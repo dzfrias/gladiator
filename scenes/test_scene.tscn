@@ -7,7 +7,10 @@
 
 [node name="Player" parent="." instance=ExtResource("1_ql7v1")]
 position = Vector2(8, -4)
+move_speed = 40000.0
 
 [node name="Block" type="Sprite2D" parent="."]
 position = Vector2(201, -243)
 texture = ExtResource("2_xlqv4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
