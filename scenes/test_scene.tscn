@@ -1,16 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwfjl353c2wgp"]
+[gd_scene load_steps=4 format=3 uid="uid://bwfjl353c2wgp"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_ql7v1"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://icon.svg" id="2_xlqv4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvj7l"]
+size = Vector2(128, 126)
+
 [node name="TestScene" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_ql7v1")]
-position = Vector2(8, -4)
+position = Vector2(8, -61)
 move_speed = 40000.0
 
-[node name="Block" type="Sprite2D" parent="."]
-position = Vector2(201, -243)
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(3, 124)
+scale = Vector2(8.895, 1)
+
+[node name="Block" type="Sprite2D" parent="Floor"]
 texture = ExtResource("2_xlqv4")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_yvj7l")
