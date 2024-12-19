@@ -12,8 +12,6 @@ size = Vector2(128, 126)
 position = Vector2(8, -61)
 move_speed = 40000.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(3, 124)
 scale = Vector2(8.895, 1)
