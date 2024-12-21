@@ -32,8 +32,3 @@ func _input(event: InputEvent) -> void:
 		query.exclude = [self]
 		var result = space_state.intersect_ray(query)
 		print("Hit: " + str(result))
-		
-func _physics_process(delta):
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(Vector2(0, 0), Vector2(50, 100))
-	var result = space_state.intersect_ray(query)
