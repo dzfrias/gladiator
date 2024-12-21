@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var jump_speed : float = 500
 
 @export var weapon_range : float = 2000
+@export var bullet_path_scene : PackedScene
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
@@ -31,4 +32,8 @@ func _input(event: InputEvent) -> void:
 		var query = PhysicsRayQueryParameters2D.create(position, position + (direction * weapon_range))
 		query.exclude = [self]
 		var result = space_state.intersect_ray(query)
+		var bullet_path = bullet_path_scene.instantiate() as Line2D
+		get_tree().root.add_child(bullet_path)
+		bullet_path.add_point(query.from, 0)
+		bullet_path.add_point(query.to, 1)
 		print("Hit: " + str(result))
