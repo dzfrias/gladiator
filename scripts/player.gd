@@ -3,8 +3,6 @@ extends CharacterBody2D
 @export var move_speed : float = 10000
 @export var jump_speed : float = 500
 
-@export var weapon : Weapon
-
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 		velocity.x = 0
@@ -24,4 +22,4 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire"):
-		weapon.fire(position)
+		$Weapon.fire(position)
