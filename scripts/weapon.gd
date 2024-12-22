@@ -5,19 +5,22 @@ extends Node2D
 @export var weapon_range: float = 2000
 @export var damage: float = 5
 @export var bullet_path_scene: PackedScene
-@export var reload_time : float = 1
-@export var max_ammo : int = 8
+@export var reload_time: float = 1
+@export var max_ammo: int = 8
+@export var firing_interval: float = 0.5
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
 
-var ammo : int
-var is_reloading : bool
+var ammo: int
+var is_reloading: bool
+var can_fire: bool
 
 func _ready() -> void:
 	ammo = max_ammo
+	can_fire = true
 
 func fire(pos: Vector2):
-	if ammo <= 0:
+	if ammo <= 0 or !can_fire:
 		return
 	
 	var mouse_position = get_global_mouse_position()
@@ -44,10 +47,20 @@ func fire(pos: Vector2):
 	on_ammo_changed.emit(ammo, max_ammo)
 	if ammo <= 0:
 		reload()
+	shot_wait_time()
+	
+func shot_wait_time():
+	can_fire = false
+	await get_tree().create_timer(firing_interval).timeout
+	
+	if !is_reloading:
+		can_fire = true
 	
 func reload():
 	is_reloading = true
+	can_fire = false
 	await get_tree().create_timer(reload_time).timeout
 	ammo = max_ammo
 	on_ammo_changed.emit(ammo, max_ammo)
+	can_fire = true
 	is_reloading = false
