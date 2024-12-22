@@ -31,14 +31,7 @@ func _process(delta: float) -> void:
 				_direction = 1
 			else:
 				velocity.x = 0
-			
-			# TODO make these events
-			if is_on_floor() and Input.is_action_pressed("jump"):
-				velocity.y = -jump_speed
-			if is_on_floor() and Input.is_action_pressed("roll"):
-				_state = State.ROLL
-				$RollTimer.start()
-				collision_layer = 4
+		
 		State.ROLL:
 			velocity.x = roll_speed * _direction
 		
@@ -47,6 +40,13 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire"):
 		$Weapon.fire(position)
+	if is_on_floor():
+		if event.is_action_pressed("jump"):
+			velocity.y = -jump_speed
+		if event.is_action_pressed("roll"):
+			_state = State.ROLL
+			$RollTimer.start()
+			collision_layer = Constants.INVINCIBLE_LAYER
 
 func damage(amount: float) -> void:
 	print("Player hit")
