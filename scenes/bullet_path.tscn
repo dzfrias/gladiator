@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://chodbgyujd3sh"]
 
-[ext_resource type="Script" path="res://scripts/bullet_path.gd" id="1_24pxv"]
+[ext_resource type="Script" path="res://scripts/util/bullet_path.gd" id="1_24pxv"]
 
 [node name="BulletPath" type="Line2D"]
 default_color = Color(1, 0, 0, 1)

@@ -17,7 +17,7 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-Constants="*res://scripts/Constants.gd"
+Constants="*res://scripts/util/Constants.gd"
 
 [input]
 
