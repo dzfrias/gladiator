@@ -2,8 +2,8 @@ class_name Player
 
 extends CharacterBody2D
 
-@export var move_speed : float = 10000
-@export var jump_speed : float = 500
+@export var move_speed: float = 10000
+@export var jump_speed: float = 500
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):

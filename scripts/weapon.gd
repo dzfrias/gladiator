@@ -2,9 +2,9 @@ class_name Weapon
 
 extends Node2D
 
-@export var weapon_range : float = 2000
-@export var damage : float = 5
-@export var bullet_path_scene : PackedScene
+@export var weapon_range: float = 2000
+@export var damage: float = 5
+@export var bullet_path_scene: PackedScene
 
 func fire(pos: Vector2):
 	var mouse_position = get_global_mouse_position()

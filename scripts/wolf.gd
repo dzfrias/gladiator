@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var speed: float = 300.0
 var tracking: Node2D
 
-
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -17,20 +16,16 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
 		tracking = body
-
 
 func _on_detection_zone_body_exited(body: Node2D) -> void:
 	if body is Player:
 		tracking = null
 
-
 func _on_health_damage_taken(_amount: float) -> void:
 	print("Wolf damage taken")
-
 
 func _on_health_died() -> void:
 	print("Wolf died")

@@ -7,9 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qwbp6"]
 size = Vector2(130.5, 129.5)
 
-[node name="Box" type="RigidBody2D" node_paths=PackedStringArray("health")]
+[node name="Box" type="RigidBody2D"]
 script = ExtResource("1_yyv85")
-health = NodePath("Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.25, 0.25)
@@ -20,3 +19,6 @@ texture = ExtResource("1_4rgar")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_1xbv2")
+
+[connection signal="damage_taken" from="Health" to="." method="_on_health_damage_taken"]
+[connection signal="died" from="Health" to="." method="_on_health_died"]
