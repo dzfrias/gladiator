@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_ql7v1"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_xlqv4"]
-[ext_resource type="PackedScene" uid="uid://ckkso33gcybml" path="res://scenes/box.tscn" id="3_u64fv"]
+[ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="3_o7uif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvj7l"]
 size = Vector2(128, 126)
@@ -23,5 +23,5 @@ texture = ExtResource("2_xlqv4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("RectangleShape2D_yvj7l")
 
-[node name="Box" parent="." instance=ExtResource("3_u64fv")]
-position = Vector2(-396, -25)
+[node name="Wolf" parent="." instance=ExtResource("3_o7uif")]
+position = Vector2(-236, -1)

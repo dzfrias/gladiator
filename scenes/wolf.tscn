@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bydm8vffd6nwt"]
+
+[ext_resource type="Script" path="res://scripts/wolf.gd" id="1_4octj"]
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_oje08"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
+size = Vector2(128, 59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmjyx"]
+size = Vector2(200.25, 1066)
+
+[node name="Node2D" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_4octj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5.96046e-08)
+scale = Vector2(1, 0.460938)
+texture = ExtResource("1_oje08")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ot88w")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_d7ips")
+max_health = 15.0
+
+[node name="DetectionZone" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+position = Vector2(2, -68.875)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_kmjyx")
+
+[connection signal="damage_taken" from="Health" to="." method="_on_health_damage_taken"]
+[connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]

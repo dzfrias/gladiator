@@ -1,3 +1,5 @@
+class_name Player
+
 extends CharacterBody2D
 
 @export var move_speed : float = 10000
