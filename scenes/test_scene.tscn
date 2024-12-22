@@ -1,12 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwfjl353c2wgp"]
+[gd_scene load_steps=9 format=3 uid="uid://bwfjl353c2wgp"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_ql7v1"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_xlqv4"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="3_o7uif"]
 [ext_resource type="Script" path="res://scripts/ammo_ui.gd" id="4_sei8v"]
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="5_hwu5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvj7l"]
 size = Vector2(128, 126)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eba51"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoitw"]
+bg_color = Color(0.310203, 0.822627, 0.514826, 1)
 
 [node name="TestScene" type="Node2D"]
 
@@ -31,10 +38,22 @@ position = Vector2(-236, -1)
 
 [node name="AmmoUI" type="Label" parent="HUD"]
 offset_left = 16.0
-offset_top = 15.0
+offset_top = 523.0
 offset_right = 174.0
-offset_bottom = 64.0
+offset_bottom = 572.0
 theme_override_font_sizes/font_size = 30
 text = "Ammo: 0/0"
 vertical_alignment = 1
 script = ExtResource("4_sei8v")
+
+[node name="HealthBar" type="ProgressBar" parent="HUD"]
+offset_left = 12.0
+offset_top = 586.0
+offset_right = 266.0
+offset_bottom = 639.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/background = SubResource("StyleBoxFlat_eba51")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uoitw")
+value = 100.0
+show_percentage = false
+script = ExtResource("5_hwu5q")

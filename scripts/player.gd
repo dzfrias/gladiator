@@ -4,6 +4,7 @@ class_name Player extends CharacterBody2D
 @export var jump_speed: float = 500
 @export var roll_speed: float = 800
 @export var weapon: Weapon
+@export var health: Health
 
 var _state := State.CONTROL
 var _direction: float = 1
@@ -73,3 +74,6 @@ func _on_roll_timer_timeout() -> void:
 	
 func get_weapon() -> Weapon:
 	return weapon
+	
+func get_health() -> Health:
+	return health;
