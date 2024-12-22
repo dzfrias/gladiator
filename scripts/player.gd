@@ -3,9 +3,11 @@ class_name Player extends CharacterBody2D
 @export var move_speed: float = 400
 @export var jump_speed: float = 500
 @export var roll_speed: float = 800
+@export var weapon: Weapon
 
 var _state := State.CONTROL
 var _direction: float = 1
+static var Instance
 @onready var _init_layer = collision_layer
 
 enum State {
@@ -16,6 +18,7 @@ enum State {
 func _ready() -> void:
 	$RollTimer.timeout.connect(_on_roll_timer_timeout)
 	$Health.died.connect(_on_health_died)
+	Instance = self
 
 func _process(delta: float) -> void:
 	if not is_on_floor():
@@ -49,6 +52,9 @@ func _input(event: InputEvent) -> void:
 			_state = State.ROLL
 			$RollTimer.start()
 			collision_layer = Constants.INVINCIBLE_LAYER
+	if event.is_action_pressed("reload"):
+		if !weapon.is_reloading:
+			weapon.reload()
 
 func damage(amount: float) -> void:
 	if $Health.has_died:
@@ -62,3 +68,6 @@ func _on_health_died() -> void:
 func _on_roll_timer_timeout() -> void:
 	collision_layer = _init_layer
 	_state = State.CONTROL
+	
+func get_weapon() -> Weapon:
+	return weapon
