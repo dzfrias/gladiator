@@ -49,6 +49,8 @@ func _input(event: InputEvent) -> void:
 			collision_layer = Constants.INVINCIBLE_LAYER
 
 func damage(amount: float) -> void:
+	if $Health.has_died:
+		return
 	print("Player hit")
 	$Health.take_damage(amount)
 
