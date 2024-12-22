@@ -26,3 +26,9 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire"):
 		$Weapon.fire(position)
+
+func damage(amount: float) -> void:
+	$Health.take_damage(amount)
+
+func _on_health_died() -> void:
+	print("The player has died")

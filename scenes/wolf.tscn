@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=7 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/wolf.gd" id="1_4octj"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_oje08"]
@@ -9,6 +9,9 @@ size = Vector2(128, 59)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmjyx"]
 size = Vector2(200.25, 1066)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ct54a"]
+size = Vector2(25, 91)
 
 [node name="Node2D" type="CharacterBody2D"]
 collision_layer = 2
@@ -28,14 +31,43 @@ script = ExtResource("2_d7ips")
 max_health = 15.0
 
 [node name="DetectionZone" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 position = Vector2(2, -68.875)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_kmjyx")
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="TiredTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="WindupTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(58, -5)
+shape = SubResource("RectangleShape2D_ct54a")
+disabled = true
+debug_color = Color(0.644145, 0.106926, 0.184851, 0.42)
+
 [connection signal="damage_taken" from="Health" to="." method="_on_health_damage_taken"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="TiredTimer" to="." method="_on_tired_timer_timeout"]
+[connection signal="timeout" from="WindupTimer" to="." method="_on_windup_timer_timeout"]
+[connection signal="body_entered" from="AttackBox" to="." method="_on_attack_box_body_entered"]

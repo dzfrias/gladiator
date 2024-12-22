@@ -29,3 +29,5 @@ script = ExtResource("3_s7yvn")
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("5_crqak")
 bullet_path_scene = ExtResource("2_xv087")
+
+[connection signal="died" from="Health" to="." method="_on_health_died"]
