@@ -19,10 +19,20 @@ enum State {
 	TIRED,
 }
 
+func _ready() -> void:
+	$AttackTimer.timeout.connect(_on_attack_timer_timeout)
+	$WindupTimer.timeout.connect(_on_windup_timer_timeout)
+	$TiredTimer.timeout.connect(_on_tired_timer_timeout)
+	$AttackBox.body_entered.connect(_on_attack_box_body_entered)
+	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
+	$DetectionZone.body_exited.connect(_on_detection_zone_body_exited)
+	$Health.died.connect(_on_health_died)
+	$Health.damage_taken.connect(_on_health_damage_taken)
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
 	match _state:
 		State.TRACKING:
 			assert(_tracking != null)

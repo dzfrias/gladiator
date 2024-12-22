@@ -19,6 +19,3 @@ texture = ExtResource("1_4rgar")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_1xbv2")
-
-[connection signal="damage_taken" from="Health" to="." method="_on_health_damage_taken"]
-[connection signal="died" from="Health" to="." method="_on_health_died"]

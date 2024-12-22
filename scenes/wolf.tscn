@@ -62,12 +62,3 @@ position = Vector2(58, -5)
 shape = SubResource("RectangleShape2D_ct54a")
 disabled = true
 debug_color = Color(0.644145, 0.106926, 0.184851, 0.42)
-
-[connection signal="damage_taken" from="Health" to="." method="_on_health_damage_taken"]
-[connection signal="died" from="Health" to="." method="_on_health_died"]
-[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="TiredTimer" to="." method="_on_tired_timer_timeout"]
-[connection signal="timeout" from="WindupTimer" to="." method="_on_windup_timer_timeout"]
-[connection signal="body_entered" from="AttackBox" to="." method="_on_attack_box_body_entered"]

@@ -1,6 +1,4 @@
-class_name Player
-
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export var move_speed: float = 400
 @export var jump_speed: float = 500
@@ -14,6 +12,10 @@ enum State {
 	CONTROL,
 	ROLL,
 }
+
+func _ready() -> void:
+	$RollTimer.timeout.connect(_on_roll_timer_timeout)
+	$Health.died.connect(_on_health_died)
 
 func _process(delta: float) -> void:
 	if not is_on_floor():
