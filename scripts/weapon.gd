@@ -2,12 +2,8 @@ class_name Weapon
 
 extends Node2D
 
-@export var weapon_range: float = 2000
-@export var damage: float = 5
 @export var bullet_path_scene: PackedScene
-@export var reload_time: float = 1
-@export var max_ammo: int = 8
-@export var firing_interval: float = 0.5
+@export var weapon_stats: WeaponStats
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
 
@@ -16,7 +12,7 @@ var is_reloading: bool
 var can_fire: bool
 
 func _ready() -> void:
-	ammo = max_ammo
+	ammo = weapon_stats.max_ammo
 	can_fire = true
 
 func fire(pos: Vector2):
@@ -27,7 +23,7 @@ func fire(pos: Vector2):
 
 	var space_state = get_world_2d().direct_space_state
 	var direction = (mouse_position - pos).normalized()
-	var query = PhysicsRayQueryParameters2D.create(pos, pos + (direction * weapon_range))
+	var query = PhysicsRayQueryParameters2D.create(pos, pos + (direction * weapon_stats.weapon_range))
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	var bullet_path = bullet_path_scene.instantiate() as Line2D
@@ -40,18 +36,18 @@ func fire(pos: Vector2):
 		for child in hit_collider.get_children():
 			if child is Health:
 				var hit_object_health = child as Health
-				hit_object_health.take_damage(damage)
+				hit_object_health.take_damage(weapon_stats.damage)
 		
 	print("Hit: " + str(result))
 	ammo -= 1
-	on_ammo_changed.emit(ammo, max_ammo)
+	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
 	if ammo <= 0:
 		reload()
 	shot_wait_time()
 	
 func shot_wait_time():
 	can_fire = false
-	await get_tree().create_timer(firing_interval).timeout
+	await get_tree().create_timer(weapon_stats.firing_interval).timeout
 	
 	if !is_reloading:
 		can_fire = true
@@ -59,8 +55,8 @@ func shot_wait_time():
 func reload():
 	is_reloading = true
 	can_fire = false
-	await get_tree().create_timer(reload_time).timeout
-	ammo = max_ammo
-	on_ammo_changed.emit(ammo, max_ammo)
+	await get_tree().create_timer(weapon_stats.reload_time).timeout
+	ammo = weapon_stats.max_ammo
+	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
 	can_fire = true
 	is_reloading = false
