@@ -48,12 +48,15 @@ func _physics_process(delta: float) -> void:
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
-		_state = State.TRACKING
+		if _state == State.IDLE:
+			_state = State.TRACKING
 		_tracking = body
 
 func _on_detection_zone_body_exited(body: Node2D) -> void:
 	if body is Player:
 		_tracking = null
+		if _state == State.TRACKING:
+			_state = State.IDLE
 
 func _on_health_damage_taken(_amount: float) -> void:
 	print("Wolf damage taken")
