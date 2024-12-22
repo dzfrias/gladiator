@@ -30,4 +30,9 @@ script = ExtResource("3_s7yvn")
 script = ExtResource("5_crqak")
 bullet_path_scene = ExtResource("2_xv087")
 
+[node name="RollTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
