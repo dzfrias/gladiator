@@ -11,7 +11,7 @@ size = Vector2(128, 126)
 
 [node name="Player" parent="." instance=ExtResource("1_ql7v1")]
 position = Vector2(8, -61)
-move_speed = 40000.0
+move_speed = 400.0
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(3, 124)
