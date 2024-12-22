@@ -44,7 +44,9 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fire"):
-		$Weapon.fire(position)
+		$Weapon.set_firing(true)
+	if event.is_action_released("fire"):
+		$Weapon.set_firing(false)
 	if is_on_floor():
 		if event.is_action_pressed("jump"):
 			velocity.y = -jump_speed

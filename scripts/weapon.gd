@@ -10,20 +10,28 @@ signal on_ammo_changed(ammo: int, max_ammo: int)
 var ammo: int
 var is_reloading: bool
 var can_fire: bool
+var is_firing: bool
 
 func _ready() -> void:
 	ammo = weapon_stats.max_ammo
 	can_fire = true
+	
+func set_firing(is_firing: bool):
+	self.is_firing = is_firing
+	
+func _process(delta: float) -> void:
+	if is_firing:
+		fire()
 
-func fire(pos: Vector2):
+func fire():
 	if ammo <= 0 or !can_fire:
 		return
 	
 	var mouse_position = get_global_mouse_position()
 
 	var space_state = get_world_2d().direct_space_state
-	var direction = (mouse_position - pos).normalized()
-	var query = PhysicsRayQueryParameters2D.create(pos, pos + (direction * weapon_stats.weapon_range))
+	var direction = (mouse_position - global_position).normalized()
+	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * weapon_stats.weapon_range))
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	var bullet_path = bullet_path_scene.instantiate() as Line2D
