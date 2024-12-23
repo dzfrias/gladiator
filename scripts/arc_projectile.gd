@@ -1,6 +1,6 @@
 class_name ArcProjectile extends Area2D
 
-var damage := 5.0
+signal on_collision(body: Node2D)
 
 var _velocity: Vector2
 
@@ -16,8 +16,4 @@ func _process(delta: float) -> void:
 	position += _velocity * delta
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is not Player:
-		return
-	var player := body as Player
-	player.damage(damage)
-	queue_free()
+	on_collision.emit(self, body)

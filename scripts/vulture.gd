@@ -13,6 +13,8 @@ class_name Vulture extends Area2D
 @export var attack_cooldown_time := 2.0
 @export var projectile: PackedScene
 @export var projectile_speed := 500.0
+@export var projectile_damage := 5.0
+@export var projectile_splash_radius := 80.0
 # Flapping
 @export var flap_interval_time := 0.8
 @export var flap_y_speed_mean := 100.0
@@ -88,6 +90,7 @@ func _attack() -> void:
 	var angle := _firing_angle(projectile_speed, dx, dy)
 	var p := projectile.instantiate() as ArcProjectile
 	get_tree().root.add_child(p)
+	p.on_collision.connect(_on_projectile_collision)
 	p.fire(projectile_speed, angle)
 	p.position = position
 	_can_attack = false
@@ -124,6 +127,30 @@ func _on_health_damage_taken(_amount: float) -> void:
 func _on_health_died() -> void:
 	print("Vulture died")
 	queue_free()
+
+func _on_projectile_collision(p: Node2D, body: Node2D) -> void:
+	var collider := body as CollisionObject2D
+	if body is Player:
+		var player := body as Player
+		player.damage(projectile_damage)
+		p.queue_free()
+		return
+	if collider.collision_layer & Constants.ENVIRONMENT_LAYER:
+		var space_state := get_world_2d().direct_space_state
+		var splash := CircleShape2D.new()
+		splash.radius = projectile_splash_radius
+		var transform = Transform2D(0, p.position)
+		var query = PhysicsShapeQueryParameters2D.new()
+		query.shape = splash
+		query.transform = transform
+		query.collision_mask = Constants.ENTITY_LAYER
+		var collisions = space_state.intersect_shape(query)
+		for collision in collisions:
+			var entity = collision.get("collider")
+			if entity is Player:
+				var player = entity as Player
+				player.damage(projectile_damage)
+		p.queue_free()
 
 static func _firing_angle(v: float, dx: float, dy: float) -> float:
 	const GRAVITY = 980.0
