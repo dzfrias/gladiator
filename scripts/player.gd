@@ -3,11 +3,12 @@ class_name Player extends CharacterBody2D
 @export var move_speed: float = 400
 @export var jump_speed: float = 500
 @export var roll_speed: float = 800
-@export var weapon: Weapon
-@export var health: Health
+@export var roll_time: float = 0.2
+@export var roll_cooldown_time: float = 0.4
 
 var _state := State.CONTROL
 var _direction: float = 1
+var _can_roll := true
 static var Instance
 @onready var _init_layer = collision_layer
 
@@ -17,7 +18,6 @@ enum State {
 }
 
 func _ready() -> void:
-	$RollTimer.timeout.connect(_on_roll_timer_timeout)
 	$Health.died.connect(_on_health_died)
 	Instance = self
 
@@ -37,13 +37,14 @@ func _process(delta: float) -> void:
 				_direction = 1
 			else:
 				velocity.x = 0
-		
 		State.ROLL:
 			velocity.x = roll_speed * _direction
 		
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
+	if _state != State.CONTROL:
+		return
 	if event.is_action_pressed("fire"):
 		$Weapon.set_firing(true)
 	if event.is_action_released("fire"):
@@ -51,13 +52,11 @@ func _input(event: InputEvent) -> void:
 	if is_on_floor():
 		if event.is_action_pressed("jump"):
 			velocity.y = -jump_speed
-		if event.is_action_pressed("roll"):
-			_state = State.ROLL
-			$RollTimer.start()
-			collision_layer = Constants.INVINCIBLE_LAYER
+		if event.is_action_pressed("roll") and _can_roll:
+			_roll()
 	if event.is_action_pressed("reload"):
-		if !weapon.is_reloading:
-			weapon.reload()
+		if !$Weapon.is_reloading:
+			$Weapon.reload()
 
 func damage(amount: float) -> void:
 	if $Health.has_died:
@@ -65,15 +64,21 @@ func damage(amount: float) -> void:
 	print("Player hit")
 	$Health.take_damage(amount)
 
+func _roll() -> void:
+	_state = State.ROLL
+	collision_layer = Constants.INVINCIBLE_LAYER
+	await get_tree().create_timer(roll_time).timeout
+	_state = State.CONTROL
+	collision_layer = _init_layer
+	_can_roll = false
+	await get_tree().create_timer(roll_cooldown_time).timeout
+	_can_roll = true
+
 func _on_health_died() -> void:
 	print("The player has died")
 
-func _on_roll_timer_timeout() -> void:
-	collision_layer = _init_layer
-	_state = State.CONTROL
-	
 func get_weapon() -> Weapon:
-	return weapon
+	return $Weapon
 	
 func get_health() -> Health:
-	return health;
+	return $Health;
