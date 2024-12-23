@@ -136,13 +136,14 @@ func _on_projectile_collision(p: Node2D, body: Node2D) -> void:
 		p.queue_free()
 		return
 	if collider.collision_layer & Constants.ENVIRONMENT_LAYER:
+		Debug.draw_circle(p.position, projectile_splash_radius)
 		var space_state := get_world_2d().direct_space_state
 		var splash := CircleShape2D.new()
 		splash.radius = projectile_splash_radius
-		var transform = Transform2D(0, p.position)
+		var splash_transform = Transform2D(0, p.position)
 		var query = PhysicsShapeQueryParameters2D.new()
 		query.shape = splash
-		query.transform = transform
+		query.transform = splash_transform
 		query.collision_mask = Constants.ENTITY_LAYER
 		var collisions = space_state.intersect_shape(query)
 		for collision in collisions:

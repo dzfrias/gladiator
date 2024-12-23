@@ -35,10 +35,7 @@ func fire():
 	query.collide_with_areas = true
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
-	var bullet_path = bullet_path_scene.instantiate() as Line2D
-	get_tree().root.add_child(bullet_path)
-	bullet_path.add_point(query.from, 0)
-	bullet_path.add_point(query.to, 1)
+	Debug.draw_line(query.from, query.to, 10.0, Color.RED, 0.05)
 	
 	if result.get("collider") != null:
 		var hit_collider = result.get("collider") as CollisionObject2D

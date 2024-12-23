@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 Constants="*res://scripts/util/Constants.gd"
+Debug="*res://scripts/util/Debug.gd"
 
 [input]
 
