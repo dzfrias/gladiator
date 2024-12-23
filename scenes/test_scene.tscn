@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwfjl353c2wgp"]
+[gd_scene load_steps=10 format=3 uid="uid://bwfjl353c2wgp"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_ql7v1"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_xlqv4"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="3_o7uif"]
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="4_sei8v"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="5_hwu5q"]
+[ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_4ttbr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvj7l"]
 size = Vector2(128, 126)
@@ -57,3 +58,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_uoitw")
 value = 100.0
 show_percentage = false
 script = ExtResource("5_hwu5q")
+
+[node name="Vulture" parent="." instance=ExtResource("6_4ttbr")]
+position = Vector2(0, -500)

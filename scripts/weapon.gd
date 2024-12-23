@@ -32,6 +32,7 @@ func fire():
 	var space_state = get_world_2d().direct_space_state
 	var direction = (mouse_position - global_position).normalized()
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * weapon_stats.weapon_range))
+	query.collide_with_areas = true
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	var bullet_path = bullet_path_scene.instantiate() as Line2D
