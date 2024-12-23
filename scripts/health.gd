@@ -17,12 +17,12 @@ func _ready() -> void:
 
 func take_damage(amount: float) -> void:
 	if _died: return
+	var old := _health
 	_health = max(_health - amount, 0)
+	damage_taken.emit(old - _health)
 	if _health == 0:
 		died.emit()
 		_died = true
-		return
-	damage_taken.emit(amount)
 
 func heal(amount: float) -> void:
 	if _died: return
