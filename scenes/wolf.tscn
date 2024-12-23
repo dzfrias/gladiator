@@ -40,18 +40,6 @@ position = Vector2(2, -68.875)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_kmjyx")
 
-[node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.6
-one_shot = true
-
-[node name="TiredTimer" type="Timer" parent="."]
-wait_time = 0.8
-one_shot = true
-
-[node name="WindupTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
 [node name="AttackBox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 2

@@ -5,6 +5,9 @@ class_name Wolf extends CharacterBody2D
 @export var attack_jump: float = -250.0
 @export var attack_distance: float = 200.0
 @export var attack_damage: float = 5.0
+@export var attack_time: float = 0.6
+@export var attack_windup_time: float = 0.1
+@export var attack_tired_time: float = 0.8
 
 var _state: State = State.IDLE
 var _tracking: Node2D
@@ -20,9 +23,6 @@ enum State {
 }
 
 func _ready() -> void:
-	$AttackTimer.timeout.connect(_on_attack_timer_timeout)
-	$WindupTimer.timeout.connect(_on_windup_timer_timeout)
-	$TiredTimer.timeout.connect(_on_tired_timer_timeout)
 	$AttackBox.body_entered.connect(_on_attack_box_body_entered)
 	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
 	$DetectionZone.body_exited.connect(_on_detection_zone_body_exited)
@@ -40,9 +40,8 @@ func _physics_process(delta: float) -> void:
 			var direction := signf(dist)
 			scale.x = direction
 			if abs(dist) <= attack_distance:
-				_state = State.TIRED
 				_attack_direction = direction
-				$WindupTimer.start()
+				_attack()
 			else:
 				velocity.x = direction * speed
 		State.IDLE:
@@ -55,6 +54,23 @@ func _physics_process(delta: float) -> void:
 			velocity.x = _attack_direction * attack_speed
 
 	move_and_slide()
+
+func _attack() -> void:
+	assert(abs(_attack_direction) == 1)
+	_state = State.TIRED
+	await get_tree().create_timer(attack_windup_time).timeout
+	assert(_state == State.TIRED and abs(_attack_direction) == 1)
+	_state = State.ATTACKING
+	velocity.y = attack_jump
+	$AttackBox/CollisionShape2D.disabled = false
+	await get_tree().create_timer(attack_time).timeout
+	assert(_state == State.ATTACKING)
+	_attack_direction = 0
+	_state = State.TIRED
+	$AttackBox/CollisionShape2D.disabled = true
+	await get_tree().create_timer(attack_tired_time).timeout
+	assert(_state == State.TIRED)
+	_state = State.TRACKING if _tracking else State.IDLE
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -74,25 +90,6 @@ func _on_health_damage_taken(_amount: float) -> void:
 func _on_health_died() -> void:
 	print("Wolf died")
 	queue_free()
-
-func _on_attack_timer_timeout() -> void:
-	assert(_state == State.ATTACKING)
-	_state = State.TIRED
-	_attack_direction = 0.0
-	$TiredTimer.start()
-	$AttackBox/CollisionShape2D.disabled = true
-
-func _on_tired_timer_timeout() -> void:
-	assert(_state == State.TIRED)
-	_state = State.TRACKING if _tracking else State.IDLE
-
-func _on_windup_timer_timeout() -> void:
-	# Should already be set
-	assert(_attack_direction != 0 and _state == State.TIRED)
-	_state = State.ATTACKING
-	velocity.y = attack_jump
-	$AttackTimer.start()
-	$AttackBox/CollisionShape2D.disabled = false
 
 func _on_attack_box_body_entered(body: Node2D) -> void:
 	if body is not Player:
