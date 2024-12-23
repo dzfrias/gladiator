@@ -2,7 +2,6 @@ class_name Weapon
 
 extends Node2D
 
-@export var bullet_path_scene: PackedScene
 @export var weapon_stats: WeaponStats
 
 signal on_ammo_changed(ammo: int, max_ammo: int)

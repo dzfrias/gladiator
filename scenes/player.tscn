@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=7 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
-[ext_resource type="PackedScene" uid="uid://chodbgyujd3sh" path="res://scenes/bullet_path.tscn" id="2_xv087"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
@@ -29,5 +28,4 @@ script = ExtResource("3_s7yvn")
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("5_crqak")
-bullet_path_scene = ExtResource("2_xv087")
 weapon_stats = ExtResource("6_0weg3")
