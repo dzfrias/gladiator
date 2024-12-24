@@ -66,6 +66,7 @@ func _input(event: InputEvent) -> void:
 		if not _weapon:
 			_weapon = $Weapon
 		else:
+			_weapon.set_firing(false)
 			_weapon = null
 		weapon_changed.emit()
 
