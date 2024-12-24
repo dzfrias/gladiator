@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="5_hwu5q"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_4ttbr"]
 [ext_resource type="Script" path="res://scripts/acid_rain.gd" id="7_8dpbw"]
-[ext_resource type="Script" path="res://scripts/acid_rain_indicator.gd" id="7_8o478"]
+[ext_resource type="Script" path="res://scripts/ui/acid_rain_indicator.gd" id="7_8o478"]
 [ext_resource type="Script" path="res://scripts/ui/lightning_indicator.gd" id="9_l752i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvj7l"]
