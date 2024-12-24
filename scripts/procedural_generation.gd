@@ -8,7 +8,7 @@ const BLOCK_TILE_ATLAS_POS = Vector2(0, 0)
 @onready var noise: Noise = noise_sprite.texture.noise
 var depth_multiplier = 20
 var x_distance = 200
-var y_distance = 10
+var y_distance = 50
 
 var ground_height: Dictionary
 
