@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://da2qlyhp43518"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_jc61t"]
+[ext_resource type="Script" path="res://scripts/procedural_generation.gd" id="2_k3yki"]
+[ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_4x0er"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4vu7"]
+texture = ExtResource("1_jc61t")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_ww7cr"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 3
+sources/1 = SubResource("TileSetAtlasSource_r4vu7")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3fpmt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xlxtx"]
+noise = SubResource("FastNoiseLite_3fpmt")
+
+[node name="ProceduralGenerationTest" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("noise_sprite")]
+tile_set = SubResource("TileSet_ww7cr")
+collision_visibility_mode = 1
+script = ExtResource("2_k3yki")
+noise_sprite = NodePath("../Noise")
+
+[node name="Noise" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_xlxtx")
+
+[node name="Player" parent="." instance=ExtResource("3_4x0er")]
+position = Vector2(656, -262)
+move_speed = 600.0
+jump_speed = 700.0
