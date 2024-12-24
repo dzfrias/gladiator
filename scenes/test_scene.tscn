@@ -31,7 +31,7 @@ size = Vector2(510, 64)
 [node name="AcidRain" type="RayCast2D" parent="." node_paths=PackedStringArray("debug_line")]
 position = Vector2(0, -1194)
 target_position = Vector2(0, 10000)
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("7_8dpbw")
 debug_line = NodePath("Line2D")
 
@@ -121,6 +121,8 @@ position = Vector2(0, -500)
 
 [node name="Roof" type="StaticBody2D" parent="."]
 position = Vector2(116, -225)
+collision_layer = 8
+collision_mask = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Roof"]
 scale = Vector2(4, 0.5)

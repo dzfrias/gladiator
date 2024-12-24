@@ -66,3 +66,4 @@ toggle_weapon={
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Entities"
 2d_physics/layer_3="Invincible"
+2d_physics/layer_4="Roof"
