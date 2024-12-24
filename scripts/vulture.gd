@@ -1,12 +1,12 @@
 class_name Vulture extends Area2D
 
 # Movement
-@export var x_speed := 200.0
-@export var y_speed := 100.0
+@export var x_speed := 300.0
+@export var y_speed := 150.0
 @export var y_acceleration := 400.0
 @export var x_acceleration := 300.0
 @export var stop_dist := 300.0
-@export var fly_height := 300.0
+@export var fly_height := 400.0
 # Attacking
 @export var attack_idle_time := 1.0
 @export var attack_windup_time := 0.3
@@ -90,8 +90,9 @@ func _attack() -> void:
 	var angle := _firing_angle(projectile_speed, dx, dy)
 	var p := projectile.instantiate() as ArcProjectile
 	get_tree().root.add_child(p)
-	p.on_collision.connect(_on_projectile_collision)
 	p.fire(projectile_speed, angle)
+	p.damage = projectile_damage
+	p.splash_radius = projectile_splash_radius
 	p.position = position
 	_can_attack = false
 	await get_tree().create_timer(attack_cooldown_time).timeout
@@ -127,31 +128,6 @@ func _on_health_damage_taken(_amount: float) -> void:
 func _on_health_died() -> void:
 	print("Vulture died")
 	queue_free()
-
-func _on_projectile_collision(p: Node2D, body: Node2D) -> void:
-	var collider := body as CollisionObject2D
-	if body is Player:
-		var player := body as Player
-		player.damage(projectile_damage)
-		p.queue_free()
-		return
-	if collider.collision_layer & Constants.ENVIRONMENT_LAYER:
-		Debug.draw_circle(p.position, projectile_splash_radius)
-		var space_state := get_world_2d().direct_space_state
-		var splash := CircleShape2D.new()
-		splash.radius = projectile_splash_radius
-		var splash_transform = Transform2D(0, p.position)
-		var query = PhysicsShapeQueryParameters2D.new()
-		query.shape = splash
-		query.transform = splash_transform
-		query.collision_mask = Constants.ENTITY_LAYER
-		var collisions = space_state.intersect_shape(query)
-		for collision in collisions:
-			var entity = collision.get("collider")
-			if entity is Player:
-				var player = entity as Player
-				player.damage(projectile_damage)
-		p.queue_free()
 
 static func _firing_angle(v: float, dx: float, dy: float) -> float:
 	const GRAVITY = 980.0
