@@ -22,16 +22,6 @@ size = Vector2(510, 64)
 
 [node name="TestScene" type="Node2D"]
 
-[node name="AcidRain" type="RayCast2D" parent="." node_paths=PackedStringArray("debug_line")]
-position = Vector2(0, -1194)
-target_position = Vector2(0, 10000)
-collision_mask = 3
-script = ExtResource("7_8dpbw")
-debug_line = NodePath("Line2D")
-
-[node name="Line2D" type="Line2D" parent="AcidRain"]
-default_color = Color(0.203922, 0.666667, 0.45098, 1)
-
 [node name="Player" parent="." instance=ExtResource("1_ql7v1")]
 position = Vector2(8, -61)
 move_speed = 400.0
@@ -77,7 +67,7 @@ script = ExtResource("5_hwu5q")
 position = Vector2(0, -500)
 
 [node name="Roof" type="StaticBody2D" parent="."]
-position = Vector2(116, -225)
+position = Vector2(274, -231)
 
 [node name="Sprite2D" type="Sprite2D" parent="Roof"]
 scale = Vector2(4, 0.5)
@@ -85,3 +75,12 @@ texture = ExtResource("2_xlqv4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
 shape = SubResource("RectangleShape2D_rvov1")
+
+[node name="RayCast2D" type="RayCast2D" parent="." node_paths=PackedStringArray("debug_line")]
+position = Vector2(0, -1194)
+target_position = Vector2(0, 10000)
+collision_mask = 3
+script = ExtResource("7_8dpbw")
+debug_line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="RayCast2D"]
