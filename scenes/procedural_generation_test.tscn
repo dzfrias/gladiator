@@ -1,0 +1,47 @@
+[gd_scene load_steps=11 format=3 uid="uid://da2qlyhp43518"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_jc61t"]
+[ext_resource type="Script" path="res://scripts/procedural_generation.gd" id="2_k3yki"]
+[ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="3_4o14u"]
+[ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_4x0er"]
+[ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="4_dyopk"]
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_1k65c"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4vu7"]
+texture = ExtResource("1_jc61t")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_ww7cr"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_r4vu7")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3fpmt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xlxtx"]
+noise = SubResource("FastNoiseLite_3fpmt")
+
+[node name="ProceduralGenerationTest" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("noise_sprite")]
+tile_set = SubResource("TileSet_ww7cr")
+collision_visibility_mode = 1
+script = ExtResource("2_k3yki")
+noise_sprite = NodePath("../Noise")
+
+[node name="Noise" type="Sprite2D" parent="."]
+position = Vector2(-676, 0)
+texture = SubResource("NoiseTexture2D_xlxtx")
+
+[node name="Player" parent="." instance=ExtResource("3_4x0er")]
+position = Vector2(957, -44)
+move_speed = 600.0
+jump_speed = 700.0
+
+[node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
+script = ExtResource("6_1k65c")
+tilemap = NodePath("../TileMapLayer")
+wolf_scene = ExtResource("3_4o14u")
+vulture_scene = ExtResource("4_dyopk")

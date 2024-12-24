@@ -38,7 +38,8 @@ func fire():
 	Debug.draw_line(query.from, query.to, 10.0, Color.RED, 0.05)
 	
 	if result.get("collider") != null:
-		var hit_collider = result.get("collider") as CollisionObject2D
+		var hit_collider = result.get("collider")
+		
 		for child in hit_collider.get_children():
 			if child is Health:
 				var hit_object_health = child as Health
