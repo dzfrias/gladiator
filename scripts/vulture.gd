@@ -1,13 +1,13 @@
 class_name Vulture extends Area2D
 
-# Movement
+@export_category("Movement")
 @export var x_speed := 300.0
 @export var y_speed := 150.0
 @export var y_acceleration := 400.0
 @export var x_acceleration := 300.0
 @export var stop_dist := 300.0
 @export var fly_height := 400.0
-# Attacking
+@export_category("Attack")
 @export var attack_idle_time := 1.0
 @export var attack_windup_time := 0.3
 @export var attack_cooldown_time := 2.0
@@ -15,7 +15,7 @@ class_name Vulture extends Area2D
 @export var projectile_speed := 500.0
 @export var projectile_damage := 5.0
 @export var projectile_splash_radius := 80.0
-# Flapping
+@export_category("Flap")
 @export var flap_interval_time := 0.8
 @export var flap_y_speed_mean := 100.0
 @export var flap_y_speed_sd := 10.0

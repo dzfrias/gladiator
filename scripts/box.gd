@@ -4,7 +4,7 @@ func _ready() -> void:
 	$Health.damage_taken.connect(_on_health_damage_taken)
 	$Health.died.connect(_on_health_died)
 
-func _on_health_damage_taken(amount: float) -> void:
+func _on_health_damage_taken(_amount: float) -> void:
 	print("Ow")
 
 func _on_health_died() -> void:

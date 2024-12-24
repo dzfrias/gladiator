@@ -15,10 +15,10 @@ func _ready() -> void:
 	ammo = weapon_stats.max_ammo
 	can_fire = true
 	
-func set_firing(is_firing: bool):
-	self.is_firing = is_firing
+func set_firing(on: bool):
+	self.is_firing = on
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_firing:
 		fire()
 
