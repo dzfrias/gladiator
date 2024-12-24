@@ -6,11 +6,15 @@ class_name Player extends CharacterBody2D
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.4
 
+# NOTE this field can be null (if the player has no weapon)
+var _weapon: Weapon
 var _state := State.CONTROL
 var _direction: float = 1
 var _can_roll := true
 static var Instance
 @onready var _init_layer = collision_layer
+
+signal weapon_changed
 
 enum State {
 	CONTROL,
@@ -20,6 +24,7 @@ enum State {
 func _ready() -> void:
 	$Health.died.connect(_on_health_died)
 	Instance = self
+	_weapon = $Weapon
 
 func _process(delta: float) -> void:
 	if not is_on_floor():
@@ -45,18 +50,24 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if _state != State.CONTROL:
 		return
-	if event.is_action_pressed("fire"):
-		$Weapon.set_firing(true)
-	if event.is_action_released("fire"):
-		$Weapon.set_firing(false)
+	if event.is_action_pressed("fire") and _weapon:
+		_weapon.set_firing(true)
+	if event.is_action_released("fire") and _weapon:
+		_weapon.set_firing(false)
 	if is_on_floor():
 		if event.is_action_pressed("jump"):
 			velocity.y = -jump_speed
 		if event.is_action_pressed("roll") and _can_roll:
 			_roll()
-	if event.is_action_pressed("reload"):
-		if !$Weapon.is_reloading:
-			$Weapon.reload()
+	if event.is_action_pressed("reload") and _weapon:
+		if !_weapon.is_reloading:
+			_weapon.reload()
+	if event.is_action_pressed("toggle_weapon"):
+		if not _weapon:
+			_weapon = $Weapon
+		else:
+			_weapon = null
+		weapon_changed.emit()
 
 func damage(amount: float) -> void:
 	if $Health.has_died:
@@ -78,7 +89,7 @@ func _on_health_died() -> void:
 	print("The player has died")
 
 func get_weapon() -> Weapon:
-	return $Weapon
+	return _weapon
 	
 func get_health() -> Health:
 	return $Health;
