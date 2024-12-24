@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bwfjl353c2wgp"]
+[gd_scene load_steps=13 format=3 uid="uid://bwfjl353c2wgp"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_ql7v1"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_xlqv4"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="5_hwu5q"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_4ttbr"]
 [ext_resource type="Script" path="res://scripts/acid_rain.gd" id="7_8dpbw"]
+[ext_resource type="Script" path="res://scripts/acid_rain_indicator.gd" id="7_8o478"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvj7l"]
 size = Vector2(128, 126)
@@ -72,6 +73,23 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_uoitw")
 value = 100.0
 show_percentage = false
 script = ExtResource("5_hwu5q")
+
+[node name="AcidRainIndicator" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("acid_rain")]
+anchors_preset = -1
+anchor_left = 0.515
+anchor_top = 0.077
+anchor_right = 0.515
+anchor_bottom = 0.077
+offset_left = -325.28
+offset_top = -20.896
+offset_right = 324.72
+offset_bottom = 21.104
+theme_override_font_sizes/font_size = 30
+theme_override_styles/background = SubResource("StyleBoxFlat_eba51")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uoitw")
+show_percentage = false
+script = ExtResource("7_8o478")
+acid_rain = NodePath("../../AcidRain")
 
 [node name="Vulture" parent="." instance=ExtResource("6_4ttbr")]
 position = Vector2(0, -500)
