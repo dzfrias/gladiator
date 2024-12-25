@@ -12,7 +12,6 @@ var _state := State.CONTROL
 var _direction: float = 1
 var _can_roll := true
 static var Instance
-@onready var _init_layer = collision_layer
 
 signal weapon_changed
 
@@ -78,10 +77,11 @@ func damage(amount: float) -> void:
 
 func _roll() -> void:
 	_state = State.ROLL
+	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
 	collision_layer = Constants.INVINCIBLE_LAYER
 	await get_tree().create_timer(roll_time).timeout
 	_state = State.CONTROL
-	collision_layer = _init_layer
+	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 	_can_roll = false
 	await get_tree().create_timer(roll_cooldown_time).timeout
 	_can_roll = true

@@ -15,14 +15,7 @@ func _process(delta: float) -> void:
 	velocity.y += 980 * delta
 	position += velocity * delta
 
-func _on_body_entered(body: Node2D) -> void:
-	var collider := body
-	if body is Player:
-		var player := body as Player
-		player.damage(damage)
-		queue_free()
-		return
-
+func _on_body_entered(_body: Node2D) -> void:
 	Debug.draw_circle(position, splash_radius)
 	var space_state := get_world_2d().direct_space_state
 	var splash := CircleShape2D.new()
@@ -31,11 +24,12 @@ func _on_body_entered(body: Node2D) -> void:
 	var query = PhysicsShapeQueryParameters2D.new()
 	query.shape = splash
 	query.transform = splash_transform
-	query.collision_mask = Constants.ENTITY_LAYER
+	query.collision_mask = Constants.PLAYER_LAYER
 	var collisions = space_state.intersect_shape(query)
-	for collision in collisions:
-		var entity = collision.get("collider")
-		if entity is Player:
-			var player = entity as Player
-			player.damage(damage)
+	assert(collisions.size() <= 1)
+	if collisions.size() == 1:
+		var collider = collisions[0].get("collider")
+		assert(collider is Player)
+		var player := collider as Player
+		player.damage(damage)
 	queue_free()

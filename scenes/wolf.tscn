@@ -32,7 +32,7 @@ max_health = 15.0
 
 [node name="DetectionZone" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 20
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
@@ -41,8 +41,8 @@ rotation = -1.5708
 shape = SubResource("RectangleShape2D_kmjyx")
 
 [node name="AttackBox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 0
+collision_mask = 16
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
