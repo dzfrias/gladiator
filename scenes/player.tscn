@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
-size = Vector2(130, 128)
+size = Vector2(106, 108)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 18

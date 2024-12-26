@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcjerk6m5dfga"]
+[gd_scene load_steps=13 format=3 uid="uid://da2qlyhp43518"]
 
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_jc61t"]
 [ext_resource type="Script" path="res://scripts/procedural_generation.gd" id="2_k3yki"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_4x0er"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="4_dyopk"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_1k65c"]
+[ext_resource type="PackedScene" uid="uid://p18h7pj2yoxi" path="res://scenes/basic_structure.tscn" id="7_5cx03"]
+[ext_resource type="Script" path="res://scripts/structure_spawner.gd" id="7_5kgrx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4vu7"]
 texture = ExtResource("1_jc61t")
@@ -38,10 +40,15 @@ texture = SubResource("NoiseTexture2D_xlxtx")
 [node name="Player" parent="." instance=ExtResource("3_4x0er")]
 position = Vector2(957, -44)
 move_speed = 600.0
-jump_speed = 700.0
+jump_speed = 1000.0
 
 [node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
 script = ExtResource("6_1k65c")
 tilemap = NodePath("../TileMapLayer")
 wolf_scene = ExtResource("3_4o14u")
 vulture_scene = ExtResource("4_dyopk")
+
+[node name="StructureGeneration" type="Node2D" parent="." node_paths=PackedStringArray("procedural_generation")]
+script = ExtResource("7_5kgrx")
+procedural_generation = NodePath("../TileMapLayer")
+structure_scene = ExtResource("7_5cx03")
