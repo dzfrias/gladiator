@@ -4,7 +4,7 @@ extends Node2D
 @export var structure_scene: PackedScene
 
 @onready var fnl = FastNoiseLite.new()
-var flat_ground_required = 6
+@onready var flat_ground_required = get_structure_size()[0]
 var taken_locations: Array
 var tile_offset = Vector2(-64, 64)
 
@@ -42,3 +42,8 @@ func copy(structure_tilemap: TileMapLayer):
 		var new_cell_pos = procedural_generation.local_to_map(procedural_generation.to_local(global_cell_pos))
 		procedural_generation.set_cell(new_cell_pos, 1, Vector2(0, 0))
 	structure_tilemap.queue_free()
+
+func get_structure_size():
+	var structure = structure_scene.instantiate() as TileMapLayer
+	return structure.get_used_rect().size
+	structure.queue_free()
