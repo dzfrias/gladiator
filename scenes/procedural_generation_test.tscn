@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://da2qlyhp43518"]
+[gd_scene load_steps=14 format=3 uid="uid://da2qlyhp43518"]
 
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_jc61t"]
 [ext_resource type="Script" path="res://scripts/procedural_generation.gd" id="2_k3yki"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_1k65c"]
 [ext_resource type="PackedScene" uid="uid://p18h7pj2yoxi" path="res://scenes/basic_structure.tscn" id="7_5cx03"]
 [ext_resource type="Script" path="res://scripts/structure_spawner.gd" id="7_5kgrx"]
+[ext_resource type="Script" path="res://scripts/debug_coords.gd" id="9_i48gf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4vu7"]
 texture = ExtResource("1_jc61t")
@@ -52,3 +53,14 @@ vulture_scene = ExtResource("4_dyopk")
 script = ExtResource("7_5kgrx")
 procedural_generation = NodePath("../TileMapLayer")
 structure_scene = ExtResource("7_5cx03")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Coords" type="Label" parent="CanvasLayer"]
+offset_left = 22.0
+offset_top = 18.0
+offset_right = 62.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 30
+text = "Coords: ()"
+script = ExtResource("9_i48gf")
