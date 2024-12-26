@@ -6,6 +6,7 @@ extends Node2D
 @onready var fnl = FastNoiseLite.new()
 var flat_ground_required = 6
 var taken_locations: Array
+var tile_offset = Vector2(-64, 64)
 
 func _ready() -> void:
 	fnl.seed = randi_range(0, 1000)
@@ -30,7 +31,8 @@ func spawn_structure(x):
 	print("spawned structure")
 	var structure = structure_scene.instantiate()
 	add_taken_location(x, x + flat_ground_required)
-	structure.global_position = to_global(procedural_generation.map_to_local(Vector2(x, procedural_generation.get_ground_height(x) - 1)))
+	var tilemap_to_global = procedural_generation.to_global(procedural_generation.map_to_local(Vector2(x, procedural_generation.get_ground_height(x) - 1)))
+	structure.global_position = tilemap_to_global + tile_offset
 	get_tree().root.add_child.call_deferred(structure)
 	copy(structure)
 
