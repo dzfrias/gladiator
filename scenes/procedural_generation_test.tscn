@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bghx0g5lsb0cd"]
+[gd_scene load_steps=12 format=3 uid="uid://bghx0g5lsb0cd"]
 
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_jc61t"]
 [ext_resource type="Script" path="res://scripts/mission/procedural_generation.gd" id="2_k3yki"]
@@ -21,22 +21,12 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_r4vu7")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_3fpmt"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xlxtx"]
-noise = SubResource("FastNoiseLite_3fpmt")
-
 [node name="ProceduralGenerationTest" type="Node2D"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("noise_sprite")]
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_ww7cr")
 collision_visibility_mode = 1
 script = ExtResource("2_k3yki")
-noise_sprite = NodePath("../Noise")
-
-[node name="Noise" type="Sprite2D" parent="."]
-position = Vector2(-676, 0)
-texture = SubResource("NoiseTexture2D_xlxtx")
 
 [node name="Player" parent="." instance=ExtResource("3_4x0er")]
 position = Vector2(957, -44)

@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://p18h7pj2yoxi"]
 
 [ext_resource type="TileSet" uid="uid://ubuid1vb61rr" path="res://assets/world_tileset.tres" id="1_12g23"]
-[ext_resource type="Script" path="res://scripts/structure.gd" id="2_0s6uf"]
 
 [node name="BasicStructure" type="TileMapLayer"]
 tile_map_data = PackedByteArray("AAAAAP//AQAAAAAAAAABAP3/AQAAAAAAAAABAP//AQAAAAAAAAACAPv/AQAAAAAAAAACAP3/AQAAAAAAAAACAP//AQAAAAAAAAADAP3/AQAAAAAAAAADAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAPv/AQAAAAAAAAAEAP3/AQAAAAAAAAAFAP//AQAAAAAAAAA=")
 tile_set = ExtResource("1_12g23")
-script = ExtResource("2_0s6uf")
