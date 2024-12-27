@@ -1,4 +1,4 @@
-extends Node
+class_name Constants
 
 const ENVIRONMENT_LAYER = 1
 const ENTITY_LAYER = 2

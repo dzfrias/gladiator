@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=3 uid="uid://bghx0g5lsb0cd"]
 
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_jc61t"]
-[ext_resource type="Script" path="res://scripts/procedural_generation.gd" id="2_k3yki"]
+[ext_resource type="Script" path="res://scripts/mission/procedural_generation.gd" id="2_k3yki"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="3_4o14u"]
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_4x0er"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="4_dyopk"]
-[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="6_1k65c"]
-[ext_resource type="PackedScene" uid="uid://p18h7pj2yoxi" path="res://scenes/basic_structure.tscn" id="7_5cx03"]
-[ext_resource type="Script" path="res://scripts/structure_spawner.gd" id="7_5kgrx"]
-[ext_resource type="Script" path="res://scripts/debug_coords.gd" id="9_i48gf"]
+[ext_resource type="Script" path="res://scripts/mission/enemy_spawner.gd" id="6_1k65c"]
+[ext_resource type="PackedScene" path="res://scenes/basic_structure.tscn" id="7_5cx03"]
+[ext_resource type="Script" path="res://scripts/mission/structure_spawner.gd" id="7_5kgrx"]
+[ext_resource type="Script" path="res://scripts/ui/debug_coords.gd" id="9_i48gf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4vu7"]
 texture = ExtResource("1_jc61t")

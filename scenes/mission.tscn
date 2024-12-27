@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://bcjerk6m5dfga"]
 
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_a3wti"]
-[ext_resource type="Script" path="res://scripts/procedural_generation.gd" id="2_iogpu"]
+[ext_resource type="Script" path="res://scripts/mission/procedural_generation.gd" id="2_iogpu"]
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_mkemn"]
-[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="4_orx62"]
+[ext_resource type="Script" path="res://scripts/mission/enemy_spawner.gd" id="4_orx62"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="5_61yb7"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_q2hro"]
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="8_kos0p"]

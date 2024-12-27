@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://brhth4kuom7aw"]
 
-[ext_resource type="Script" path="res://scripts/vulture.gd" id="1_8pv11"]
+[ext_resource type="Script" path="res://scripts/enemies/vulture.gd" id="1_8pv11"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_mrh4i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_c4mip"]
 [ext_resource type="PackedScene" uid="uid://dxkwbttbgrri6" path="res://scenes/vulture_projectile.tscn" id="2_yrlq5"]

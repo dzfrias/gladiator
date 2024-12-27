@@ -17,9 +17,8 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-Constants="*res://scripts/util/Constants.gd"
 Debug="*res://scripts/util/Debug.gd"
-MissionManager="*res://scripts/mission_manager.gd"
+MissionManager="*res://scripts/mission/mission_manager.gd"
 
 [input]
 

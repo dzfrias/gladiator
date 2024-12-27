@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bydm8vffd6nwt"]
 
-[ext_resource type="Script" path="res://scripts/wolf.gd" id="1_4octj"]
+[ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_oje08"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 
