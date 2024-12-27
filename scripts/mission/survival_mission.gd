@@ -1,6 +1,6 @@
 class_name SurvivalMission extends Mission
 
-var time := 30.0
+var time := 60.0
 
 func _process(delta: float) -> void:
 	time -= delta

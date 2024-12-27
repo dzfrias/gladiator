@@ -17,9 +17,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	global_position.x = Player.Instance.global_position.x
+	global_position.y = Player.Instance.global_position.y
 
 	if is_colliding():
 		var collider = get_collider()
+		print(collider)
 		if collider is Player and _can_damage:
 			var player = collider as Player
 			player.damage(damage)

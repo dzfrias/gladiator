@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://beu7cb0rnolxb"]
+
+[ext_resource type="Script" path="res://scripts/ui/survival_timer.gd" id="1_lj44e"]
+
+[node name="SurvivalUI" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Timer" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 26.0
+grow_horizontal = 2
+scale = Vector2(1.98, 1.98)
+text = "30.0"
+horizontal_alignment = 1
+script = ExtResource("1_lj44e")

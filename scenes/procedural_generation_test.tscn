@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_4x0er"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="4_dyopk"]
 [ext_resource type="Script" path="res://scripts/mission/enemy_spawner.gd" id="6_1k65c"]
-[ext_resource type="PackedScene" path="res://scenes/basic_structure.tscn" id="7_5cx03"]
+[ext_resource type="PackedScene" uid="uid://p18h7pj2yoxi" path="res://scenes/basic_structure.tscn" id="7_5cx03"]
 [ext_resource type="Script" path="res://scripts/mission/structure_spawner.gd" id="7_5kgrx"]
 [ext_resource type="Script" path="res://scripts/ui/debug_coords.gd" id="9_i48gf"]
 

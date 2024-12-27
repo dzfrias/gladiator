@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcjerk6m5dfga"]
+[gd_scene load_steps=17 format=3 uid="uid://bcjerk6m5dfga"]
 
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_a3wti"]
 [ext_resource type="Script" path="res://scripts/mission/procedural_generation.gd" id="2_iogpu"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="8_lt0d7"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="9_ia2mn"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="9_iri0h"]
+[ext_resource type="PackedScene" uid="uid://beu7cb0rnolxb" path="res://scenes/survival_ui.tscn" id="10_dmfm5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4vu7"]
 texture = ExtResource("1_a3wti")
@@ -49,8 +50,9 @@ vulture_scene = ExtResource("6_q2hro")
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("8_lt0d7")
-lightning_scene = ExtResource("8_l4yi6")
-acid_rain_scene = ExtResource("9_iri0h")
+lightning_ui = ExtResource("8_l4yi6")
+acid_rain_ui = ExtResource("9_iri0h")
+survival_ui = ExtResource("10_dmfm5")
 
 [node name="Ammo" type="Label" parent="UI"]
 offset_left = 16.0

@@ -1,15 +1,16 @@
 class_name MissionUI extends CanvasLayer
 
-@export var lightning_scene: PackedScene
-@export var acid_rain_scene: PackedScene
+@export var lightning_ui: PackedScene
+@export var acid_rain_ui: PackedScene
+@export var survival_ui: PackedScene
 
 func _ready() -> void:
-	var indicator: Node
+	# Weather UI
 	if MissionManager.weather is AcidRain:
-		indicator = acid_rain_scene.instantiate()
-		indicator.acid_rain = MissionManager.weather
+		add_child(acid_rain_ui.instantiate())
 	if MissionManager.weather is Lightning:
-		indicator = lightning_scene.instantiate()
-		indicator.lightning = MissionManager.weather
-	if indicator != null:
-		add_child(indicator)
+		add_child(lightning_ui.instantiate())
+	
+	# Mission UI
+	if MissionManager.mission is SurvivalMission:
+		add_child(survival_ui.instantiate())

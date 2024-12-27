@@ -1,10 +1,12 @@
 class_name LightningIndicator extends ProgressBar
 
-@export var lightning: Lightning
+var _lightning: Lightning
 
 func _ready() -> void:
+	assert(MissionManager.weather is Lightning)
+	_lightning = MissionManager.weather as Lightning
 	value = 0
-	max_value = lightning.tolerance_time
+	max_value = _lightning.tolerance_time
 
 func _process(_delta: float) -> void:
-	value = lightning.current_time
+	value = _lightning.current_time
