@@ -22,7 +22,6 @@ func _process(_delta: float) -> void:
 
 	if is_colliding():
 		var collider = get_collider()
-		print(collider)
 		if collider is Player and _can_damage:
 			var player = collider as Player
 			player.damage(damage)
