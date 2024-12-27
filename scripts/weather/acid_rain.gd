@@ -13,11 +13,12 @@ signal timer_changed(timer: SceneTreeTimer)
 
 func _ready() -> void:
 	collision_mask = Constants.ENVIRONMENT_LAYER | Constants.ROOF_LAYER | Constants.PLAYER_LAYER
+	target_position.y = 10000
+	global_position.y = -5000
 	_cycle()
 
 func _process(_delta: float) -> void:
 	global_position.x = Player.Instance.global_position.x
-	global_position.y = Player.Instance.global_position.y
 
 	if is_colliding():
 		var collider = get_collider()
