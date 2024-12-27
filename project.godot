@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 Constants="*res://scripts/util/Constants.gd"
 Debug="*res://scripts/util/Debug.gd"
+MissionManager="*res://scripts/mission_manager.gd"
 
 [input]
 

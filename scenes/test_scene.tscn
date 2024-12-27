@@ -1,132 +1,22 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwfjl353c2wgp"]
+[gd_scene load_steps=2 format=3 uid="uid://bwfjl353c2wgp"]
 
-[ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_ql7v1"]
-[ext_resource type="Script" path="res://scripts/lightning.gd" id="2_pspid"]
-[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_xlqv4"]
-[ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="3_o7uif"]
-[ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="4_sei8v"]
-[ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="5_hwu5q"]
-[ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_4ttbr"]
-[ext_resource type="Script" path="res://scripts/acid_rain.gd" id="7_8dpbw"]
-[ext_resource type="Script" path="res://scripts/ui/acid_rain_indicator.gd" id="7_8o478"]
-[ext_resource type="Script" path="res://scripts/ui/lightning_indicator.gd" id="9_l752i"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvj7l"]
-size = Vector2(128, 126)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eba51"]
-bg_color = Color(0.215902, 0.215902, 0.215902, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoitw"]
-bg_color = Color(0.310203, 0.822627, 0.514826, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrxf2"]
-bg_color = Color(0.838505, 0.770122, 0.196965, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvov1"]
-size = Vector2(510, 64)
+[ext_resource type="Script" path="res://scripts/ui/test_mission_button.gd" id="1_dd6cd"]
 
 [node name="TestScene" type="Node2D"]
 
-[node name="AcidRain" type="RayCast2D" parent="." node_paths=PackedStringArray("debug_line")]
-position = Vector2(0, -1194)
-target_position = Vector2(0, 10000)
-collision_mask = 11
-script = ExtResource("7_8dpbw")
-debug_line = NodePath("Line2D")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Line2D" type="Line2D" parent="AcidRain"]
-default_color = Color(0.203922, 0.666667, 0.45098, 1)
-
-[node name="Lightning" type="Node2D" parent="."]
-script = ExtResource("2_pspid")
-
-[node name="Player" parent="." instance=ExtResource("1_ql7v1")]
-position = Vector2(8, -61)
-move_speed = 400.0
-
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(3, 124)
-scale = Vector2(8.895, 1)
-
-[node name="Block" type="Sprite2D" parent="Floor"]
-texture = ExtResource("2_xlqv4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-shape = SubResource("RectangleShape2D_yvj7l")
-
-[node name="Wolf" parent="." instance=ExtResource("3_o7uif")]
-position = Vector2(-236, -1)
-
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="AmmoUI" type="Label" parent="HUD"]
-offset_left = 16.0
-offset_top = 523.0
-offset_right = 174.0
-offset_bottom = 572.0
-theme_override_font_sizes/font_size = 30
-text = "Ammo: 0/0"
-vertical_alignment = 1
-script = ExtResource("4_sei8v")
-
-[node name="HealthBar" type="ProgressBar" parent="HUD"]
-offset_left = 12.0
-offset_top = 586.0
-offset_right = 266.0
-offset_bottom = 639.0
-theme_override_font_sizes/font_size = 30
-theme_override_styles/background = SubResource("StyleBoxFlat_eba51")
-theme_override_styles/fill = SubResource("StyleBoxFlat_uoitw")
-value = 100.0
-show_percentage = false
-script = ExtResource("5_hwu5q")
-
-[node name="AcidRainIndicator" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("acid_rain")]
-anchors_preset = -1
-anchor_left = 0.515
-anchor_top = 0.077
-anchor_right = 0.515
-anchor_bottom = 0.077
-offset_left = -325.28
-offset_top = -20.896
-offset_right = 324.72
-offset_bottom = 21.104
-theme_override_font_sizes/font_size = 30
-theme_override_styles/background = SubResource("StyleBoxFlat_eba51")
-theme_override_styles/fill = SubResource("StyleBoxFlat_uoitw")
-show_percentage = false
-script = ExtResource("7_8o478")
-acid_rain = NodePath("../../AcidRain")
-
-[node name="LightningIndicator" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("lightning")]
-anchors_preset = -1
-anchor_left = 0.524
-anchor_top = 0.168
-anchor_right = 0.524
-anchor_bottom = 0.168
-offset_left = -223.648
-offset_top = -20.864
-offset_right = 224.352
-offset_bottom = 21.136
-theme_override_font_sizes/font_size = 30
-theme_override_styles/background = SubResource("StyleBoxFlat_eba51")
-theme_override_styles/fill = SubResource("StyleBoxFlat_vrxf2")
-show_percentage = false
-script = ExtResource("9_l752i")
-lightning = NodePath("../../Lightning")
-
-[node name="Vulture" parent="." instance=ExtResource("6_4ttbr")]
-position = Vector2(0, -500)
-
-[node name="Roof" type="StaticBody2D" parent="."]
-position = Vector2(116, -225)
-collision_layer = 8
-collision_mask = 8
-
-[node name="Sprite2D" type="Sprite2D" parent="Roof"]
-scale = Vector2(4, 0.5)
-texture = ExtResource("2_xlqv4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
-shape = SubResource("RectangleShape2D_rvov1")
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.5
+offset_top = -53.5
+offset_right = 227.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enter Mission"
+script = ExtResource("1_dd6cd")

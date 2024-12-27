@@ -1,0 +1,85 @@
+[gd_scene load_steps=18 format=3 uid="uid://bcjerk6m5dfga"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_a3wti"]
+[ext_resource type="Script" path="res://scripts/procedural_generation.gd" id="2_iogpu"]
+[ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_mkemn"]
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="4_orx62"]
+[ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="5_61yb7"]
+[ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_q2hro"]
+[ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="8_kos0p"]
+[ext_resource type="PackedScene" uid="uid://bm0hxwrfnl0cc" path="res://scenes/lightning_indicator.tscn" id="8_l4yi6"]
+[ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="8_lt0d7"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="9_ia2mn"]
+[ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="9_iri0h"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4vu7"]
+texture = ExtResource("1_a3wti")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_ww7cr"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_r4vu7")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3fpmt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xlxtx"]
+noise = SubResource("FastNoiseLite_3fpmt")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1jq8"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5mr4"]
+bg_color = Color(0.310203, 0.822627, 0.514826, 1)
+
+[node name="Mission" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." node_paths=PackedStringArray("noise_sprite")]
+tile_set = SubResource("TileSet_ww7cr")
+collision_visibility_mode = 1
+script = ExtResource("2_iogpu")
+noise_sprite = NodePath("../Noise")
+
+[node name="Noise" type="Sprite2D" parent="."]
+position = Vector2(-676, 0)
+texture = SubResource("NoiseTexture2D_xlxtx")
+
+[node name="Player" parent="." instance=ExtResource("3_mkemn")]
+position = Vector2(957, -44)
+move_speed = 600.0
+jump_speed = 700.0
+
+[node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("tilemap")]
+script = ExtResource("4_orx62")
+tilemap = NodePath("../TileMapLayer")
+wolf_scene = ExtResource("5_61yb7")
+vulture_scene = ExtResource("6_q2hro")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("8_lt0d7")
+lightning_scene = ExtResource("8_l4yi6")
+acid_rain_scene = ExtResource("9_iri0h")
+
+[node name="Ammo" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 523.0
+offset_right = 174.0
+offset_bottom = 572.0
+theme_override_font_sizes/font_size = 30
+text = "Ammo: 0/0"
+vertical_alignment = 1
+script = ExtResource("8_kos0p")
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+offset_left = 12.0
+offset_top = 586.0
+offset_right = 266.0
+offset_bottom = 639.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/background = SubResource("StyleBoxFlat_k1jq8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u5mr4")
+value = 100.0
+show_percentage = false
+script = ExtResource("9_ia2mn")
