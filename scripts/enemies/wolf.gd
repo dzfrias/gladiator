@@ -76,16 +76,15 @@ func _attack() -> void:
 	velocity.y = attack_jump
 	$AttackBox/CollisionShape2D.disabled = false
 	await get_tree().create_timer(attack_time).timeout
-	assert(_state == State.ATTACKING)
-	
 	if _state != State.ATTACKING: return
+	assert(_state == State.ATTACKING)
 	_attack_direction = 0
 	_state = State.TIRED
 	$AttackBox/CollisionShape2D.disabled = true
 	await get_tree().create_timer(attack_tired_time).timeout
+	if _state != State.TIRED: return
 	assert(_state == State.TIRED)
 	
-	if _state != State.TIRED: return
 	_state = State.TRACKING if _tracking else State.IDLE
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
