@@ -50,6 +50,9 @@ func fire():
 			# Applies Knockback
 			var character_body = hit_collider as CharacterBody2D
 			character_body.velocity = direction * weapon_stats.knockback
+		if hit_collider is Vulture:
+			var vulture = hit_collider as Vulture
+			vulture._velocity = direction * weapon_stats.knockback
 		
 	print("Hit: " + str(result))
 	ammo -= 1
