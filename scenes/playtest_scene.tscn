@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bnbskcv2wvq43"]
+[gd_scene load_steps=12 format=4 uid="uid://bnbskcv2wvq43"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_flae5"]
 [ext_resource type="Texture2D" uid="uid://duechmedh5rix" path="res://assets/SandBlock.png" id="2_uq67u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/spawner.gd" id="4_k3it1"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="5_mcqq3"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_cqa8h"]
+[ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_igtfv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5bcl"]
 texture = ExtResource("2_uq67u")
@@ -24,6 +25,8 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 3
 sources/2 = SubResource("TileSetAtlasSource_n5bcl")
 sources/3 = SubResource("TileSetAtlasSource_pfdh6")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8pxj3"]
 
 [node name="PlaytestScene" type="Node2D"]
 
@@ -46,3 +49,20 @@ position = Vector2(-6749, -456)
 
 [node name="Spawnpoint2" type="Node2D" parent="Spawner"]
 position = Vector2(9406, -81)
+
+[node name="WorldBoundry" type="StaticBody2D" parent="."]
+position = Vector2(-9086, -137)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundry"]
+position = Vector2(-4.80825e-07, -11)
+shape = SubResource("WorldBoundaryShape2D_8pxj3")
+
+[node name="WorldBoundry2" type="StaticBody2D" parent="."]
+position = Vector2(10738, -137)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundry2"]
+shape = SubResource("WorldBoundaryShape2D_8pxj3")
+
+[node name="PlayerUI" parent="." instance=ExtResource("7_igtfv")]
