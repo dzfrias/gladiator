@@ -1,6 +1,8 @@
 class_name Player extends CharacterBody2D
 
 @export var move_speed: float = 400
+@export var move_acceleration: float = 2000
+@export var direction_change_factor: float = 3
 @export var jump_speed: float = 500
 @export var roll_speed: float = 800
 @export var roll_time: float = 0.2
@@ -32,15 +34,23 @@ func _process(delta: float) -> void:
 	match _state:
 		State.CONTROL:
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
-				velocity.x = 0
+				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
 			elif Input.is_action_pressed("left"):
-				velocity.x = -move_speed
+				var acceleration := move_acceleration
+				# This will make the movement snappier if the player wants to
+				# change directions
+				if velocity.x > 0:
+					acceleration *= direction_change_factor
+				velocity.x = max(-move_speed, velocity.x - acceleration * delta)
 				_direction = -1
 			elif Input.is_action_pressed("right"):
-				velocity.x = move_speed
+				var acceleration := move_acceleration
+				if velocity.x < 0:
+					acceleration *= direction_change_factor
+				velocity.x = min(move_speed, velocity.x + acceleration * delta)
 				_direction = 1
 			else:
-				velocity.x = 0
+				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
 		State.ROLL:
 			velocity.x = roll_speed * _direction
 		
