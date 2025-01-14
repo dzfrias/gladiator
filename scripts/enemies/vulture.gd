@@ -60,6 +60,7 @@ func _process(delta: float) -> void:
 	
 	match _state:
 		State.IDLE:
+			_velocity = Vector2.ZERO
 			# TODO patrol
 			pass
 		State.TRACKING:

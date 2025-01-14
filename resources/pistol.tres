@@ -9,3 +9,4 @@ damage = 5.0
 reload_time = 1.0
 max_ammo = 8
 firing_interval = 0.5
+knockback = 1000.0
