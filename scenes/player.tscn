@@ -21,6 +21,7 @@ shape = SubResource("RectangleShape2D_m5kfl")
 texture = ExtResource("1_rjir4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -250)
 position_smoothing_enabled = true
 
 [node name="Health" type="Node" parent="."]
