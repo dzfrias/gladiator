@@ -22,10 +22,12 @@ func instantiate_enemies():
 	var random_index = randi_range(0, spawn_positions.size() - 1)
 	var spawn_position = spawn_positions[random_index].global_position
 	wolf.global_position = spawn_position
+	wolf._always_tracking = true
 	get_tree().root.add_child(wolf)
 	
 	var vulture = vulture_prefab.instantiate()
 	random_index = randi_range(0, spawn_positions.size() - 1)
 	spawn_position = spawn_positions[random_index].global_position
 	vulture.global_position = spawn_position
+	vulture._always_tracking = true
 	get_tree().root.add_child(vulture)

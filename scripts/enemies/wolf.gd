@@ -14,6 +14,7 @@ class_name Wolf extends CharacterBody2D
 
 @onready var detection_zone: Area2D = $DetectionZone
 
+var _always_tracking: bool
 var _state: State = State.IDLE
 var _tracking: Node2D
 var _attack_direction := 0.0
@@ -53,6 +54,9 @@ func _physics_process(delta: float) -> void:
 				velocity.x = direction * speed
 		State.IDLE:
 			# TODO make wolf patrol back and forth
+			if _always_tracking:
+				_tracking = Player.Instance
+				_state = State.TRACKING
 			velocity.x = 0
 		State.TIRED:
 			velocity.x = 0
@@ -121,6 +125,7 @@ func knockback():
 	recover()
 
 func recover():
+	velocity = Vector2.ZERO
 	await get_tree().create_timer(stun_duration).timeout
 	_state = State.IDLE
 	for body in detection_zone.get_overlapping_bodies():

@@ -27,6 +27,7 @@ class_name Vulture extends Area2D
 
 @onready var detection_zone: Area2D = $DetectionZone
 
+var _always_tracking : bool
 var _state := State.IDLE
 var _tracking: Node2D
 var _idle_time := 0.0
@@ -61,6 +62,9 @@ func _process(delta: float) -> void:
 	match _state:
 		State.IDLE:
 			_velocity = Vector2.ZERO
+			if _always_tracking:
+				_tracking = Player.Instance
+				_state = State.TRACKING
 			# TODO patrol
 			pass
 		State.TRACKING:
