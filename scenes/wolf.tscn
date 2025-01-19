@@ -28,7 +28,6 @@ shape = SubResource("RectangleShape2D_ot88w")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_d7ips")
-max_health = 15.0
 
 [node name="AttackBox" type="Area2D" parent="."]
 collision_layer = 0

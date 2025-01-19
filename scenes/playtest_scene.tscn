@@ -43,12 +43,13 @@ script = ExtResource("4_k3it1")
 wolf_prefab = ExtResource("5_mcqq3")
 vulture_prefab = ExtResource("6_cqa8h")
 spawn_positions = [NodePath("Spawnpoint1"), NodePath("Spawnpoint2")]
+spawn_delay = 18.0
 
 [node name="Spawnpoint1" type="Node2D" parent="Spawner"]
-position = Vector2(-6749, -456)
+position = Vector2(-2469, -236)
 
 [node name="Spawnpoint2" type="Node2D" parent="Spawner"]
-position = Vector2(9406, -81)
+position = Vector2(1911, -305)
 
 [node name="WorldBoundry" type="StaticBody2D" parent="."]
 position = Vector2(-9086, -137)
