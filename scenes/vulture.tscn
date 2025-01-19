@@ -14,6 +14,8 @@ radius = 797.023
 [node name="Vulture" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_8pv11")
+stop_dist = 400.0
+attack_idle_time = 0.5
 projectile = ExtResource("2_yrlq5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
