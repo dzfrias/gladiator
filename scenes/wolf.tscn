@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=8 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_oje08"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
+[ext_resource type="PackedScene" uid="uid://c6ow4rteapjg" path="res://scenes/health_bar.tscn" id="4_3lbon"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(128, 59)
@@ -28,6 +29,13 @@ shape = SubResource("RectangleShape2D_ot88w")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_d7ips")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_3lbon")]
+offset_left = -122.0
+offset_top = -125.0
+offset_right = 132.0
+offset_bottom = -72.0
+health = NodePath("../Health")
 
 [node name="AttackBox" type="Area2D" parent="."]
 collision_layer = 0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=8 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
+[ext_resource type="PackedScene" uid="uid://c6ow4rteapjg" path="res://scenes/health_bar.tscn" id="6_33j43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(106, 108)
@@ -30,3 +31,10 @@ script = ExtResource("3_s7yvn")
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("5_crqak")
 weapon_stats = ExtResource("6_0weg3")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_33j43")]
+offset_left = -121.0
+offset_top = 83.0
+offset_right = 133.0
+offset_bottom = 136.0
+health = NodePath("../Health")

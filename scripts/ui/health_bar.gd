@@ -1,10 +1,11 @@
 extends ProgressBar
 
+@export var health: Health
+
 func _ready() -> void:
-	var player_health = Player.Instance.get_health() as Health
-	max_value = player_health.max_health
-	player_health.damage_taken.connect(_on_health_lost)
-	player_health.health_gained.connect(_on_health_gained)
+	max_value = health.max_health
+	health.damage_taken.connect(_on_health_lost)
+	health.health_gained.connect(_on_health_gained)
 
 func _on_health_lost(amount: float):
 	value -= amount

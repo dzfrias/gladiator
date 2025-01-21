@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://brhth4kuom7aw"]
+[gd_scene load_steps=8 format=3 uid="uid://brhth4kuom7aw"]
 
 [ext_resource type="Script" path="res://scripts/enemies/vulture.gd" id="1_8pv11"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_mrh4i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_c4mip"]
 [ext_resource type="PackedScene" uid="uid://dxkwbttbgrri6" path="res://scenes/vulture_projectile.tscn" id="2_yrlq5"]
+[ext_resource type="PackedScene" uid="uid://c6ow4rteapjg" path="res://scenes/health_bar.tscn" id="5_hq1jj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6s7y"]
 size = Vector2(127, 128)
@@ -28,6 +29,13 @@ shape = SubResource("RectangleShape2D_g6s7y")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_c4mip")
 max_health = 25.0
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_hq1jj")]
+offset_left = -126.0
+offset_top = -148.0
+offset_right = 128.0
+offset_bottom = -95.0
+health = NodePath("../Health")
 
 [node name="DetectionZone" type="Area2D" parent="."]
 visible = false
