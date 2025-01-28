@@ -13,8 +13,8 @@ class_name Player extends CharacterBody2D
 @export var melee_knockback: Vector2 = Vector2(1000, -500)
 @export var melee_cooldown: float = 2
 
-# NOTE this field can be null (if the player has no weapon)
 var _can_melee := true
+# NOTE this field can be null (if the player has no weapon)
 var _weapon: Weapon
 var _state := State.CONTROL
 var _direction: float = 1
@@ -121,8 +121,10 @@ func _roll() -> void:
 	_state = State.ROLL
 	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
 	collision_layer = Constants.INVINCIBLE_LAYER
+	$Sprite2D.flip_v = true
 	await get_tree().create_timer(roll_time).timeout
 	_state = State.CONTROL
+	$Sprite2D.flip_v = false
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 	_can_roll = false
 	await get_tree().create_timer(roll_cooldown_time).timeout
