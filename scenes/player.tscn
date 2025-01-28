@@ -17,7 +17,7 @@ size = Vector2(109, 99)
 collision_layer = 18
 script = ExtResource("1_5wdcp")
 move_speed = 20000.0
-roll_speed = 500.0
+roll_speed = 900.0
 roll_time = 0.4
 melee_box = NodePath("Area2D")
 

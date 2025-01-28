@@ -31,7 +31,7 @@ shape = SubResource("RectangleShape2D_g6s7y")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_c4mip")
-max_health = 18.0
+max_health = 10.0
 
 [node name="DetectionZone" type="Area2D" parent="."]
 visible = false

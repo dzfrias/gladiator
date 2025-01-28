@@ -6,18 +6,14 @@ extends Node2D
 @export var spawn_delay: float = 10
 @export var enemy_group: Node2D
 
-var can_spawn: bool = true
-
-func _process(delta: float) -> void:
-	if can_spawn:
-		spawn_enemies()
+func _ready() -> void:
+	spawn_enemies()
 
 func spawn_enemies():
-	can_spawn = false
-	if enemy_group.get_child_count() <= 4:
-		instantiate_enemies(1, 1)
-	await get_tree().create_timer(spawn_delay).timeout
-	can_spawn = true
+	while true:
+		if enemy_group.get_child_count() <= 4:
+			instantiate_enemies(1, 1)
+		await get_tree().create_timer(spawn_delay).timeout
 
 func instantiate_enemies(wolf_amount: int, vulture_amount: int):
 	for i in range(wolf_amount):
