@@ -97,7 +97,7 @@ func _attack() -> void:
 	_state = State.TRACKING if _tracking else State.IDLE
 	var angle := _firing_angle(projectile_speed, dx, dy)
 	var p := projectile.instantiate() as ArcProjectile
-	
+	get_tree().root.add_child(p)
 	p.fire(projectile_speed, angle)
 	p.damage = projectile_damage
 	p.splash_radius = projectile_splash_radius
