@@ -10,7 +10,7 @@ class_name Player extends CharacterBody2D
 
 @export var melee_box: Area2D
 @export var melee_damage: float = 5
-@export var melee_knockback: Vector2 = Vector2(1000, -1000)
+@export var melee_knockback: Vector2 = Vector2(1000, -500)
 @export var melee_cooldown: float = 2
 
 # NOTE this field can be null (if the player has no weapon)

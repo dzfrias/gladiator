@@ -7,9 +7,6 @@ class_name Vulture extends Area2D
 @export var x_acceleration := 300.0
 @export var stop_dist := 300.0
 @export var fly_height := 400.0
-@export var stun_duration: float = 0.1
-@export var recovery_time: float = 0.1
-@export var knockback_air_resistance: float = 5000
 @export_category("Attack")
 @export var attack_idle_time := 1.0
 @export var attack_windup_time := 0.3
@@ -38,8 +35,6 @@ const _GROUND_RAYCAST_DISTANCE = 10000.0
 enum State {
 	IDLE,
 	TRACKING,
-	HIT,
-	RECOVER,
 	ATTACK_WINDUP,
 }
 
@@ -55,7 +50,7 @@ func _process(delta: float) -> void:
 	# This is the distance from the optimal idle position in the y axis
 	# this number will almost always be greater than zero
 	var fly_target := (ground_y - fly_height) - position.y
-	if fly_target > 1 and _state != State.HIT:
+	if fly_target > 1:
 		# Set our velocity to move us down (closer to fly target)
 		_velocity.y = move_toward(_velocity.y, y_speed, y_acceleration * delta)
 	
@@ -97,7 +92,6 @@ func _attack() -> void:
 	var dy := fly_height
 	_state = State.ATTACK_WINDUP
 	await get_tree().create_timer(attack_windup_time).timeout
-	if _state != State.ATTACK_WINDUP: return
 	assert(_state == State.ATTACK_WINDUP)
 	
 	_state = State.TRACKING if _tracking else State.IDLE
@@ -138,28 +132,10 @@ func _on_detection_zone_body_exited(body: Node2D) -> void:
 
 func _on_health_damage_taken(_amount: float) -> void:
 	print("Vulture damage taken")
-	knockback()
-	_state = State.HIT
 
 func _on_health_died() -> void:
 	print("Vulture died")
 	queue_free()
-	
-func knockback():
-	# Knocks enemy backs and stuns them for short duration
-	await get_tree().create_timer(stun_duration).timeout
-	_state = State.RECOVER
-	recover()
-
-func recover():
-	await get_tree().create_timer(stun_duration).timeout
-	_state = State.IDLE
-	for body in detection_zone.get_overlapping_bodies():
-		if body is Player:
-			if _state == State.IDLE:
-				await get_tree().create_timer(recovery_time).timeout
-				_state = State.TRACKING
-			_tracking = body
 
 static func _firing_angle(v: float, dx: float, dy: float) -> float:
 	const GRAVITY = 980.0
