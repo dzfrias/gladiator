@@ -11,8 +11,10 @@ class_name Player extends CharacterBody2D
 @export var melee_box: Area2D
 @export var melee_damage: float = 5
 @export var melee_knockback: Vector2 = Vector2(1000, -1000)
+@export var melee_cooldown: float = 2
 
 # NOTE this field can be null (if the player has no weapon)
+var _can_melee := true
 var _weapon: Weapon
 var _state := State.CONTROL
 var _direction: float = 1
@@ -47,17 +49,18 @@ func _process(delta: float) -> void:
 					acceleration *= direction_change_factor
 				velocity.x = max(-move_speed, velocity.x - acceleration * delta)
 				_direction = -1
+				melee_box.position = Vector2(-125, 0)
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
 				if velocity.x < 0:
 					acceleration *= direction_change_factor
 				velocity.x = min(move_speed, velocity.x + acceleration * delta)
 				_direction = 1
+				melee_box.position = Vector2(125, 0)
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
 		State.ROLL:
 			velocity.x = roll_speed * _direction
-	scale.x = _direction
 		
 	move_and_slide()
 
@@ -66,7 +69,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("fire") and _weapon:
 		var hit_enemy := false
-		if melee_box.has_overlapping_bodies():
+		if melee_box.has_overlapping_bodies() and _can_melee:
 			for body in melee_box.get_overlapping_bodies():
 				var took_damage = false
 				for child in body.get_children():
@@ -75,6 +78,7 @@ func _input(event: InputEvent) -> void:
 						hit_object_health.take_damage(melee_damage)
 						took_damage = true
 						hit_enemy = true
+						melee_timer()
 				if body is CharacterBody2D and took_damage:
 					# Applies Knockback
 					var character_body = body as CharacterBody2D
@@ -101,6 +105,11 @@ func _input(event: InputEvent) -> void:
 			_weapon.set_firing(false)
 			_weapon = null
 		weapon_changed.emit()
+
+func melee_timer():
+	_can_melee = false
+	await get_tree().create_timer(melee_cooldown).timeout
+	_can_melee = true
 
 func damage(amount: float) -> void:
 	if $Health.has_died:

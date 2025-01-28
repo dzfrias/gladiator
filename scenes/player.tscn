@@ -40,9 +40,8 @@ weapon_stats = ExtResource("6_0weg3")
 health = NodePath("../Health")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(186, 0)
+position = Vector2(123, 0)
 collision_mask = 7
 
 [node name="MeleeBox" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-62.5, 10.5)
 shape = SubResource("RectangleShape2D_xdhhq")
