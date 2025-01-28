@@ -40,19 +40,10 @@ func fire():
 	if result.get("collider") != null:
 		var hit_collider = result.get("collider")
 		
-		var took_damage = false
 		for child in hit_collider.get_children():
 			if child is Health:
 				var hit_object_health = child as Health
 				hit_object_health.take_damage(weapon_stats.damage)
-				took_damage = true
-		if hit_collider is CharacterBody2D and took_damage:
-			# Applies Knockback
-			var character_body = hit_collider as CharacterBody2D
-			character_body.velocity = direction * weapon_stats.knockback
-		if hit_collider is Vulture:
-			var vulture = hit_collider as Vulture
-			vulture._velocity = direction * weapon_stats.knockback
 		
 	print("Hit: " + str(result))
 	ammo -= 1

@@ -79,9 +79,6 @@ func _process(delta: float) -> void:
 				_idle_time += delta
 				if _idle_time > attack_idle_time and _can_attack and fly_target < 1:
 					_attack()
-		State.HIT:
-			var slowdown_direction = (Player.Instance.global_position - global_position).normalized()
-			_velocity += slowdown_direction * knockback_air_resistance * delta
 		State.ATTACK_WINDUP:
 			pass
 	
@@ -106,7 +103,7 @@ func _attack() -> void:
 	_state = State.TRACKING if _tracking else State.IDLE
 	var angle := _firing_angle(projectile_speed, dx, dy)
 	var p := projectile.instantiate() as ArcProjectile
-	get_tree().root.add_child(p)
+	
 	p.fire(projectile_speed, angle)
 	p.damage = projectile_damage
 	p.splash_radius = projectile_splash_radius

@@ -1,19 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=9 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
+[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_0pcrb"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
-[ext_resource type="PackedScene" uid="uid://c6ow4rteapjg" path="res://scenes/health_bar.tscn" id="6_33j43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(106, 108)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdhhq"]
+size = Vector2(109, 99)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("melee_box")]
 collision_layer = 18
 script = ExtResource("1_5wdcp")
 move_speed = 20000.0
+melee_box = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_m5kfl")
@@ -32,9 +36,13 @@ script = ExtResource("3_s7yvn")
 script = ExtResource("5_crqak")
 weapon_stats = ExtResource("6_0weg3")
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_33j43")]
-offset_left = -121.0
-offset_top = 83.0
-offset_right = 133.0
-offset_bottom = 136.0
+[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_0pcrb")]
 health = NodePath("../Health")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(186, 0)
+collision_mask = 7
+
+[node name="MeleeBox" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-62.5, 10.5)
+shape = SubResource("RectangleShape2D_xdhhq")

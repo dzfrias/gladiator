@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_mrh4i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_c4mip"]
 [ext_resource type="PackedScene" uid="uid://dxkwbttbgrri6" path="res://scenes/vulture_projectile.tscn" id="2_yrlq5"]
-[ext_resource type="PackedScene" uid="uid://c6ow4rteapjg" path="res://scenes/health_bar.tscn" id="5_hq1jj"]
+[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="3_7uvll"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6s7y"]
 size = Vector2(127, 128)
@@ -19,6 +19,9 @@ stop_dist = 400.0
 attack_idle_time = 0.5
 projectile = ExtResource("2_yrlq5")
 
+[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_7uvll")]
+health = NodePath("../Health")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mrh4i")
 
@@ -29,13 +32,6 @@ shape = SubResource("RectangleShape2D_g6s7y")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_c4mip")
 max_health = 25.0
-
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_hq1jj")]
-offset_left = -126.0
-offset_top = -148.0
-offset_right = 128.0
-offset_bottom = -95.0
-health = NodePath("../Health")
 
 [node name="DetectionZone" type="Area2D" parent="."]
 visible = false

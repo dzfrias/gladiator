@@ -8,6 +8,10 @@ class_name Player extends CharacterBody2D
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.4
 
+@export var melee_box: Area2D
+@export var melee_damage: float = 5
+@export var melee_knockback: Vector2 = Vector2(1000, -1000)
+
 # NOTE this field can be null (if the player has no weapon)
 var _weapon: Weapon
 var _state := State.CONTROL
@@ -53,6 +57,7 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
 		State.ROLL:
 			velocity.x = roll_speed * _direction
+	scale.x = _direction
 		
 	move_and_slide()
 
@@ -60,7 +65,25 @@ func _input(event: InputEvent) -> void:
 	if _state != State.CONTROL:
 		return
 	if event.is_action_pressed("fire") and _weapon:
-		_weapon.set_firing(true)
+		var hit_enemy := false
+		if melee_box.has_overlapping_bodies():
+			for body in melee_box.get_overlapping_bodies():
+				var took_damage = false
+				for child in body.get_children():
+					if child is Health:
+						var hit_object_health = child as Health
+						hit_object_health.take_damage(melee_damage)
+						took_damage = true
+						hit_enemy = true
+				if body is CharacterBody2D and took_damage:
+					# Applies Knockback
+					var character_body = body as CharacterBody2D
+					character_body.velocity = Vector2(_direction * melee_knockback.x, melee_knockback.y) 
+				if body is Vulture:
+					var vulture = body as Vulture
+					vulture._velocity = _direction * melee_knockback
+		if !hit_enemy:
+			_weapon.set_firing(true)
 	if event.is_action_released("fire") and _weapon:
 		_weapon.set_firing(false)
 	if is_on_floor():

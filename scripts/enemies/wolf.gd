@@ -60,8 +60,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 		State.TIRED:
 			velocity.x = 0
-		State.HIT:
-			velocity.x -= knockback_air_resistance * delta
 		State.RECOVER:
 			pass
 		State.ATTACKING:
@@ -74,7 +72,7 @@ func _attack() -> void:
 	assert(abs(_attack_direction) == 1)
 	_state = State.TIRED
 	await get_tree().create_timer(attack_windup_time).timeout
-	if _state != State.TIRED: return
+	if _state != State.TIRED or abs(_attack_direction) != 0: return
 	assert(_state == State.TIRED and abs(_attack_direction) == 1)
 	_state = State.ATTACKING
 	velocity.y = attack_jump
