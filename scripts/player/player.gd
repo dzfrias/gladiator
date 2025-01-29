@@ -119,6 +119,8 @@ func damage(amount: float) -> void:
 
 func _roll() -> void:
 	_state = State.ROLL
+	if _weapon:
+		_weapon.set_firing(false)
 	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
 	collision_layer = Constants.INVINCIBLE_LAYER
 	$Sprite2D.flip_v = true
