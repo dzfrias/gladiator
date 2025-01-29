@@ -9,6 +9,7 @@ func _ready() -> void:
 	health.damage_taken.connect(_on_health_lost)
 	health.health_gained.connect(_on_health_gained)
 	health.died.connect(_on_death)
+	hide()
 
 func _process(delta: float) -> void:
 	global_position = health.get_parent().global_position + health_bar_offset
@@ -18,6 +19,7 @@ func set_health(health):
 
 func _on_health_lost(amount: float):
 	value -= amount
+	show()
 	
 func _on_health_gained(amount: float):
 	value += amount
