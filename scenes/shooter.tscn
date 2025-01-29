@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8sfq85fv1ul4"]
+
+[ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
+[ext_resource type="PackedScene" uid="uid://c2v7wruth6ltd" path="res://scenes/shooter_projectile.tscn" id="2_5g1nj"]
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_y4oe8"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
+[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="5_mp71e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
+size = Vector2(72, 142)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
+radius = 902.29
+
+[node name="Shooter" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_a5ml5")
+projectile = ExtResource("2_5g1nj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_d8kds")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.61, 1.17)
+texture = ExtResource("2_y4oe8")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_oetyt")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_arjap")
+max_health = 15.0
+
+[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_mp71e")]
+health = NodePath("../Health")

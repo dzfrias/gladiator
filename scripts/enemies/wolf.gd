@@ -9,8 +9,6 @@ class_name Wolf extends CharacterBody2D
 @export var attack_windup_time: float = 0.1
 @export var attack_tired_time: float = 0.8
 
-@onready var detection_zone: Area2D = $DetectionZone
-
 var _always_tracking: bool
 var _state: State = State.IDLE
 var _tracking: Node2D

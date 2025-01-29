@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bnbskcv2wvq43"]
+[gd_scene load_steps=13 format=4 uid="uid://bnbskcv2wvq43"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_flae5"]
 [ext_resource type="Texture2D" uid="uid://duechmedh5rix" path="res://assets/SandBlock.png" id="2_uq67u"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="5_mcqq3"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_cqa8h"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_igtfv"]
+[ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="8_ouu5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5bcl"]
 texture = ExtResource("2_uq67u")
@@ -70,3 +71,7 @@ shape = SubResource("WorldBoundaryShape2D_8pxj3")
 [node name="PlayerUI" parent="." instance=ExtResource("7_igtfv")]
 
 [node name="EnemyGroup" type="Node2D" parent="."]
+
+[node name="Shooter" parent="." instance=ExtResource("8_ouu5s")]
+position = Vector2(-1248, -133)
+stop_dist = 700.0
