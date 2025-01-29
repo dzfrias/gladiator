@@ -9,10 +9,10 @@ class_name Wolf extends CharacterBody2D
 @export var attack_windup_time: float = 0.1
 @export var attack_tired_time: float = 0.8
 
-var _always_tracking: bool
 var _state: State = State.IDLE
 var _tracking: Node2D
 var _attack_direction := 0.0
+@onready var _original_attack_x = $AttackBox/CollisionShape2D.position.x
 
 enum State {
 	IDLE,
@@ -22,6 +22,11 @@ enum State {
 	# Recovering from attack (or beginning an attack)
 	TIRED,
 }
+
+func track(target: Node2D) -> void:
+	_tracking = target
+	if _state == State.IDLE:
+		_state = State.TRACKING
 
 func _ready() -> void:
 	$AttackBox.body_entered.connect(_on_attack_box_body_entered)
@@ -39,7 +44,6 @@ func _physics_process(delta: float) -> void:
 			assert(_tracking != null)
 			var dist := _tracking.position.x - position.x
 			var direction := signf(dist)
-			scale.x = direction
 			if abs(dist) <= attack_distance:
 				_attack_direction = direction
 				_attack()
@@ -47,16 +51,16 @@ func _physics_process(delta: float) -> void:
 				velocity.x = direction * speed
 		State.IDLE:
 			# TODO make wolf patrol back and forth
-			if _always_tracking:
-				_tracking = Player.Instance
-				_state = State.TRACKING
 			velocity.x = 0
 		State.TIRED:
 			velocity.x = 0
 		State.ATTACKING:
 			assert(_attack_direction != 0)
 			velocity.x = _attack_direction * attack_speed
-
+	
+	if velocity.x != 0:
+		_flip(signf(velocity.x))
+	
 	move_and_slide()
 
 func _attack() -> void:
@@ -83,11 +87,8 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 			_state = State.TRACKING
 		_tracking = body
 
-func _on_detection_zone_body_exited(body: Node2D) -> void:
-	if body is Player:
-		_tracking = null
-		if _state == State.TRACKING:
-			_state = State.IDLE
+func _on_detection_zone_body_exited(_body: Node2D) -> void:
+	pass
 
 func _on_health_damage_taken(_amount: float) -> void:
 	print("Wolf damage taken")
@@ -101,3 +102,7 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 		return
 	var player := body as Player
 	player.damage(attack_damage)
+
+func _flip(direction: float) -> void:
+	assert(absf(direction) == 1)
+	$AttackBox/CollisionShape2D.position.x = _original_attack_x * direction

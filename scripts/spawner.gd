@@ -7,27 +7,22 @@ extends Node2D
 @export var enemy_group: Node2D
 
 func _ready() -> void:
-	spawn_enemies()
+	_spawn_enemies_loop()
 
-func spawn_enemies():
+func _spawn_enemies_loop() -> void:
 	while true:
 		if enemy_group.get_child_count() <= 4:
-			instantiate_enemies(1, 1)
+			_spawn_enemies()
 		await get_tree().create_timer(spawn_delay).timeout
 
-func instantiate_enemies(wolf_amount: int, vulture_amount: int):
-	for i in range(wolf_amount):
-		var wolf = wolf_prefab.instantiate()
-		var random_index = randi_range(0, spawn_positions.size() - 1)
-		var spawn_position = spawn_positions[random_index].global_position
-		wolf.global_position = spawn_position
-		wolf._always_tracking = true
-		enemy_group.add_child(wolf)
-	
-	for i in range(vulture_amount):
-		var vulture = vulture_prefab.instantiate()
-		var random_index = randi_range(0, spawn_positions.size() - 1)
-		var spawn_position = spawn_positions[random_index].global_position
-		vulture.global_position = spawn_position
-		vulture._always_tracking = true
-		enemy_group.add_child(vulture)
+func _spawn_enemies() -> void:
+	_spawn(wolf_prefab)
+	_spawn(vulture_prefab)
+
+func _spawn(enemy: PackedScene) -> void:
+	var instance := enemy.instantiate()
+	var random_index := randi_range(0, spawn_positions.size() - 1)
+	var spawn_position := spawn_positions[random_index].global_position
+	instance.global_position = spawn_position
+	instance.track(Player.Instance)
+	enemy_group.add_child(instance)
