@@ -13,6 +13,8 @@ class_name Shooter extends CharacterBody2D
 @export var shoot_cooldown_avg: float = 1.4
 @export var shoot_cooldown_sd: float = 0.2
 
+@export var impact_particle_prefab: PackedScene
+
 var _state: State = State.IDLE
 var _tracking: Node2D
 var _can_attack: bool = true
@@ -81,7 +83,13 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 func _on_detection_zone_body_exited(_body: Node2D) -> void:
 	pass
 
-func _on_health_damage_taken(_amount: float) -> void:
+func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
+	var impact_particles = impact_particle_prefab.instantiate()
+	impact_particles.global_position = global_position
+	get_tree().root.add_child(impact_particles)
+	impact_particles.direction = _direction
+	impact_particles.emitting = true
+	
 	print("Shooter damage taken")
 
 func _on_health_died() -> void:

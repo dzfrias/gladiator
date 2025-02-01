@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch01mb13w86qc"]
+
+[sub_resource type="Curve" id="Curve_3d8a7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4986), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="ImpactParticles" type="CPUParticles2D"]
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 2
+emission_sphere_radius = 5.0
+spread = 20.0
+gravity = Vector2(0, 1000)
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+angular_velocity_min = 2.0
+angular_velocity_max = 5.0
+scale_amount_min = 8.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_3d8a7")

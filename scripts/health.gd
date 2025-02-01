@@ -1,6 +1,6 @@
 class_name Health extends Node
 
-signal damage_taken(amount: float)
+signal damage_taken(amount: float, direction: Vector2)
 signal health_gained(amount: float)
 signal died
 
@@ -15,11 +15,11 @@ var _died := false
 func _ready() -> void:
 	_health = max_health
 
-func take_damage(amount: float) -> void:
+func take_damage(amount: float, direction: Vector2) -> void:
 	if _died: return
 	var old := _health
 	_health = max(_health - amount, 0)
-	damage_taken.emit(old - _health)
+	damage_taken.emit(old - _health, direction)
 	if _health == 0:
 		died.emit()
 		_died = true

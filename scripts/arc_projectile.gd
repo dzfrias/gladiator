@@ -31,5 +31,5 @@ func _on_body_entered(_body: Node2D) -> void:
 		var collider = collisions[0].get("collider")
 		assert(collider is Player)
 		var player := collider as Player
-		player.damage(damage)
+		player.damage(damage, Vector2.ZERO)
 	queue_free()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://brhth4kuom7aw"]
+[gd_scene load_steps=9 format=3 uid="uid://brhth4kuom7aw"]
 
 [ext_resource type="Script" path="res://scripts/enemies/vulture.gd" id="1_8pv11"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_mrh4i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_c4mip"]
 [ext_resource type="PackedScene" uid="uid://dxkwbttbgrri6" path="res://scenes/vulture_projectile.tscn" id="2_yrlq5"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="3_7uvll"]
+[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_dpgdj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6s7y"]
 size = Vector2(127, 128)
@@ -18,6 +19,7 @@ script = ExtResource("1_8pv11")
 stop_dist = 400.0
 attack_idle_time = 0.5
 projectile = ExtResource("2_yrlq5")
+impact_particle_prefab = ExtResource("3_dpgdj")
 
 [node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_7uvll")]
 health = NodePath("../Health")

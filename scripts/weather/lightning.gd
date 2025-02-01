@@ -12,6 +12,6 @@ func _process(delta: float) -> void:
 		current_time += delta
 		if current_time >= tolerance_time:
 			current_time = 0
-			player.damage(damage)
+			player.damage(damage, Vector2.ZERO)
 	else:
 		current_time = maxf(current_time - delta, 0)

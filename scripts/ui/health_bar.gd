@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 func set_health(health):
 	self.health = health
 
-func _on_health_lost(amount: float):
+func _on_health_lost(amount: float, direction: Vector2):
 	value -= amount
 	show()
 	

@@ -16,5 +16,5 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		var player := body as Player
-		player.damage(damage)
+		player.damage(damage, velocity.normalized())
 	queue_free()

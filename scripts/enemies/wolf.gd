@@ -9,6 +9,8 @@ class_name Wolf extends CharacterBody2D
 @export var attack_windup_time: float = 0.1
 @export var attack_tired_time: float = 0.8
 
+@export var impact_particle_prefab: PackedScene
+
 var _state: State = State.IDLE
 var _tracking: Node2D
 var _attack_direction := 0.0
@@ -90,7 +92,13 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 func _on_detection_zone_body_exited(_body: Node2D) -> void:
 	pass
 
-func _on_health_damage_taken(_amount: float) -> void:
+func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
+	var impact_particles = impact_particle_prefab.instantiate()
+	impact_particles.global_position = global_position
+	get_tree().root.add_child(impact_particles)
+	impact_particles.direction = _direction
+	impact_particles.emitting = true
+	
 	print("Wolf damage taken")
 
 func _on_health_died() -> void:
@@ -101,7 +109,7 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 	if body is not Player:
 		return
 	var player := body as Player
-	player.damage(attack_damage)
+	player.damage(attack_damage, Vector2(_attack_direction, 0))
 
 func _flip(direction: float) -> void:
 	assert(absf(direction) == 1)

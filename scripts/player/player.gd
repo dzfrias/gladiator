@@ -75,7 +75,7 @@ func _input(event: InputEvent) -> void:
 				for child in body.get_children():
 					if child is Health:
 						var hit_object_health = child as Health
-						hit_object_health.take_damage(melee_damage)
+						hit_object_health.take_damage(melee_damage, Vector2(_direction, 0))
 						took_damage = true
 						hit_enemy = true
 						melee_timer()
@@ -111,11 +111,11 @@ func melee_timer():
 	await get_tree().create_timer(melee_cooldown).timeout
 	_can_melee = true
 
-func damage(amount: float) -> void:
+func damage(amount: float, direction: Vector2) -> void:
 	if $Health.has_died:
 		return
 	print("Player hit")
-	$Health.take_damage(amount)
+	$Health.take_damage(amount, direction)
 
 func _roll() -> void:
 	_state = State.ROLL

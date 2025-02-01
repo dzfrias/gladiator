@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=9 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_oje08"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="2_0u6iq"]
+[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
@@ -18,6 +19,7 @@ radius = 797.023
 collision_layer = 2
 script = ExtResource("1_4octj")
 attack_windup_time = 0.3
+impact_particle_prefab = ExtResource("2_8oh5i")
 
 [node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("2_0u6iq")]
 health = NodePath("../Health")

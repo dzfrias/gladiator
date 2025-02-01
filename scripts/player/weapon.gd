@@ -43,7 +43,7 @@ func fire():
 		for child in hit_collider.get_children():
 			if child is Health:
 				var hit_object_health = child as Health
-				hit_object_health.take_damage(weapon_stats.damage)
+				hit_object_health.take_damage(weapon_stats.damage, direction)
 		
 	print("Hit: " + str(result))
 	ammo -= 1

@@ -22,6 +22,8 @@ class_name Vulture extends Area2D
 @export var flap_x_speed_mean := 30.0
 @export var flap_x_speed_sd := 15.0
 
+@export var impact_particle_prefab: PackedScene
+
 @onready var detection_zone: Area2D = $DetectionZone
 
 var _state := State.IDLE
@@ -130,7 +132,13 @@ func _on_detection_zone_body_exited(body: Node2D) -> void:
 		if _state == State.TRACKING:
 			_state = State.IDLE
 
-func _on_health_damage_taken(_amount: float) -> void:
+func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
+	var impact_particles = impact_particle_prefab.instantiate()
+	impact_particles.global_position = global_position
+	get_tree().root.add_child(impact_particles)
+	impact_particles.direction = _direction
+	impact_particles.emitting = true
+	
 	print("Vulture damage taken")
 
 func _on_health_died() -> void:

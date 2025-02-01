@@ -24,7 +24,7 @@ func _process(_delta: float) -> void:
 		var collider = get_collider()
 		if collider is Player and _can_damage:
 			var player = collider as Player
-			player.damage(damage)
+			player.damage(damage, Vector2.ZERO)
 			_damage_cooldown()
 
 func _damage_cooldown():
