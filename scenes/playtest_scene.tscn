@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=4 uid="uid://bnbskcv2wvq43"]
+[gd_scene load_steps=12 format=4 uid="uid://bnbskcv2wvq43"]
 
+[ext_resource type="Texture2D" uid="uid://3ot88no4hqp0" path="res://assets/Background first layer.jpeg" id="1_bl55t"]
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_flae5"]
 [ext_resource type="Texture2D" uid="uid://c1b6xcoqgijcm" path="res://assets/new_tileset.png" id="2_wt64q"]
 [ext_resource type="Script" path="res://scripts/spawner.gd" id="4_k3it1"]
@@ -7,12 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_cqa8h"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_igtfv"]
 [ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="8_ouu5s"]
-
-[sub_resource type="Gradient" id="Gradient_c68xo"]
-colors = PackedColorArray(0.85098, 0.447059, 0.101961, 1, 1, 0.823529, 0.654902, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mknkc"]
-gradient = SubResource("Gradient_c68xo")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bamm8"]
 texture = ExtResource("2_wt64q")
@@ -258,11 +253,10 @@ sources/0 = SubResource("TileSetAtlasSource_bamm8")
 
 [node name="PlaytestScene" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(659, -598.985)
-rotation = -1.5708
-scale = Vector2(66.5308, 120.421)
-texture = SubResource("GradientTexture2D_mknkc")
+[node name="BackgroundFirstLayer" type="Sprite2D" parent="."]
+position = Vector2(514.001, -501)
+scale = Vector2(25.9, 25.9)
+texture = ExtResource("1_bl55t")
 
 [node name="Player" parent="." instance=ExtResource("1_flae5")]
 position = Vector2(-14, -85)
