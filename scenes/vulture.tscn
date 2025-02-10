@@ -17,6 +17,7 @@ radius = 797.023
 collision_layer = 2
 script = ExtResource("1_8pv11")
 stop_dist = 400.0
+fly_height = 200.0
 attack_idle_time = 0.5
 projectile = ExtResource("2_yrlq5")
 impact_particle_prefab = ExtResource("3_dpgdj")
