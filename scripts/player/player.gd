@@ -137,6 +137,9 @@ func _on_health_died() -> void:
 
 func get_weapon() -> Weapon:
 	return _weapon
+
+func get_direction():
+	return _direction
 	
 func get_health() -> Health:
 	return $Health;

@@ -25,11 +25,9 @@ func _process(_delta: float) -> void:
 func fire():
 	if ammo <= 0 or !can_fire:
 		return
-	
-	var mouse_position = get_global_mouse_position()
 
 	var space_state = get_world_2d().direct_space_state
-	var direction = (mouse_position - global_position).normalized()
+	var direction = Vector2(Player.Instance.get_direction(), 0)
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * weapon_stats.weapon_range))
 	query.collide_with_areas = true
 	query.collision_mask = Constants.ENTITY_LAYER | Constants.ENVIRONMENT_LAYER
