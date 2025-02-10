@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=10 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_0pcrb"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
+[ext_resource type="PackedScene" uid="uid://dcp3huoajqaue" path="res://scenes/projectile.tscn" id="6_w2kq1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(106, 108)
@@ -34,12 +35,14 @@ position_smoothing_enabled = true
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_s7yvn")
 
-[node name="Weapon" type="Node2D" parent="."]
-script = ExtResource("5_crqak")
-weapon_stats = ExtResource("6_0weg3")
-
 [node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_0pcrb")]
 health = NodePath("../Health")
+
+[node name="Weapon" type="Node2D" parent="."]
+position = Vector2(123, 0)
+script = ExtResource("5_crqak")
+weapon_stats = ExtResource("6_0weg3")
+projectile_prefab = ExtResource("6_w2kq1")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(123, 0)

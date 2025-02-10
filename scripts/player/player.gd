@@ -19,6 +19,7 @@ var _weapon: Weapon
 var _state := State.CONTROL
 var _direction: float = 1
 var _can_roll := true
+var _combat_flip_position = Vector2(125, 0)
 static var Instance
 
 signal weapon_changed
@@ -49,14 +50,16 @@ func _process(delta: float) -> void:
 					acceleration *= direction_change_factor
 				velocity.x = max(-move_speed, velocity.x - acceleration * delta)
 				_direction = -1
-				melee_box.position = Vector2(-125, 0)
+				melee_box.position = -_combat_flip_position
+				_weapon.position = -_combat_flip_position
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
 				if velocity.x < 0:
 					acceleration *= direction_change_factor
 				velocity.x = min(move_speed, velocity.x + acceleration * delta)
 				_direction = 1
-				melee_box.position = Vector2(125, 0)
+				melee_box.position = _combat_flip_position
+				_weapon.position = _combat_flip_position
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
 		State.ROLL:

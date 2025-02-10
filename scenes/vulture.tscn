@@ -28,8 +28,7 @@ health = NodePath("../Health")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mrh4i")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g6s7y")
 
 [node name="Health" type="Node" parent="."]

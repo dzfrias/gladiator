@@ -6,6 +6,7 @@ extends Node2D
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
 
+@export var projectile_prefab: PackedScene
 var ammo: int
 var is_reloading: bool
 var can_fire: bool
@@ -28,22 +29,14 @@ func fire():
 
 	var space_state = get_world_2d().direct_space_state
 	var direction = Vector2(Player.Instance.get_direction(), 0)
-	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * weapon_stats.weapon_range))
-	query.collide_with_areas = true
-	query.collision_mask = Constants.ENTITY_LAYER | Constants.ENVIRONMENT_LAYER
-	query.exclude = [self]
-	var result = space_state.intersect_ray(query)
-	Debug.draw_line(query.from, query.to, 10.0, Color.RED, 0.05)
 	
-	if result.get("collider") != null:
-		var hit_collider = result.get("collider")
-		
-		for child in hit_collider.get_children():
-			if child is Health:
-				var hit_object_health = child as Health
-				hit_object_health.take_damage(weapon_stats.damage, direction)
-		
-	print("Hit: " + str(result))
+	var projectile = projectile_prefab.instantiate() as Projectile
+	projectile._set_direction(direction)
+	projectile._set_damage(weapon_stats.damage)
+	get_tree().root.add_child(projectile)
+	projectile.global_position = global_position
+	
+	
 	ammo -= 1
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
 	if ammo <= 0:
