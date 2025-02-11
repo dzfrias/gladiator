@@ -68,3 +68,7 @@ toggle_weapon={
 2d_physics/layer_3="Invincible"
 2d_physics/layer_4="Roof"
 2d_physics/layer_5="Player"
+
+[physics]
+
+2d/default_gravity=1400.0
