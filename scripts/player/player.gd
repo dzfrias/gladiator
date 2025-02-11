@@ -101,8 +101,8 @@ func _input(event: InputEvent) -> void:
 	if is_on_floor():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
 			velocity.y = -jump_speed
-		if event.is_action_pressed("roll") and _can_roll:
-			_roll()
+	if event.is_action_pressed("roll") and _can_roll:
+		_roll()
 	if event.is_action_pressed("reload") and _weapon:
 		if !_weapon.is_reloading:
 			_weapon.reload()
