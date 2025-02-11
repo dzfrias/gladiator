@@ -5,5 +5,6 @@ const ENTITY_LAYER = 2
 const INVINCIBLE_LAYER = 4
 const ROOF_LAYER = 8
 const PLAYER_LAYER = 16
+const PLATFORM_LAYER = 6
 
 const EPSILON = 0.000001

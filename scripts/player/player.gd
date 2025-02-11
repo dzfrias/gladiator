@@ -37,9 +37,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += get_gravity().y * delta
-	
+		
 	match _state:
 		State.CONTROL:
+			if Input.is_action_pressed("crouch") and Input.is_action_pressed("jump"):
+				set_collision_mask_value(Constants.PLATFORM_LAYER, false)
+			else:
+				set_collision_mask_value(Constants.PLATFORM_LAYER, true)
+			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
 			elif Input.is_action_pressed("left"):
@@ -94,7 +99,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("fire") and _weapon:
 		_weapon.set_firing(false)
 	if is_on_floor():
-		if event.is_action_pressed("jump"):
+		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
 			velocity.y = -jump_speed
 		if event.is_action_pressed("roll") and _can_roll:
 			_roll()

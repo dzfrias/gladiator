@@ -16,6 +16,7 @@ size = Vector2(109, 99)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("melee_box")]
 collision_layer = 18
+collision_mask = 33
 script = ExtResource("1_5wdcp")
 move_speed = 20000.0
 jump_speed = 800.0
