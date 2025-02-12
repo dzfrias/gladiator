@@ -31,6 +31,11 @@ func _ready() -> void:
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
 
+func track(target: Node2D) -> void:
+	_tracking = target
+	if _state == State.IDLE:
+		_state = State.TRACKING
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta

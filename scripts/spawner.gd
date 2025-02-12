@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var wolf_prefab: PackedScene
-@export var vulture_prefab: PackedScene
+@export var shooter_prefab: PackedScene
 @export var spawn_positions: Array[Node2D]
 @export var spawn_delay: float = 10
 @export var enemy_group: Node2D
@@ -17,7 +17,7 @@ func _spawn_enemies_loop() -> void:
 
 func _spawn_enemies() -> void:
 	_spawn(wolf_prefab)
-	_spawn(vulture_prefab)
+	_spawn(shooter_prefab)
 
 func _spawn(enemy: PackedScene) -> void:
 	var instance := enemy.instantiate()

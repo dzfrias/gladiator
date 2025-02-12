@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://bnbskcv2wvq43"]
+[gd_scene load_steps=11 format=4 uid="uid://bnbskcv2wvq43"]
 
 [ext_resource type="Texture2D" uid="uid://3ot88no4hqp0" path="res://assets/Background first layer.jpeg" id="1_bl55t"]
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_flae5"]
 [ext_resource type="Texture2D" uid="uid://c1b6xcoqgijcm" path="res://assets/new_tileset.png" id="2_wt64q"]
 [ext_resource type="Script" path="res://scripts/spawner.gd" id="4_k3it1"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="5_mcqq3"]
-[ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_cqa8h"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_igtfv"]
 [ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="8_ouu5s"]
 
@@ -274,7 +273,7 @@ tile_set = SubResource("TileSet_stfr1")
 [node name="Spawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_positions", "enemy_group")]
 script = ExtResource("4_k3it1")
 wolf_prefab = ExtResource("5_mcqq3")
-vulture_prefab = ExtResource("6_cqa8h")
+shooter_prefab = ExtResource("8_ouu5s")
 spawn_positions = [NodePath("Spawnpoint1"), NodePath("Spawnpoint2")]
 spawn_delay = 4.0
 enemy_group = NodePath("../EnemyGroup")
