@@ -9,7 +9,7 @@ size = Vector2(26, 26)
 [node name="Projectile" type="Node2D" node_paths=PackedStringArray("area2D")]
 script = ExtResource("1_ppors")
 area2D = NodePath("Area2D")
-speed = 60.0
+speed = 30.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
