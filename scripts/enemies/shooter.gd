@@ -5,6 +5,7 @@ class_name Shooter extends CharacterBody2D
 # TODO this might be best done with another detection zone
 @export var stop_dist: float = 400.0
 @export var y_cutoff: float = 70.0
+@export var jump_height: float = -800
 @export_category("Shooting")
 @export var projectile: PackedScene
 @export var projectile_speed := 800.0
@@ -14,6 +15,8 @@ class_name Shooter extends CharacterBody2D
 @export var shoot_cooldown_sd: float = 0.2
 
 @export var impact_particle_prefab: PackedScene
+
+@onready var _platform_detection = $PlatformDetection
 
 var _state: State = State.IDLE
 var _tracking: Node2D
@@ -43,6 +46,10 @@ func _physics_process(delta: float) -> void:
 	match _state:
 		State.TRACKING:
 			assert(_tracking != null)
+			
+			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection._detect_platform():
+				velocity.y = jump_height
+			
 			var xdist := _tracking.position.x - position.x
 			var direction := signf(xdist)
 			scale.x = direction

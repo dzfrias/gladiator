@@ -9,9 +9,9 @@ class_name Wolf extends CharacterBody2D
 @export var attack_windup_time: float = 0.1
 @export var attack_tired_time: float = 0.8
 @export var jump_height: float = -800
+@onready var _platform_detection = $PlatformDetection
 
 @export var impact_particle_prefab: PackedScene
-@onready var _platform_detection = $PlatformDetection
 
 var _state: State = State.IDLE
 var _tracking: Node2D
@@ -48,11 +48,11 @@ func _physics_process(delta: float) -> void:
 			assert(_tracking != null)
 			var dist := _tracking.position.x - position.x
 			var direction := signf(dist)
-			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _detect_platform():
+			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection._detect_platform():
 				velocity.y = jump_height
 			
 			if abs(dist) <= attack_distance:
-				if !Player.Instance.is_on_platform() or (is_on_platform() and Player.Instance.get_platform_height() == get_platform_height()):
+				if !Player.Instance.is_on_platform() or (_platform_detection.is_on_platform() and Player.Instance.get_platform_height() == _platform_detection.get_platform_height()):
 					_attack_direction = direction
 					_attack()
 			else:
@@ -116,25 +116,6 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 		return
 	var player := body as Player
 	player.damage(attack_damage, Vector2(_attack_direction, 0))
-
-func is_on_platform():
-	var result = _platform_raycast()
-	return !result.is_empty()
-
-func get_platform_height():
-	# Assums that platform is checked already
-	var result = _platform_raycast()
-	return result.position.y
-
-func _platform_raycast() -> Dictionary:
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 100))
-	query.set_collision_mask(Constants.PLATFORM_LAYER_VALUE)
-	var result = space_state.intersect_ray(query)
-	return result
-
-func _detect_platform():
-	return _platform_detection.has_overlapping_bodies()
 
 func _flip(direction: float) -> void:
 	assert(absf(direction) == 1)

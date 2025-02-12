@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="2_0u6iq"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
+[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="6_2w8ig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(128, 59)
@@ -14,9 +15,6 @@ size = Vector2(25, 91)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpl7i"]
 radius = 797.023
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f3ii"]
-size = Vector2(346, 155.5)
 
 [node name="Node2D" type="CharacterBody2D"]
 collision_layer = 2
@@ -61,12 +59,4 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_wpl7i")
 
-[node name="PlatformDetection" type="Area2D" parent="."]
-visible = false
-position = Vector2(0, -123)
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetection"]
-position = Vector2(0, -44.25)
-shape = SubResource("RectangleShape2D_6f3ii")
+[node name="PlatformDetection" parent="." instance=ExtResource("6_2w8ig")]
