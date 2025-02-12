@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_0pcrb"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
-[ext_resource type="PackedScene" path="res://scenes/projectile.tscn" id="6_w2kq1"]
+[ext_resource type="PackedScene" uid="uid://dcp3huoajqaue" path="res://scenes/projectile.tscn" id="6_w2kq1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(106, 108)

@@ -41,9 +41,9 @@ func _process(delta: float) -> void:
 	match _state:
 		State.CONTROL:
 			if Input.is_action_pressed("crouch") and Input.is_action_pressed("jump"):
-				set_collision_mask_value(Constants.PLATFORM_LAYER, false)
+				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, false)
 			else:
-				set_collision_mask_value(Constants.PLATFORM_LAYER, true)
+				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, true)
 			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -148,6 +148,22 @@ func get_weapon() -> Weapon:
 
 func get_direction():
 	return _direction
+
+func is_on_platform():
+	var result = _platform_raycast()
+	return !result.is_empty()
+
+func get_platform_height():
+	# Assums that platform is checked already
+	var result = _platform_raycast()
+	return result.position.y
+
+func _platform_raycast() -> Dictionary:
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 100))
+	query.set_collision_mask(Constants.PLATFORM_LAYER_VALUE)
+	var result = space_state.intersect_ray(query)
+	return result
 	
 func get_health() -> Health:
 	return $Health;

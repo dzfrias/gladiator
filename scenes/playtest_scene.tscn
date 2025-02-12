@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="5_mcqq3"]
 [ext_resource type="PackedScene" uid="uid://brhth4kuom7aw" path="res://scenes/vulture.tscn" id="6_cqa8h"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_igtfv"]
-[ext_resource type="PackedScene" path="res://scenes/shooter.tscn" id="8_ouu5s"]
+[ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="8_ouu5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bamm8"]
 texture = ExtResource("2_wt64q")
@@ -257,6 +257,7 @@ sources/0 = SubResource("TileSetAtlasSource_bamm8")
 [node name="PlaytestScene" type="Node2D"]
 
 [node name="BackgroundFirstLayer" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(514.001, -501)
 scale = Vector2(25.9, 25.9)
 texture = ExtResource("1_bl55t")
