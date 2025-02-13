@@ -65,6 +65,8 @@ func _physics_process(delta: float) -> void:
 				velocity.x = direction * speed
 			elif _can_attack:
 				_shoot(direction)
+			elif is_on_floor():
+				velocity.x = 0
 		State.IDLE:
 			velocity.x = 0
 		State.SHOOTING:
