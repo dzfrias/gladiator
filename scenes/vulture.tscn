@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_c4mip"]
 [ext_resource type="PackedScene" uid="uid://dxkwbttbgrri6" path="res://scenes/vulture_projectile.tscn" id="2_yrlq5"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="3_7uvll"]
-[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_dpgdj"]
+[ext_resource type="PackedScene" path="res://assets/impact_particles.tscn" id="3_dpgdj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6s7y"]
 size = Vector2(127, 128)
