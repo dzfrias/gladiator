@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=4 uid="uid://dsc0xvj7rejpq"]
+
+[ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_tb1qx"]
+[ext_resource type="Script" path="res://scripts/module.gd" id="2_rcl6b"]
+
+[node name="Flat" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAAAAP//AwAGAAAAAAABAP//AwAGAAAAAAACAP//AwAGAAAAAAADAP//AwAGAAAAAAAEAP//AwAGAAAAAAAFAP//AwAGAAAAAAAGAP//AwAGAAAAAAAHAP//AwAGAAAAAAAIAP//AwAGAAAAAAAJAP//AwAGAAAAAAAKAP//AwAGAAAAAAALAP//AwAGAAAAAAAMAP//AwAGAAAAAAA=")
+tile_set = ExtResource("1_tb1qx")
+script = ExtResource("2_rcl6b")
