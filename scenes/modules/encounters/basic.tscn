@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=4 uid="uid://dqhlpfksevfa3"]
+
+[ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_yx8d7"]
+[ext_resource type="Script" path="res://scripts/module.gd" id="2_3x1hw"]
+
+[node name="Basic" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAAAAP//AwAGAAAAAAABAP//AwAGAAAAAAACAP//AwAGAAAAAAADAP//AwAGAAAAAAAEAP//AwAGAAAAAAAFAP//AwAGAAAAAAAGAP//AwAGAAAAAAAHAP//AwAGAAAAAAAIAP//AwAGAAAAAAAJAP//AwAGAAAAAAAKAP//AwAGAAAAAAALAP//AwAGAAAAAAAMAP//AwAGAAAAAAA=")
+tile_set = ExtResource("1_yx8d7")
+script = ExtResource("2_3x1hw")
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Spawn1" type="Node2D" parent="SpawnPoints"]
+position = Vector2(344, -74)
+
+[node name="Spawn2" type="Node2D" parent="SpawnPoints"]
+position = Vector2(266, -77)

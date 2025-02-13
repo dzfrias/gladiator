@@ -1,6 +1,6 @@
 class_name WorldMap extends TileMapLayer
 
-class ModuleInfo:
+class WeightedScene:
 	var scene: PackedScene
 	var weight: float
 	
@@ -21,8 +21,15 @@ class FillTile:
 @export var map_width: int = 100
 
 var _terrain := [
-	ModuleInfo.new("res://scenes/modules/terrain/flat.tscn", 0.5),
-	ModuleInfo.new("res://scenes/modules/terrain/slope_up.tscn", 0.5),
+	WeightedScene.new("res://scenes/modules/terrain/flat.tscn", 0.5),
+	WeightedScene.new("res://scenes/modules/terrain/slope_up.tscn", 0.5),
+]
+var _encounters := [
+	WeightedScene.new("res://scenes/modules/encounters/basic.tscn", 1.0),
+]
+var _enemies := [
+	WeightedScene.new("res://scenes/wolf.tscn", 0.75),
+	WeightedScene.new("res://scenes/shooter.tscn", 0.25),
 ]
 var _fill_tiles: Array[FillTile] = []
 var _fill_source_id: int
@@ -38,16 +45,23 @@ func _ready() -> void:
 		if fill_probability > 0.0:
 			_fill_tiles.append(FillTile.new(tile_coords, fill_probability))
 	
-	_generate()
+	_generate.call_deferred()
 
 func _generate() -> void:
 	var module_origin := Vector2i(0, 0)
+	var next_encounter := randi_range(3, 5)
 	while module_origin.x < map_width:
-		var module = weighted_choice(_terrain)
+		var module: WeightedScene
+		if next_encounter == 0:
+			module = _weighted_choice(_encounters)
+			next_encounter = randi_range(3, 5)
+		else:
+			module = _weighted_choice(_terrain)
+			next_encounter -= 1
 		var delta := _place_module(module_origin, module)
 		module_origin += delta
 
-func _place_module(origin: Vector2i, module: ModuleInfo) -> Vector2i:
+func _place_module(origin: Vector2i, module: WeightedScene) -> Vector2i:
 	var instance = module.scene.instantiate() as Module
 	instance.queue_free()
 	
@@ -61,20 +75,31 @@ func _place_module(origin: Vector2i, module: ModuleInfo) -> Vector2i:
 	
 	var width := instance.get_used_rect().size.x
 	_fill(Vector2i(origin.x, lowest_y + 1), width)
+	
+	if instance.has_node("SpawnPoints"):
+		var scene_origin := map_to_local(origin)
+		var spawn_points := instance.get_node("SpawnPoints")
+		for child in spawn_points.get_children():
+			var spawn_point := child as Node2D
+			var enemy = _weighted_choice(_enemies)
+			var enemy_instance := enemy.scene.instantiate() as Node2D
+			enemy_instance.position = scene_origin + spawn_point.position
+			get_tree().current_scene.add_child(enemy_instance)
+	
 	return Vector2i(width, instance.delta_y)
 
 func _fill(origin: Vector2i, width: int) -> void:
 	const Y_HEIGHT = 1000
 	for i in range(width):
 		for j in range(Y_HEIGHT):
-			var fill_tile = weighted_choice(_fill_tiles)
+			var fill_tile = _weighted_choice(_fill_tiles)
 			set_cell(
 				origin + i * Vector2i.RIGHT + j * Vector2i.DOWN,
 				_fill_source_id,
 				fill_tile.atlas_coords
 			)
 
-static func weighted_choice(array: Array) -> Variant:
+static func _weighted_choice(array: Array) -> Variant:
 	var rand := randf()
 	var cumulative := 0.0
 	for item in array:
