@@ -51,6 +51,11 @@ func _physics_process(delta: float) -> void:
 			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection._detect_platform():
 				velocity.y = jump_height
 			
+			if !Player.Instance.is_on_platform() and _platform_detection.is_on_platform():
+				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, false)
+			else:
+				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, true)
+			
 			if abs(dist) <= attack_distance:
 				if !Player.Instance.is_on_platform() or (_platform_detection.is_on_platform() and Player.Instance.get_platform_height() == _platform_detection.get_platform_height()):
 					_attack_direction = direction

@@ -287,35 +287,35 @@ shape = SubResource("WorldBoundaryShape2D_8pxj3")
 
 [node name="EnemyGroup" type="Node2D" parent="."]
 
-[node name="Shooter" parent="." instance=ExtResource("6_akhvg")]
+[node name="Shooter" parent="EnemyGroup" instance=ExtResource("6_akhvg")]
 position = Vector2(-335, -298)
 
-[node name="Shooter2" parent="." instance=ExtResource("6_akhvg")]
+[node name="Shooter2" parent="EnemyGroup" instance=ExtResource("6_akhvg")]
 position = Vector2(-1130, -80)
 
-[node name="Shooter3" parent="." instance=ExtResource("6_akhvg")]
+[node name="Shooter3" parent="EnemyGroup" instance=ExtResource("6_akhvg")]
 position = Vector2(1375, -81)
 
-[node name="Shooter4" parent="." instance=ExtResource("6_akhvg")]
+[node name="Shooter4" parent="EnemyGroup" instance=ExtResource("6_akhvg")]
 position = Vector2(940, -291)
 
-[node name="Shooter5" parent="." instance=ExtResource("6_akhvg")]
+[node name="Shooter5" parent="EnemyGroup" instance=ExtResource("6_akhvg")]
 position = Vector2(2531, -397)
 
-[node name="Shooter6" parent="." instance=ExtResource("6_akhvg")]
+[node name="Shooter6" parent="EnemyGroup" instance=ExtResource("6_akhvg")]
 position = Vector2(3326, -287)
 
-[node name="Node2D" parent="." instance=ExtResource("5_jrgqa")]
+[node name="Node2D" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(-1372, -62)
 
-[node name="Node2D2" parent="." instance=ExtResource("5_jrgqa")]
+[node name="Node2D2" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(635, -25)
 
-[node name="Node2D3" parent="." instance=ExtResource("5_jrgqa")]
+[node name="Node2D3" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(1662, -136)
 
-[node name="Node2D4" parent="." instance=ExtResource("5_jrgqa")]
+[node name="Node2D4" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(3008, -54)
 
-[node name="Node2D5" parent="." instance=ExtResource("5_jrgqa")]
+[node name="Node2D5" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(2715, -374)
