@@ -19,6 +19,7 @@ collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_a5ml5")
 projectile = ExtResource("2_5g1nj")
+prepare_attack_time = 0.4
 impact_particle_prefab = ExtResource("3_qpshq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

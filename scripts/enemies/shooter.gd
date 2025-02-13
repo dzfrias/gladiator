@@ -11,6 +11,7 @@ class_name Shooter extends CharacterBody2D
 @export var projectile_speed := 800.0
 @export var projectile_damage := 4.0
 @export var idle_time := 0.5
+@export var prepare_attack_time := 0.25
 @export var shoot_cooldown_avg: float = 1.4
 @export var shoot_cooldown_sd: float = 0.2
 
@@ -67,6 +68,8 @@ func _physics_process(delta: float) -> void:
 				_shoot(direction)
 			elif is_on_floor():
 				velocity.x = 0
+				# This allows enemy to attack when they move onto new platform instead of waiting for a long time
+				_can_attack = true
 		State.IDLE:
 			velocity.x = 0
 		State.SHOOTING:
@@ -76,6 +79,7 @@ func _physics_process(delta: float) -> void:
 
 func _shoot(direction: float) -> void:
 	_state = State.SHOOTING
+	await get_tree().create_timer(prepare_attack_time).timeout
 	var p := projectile.instantiate() as HorizontalProjectile
 	get_tree().root.add_child(p)
 	var angle: float
