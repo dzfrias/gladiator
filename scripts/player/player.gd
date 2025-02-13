@@ -8,7 +8,6 @@ class_name Player extends CharacterBody2D
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.4
 
-@export var melee_box: Area2D
 @export var melee_damage: float = 5
 @export var melee_knockback: Vector2 = Vector2(1000, -500)
 @export var melee_cooldown: float = 2
@@ -20,6 +19,7 @@ var _state := State.CONTROL
 var _direction: float = 1
 var _can_roll := true
 var _combat_flip_position = Vector2(125, 0)
+@onready var _melee_box = $MeleeBox
 static var Instance
 
 signal weapon_changed
@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 					acceleration *= direction_change_factor
 				velocity.x = max(-move_speed, velocity.x - acceleration * delta)
 				_direction = -1
-				melee_box.position = -_combat_flip_position
+				_melee_box.position = -_combat_flip_position
 				_weapon.position = -_combat_flip_position
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
@@ -63,7 +63,7 @@ func _process(delta: float) -> void:
 					acceleration *= direction_change_factor
 				velocity.x = min(move_speed, velocity.x + acceleration * delta)
 				_direction = 1
-				melee_box.position = _combat_flip_position
+				_melee_box.position = _combat_flip_position
 				_weapon.position = _combat_flip_position
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -77,8 +77,8 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("fire") and _weapon:
 		var hit_enemy := false
-		if melee_box.has_overlapping_bodies() and _can_melee:
-			for body in melee_box.get_overlapping_bodies():
+		if _melee_box.has_overlapping_bodies() and _can_melee:
+			for body in _melee_box.get_overlapping_bodies():
 				var took_damage = false
 				for child in body.get_children():
 					if child is Health:
