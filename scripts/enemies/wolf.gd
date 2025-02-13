@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, true)
 			
-			if abs(dist) <= attack_distance:
+			if abs(dist) <= attack_distance and is_on_floor():
 				if !Player.Instance.is_on_platform() or (_platform_detection.is_on_platform() and Player.Instance.get_platform_height() == _platform_detection.get_platform_height()):
 					_attack_direction = direction
 					_attack()
