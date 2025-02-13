@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection._detect_platform():
 				velocity.y = jump_height
 			
-			if !Player.Instance.is_on_platform() and _platform_detection.is_on_platform():
+			if !Player.Instance.is_on_platform() and Player.Instance.is_on_floor() and _platform_detection.is_on_platform():
 				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
 			else:
 				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
