@@ -52,9 +52,9 @@ func _physics_process(delta: float) -> void:
 				velocity.y = jump_height
 			
 			if !Player.Instance.is_on_platform() and _platform_detection.is_on_platform():
-				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, false)
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
 			else:
-				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, true)
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 			
 			var xdist := _tracking.position.x - position.x
 			var direction := signf(xdist)

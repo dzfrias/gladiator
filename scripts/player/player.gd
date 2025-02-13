@@ -41,9 +41,9 @@ func _process(delta: float) -> void:
 	match _state:
 		State.CONTROL:
 			if Input.is_action_pressed("crouch") and Input.is_action_pressed("jump"):
-				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, false)
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
 			else:
-				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, true)
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -161,7 +161,7 @@ func get_platform_height():
 func _platform_raycast() -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 100))
-	query.set_collision_mask(Constants.PLATFORM_LAYER_VALUE)
+	query.set_collision_mask(Constants.PLATFORM_LAYER)
 	var result = space_state.intersect_ray(query)
 	return result
 	
