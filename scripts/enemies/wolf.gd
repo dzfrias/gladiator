@@ -52,9 +52,9 @@ func _physics_process(delta: float) -> void:
 				velocity.y = jump_height
 			
 			if !Player.Instance.is_on_platform() and _platform_detection.is_on_platform():
-				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, false)
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
 			else:
-				set_collision_mask_value(Constants.PLATFORM_LAYER_NUMBER, true)
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 			
 			if abs(dist) <= attack_distance and is_on_floor():
 				if !Player.Instance.is_on_platform() or (_platform_detection.is_on_platform() and Player.Instance.get_platform_height() == _platform_detection.get_platform_height()):

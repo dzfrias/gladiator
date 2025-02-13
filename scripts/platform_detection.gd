@@ -12,7 +12,7 @@ func get_platform_height():
 func _platform_raycast() -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 100))
-	query.set_collision_mask(Constants.PLATFORM_LAYER_VALUE)
+	query.set_collision_mask(Constants.PLATFORM_LAYER)
 	var result = space_state.intersect_ray(query)
 	return result
 
