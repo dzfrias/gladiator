@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cp8jetrkdcjtc"]
 
-[ext_resource type="Script" path="res://scripts/health_bar_creator.gd" id="1_agshf"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="1_agshf"]
 [ext_resource type="PackedScene" uid="uid://c6ow4rteapjg" path="res://scenes/health_bar.tscn" id="2_k7k6u"]
 
 [node name="HealthBarCreator" type="Node"]

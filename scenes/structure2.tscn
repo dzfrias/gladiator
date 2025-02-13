@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=4 uid="uid://cy86gey2llvfo"]
-
-[ext_resource type="TileSet" uid="uid://wyux5i55ro6m" path="res://assets/world_tileset.tres" id="1_dvgtj"]
-
-[node name="BasicStructure" type="TileMapLayer"]
-tile_map_data = PackedByteArray("AAACAPz/AQAAAAAAAAADAPz/AQAAAAAAAAABAPz/AQAAAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAAAAAAAAP//AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAA=")
-tile_set = ExtResource("1_dvgtj")
