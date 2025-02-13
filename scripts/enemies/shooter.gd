@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		State.TRACKING:
 			assert(_tracking != null)
 			
-			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection._detect_platform():
+			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection.is_detecting_platform():
 				velocity.y = jump_height
 			
 			if !Player.Instance.is_on_platform() and Player.Instance.is_on_floor() and _platform_detection.is_on_platform():

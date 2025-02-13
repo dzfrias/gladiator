@@ -9,12 +9,12 @@ func get_platform_height():
 	var result = _platform_raycast()
 	return result.position.y
 
+func is_detecting_platform():
+	return has_overlapping_bodies()
+
 func _platform_raycast() -> Dictionary:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(0, 100))
 	query.set_collision_mask(Constants.PLATFORM_LAYER)
 	var result = space_state.intersect_ray(query)
 	return result
-
-func _detect_platform():
-	return has_overlapping_bodies()
