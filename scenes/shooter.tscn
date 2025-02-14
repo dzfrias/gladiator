@@ -20,10 +20,9 @@ collision_mask = 33
 script = ExtResource("1_a5ml5")
 projectile = ExtResource("2_5g1nj")
 projectile_speed = 600.0
-idle_time = 0.1
-prepare_attack_time = 0.1
-shoot_cooldown_avg = 0.1
-shoot_cooldown_sd = 0.0
+reload_time = 4.0
+shoot_cooldown_avg = 0.3
+shoot_cooldown_sd = 0.1
 impact_particle_prefab = ExtResource("3_qpshq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

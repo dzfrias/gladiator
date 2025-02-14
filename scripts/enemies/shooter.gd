@@ -12,8 +12,6 @@ class_name Shooter extends CharacterBody2D
 @export var projectile_damage := 4.0
 @export var ammo := 3
 @export var reload_time := 5.0
-@export var idle_time := 0.5
-@export var prepare_attack_time := 0.25
 @export var shoot_cooldown_avg: float = 0.9
 @export var shoot_cooldown_sd: float = 0.2
 
@@ -80,30 +78,24 @@ func _physics_process(delta: float) -> void:
 
 func _shoot(direction: float) -> void:
 	_state = State.SHOOTING
-	await get_tree().create_timer(prepare_attack_time).timeout
-	var p := projectile.instantiate() as HorizontalProjectile
-	get_tree().root.add_child(p)
-	var angle: float
-	if direction == 1:
-		angle = 0.0
-	else:
-		angle = PI
-	p.fire(projectile_speed, angle)
-	p.damage = projectile_damage
-	p.position = position
-	_current_ammo -= 1
-	await get_tree().create_timer(idle_time).timeout
+	for i in range(ammo):
+		var p := projectile.instantiate() as HorizontalProjectile
+		get_tree().root.add_child(p)
+		var angle: float
+		if direction == 1:
+			angle = 0.0
+		else:
+			angle = PI
+		p.fire(projectile_speed, angle)
+		p.damage = projectile_damage
+		p.position = position
+		var wait := maxf(0, randfn(shoot_cooldown_avg, shoot_cooldown_sd))
+		await get_tree().create_timer(wait).timeout
+	
 	_state = State.TRACKING
 	_can_attack = false
-	var wait: float
-	if _current_ammo == 0:
-		wait = reload_time
-	else:
-		wait = maxf(0, randfn(shoot_cooldown_avg, shoot_cooldown_sd))
-	await get_tree().create_timer(wait).timeout
+	await get_tree().create_timer(reload_time).timeout
 	_can_attack = true
-	if _current_ammo == 0:
-		_current_ammo = ammo
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
