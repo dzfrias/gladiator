@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=4 uid="uid://c1e275yyju6wo"]
+
+[ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_k6ulm"]
+[ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_t1itt"]
+
+[node name="SlopeDown" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAAAAAAAAwAKAAEAAAAAAAEAAwAKAAIAAAAAAAIAAwAIAAIAAAAAAAMAAwALAAEAAAABAAEAAwAIAAEAAAABAAIAAwAGAAEAAAABAAMAAwAJAAIAAAACAAIAAwAJAAEAAAACAAMAAwALAAIAAAADAAMAAwAHAAEAAAAAAP//AwAIAAAAAAABAAAAAwAIAAAAAAACAAEAAwAIAAAAAAADAAIAAwAIAAAAAAAEAAMAAwAIAAAAAAA=")
+tile_set = ExtResource("1_k6ulm")
+script = ExtResource("2_t1itt")
+delta_y = 5

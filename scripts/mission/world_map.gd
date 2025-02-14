@@ -22,7 +22,8 @@ class FillTile:
 
 var _terrain := [
 	WeightedScene.new("res://scenes/modules/terrain/flat.tscn", 0.5),
-	WeightedScene.new("res://scenes/modules/terrain/slope_up.tscn", 0.5),
+	WeightedScene.new("res://scenes/modules/terrain/slope_up.tscn", 0.25),
+	WeightedScene.new("res://scenes/modules/terrain/slope_down.tscn", 0.25),
 ]
 var _encounters := [
 	WeightedScene.new("res://scenes/modules/encounters/basic.tscn", 1.0),
