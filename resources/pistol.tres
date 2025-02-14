@@ -8,5 +8,5 @@ weapon_range = 2000.0
 damage = 4.0
 reload_time = 1.0
 max_ammo = 16
-firing_interval = 0.25
+firing_interval = 0.35
 knockback = 1000.0

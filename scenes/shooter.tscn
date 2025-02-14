@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
-[ext_resource type="PackedScene" path="res://scenes/shooter_projectile.tscn" id="2_5g1nj"]
+[ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_5g1nj"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_y4oe8"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
 [ext_resource type="PackedScene" path="res://assets/impact_particles.tscn" id="3_qpshq"]
