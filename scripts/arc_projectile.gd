@@ -20,16 +20,18 @@ func _on_body_entered(_body: Node2D) -> void:
 	var space_state := get_world_2d().direct_space_state
 	var splash := CircleShape2D.new()
 	splash.radius = splash_radius
-	var splash_transform = Transform2D(0, position)
-	var query = PhysicsShapeQueryParameters2D.new()
+	var splash_transform := Transform2D(0, position)
+	var query := PhysicsShapeQueryParameters2D.new()
 	query.shape = splash
 	query.transform = splash_transform
 	query.collision_mask = Constants.PLAYER_LAYER
-	var collisions = space_state.intersect_shape(query)
+	var collisions := space_state.intersect_shape(query)
 	assert(collisions.size() <= 1)
 	if collisions.size() == 1:
 		var collider = collisions[0].get("collider")
-		assert(collider is Player)
-		var player := collider as Player
-		player.damage(damage, Vector2.ZERO)
+		var body := collider as Node2D
+		for child in body.get_children():
+			if child is Health:
+				var health := child as Health
+				health.take_damage(damage, Vector2.ZERO)
 	queue_free()
