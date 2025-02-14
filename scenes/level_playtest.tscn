@@ -18,11 +18,6 @@ texture = ExtResource("1_xth1b")
 
 [node name="Player" parent="." instance=ExtResource("2_arsj3")]
 position = Vector2(-2727, -115)
-move_speed = 700.0
-move_acceleration = 1500.0
-move_deceleration = 2400.0
-jump_accel = 250.0
-jump_hold_time = 0.2
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(3, 3)
