@@ -31,6 +31,7 @@ var _enemies := [
 	WeightedScene.new("res://scenes/wolf.tscn", 0.75),
 	WeightedScene.new("res://scenes/shooter.tscn", 0.25),
 ]
+var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn")
 var _fill_tiles: Array[FillTile] = []
 var _fill_source_id: int
 
@@ -49,6 +50,8 @@ func _ready() -> void:
 
 func _generate() -> void:
 	var module_origin := Vector2i(0, 0)
+	module_origin += _place_module(module_origin, _start_module)
+
 	var next_encounter := randi_range(3, 5)
 	while module_origin.x < map_width:
 		var module: WeightedScene
@@ -58,11 +61,11 @@ func _generate() -> void:
 		else:
 			module = _weighted_choice(_terrain)
 			next_encounter -= 1
-		var delta := _place_module(module_origin, module)
+		var delta := _place_module(module_origin, module.scene)
 		module_origin += delta
 
-func _place_module(origin: Vector2i, module: WeightedScene) -> Vector2i:
-	var instance = module.scene.instantiate() as Module
+func _place_module(origin: Vector2i, module: PackedScene) -> Vector2i:
+	var instance = module.instantiate() as Module
 	instance.queue_free()
 	
 	var lowest_y := -100000
