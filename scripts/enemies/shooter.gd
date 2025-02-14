@@ -6,6 +6,7 @@ class_name Shooter extends CharacterBody2D
 @export var stop_dist: float = 1200.0
 @export var y_cutoff: float = 70.0
 @export var jump_height: float = -800
+@export var y_axis_follow_time: float = 1.0
 @export_category("Shooting")
 @export var projectile: PackedScene
 @export var projectile_speed := 800.0
@@ -22,6 +23,7 @@ class_name Shooter extends CharacterBody2D
 var _state: State = State.IDLE
 var _tracking: Node2D
 var _can_attack: bool = true
+var _player_follow_time: float = 0.0
 @onready var _current_ammo = ammo
 
 enum State {
@@ -49,13 +51,24 @@ func _physics_process(delta: float) -> void:
 		State.TRACKING:
 			assert(_tracking != null)
 			
-			if Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection.is_detecting_platform():
-				velocity.y = jump_height
+			var above = Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection.is_detecting_platform()
+			if above:
+				_player_follow_time += delta
+				if _player_follow_time >= y_axis_follow_time:
+					velocity.y = jump_height
+					_player_follow_time = 0.0
 			
-			if _platform_detection.is_on_platform() and (!Player.Instance.is_on_platform() or Player.Instance.get_platform_height() > _platform_detection.get_platform_height()) and Player.Instance.is_on_floor():
-				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+			var below = _platform_detection.is_on_platform() and (!Player.Instance.is_on_platform() or Player.Instance.get_platform_height() > _platform_detection.get_platform_height()) and Player.Instance.is_on_floor()
+			if below:
+				_player_follow_time += delta
+				if _player_follow_time >= y_axis_follow_time:
+					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+					_player_follow_time = 0.0
 			else:
 				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+			
+			if not above and not below:
+				_player_follow_time = 0.0
 			
 			var xdist := _tracking.position.x - position.x
 			var direction := signf(xdist)
