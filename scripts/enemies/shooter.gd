@@ -10,9 +10,11 @@ class_name Shooter extends CharacterBody2D
 @export var projectile: PackedScene
 @export var projectile_speed := 800.0
 @export var projectile_damage := 4.0
+@export var ammo := 3
+@export var reload_time := 5.0
 @export var idle_time := 0.5
 @export var prepare_attack_time := 0.25
-@export var shoot_cooldown_avg: float = 1.4
+@export var shoot_cooldown_avg: float = 0.9
 @export var shoot_cooldown_sd: float = 0.2
 
 @export var impact_particle_prefab: PackedScene
@@ -22,6 +24,7 @@ class_name Shooter extends CharacterBody2D
 var _state: State = State.IDLE
 var _tracking: Node2D
 var _can_attack: bool = true
+@onready var _current_ammo = ammo
 
 enum State {
 	IDLE,
@@ -66,10 +69,8 @@ func _physics_process(delta: float) -> void:
 				velocity.x = direction * speed
 			elif _can_attack:
 				_shoot(direction)
-			elif is_on_floor():
+			else:
 				velocity.x = 0
-				# This allows enemy to attack when they move onto new platform instead of waiting for a long time
-				_can_attack = true
 		State.IDLE:
 			velocity.x = 0
 		State.SHOOTING:
@@ -90,12 +91,19 @@ func _shoot(direction: float) -> void:
 	p.fire(projectile_speed, angle)
 	p.damage = projectile_damage
 	p.position = position
+	_current_ammo -= 1
 	await get_tree().create_timer(idle_time).timeout
 	_state = State.TRACKING
 	_can_attack = false
-	var wait := randfn(shoot_cooldown_avg, shoot_cooldown_sd)
+	var wait: float
+	if _current_ammo == 0:
+		wait = reload_time
+	else:
+		wait = maxf(0, randfn(shoot_cooldown_avg, shoot_cooldown_sd))
 	await get_tree().create_timer(wait).timeout
 	_can_attack = true
+	if _current_ammo == 0:
+		_current_ammo = ammo
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
