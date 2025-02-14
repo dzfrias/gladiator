@@ -2,8 +2,13 @@ class_name Player extends CharacterBody2D
 
 @export var move_speed: float = 400
 @export var move_acceleration: float = 2000
+@export var move_deceleration: float = 2000
 @export var direction_change_factor: float = 3
 @export var jump_speed: float = 500
+@export var jump_accel: float = 1000
+@export var jump_hold_time: float = 0.5
+@export var jump_buffer_time: float = 0.2
+@export var gravity_scale: float = 2.0
 @export var roll_speed: float = 1200
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.4
@@ -19,6 +24,9 @@ var _state := State.CONTROL
 var _direction: float = 1
 var _can_roll := true
 var _combat_flip_position = Vector2(125, 0)
+var _is_jumping := false
+var _jump_time := 0.0
+var _jump_buffer := 0.0
 @onready var _melee_box = $MeleeBox
 static var Instance
 
@@ -35,8 +43,16 @@ func _ready() -> void:
 	_weapon = $Weapon
 
 func _process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y += get_gravity().y * delta
+	if _is_jumping and _jump_time < jump_hold_time:
+		velocity.y -= jump_accel * delta
+		_jump_time += delta
+	elif not is_on_floor():
+		velocity.y += get_gravity().y * gravity_scale * delta
+	if _jump_buffer > 0:
+		_jump_buffer = max(0, _jump_buffer - delta)
+		if _state == State.CONTROL and is_on_floor():
+			_is_jumping = true
+			velocity.y = -jump_speed
 		
 	match _state:
 		State.CONTROL:
@@ -66,7 +82,7 @@ func _process(delta: float) -> void:
 				_melee_box.position = _combat_flip_position
 				_weapon.position = _combat_flip_position
 			else:
-				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
+				velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
 		State.ROLL:
 			velocity.x = roll_speed * _direction
 		
@@ -100,7 +116,13 @@ func _input(event: InputEvent) -> void:
 		_weapon.set_firing(false)
 	if is_on_floor():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
+			_is_jumping = true
 			velocity.y = -jump_speed
+	elif event.is_action_pressed("jump"):
+		_jump_buffer = jump_buffer_time
+	if _is_jumping and event.is_action_released("jump"):
+		_is_jumping = false
+		_jump_time = 0.0
 	if event.is_action_pressed("roll") and _can_roll:
 		_roll()
 	if event.is_action_pressed("reload") and _weapon:
@@ -127,6 +149,8 @@ func damage(amount: float, direction: Vector2) -> void:
 
 func _roll() -> void:
 	_state = State.ROLL
+	_is_jumping = false
+	_jump_buffer = 0.0
 	if _weapon:
 		_weapon.set_firing(false)
 	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
