@@ -28,13 +28,17 @@ func fire():
 		return
 
 	var space_state = get_world_2d().direct_space_state
-	var direction = Vector2(Player.Instance.get_direction(), 0)
 	
-	var projectile = projectile_prefab.instantiate() as Projectile
-	projectile._set_direction(direction)
-	projectile._set_damage(weapon_stats.damage)
-	get_tree().root.add_child(projectile)
+	var projectile = projectile_prefab.instantiate() as HorizontalProjectile
+	var angle: float
+	if Player.Instance.get_direction() == 1:
+		angle = 0.0
+	else:
+		angle = PI
+	projectile.fire(weapon_stats.projectile_speed, angle)
+	projectile.damage = weapon_stats.damage
 	projectile.global_position = global_position
+	get_tree().root.add_child(projectile)
 	
 	
 	ammo -= 1

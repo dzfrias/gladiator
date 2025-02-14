@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	position += velocity * delta
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		var player := body as Player
-		player.damage(damage, velocity.normalized())
+	for child in body.get_children():
+		if child is Health:
+			child.take_damage(damage, velocity.normalized())
 	queue_free()

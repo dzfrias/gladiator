@@ -6,3 +6,4 @@ class_name WeaponStats extends Resource
 @export var max_ammo: int = 8
 @export var firing_interval: float = 0.5
 @export var knockback: float = 1000
+@export var projectile_speed: float = 900
