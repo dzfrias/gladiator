@@ -4,7 +4,7 @@ class_name Player extends CharacterBody2D
 @export var move_acceleration: float = 2000
 @export var direction_change_factor: float = 3
 @export var jump_speed: float = 500
-@export var roll_speed: float = 800
+@export var roll_speed: float = 1200
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.4
 
@@ -134,6 +134,7 @@ func _roll() -> void:
 	$Sprite2D.flip_v = true
 	await get_tree().create_timer(roll_time).timeout
 	_state = State.CONTROL
+	velocity.x *= 0.4
 	$Sprite2D.flip_v = false
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 	_can_roll = false

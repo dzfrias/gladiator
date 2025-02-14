@@ -1,9 +1,9 @@
 class_name Shooter extends CharacterBody2D
 
 @export_category("Movement")
-@export var speed: float = 300.0
+@export var speed: float = 100.0
 # TODO this might be best done with another detection zone
-@export var stop_dist: float = 400.0
+@export var stop_dist: float = 1200.0
 @export var y_cutoff: float = 70.0
 @export var jump_height: float = -800
 @export_category("Shooting")
