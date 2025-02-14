@@ -77,23 +77,23 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("fire") and _weapon:
 		var hit_enemy := false
-		if _melee_box.has_overlapping_bodies() and _can_melee:
-			for body in _melee_box.get_overlapping_bodies():
-				var took_damage = false
-				for child in body.get_children():
-					if child is Health:
-						var hit_object_health = child as Health
-						hit_object_health.take_damage(melee_damage, Vector2(_direction, 0))
-						took_damage = true
-						hit_enemy = true
-						melee_timer()
-				if body is CharacterBody2D and took_damage:
-					# Applies Knockback
-					var character_body = body as CharacterBody2D
-					character_body.velocity = Vector2(_direction * melee_knockback.x, melee_knockback.y) 
-				if body is Vulture:
-					var vulture = body as Vulture
-					vulture._velocity = _direction * melee_knockback
+		#if _melee_box.has_overlapping_bodies() and _can_melee:
+			#for body in _melee_box.get_overlapping_bodies():
+				#var took_damage = false
+				#for child in body.get_children():
+					#if child is Health:
+						#var hit_object_health = child as Health
+						#hit_object_health.take_damage(melee_damage, Vector2(_direction, 0))
+						#took_damage = true
+						#hit_enemy = true
+						#melee_timer()
+				#if body is CharacterBody2D and took_damage:
+					## Applies Knockback
+					#var character_body = body as CharacterBody2D
+					#character_body.velocity = Vector2(_direction * melee_knockback.x, melee_knockback.y) 
+				#if body is Vulture:
+					#var vulture = body as Vulture
+					#vulture._velocity = _direction * melee_knockback
 		if !hit_enemy:
 			_weapon.set_firing(true)
 	if event.is_action_released("fire") and _weapon:
