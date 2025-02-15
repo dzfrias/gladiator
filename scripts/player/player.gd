@@ -47,6 +47,7 @@ enum State {
 
 func _ready() -> void:
 	$Health.died.connect(_on_health_died)
+	$Health.damage_taken.connect(_on_health_damage_taken)
 	Instance = self
 	_weapon = $Weapon
 
@@ -203,6 +204,9 @@ func _roll() -> void:
 func _on_health_died() -> void:
 	print("The player has died")
 
+func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
+	_flash_invincible()
+
 func get_weapon() -> Weapon:
 	return _weapon
 
@@ -221,6 +225,15 @@ func _platform_raycast() -> Dictionary:
 	query.set_collision_mask(Constants.PLATFORM_LAYER)
 	var result = space_state.intersect_ray(query)
 	return result
+
+func _flash_invincible() -> void:
+	collision_layer ^= Constants.PLAYER_LAYER
+	while $Health.is_invincible:
+		$Sprite2D.visible = false
+		await get_tree().create_timer(0.05).timeout
+		$Sprite2D.visible = true
+		await get_tree().create_timer(0.05).timeout
+	collision_layer ^= Constants.PLAYER_LAYER
 	
 func get_health() -> Health:
 	return $Health;
