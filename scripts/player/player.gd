@@ -13,6 +13,7 @@ class_name Player extends CharacterBody2D
 @export var roll_speed: float = 1200
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.4
+@export var invincible_time: float = 1.0
 
 @export var melee_damage: float = 5
 @export var melee_knockback: Vector2 = Vector2(1000, -500)
@@ -187,7 +188,6 @@ func _roll() -> void:
 	_jump_buffer = 0.0
 	if _weapon:
 		_weapon.set_firing(null)
-	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
 	collision_layer = Constants.INVINCIBLE_LAYER
 	$StandingSprite.flip_v = true
 	$CrouchingSprite.flip_v = true
@@ -205,7 +205,11 @@ func _on_health_died() -> void:
 	print("The player has died")
 
 func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
+	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
+	collision_layer = Constants.INVINCIBLE_LAYER
 	_flash_invincible()
+	await get_tree().create_timer(invincible_time).timeout
+	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
 func get_weapon() -> Weapon:
 	return _weapon
@@ -227,13 +231,13 @@ func _platform_raycast() -> Dictionary:
 	return result
 
 func _flash_invincible() -> void:
-	collision_layer ^= Constants.PLAYER_LAYER
-	while $Health.is_invincible:
-		$Sprite2D.visible = false
+	while collision_layer == Constants.INVINCIBLE_LAYER:
+		standing_sprite.visible = false
+		crouching_sprite.visible = false
 		await get_tree().create_timer(0.05).timeout
-		$Sprite2D.visible = true
+		standing_sprite.visible = !_is_crouching
+		crouching_sprite.visible = _is_crouching
 		await get_tree().create_timer(0.05).timeout
-	collision_layer ^= Constants.PLAYER_LAYER
 	
 func get_health() -> Health:
 	return $Health;

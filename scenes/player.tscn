@@ -60,7 +60,6 @@ script = ExtResource("3_70gf3")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_s7yvn")
-invincible_time = 1.0
 
 [node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_0pcrb")]
 health = NodePath("../Health")
