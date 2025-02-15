@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://coe3qeptiibjf"]
+[gd_scene load_steps=12 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
-[ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_wdbwm"]
-[ext_resource type="PackedScene" path="res://assets/impact_particles.tscn" id="3_fhmks"]
+[ext_resource type="PackedScene" uid="uid://c2v7wruth6ltd" path="res://scenes/shooter_projectile.tscn" id="2_wdbwm"]
+[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_fhmks"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="4_eip30"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="5_f8rp7"]
+[ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_undrq"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_3hdsg"]
+[ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_irxur"]
+[ext_resource type="Script" path="res://scripts/direction.gd" id="6_ofpms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(72, 165.88)
@@ -18,7 +21,6 @@ position = Vector2(0, 74)
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_gcame")
-projectile = ExtResource("2_wdbwm")
 impact_particle_prefab = ExtResource("3_fhmks")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -39,12 +41,18 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_oetyt")
 
+[node name="Weapon" type="Node2D" parent="."]
+position = Vector2(0, -142)
+script = ExtResource("5_undrq")
+weapon_stats = ExtResource("6_irxur")
+projectile_prefab = ExtResource("2_wdbwm")
+
+[node name="Direction" type="Node" parent="."]
+script = ExtResource("6_ofpms")
+
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_f8rp7")
 max_health = 15.0
 
 [node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_3hdsg")]
 health = NodePath("../Health")
-
-[node name="FiringPosition" type="Node2D" parent="."]
-position = Vector2(0, -144)

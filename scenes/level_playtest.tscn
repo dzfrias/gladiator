@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="3_i65ca"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="5_jrgqa"]
 [ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="6_akhvg"]
-[ext_resource type="PackedScene" uid="uid://coe3qeptiibjf" path="res://scenes/idle_shooter.tscn" id="7_2u84i"]
+[ext_resource type="PackedScene" uid="uid://b6n4ygstauqcx" path="res://scenes/idle_shooter.tscn" id="7_2u84i"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_l5pn1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8pxj3"]
