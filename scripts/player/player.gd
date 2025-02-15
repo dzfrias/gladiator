@@ -22,7 +22,7 @@ var _can_melee := true
 var _weapon: Weapon
 var _state := State.CONTROL
 var _can_roll := true
-var _combat_flip_position = Vector2(125, 0)
+@onready var _combat_flip_position = $Weapon.position
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
@@ -70,8 +70,8 @@ func _process(delta: float) -> void:
 					acceleration *= direction_change_factor
 				velocity.x = maxf(-move_speed, velocity.x - acceleration * delta)
 				$Direction.is_right = false
-				_melee_box.position = -_combat_flip_position
-				_weapon.position = -_combat_flip_position
+				_melee_box.position = Vector2(-_combat_flip_position.x, _combat_flip_position.y)
+				_weapon.position = Vector2(-_combat_flip_position.x, _combat_flip_position.y)
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
 				if velocity.x < 0:

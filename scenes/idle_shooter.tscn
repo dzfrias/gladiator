@@ -27,7 +27,7 @@ shape = SubResource("RectangleShape2D_d8kds")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-7.45058e-09, -90)
-scale = Vector2(0.61, 1.355)
+scale = Vector2(0.61, 1.5)
 texture = ExtResource("4_eip30")
 
 [node name="DetectionZone" type="Area2D" parent="."]
