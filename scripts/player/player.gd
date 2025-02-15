@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 @export var move_speed: float = 400
 @export var move_acceleration: float = 2000
 @export var move_deceleration: float = 2000
+@export var crouch_move_speed: float = 200
 @export var direction_change_factor: float = 3
 @export var jump_speed: float = 500
 @export var jump_accel: float = 1000
@@ -22,6 +23,7 @@ var _can_melee := true
 var _weapon: Weapon
 var _state := State.CONTROL
 var _can_roll := true
+var _is_crouching := false
 @onready var _combat_flip_position = $Weapon.position
 var _is_jumping := false
 var _jump_time := 0.0
@@ -55,10 +57,16 @@ func _process(delta: float) -> void:
 		
 	match _state:
 		State.CONTROL:
-			if Input.is_action_pressed("crouch") and Input.is_action_pressed("jump"):
-				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+			if Input.is_action_pressed("crouch"):
+				if Input.is_action_pressed("jump"):
+					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+				else:
+					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+					_is_crouching = true
+					scale.y = 0.5
 			else:
-				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+				scale.y = 1
+				_is_crouching = false
 			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -68,7 +76,10 @@ func _process(delta: float) -> void:
 				# change directions
 				if velocity.x > 0:
 					acceleration *= direction_change_factor
-				velocity.x = maxf(-move_speed, velocity.x - acceleration * delta)
+				if _is_crouching:
+					velocity.x = maxf(-crouch_move_speed, velocity.x - acceleration * delta)
+				else:
+					velocity.x = maxf(-move_speed, velocity.x - acceleration * delta)
 				$Direction.is_right = false
 				_melee_box.position = Vector2(-_combat_flip_position.x, _combat_flip_position.y)
 				_weapon.position = Vector2(-_combat_flip_position.x, _combat_flip_position.y)
@@ -76,7 +87,10 @@ func _process(delta: float) -> void:
 				var acceleration := move_acceleration
 				if velocity.x < 0:
 					acceleration *= direction_change_factor
-				velocity.x = minf(move_speed, velocity.x + acceleration * delta)
+				if _is_crouching:
+					velocity.x = minf(crouch_move_speed, velocity.x + acceleration * delta)
+				else:
+					velocity.x = minf(move_speed, velocity.x + acceleration * delta)
 				$Direction.is_right = true
 				_melee_box.position = _combat_flip_position
 				_weapon.position = _combat_flip_position

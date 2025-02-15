@@ -29,11 +29,11 @@ jump_hold_time = 0.2
 roll_cooldown_time = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -42)
+position = Vector2(-1, -98)
 shape = SubResource("RectangleShape2D_m5kfl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -43)
+position = Vector2(-1, -99)
 scale = Vector2(1, 1.5)
 texture = ExtResource("1_rjir4")
 
@@ -51,14 +51,14 @@ script = ExtResource("3_s7yvn")
 health = NodePath("../Health")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(123, -75)
+position = Vector2(122, -131)
 script = ExtResource("5_crqak")
 weapon_stats = ExtResource("6_0weg3")
 projectile_prefab = ExtResource("6_w2kq1")
 auto_reload = true
 
 [node name="MeleeBox" type="Area2D" parent="."]
-position = Vector2(123, 0)
+position = Vector2(122, -56)
 collision_layer = 0
 collision_mask = 7
 
