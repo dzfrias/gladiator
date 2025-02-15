@@ -26,15 +26,20 @@ func _physics_process(delta: float) -> void:
 	match _state:
 		State.HIDING:
 			var xdist := _tracking.position.x - position.x
+			$StandCollision.disabled = true
+			$HideCollision.disabled = false
+			$StandSprite.visible = false
+			$HideSprite.visible = true
 			$Direction.scalar = signf(xdist)
-			scale.x = $Direction.scalar
 			if detection_zone.has_overlapping_bodies() and _can_stand:
 				_state = State.STANDING
 		State.STANDING:
-			scale.y = 1
 			var xdist := _tracking.position.x - position.x
 			$Direction.scalar = signf(xdist)
-			scale.x = $Direction.scalar
+			$HideCollision.disabled = true
+			$StandCollision.disabled = false
+			$StandSprite.visible = true
+			$HideSprite.visible = false
 			
 			_shoot()
 
@@ -49,7 +54,6 @@ func _shoot() -> void:
 func _hide():
 	_state = State.HIDING
 	_can_stand = false
-	scale.y = 0.5
 	await $Weapon.reload()
 	_can_stand = true
 

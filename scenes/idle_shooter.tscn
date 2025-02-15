@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
-[ext_resource type="PackedScene" uid="uid://c2v7wruth6ltd" path="res://scenes/shooter_projectile.tscn" id="2_wdbwm"]
+[ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_wdbwm"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_fhmks"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="4_eip30"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="5_f8rp7"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/direction.gd" id="6_ofpms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
-size = Vector2(72, 165.88)
+size = Vector2(72, 66.88)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
 radius = 902.29
@@ -23,13 +23,24 @@ collision_mask = 33
 script = ExtResource("1_gcame")
 impact_particle_prefab = ExtResource("3_fhmks")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="StandCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-0.959999, -89.06)
 shape = SubResource("RectangleShape2D_d8kds")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="HideCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-0.959999, -39.56)
+shape = SubResource("RectangleShape2D_d8kds")
+disabled = true
+
+[node name="StandSprite" type="Sprite2D" parent="."]
 position = Vector2(-7.45058e-09, -90)
 scale = Vector2(0.61, 1.5)
+texture = ExtResource("4_eip30")
+
+[node name="HideSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-7.45058e-09, -34)
+scale = Vector2(0.61, 0.625)
 texture = ExtResource("4_eip30")
 
 [node name="DetectionZone" type="Area2D" parent="."]
