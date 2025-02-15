@@ -2,6 +2,7 @@ class_name Weapon extends Node2D
 
 @export var weapon_stats: WeaponStats
 @export var projectile_prefab: PackedScene
+@export var auto_reload = false
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
 
@@ -35,21 +36,19 @@ func fire(direction: Direction):
 	projectile.fire(weapon_stats.projectile_speed, angle)
 	projectile.damage = weapon_stats.damage
 	projectile.global_position = global_position
-	get_tree().root.add_child(projectile)
+	get_tree().current_scene.add_child(projectile)
 	
 	ammo -= 1
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
-	if ammo <= 0:
+	if ammo == 0 and auto_reload:
 		reload()
-	shot_wait_time()
+		return
 	
-func shot_wait_time():
 	can_fire = false
 	await get_tree().create_timer(weapon_stats.firing_interval).timeout
-	
 	if !is_reloading:
 		can_fire = true
-	
+
 func reload():
 	is_reloading = true
 	can_fire = false

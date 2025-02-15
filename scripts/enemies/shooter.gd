@@ -7,14 +7,6 @@ class_name Shooter extends CharacterBody2D
 @export var y_cutoff: float = 70.0
 @export var jump_height: float = -800
 @export var y_axis_follow_time: float = 1.0
-@export_category("Shooting")
-@export var projectile: PackedScene
-@export var projectile_speed := 800.0
-@export var projectile_damage := 4.0
-@export var ammo := 3
-@export var reload_time := 5.0
-@export var shoot_cooldown_avg: float = 0.9
-@export var shoot_cooldown_sd: float = 0.2
 
 @export var impact_particle_prefab: PackedScene
 
@@ -22,9 +14,7 @@ class_name Shooter extends CharacterBody2D
 
 var _state: State = State.IDLE
 var _tracking: Node2D
-var _can_attack: bool = true
 var _player_follow_time: float = 0.0
-@onready var _current_ammo = ammo
 
 enum State {
 	IDLE,
@@ -78,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			# player so we can get on the same ground as them.
 			if absf(xdist) > stop_dist or ydist > y_cutoff:
 				velocity.x = $Direction.scalar * speed
-			elif _can_attack:
+			elif !$Weapon.is_reloading:
 				_shoot()
 			else:
 				velocity.x = 0
@@ -91,24 +81,11 @@ func _physics_process(delta: float) -> void:
 
 func _shoot() -> void:
 	_state = State.SHOOTING
-	for i in range(ammo):
-		var p := projectile.instantiate()
-		get_tree().root.add_child(p)
-		var angle: float
-		if $Direction.is_right:
-			angle = 0.0
-		else:
-			angle = PI
-		p.fire(projectile_speed, angle)
-		p.damage = projectile_damage
-		p.position = position
-		var wait := maxf(0, randfn(shoot_cooldown_avg, shoot_cooldown_sd))
-		await get_tree().create_timer(wait).timeout
+	while $Weapon.ammo > 0:
+		await $Weapon.fire($Direction)
 	
 	_state = State.TRACKING
-	_can_attack = false
-	await get_tree().create_timer(reload_time).timeout
-	_can_attack = true
+	await $Weapon.reload()
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
