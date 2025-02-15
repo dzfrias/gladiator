@@ -18,13 +18,20 @@ class_name Player extends CharacterBody2D
 @export var melee_knockback: Vector2 = Vector2(1000, -500)
 @export var melee_cooldown: float = 2
 
+@onready var standing_hitbox = $StandingHitbox
+@onready var crouching_hitbox = $CrouchingHitbox
+@onready var standing_sprite = $StandingSprite
+@onready var crouching_sprite = $CrouchingSprite
+@onready var standing_weapon_position = $StandingWeaponPosition
+@onready var crouching_weapon_position = $CrouchingWeaponPosition
+@onready var direction = $Direction
+
 var _can_melee := true
 # NOTE this field can be null (if the player has no weapon)
 var _weapon: Weapon
 var _state := State.CONTROL
 var _can_roll := true
 var _is_crouching := false
-@onready var _combat_flip_position = $Weapon.position
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
@@ -57,16 +64,25 @@ func _process(delta: float) -> void:
 		
 	match _state:
 		State.CONTROL:
-			if Input.is_action_pressed("crouch"):
-				if Input.is_action_pressed("jump"):
-					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
-				else:
-					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
-					_is_crouching = true
-					scale.y = 0.5
+			if Input.is_action_pressed("crouch") and Input.is_action_pressed("jump"):
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
 			else:
-				scale.y = 1
+				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+			
+			if Input.is_action_just_pressed("crouch"):
+				_is_crouching = true
+				standing_hitbox.disabled = true
+				standing_sprite.visible = false
+				crouching_hitbox.disabled = false
+				crouching_sprite.visible = true
+				_weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
+			elif !Input.is_action_pressed("crouch") and _is_crouching:
 				_is_crouching = false
+				standing_hitbox.disabled = false
+				standing_sprite.visible = true
+				crouching_hitbox.disabled = true
+				crouching_sprite.visible = false
+				_weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
 			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -80,9 +96,8 @@ func _process(delta: float) -> void:
 					velocity.x = maxf(-crouch_move_speed, velocity.x - acceleration * delta)
 				else:
 					velocity.x = maxf(-move_speed, velocity.x - acceleration * delta)
-				$Direction.is_right = false
-				_melee_box.position = Vector2(-_combat_flip_position.x, _combat_flip_position.y)
-				_weapon.position = Vector2(-_combat_flip_position.x, _combat_flip_position.y)
+				direction.is_right = false
+				
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
 				if velocity.x < 0:
@@ -91,11 +106,16 @@ func _process(delta: float) -> void:
 					velocity.x = minf(crouch_move_speed, velocity.x + acceleration * delta)
 				else:
 					velocity.x = minf(move_speed, velocity.x + acceleration * delta)
-				$Direction.is_right = true
-				_melee_box.position = _combat_flip_position
-				_weapon.position = _combat_flip_position
+				direction.is_right = true
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
+			
+			if _is_crouching:
+				_melee_box.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
+				_weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
+			else:
+				_melee_box.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
+				_weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
 		State.ROLL:
 			velocity.x = roll_speed * $Direction.scalar
 		
@@ -168,11 +188,13 @@ func _roll() -> void:
 		_weapon.set_firing(null)
 	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
 	collision_layer = Constants.INVINCIBLE_LAYER
-	$Sprite2D.flip_v = true
+	$StandingSprite.flip_v = true
+	$CrouchingSprite.flip_v = true
 	await get_tree().create_timer(roll_time).timeout
 	_state = State.CONTROL
 	velocity.x *= 0.4
-	$Sprite2D.flip_v = false
+	$StandingSprite.flip_v = false
+	$CrouchingSprite.flip_v = false
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 	_can_roll = false
 	await get_tree().create_timer(roll_cooldown_time).timeout

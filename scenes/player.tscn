@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=12 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
@@ -11,6 +11,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(106, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ynjo"]
+size = Vector2(123, 103)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdhhq"]
 size = Vector2(109, 99)
@@ -28,13 +31,24 @@ jump_accel = 250.0
 jump_hold_time = 0.2
 roll_cooldown_time = 0.2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="StandingHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -98)
 shape = SubResource("RectangleShape2D_m5kfl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CrouchingHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -54.5)
+shape = SubResource("RectangleShape2D_5ynjo")
+disabled = true
+
+[node name="StandingSprite" type="Sprite2D" parent="."]
 position = Vector2(-1, -99)
 scale = Vector2(1, 1.5)
+texture = ExtResource("1_rjir4")
+
+[node name="CrouchingSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -49)
+scale = Vector2(1, 0.75)
 texture = ExtResource("1_rjir4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -56,6 +70,12 @@ script = ExtResource("5_crqak")
 weapon_stats = ExtResource("6_0weg3")
 projectile_prefab = ExtResource("6_w2kq1")
 auto_reload = true
+
+[node name="StandingWeaponPosition" type="Node2D" parent="."]
+position = Vector2(123, -131)
+
+[node name="CrouchingWeaponPosition" type="Node2D" parent="."]
+position = Vector2(122, -56)
 
 [node name="MeleeBox" type="Area2D" parent="."]
 position = Vector2(122, -56)
