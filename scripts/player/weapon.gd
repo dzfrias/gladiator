@@ -26,8 +26,6 @@ func _process(_delta: float) -> void:
 func fire():
 	if ammo <= 0 or !can_fire:
 		return
-
-	var space_state = get_world_2d().direct_space_state
 	
 	var projectile = projectile_prefab.instantiate() as HorizontalProjectile
 	var angle: float
@@ -35,6 +33,7 @@ func fire():
 		angle = 0.0
 	else:
 		angle = PI
+	angle = randfn(angle, weapon_stats.angle_variance)
 	projectile.fire(weapon_stats.projectile_speed, angle)
 	projectile.damage = weapon_stats.damage
 	projectile.global_position = global_position
