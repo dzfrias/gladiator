@@ -21,7 +21,6 @@ var _can_melee := true
 # NOTE this field can be null (if the player has no weapon)
 var _weapon: Weapon
 var _state := State.CONTROL
-var _direction: float = 1
 var _can_roll := true
 var _combat_flip_position = Vector2(125, 0)
 var _is_jumping := false
@@ -69,22 +68,22 @@ func _process(delta: float) -> void:
 				# change directions
 				if velocity.x > 0:
 					acceleration *= direction_change_factor
-				velocity.x = max(-move_speed, velocity.x - acceleration * delta)
-				_direction = -1
+				velocity.x = maxf(-move_speed, velocity.x - acceleration * delta)
+				$Direction.is_right = false
 				_melee_box.position = -_combat_flip_position
 				_weapon.position = -_combat_flip_position
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
 				if velocity.x < 0:
 					acceleration *= direction_change_factor
-				velocity.x = min(move_speed, velocity.x + acceleration * delta)
-				_direction = 1
+				velocity.x = minf(move_speed, velocity.x + acceleration * delta)
+				$Direction.is_right = true
 				_melee_box.position = _combat_flip_position
 				_weapon.position = _combat_flip_position
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
 		State.ROLL:
-			velocity.x = roll_speed * _direction
+			velocity.x = roll_speed * $Direction.scalar
 		
 	move_and_slide()
 
@@ -111,9 +110,9 @@ func _input(event: InputEvent) -> void:
 					#var vulture = body as Vulture
 					#vulture._velocity = _direction * melee_knockback
 		if !hit_enemy:
-			_weapon.set_firing(true)
+			_weapon.set_firing($Direction)
 	if event.is_action_released("fire") and _weapon:
-		_weapon.set_firing(false)
+		_weapon.set_firing(null)
 	if is_on_floor():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
 			_is_jumping = true
@@ -132,7 +131,7 @@ func _input(event: InputEvent) -> void:
 		if not _weapon:
 			_weapon = $Weapon
 		else:
-			_weapon.set_firing(false)
+			_weapon.set_firing(null)
 			_weapon = null
 		weapon_changed.emit()
 
@@ -152,7 +151,7 @@ func _roll() -> void:
 	_is_jumping = false
 	_jump_buffer = 0.0
 	if _weapon:
-		_weapon.set_firing(false)
+		_weapon.set_firing(null)
 	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
 	collision_layer = Constants.INVINCIBLE_LAYER
 	$Sprite2D.flip_v = true
@@ -170,9 +169,6 @@ func _on_health_died() -> void:
 
 func get_weapon() -> Weapon:
 	return _weapon
-
-func get_direction():
-	return _direction
 
 func is_on_platform():
 	var result = _platform_raycast()

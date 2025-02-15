@@ -1,35 +1,33 @@
-class_name Weapon
-
-extends Node2D
+class_name Weapon extends Node2D
 
 @export var weapon_stats: WeaponStats
+@export var projectile_prefab: PackedScene
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
 
-@export var projectile_prefab: PackedScene
 var ammo: int
-var is_reloading: bool
-var can_fire: bool
-var is_firing: bool
+var is_reloading: bool = false
+var can_fire: bool = true
+# NOTE when this field is null, we are not firing
+var _fire_direction: Direction = null
 
 func _ready() -> void:
 	ammo = weapon_stats.max_ammo
-	can_fire = true
 	
-func set_firing(on: bool):
-	self.is_firing = on
+func set_firing(direction: Direction):
+	_fire_direction = direction
 	
 func _process(_delta: float) -> void:
-	if is_firing:
-		fire()
+	if _fire_direction != null:
+		fire(_fire_direction)
 
-func fire():
+func fire(direction: Direction):
 	if ammo <= 0 or !can_fire:
 		return
 	
-	var projectile = projectile_prefab.instantiate() as HorizontalProjectile
+	var projectile = projectile_prefab.instantiate()
 	var angle: float
-	if Player.Instance.get_direction() == 1:
+	if direction.is_right:
 		angle = 0.0
 	else:
 		angle = PI
@@ -38,7 +36,6 @@ func fire():
 	projectile.damage = weapon_stats.damage
 	projectile.global_position = global_position
 	get_tree().root.add_child(projectile)
-	
 	
 	ammo -= 1
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)

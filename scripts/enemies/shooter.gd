@@ -71,15 +71,15 @@ func _physics_process(delta: float) -> void:
 				_player_follow_time = 0.0
 			
 			var xdist := _tracking.position.x - position.x
-			var direction := signf(xdist)
-			scale.x = direction
+			$Direction.scalar = signf(xdist)
+			scale.x = $Direction.scalar
 			var ydist := absf(_tracking.position.y - position.y)
 			# If the y distance is too far, we will move towards
 			# player so we can get on the same ground as them.
 			if absf(xdist) > stop_dist or ydist > y_cutoff:
-				velocity.x = direction * speed
+				velocity.x = $Direction.scalar * speed
 			elif _can_attack:
-				_shoot(direction)
+				_shoot()
 			else:
 				velocity.x = 0
 		State.IDLE:
@@ -89,13 +89,13 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _shoot(direction: float) -> void:
+func _shoot() -> void:
 	_state = State.SHOOTING
 	for i in range(ammo):
-		var p := projectile.instantiate() as HorizontalProjectile
+		var p := projectile.instantiate()
 		get_tree().root.add_child(p)
 		var angle: float
-		if direction == 1:
+		if $Direction.is_right:
 			angle = 0.0
 		else:
 			angle = PI

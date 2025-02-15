@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=11 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
+[ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_0pcrb"]
@@ -35,6 +36,9 @@ texture = ExtResource("1_rjir4")
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -250)
 position_smoothing_enabled = true
+
+[node name="Direction" type="Node" parent="."]
+script = ExtResource("3_70gf3")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_s7yvn")

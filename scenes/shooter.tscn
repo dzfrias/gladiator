@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=11 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="PackedScene" uid="uid://c2v7wruth6ltd" path="res://scenes/shooter_projectile.tscn" id="2_5g1nj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_qpshq"]
 [ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="5_mp71e"]
+[ext_resource type="Script" path="res://scripts/direction.gd" id="5_x6nd1"]
 [ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="7_08p06"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
@@ -41,6 +42,9 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_oetyt")
+
+[node name="Direction" type="Node" parent="."]
+script = ExtResource("5_x6nd1")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_arjap")

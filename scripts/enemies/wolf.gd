@@ -72,7 +72,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = _attack_direction * attack_speed
 	
 	if velocity.x != 0:
-		_flip(signf(velocity.x))
+		$Direction.scalar = signf(velocity.x)
+		_align_with_direction()
 	
 	move_and_slide()
 
@@ -103,11 +104,11 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 func _on_detection_zone_body_exited(_body: Node2D) -> void:
 	pass
 
-func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
+func _on_health_damage_taken(_amount: float, direction: Vector2) -> void:
 	var impact_particles = impact_particle_prefab.instantiate()
 	impact_particles.global_position = global_position
 	get_tree().root.add_child(impact_particles)
-	impact_particles.direction = _direction
+	impact_particles.direction = direction
 	impact_particles.emitting = true
 	
 	print("Wolf damage taken")
@@ -122,6 +123,6 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 	var player := body as Player
 	player.damage(attack_damage, Vector2(_attack_direction, 0))
 
-func _flip(direction: float) -> void:
-	assert(absf(direction) == 1)
+func _align_with_direction() -> void:
+	var direction = $Direction.scalar
 	$AttackBox/CollisionShape2D.position.x = _original_attack_x * direction
