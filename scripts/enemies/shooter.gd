@@ -4,7 +4,7 @@ class_name Shooter extends CharacterBody2D
 @export var speed: float = 100.0
 # TODO this might be best done with another detection zone
 @export var stop_dist: float = 1200.0
-@export var y_cutoff: float = 70.0
+@export var y_cutoff: float = 100.0
 @export var jump_height: float = -800
 @export var y_axis_follow_time: float = 1.0
 
