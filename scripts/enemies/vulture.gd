@@ -99,7 +99,7 @@ func _attack() -> void:
 	_state = State.TRACKING if _tracking else State.IDLE
 	var angle := _firing_angle(projectile_speed, dx, dy)
 	var p := projectile.instantiate() as ArcProjectile
-	get_tree().root.add_child(p)
+	get_tree().current_scene.add_child(p)
 	p.fire(projectile_speed, angle)
 	p.damage = projectile_damage
 	p.splash_radius = projectile_splash_radius
@@ -135,7 +135,7 @@ func _on_detection_zone_body_exited(body: Node2D) -> void:
 func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
 	var impact_particles = impact_particle_prefab.instantiate()
 	impact_particles.global_position = global_position
-	get_tree().root.add_child(impact_particles)
+	get_tree().current_scene.add_child(impact_particles)
 	impact_particles.direction = _direction
 	impact_particles.emitting = true
 	

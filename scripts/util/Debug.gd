@@ -15,6 +15,6 @@ func _internal_draw(on_draw, duration: float) -> void:
 	var curried_draw = func() -> void:
 		on_draw.call(node)
 	node.draw.connect(curried_draw)
-	get_tree().root.add_child(node)
+	get_tree().current_scene.add_child(node)
 	await get_tree().create_timer(duration).timeout
 	node.queue_free()
