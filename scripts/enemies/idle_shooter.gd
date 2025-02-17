@@ -48,7 +48,7 @@ func _shoot() -> void:
 	await get_tree().create_timer(prepare_attack_time).timeout
 	while $Weapon.ammo > 0:
 		await $Weapon.fire($Direction)
-	
+	await get_tree().create_timer(idle_time).timeout
 	_hide()
 
 func _hide():

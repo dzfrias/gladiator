@@ -21,6 +21,8 @@ position = Vector2(0, 74)
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_gcame")
+prepare_attack_time = 2.0
+idle_time = 2.0
 impact_particle_prefab = ExtResource("3_fhmks")
 
 [node name="StandCollision" type="CollisionShape2D" parent="."]
