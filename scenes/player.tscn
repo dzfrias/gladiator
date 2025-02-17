@@ -84,3 +84,7 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeBox"]
 shape = SubResource("RectangleShape2D_xdhhq")
+
+[node name="PlatformRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, -18)
+collision_mask = 32
