@@ -18,6 +18,7 @@ size = Vector2(72, 186)
 radius = 902.29
 
 [node name="Shooter" type="CharacterBody2D"]
+position = Vector2(0, -100)
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_a5ml5")

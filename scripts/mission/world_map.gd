@@ -38,8 +38,11 @@ var _enemies := [
 var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn")
 var _fill_tiles: Array[FillTile] = []
 var _fill_source_id: int
+var _tile_size: Vector2
 
 func _ready() -> void:
+	assert(scale.x == scale.y)
+	_tile_size = tile_set.tile_size * scale.x
 	_fill_source_id = tile_set.get_source_id(0)
 	var source := tile_set.get_source(_fill_source_id) as TileSetAtlasSource
 	for i in source.get_tiles_count():
@@ -84,13 +87,13 @@ func _place_module(origin: Vector2i, module: PackedScene) -> Vector2i:
 	_fill(Vector2i(origin.x, lowest_y + 1), width)
 	
 	if instance.has_node("SpawnPoints"):
-		var scene_origin := map_to_local(origin)
+		var scene_origin := to_global(map_to_local(origin)) - _tile_size / 2
 		var spawn_points := instance.get_node("SpawnPoints")
 		for child in spawn_points.get_children():
 			var spawn_point := child as Node2D
 			var enemy = _weighted_choice(_enemies)
 			var enemy_instance := enemy.scene.instantiate() as Node2D
-			enemy_instance.position = scene_origin + spawn_point.position
+			enemy_instance.position = scene_origin + spawn_point.position * scale.x
 			get_tree().current_scene.add_child(enemy_instance)
 	
 	return Vector2i(width, instance.delta_y)
