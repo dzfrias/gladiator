@@ -26,7 +26,10 @@ var _terrain := [
 	WeightedScene.new("res://scenes/modules/terrain/slope_down.tscn", 0.25),
 ]
 var _encounters := [
-	WeightedScene.new("res://scenes/modules/encounters/basic.tscn", 1.0),
+	WeightedScene.new("res://scenes/modules/encounters/basic.tscn", 0.25),
+	WeightedScene.new("res://scenes/modules/encounters/encounter1.tscn", 0.25),
+	WeightedScene.new("res://scenes/modules/encounters/encounter2.tscn", 0.25),
+	WeightedScene.new("res://scenes/modules/encounters/encounter3.tscn", 0.25),
 ]
 var _enemies := [
 	WeightedScene.new("res://scenes/wolf.tscn", 0.75),

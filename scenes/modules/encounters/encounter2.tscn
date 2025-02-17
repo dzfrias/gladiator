@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=4 uid="uid://uhg44q3w2xq6"]
+
+[ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_t84de"]
+[ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_fjbhw"]
+
+[node name="Encounter2" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAAAAP//AwAGAAAAAAAFAP//AwAGAAAAAAAGAP//AwAGAAAAAAAHAP//AwAGAAAAAAAIAP7/AwAEAAIAAAAIAP//AwAGAAAAAAAJAP//AwAGAAAAAAAKAP//AwAGAAAAAAABAP//AwAGAAAAAAACAP//AwAGAAAAAAADAP//AwAGAAAAAAAEAP//AwAGAAAAAAALAP//AwAGAAAAAAAMAP//AwAGAAAAAAANAPz/AwADAAIAAAANAP3/AwAHAAIAAAANAP7/AwAHAAIAAAANAP//AwAGAAAAAAAOAPz/AwADAAIAAAAOAP3/AwAHAAIAAAAOAP7/AwAHAAIAAAAOAP//AwAGAAAAAAAPAPz/AwADAAIAAAAPAP3/AwAHAAIAAAAPAP7/AwAHAAIAAAAPAP//AwAGAAAAAAAQAPz/AwADAAIAAAAQAP3/AwAHAAIAAAAQAP7/AwAHAAIAAAAQAP//AwAGAAAAAAARAPz/AwADAAIAAAARAP3/AwAHAAIAAAARAP7/AwAHAAIAAAARAP//AwAGAAAAAAASAPz/AwADAAIAAAASAP3/AwAHAAIAAAASAP7/AwAHAAIAAAASAP//AwAGAAAAAAATAP//AwAGAAAAAAAUAP//AwAGAAAAAAAVAP//AwAGAAAAAAA=")
+tile_set = ExtResource("1_t84de")
+script = ExtResource("2_fjbhw")
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Spawn1" type="Node2D" parent="SpawnPoints"]
+position = Vector2(347, -60)
+
+[node name="Spawn2" type="Node2D" parent="SpawnPoints"]
+position = Vector2(516, -59)
+
+[node name="Spawn3" type="Node2D" parent="SpawnPoints"]
+position = Vector2(598, -179)

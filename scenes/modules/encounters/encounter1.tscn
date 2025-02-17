@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=4 uid="uid://da0cwmqltm437"]
+
+[ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_tbkhf"]
+[ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_t4icp"]
+
+[node name="Encounter1" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAAAAP//AwAGAAAAAAADAP//AwAGAAAAAAAEAP//AwAGAAAAAAAFAPz/AwADAAIAAAAFAP3/AwAHAAIAAAAFAP7/AwAHAAIAAAAFAP//AwAGAAAAAAAGAPz/AwADAAIAAAAGAP3/AwAHAAIAAAAGAP7/AwAHAAIAAAAGAP//AwAGAAAAAAAHAPz/AwADAAIAAAAHAP3/AwAHAAIAAAAHAP7/AwAHAAIAAAAHAP//AwAGAAAAAAAJAP//AwAGAAAAAAABAP//AwAGAAAAAAACAP//AwAGAAAAAAAIAPz/AwADAAIAAAAIAP3/AwAHAAIAAAAIAP7/AwAHAAIAAAAIAP//AwAGAAAAAAAKAP//AwAGAAAAAAALAPv/AwADAAIAAAALAPz/AwAHAAIAAAALAP3/AwAHAAIAAAALAP7/AwAHAAIAAAALAP//AwAGAAAAAAAMAPv/AwADAAIAAAAMAPz/AwAHAAIAAAAMAP3/AwAHAAIAAAAMAP7/AwAHAAIAAAAMAP//AwAGAAAAAAANAPv/AwADAAIAAAANAPz/AwAHAAIAAAANAP3/AwAHAAIAAAANAP7/AwAHAAIAAAANAP//AwAGAAAAAAAOAPv/AwADAAIAAAAOAPz/AwAHAAIAAAAOAP3/AwAHAAIAAAAOAP7/AwAHAAIAAAAOAP//AwAGAAAAAAAPAPv/AwADAAIAAAAPAPz/AwAHAAIAAAAPAP3/AwAHAAIAAAAPAP7/AwAHAAIAAAAPAP//AwAGAAAAAAAQAP//AwAGAAAAAAARAP7/AwADAAMAAAARAP//AwAGAAAAAAASAP//AwAGAAAAAAATAP//AwAGAAAAAAAUAP//AwAGAAAAAAAVAP//AwAGAAAAAAA=")
+tile_set = ExtResource("1_tbkhf")
+script = ExtResource("2_t4icp")
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Spawn1" type="Node2D" parent="SpawnPoints"]
+position = Vector2(239, -62)
+
+[node name="Spawn2" type="Node2D" parent="SpawnPoints"]
+position = Vector2(474, -67)
+
+[node name="Spawn3" type="Node2D" parent="SpawnPoints"]
+position = Vector2(474, -216)
+
+[node name="Spawn4" type="Node2D" parent="SpawnPoints"]
+position = Vector2(678, -66)
