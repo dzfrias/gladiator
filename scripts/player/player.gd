@@ -177,7 +177,7 @@ func melee_timer():
 	_can_melee = true
 
 func damage(amount: float, direction: Vector2) -> void:
-	if $Health.has_died:
+	if $Health.has_died or collision_layer == Constants.INVINCIBLE_LAYER:
 		return
 	print("Player hit")
 	$Health.take_damage(amount, direction)
