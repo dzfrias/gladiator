@@ -23,6 +23,7 @@ collision_mask = 33
 script = ExtResource("1_4octj")
 attack_windup_time = 0.3
 jump_height = -1000.0
+stop_dist = 200.0
 impact_particle_prefab = ExtResource("2_8oh5i")
 
 [node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("2_0u6iq")]

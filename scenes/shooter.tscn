@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_rapbo"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_x6nd1"]
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_cglso"]
-[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="7_08p06"]
+[ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="7_08p06"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(72, 186)
@@ -23,6 +23,8 @@ collision_mask = 33
 script = ExtResource("1_a5ml5")
 speed = 150.0
 jump_height = -1000.0
+stop_dist = 1200.0
+jump_follow_cooldown = 1.0
 impact_particle_prefab = ExtResource("3_qpshq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -58,4 +60,3 @@ max_health = 15.0
 health = NodePath("../Health")
 
 [node name="PlatformDetection" parent="." instance=ExtResource("7_08p06")]
-visible = false
