@@ -75,6 +75,7 @@ crouch={
 2d_physics/layer_5="Player"
 2d_physics/layer_6="Platform"
 2d_physics/layer_7="HidingBlock"
+2d_physics/layer_8="Enemy"
 
 [physics]
 

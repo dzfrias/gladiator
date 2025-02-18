@@ -73,6 +73,15 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
+func notify() -> void:
+	if _tracking != null:
+		return
+	_tracking = Player.Instance
+	if _state == State.IDLE:
+		_state = State.TRACKING
+	for body in $NotifyZone.get_overlapping_bodies():
+		body.notify()
+
 func _attack() -> void:
 	pass
 
@@ -81,9 +90,7 @@ func _can_attack() -> bool:
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
-		if _state == State.IDLE:
-			_state = State.TRACKING
-		_tracking = body
+		notify()
 
 func _on_detection_zone_body_exited(_body: Node2D) -> void:
 	pass
@@ -94,6 +101,9 @@ func _on_health_damage_taken(_amount: float, direction: Vector2) -> void:
 	get_tree().current_scene.add_child(impact_particles)
 	impact_particles.direction = direction
 	impact_particles.emitting = true
+	
+	if _tracking == null:
+		notify()
 
 func _on_health_died() -> void:
 	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=24 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
@@ -103,8 +103,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrhg1"]
+radius = 400.0
+
 [node name="Wolf" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_4octj")
 attack_speed = 200.0
@@ -167,3 +170,12 @@ scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_th1nn")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="NotifyZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
+shape = SubResource("CircleShape2D_xrhg1")

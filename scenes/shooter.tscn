@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=15 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_5g1nj"]
@@ -20,9 +20,12 @@ radius = 360.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrpis"]
 size = Vector2(109, 36.91)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_c0ujg"]
+radius = 400.0
+
 [node name="Shooter" type="CharacterBody2D"]
 position = Vector2(0, -34)
-collision_layer = 2
+collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_a5ml5")
 speed = 50.0
@@ -79,3 +82,12 @@ shape = SubResource("RectangleShape2D_qrpis")
 position = Vector2(0.00800037, 92)
 target_position = Vector2(0, 30)
 collision_mask = 32
+
+[node name="NotifyZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
+shape = SubResource("CircleShape2D_c0ujg")

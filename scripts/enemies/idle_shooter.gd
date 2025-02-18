@@ -43,7 +43,14 @@ func _physics_process(delta: float) -> void:
 			
 			_shoot()
 
+func notify() -> void:
+	for body in $NotifyZone.get_overlapping_bodies():
+		if body == self:
+			continue
+		body.notify()
+
 func _shoot() -> void:
+	notify()
 	_state = State.SHOOTING
 	await get_tree().create_timer(prepare_attack_time).timeout
 	while $Weapon.ammo > 0:

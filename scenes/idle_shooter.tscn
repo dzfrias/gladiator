@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6n4ygstauqcx"]
+[gd_scene load_steps=14 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
 [ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_wdbwm"]
@@ -19,8 +19,11 @@ size = Vector2(26, 26)
 [sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
 radius = 360.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_c2f02"]
+radius = 400.0
+
 [node name="IdleShooter" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_gcame")
 prepare_attack_time = 2.0
@@ -70,3 +73,12 @@ max_health = 15.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("9_1qrsf")
+
+[node name="NotifyZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
+shape = SubResource("CircleShape2D_c2f02")

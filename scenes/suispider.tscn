@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://csqqcnv8iucaq"]
+[gd_scene load_steps=13 format=3 uid="uid://csqqcnv8iucaq"]
 
 [ext_resource type="Script" path="res://scripts/enemies/suispider.gd" id="1_5l4np"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_fkk75"]
@@ -20,8 +20,11 @@ size = Vector2(310, 113.53)
 [sub_resource type="CircleShape2D" id="CircleShape2D_78oek"]
 radius = 100.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8a7t2"]
+radius = 400.0
+
 [node name="Suispider" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_5l4np")
 distraction_jump_velocity = Vector2(500, -800)
@@ -75,3 +78,12 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionZone"]
 shape = SubResource("CircleShape2D_78oek")
+
+[node name="NotifyZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
+shape = SubResource("CircleShape2D_8a7t2")
