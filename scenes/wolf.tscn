@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=22 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
-[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_oje08"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
-[ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="6_2w8ig"]
+[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="6_2w8ig"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_3l162"]
+[ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(42, 43)
@@ -16,6 +16,89 @@ size = Vector2(28, 36)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpl7i"]
 radius = 797.023
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7kjo"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(0, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg4us"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(32, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6asb3"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(64, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sey0b"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(96, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wwl6"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(128, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib20e"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(160, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqeda"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(192, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llj57"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(224, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olamc"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(256, 0, 32, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5c7y"]
+atlas = ExtResource("8_ssrod")
+region = Rect2(0, 0, 32, 25)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_th1nn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7kjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg4us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6asb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sey0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wwl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib20e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqeda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llj57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olamc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5c7y")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
 
 [node name="Wolf" type="CharacterBody2D"]
 collision_layer = 2
@@ -30,11 +113,6 @@ impact_particle_prefab = ExtResource("2_8oh5i")
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("7_3l162")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -5.96046e-08)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("1_oje08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
@@ -69,3 +147,9 @@ shape = SubResource("CircleShape2D_wpl7i")
 
 [node name="PlatformDetection" parent="." instance=ExtResource("6_2w8ig")]
 position = Vector2(0, -91)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.6, 1.6)
+sprite_frames = SubResource("SpriteFrames_th1nn")
+animation = &"idle"
+autoplay = "idle"

@@ -40,4 +40,5 @@ func _on_attack_box_body_entered(body: Node2D) -> void:
 
 func _align_with_direction() -> void:
 	var direction = $Direction.scalar
+	$AnimatedSprite2D.flip_h = direction != 1
 	$AttackBox/CollisionShape2D.position.x = _original_attack_x * direction
