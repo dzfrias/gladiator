@@ -44,6 +44,7 @@ script = ExtResource("4_6dvl8")
 health = NodePath("../Health")
 
 [node name="DetectionZone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 20
 monitorable = false
@@ -54,6 +55,7 @@ shape = SubResource("CircleShape2D_7u64g")
 [node name="PlatformDetection" parent="." instance=ExtResource("5_ahv4j")]
 
 [node name="ExplosionZone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 16
 
