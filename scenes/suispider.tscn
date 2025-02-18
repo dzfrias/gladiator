@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_2s6ah"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="4_6dvl8"]
 [ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="5_ahv4j"]
-[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_thj7y"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="6_qtcdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouvmv"]
 size = Vector2(141, 90)
@@ -40,8 +40,8 @@ script = ExtResource("3_2s6ah")
 [node name="Direction" type="Node" parent="."]
 script = ExtResource("4_6dvl8")
 
-[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_thj7y")]
-health = NodePath("../Health")
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("6_qtcdd")
 
 [node name="DetectionZone" type="Area2D" parent="."]
 visible = false

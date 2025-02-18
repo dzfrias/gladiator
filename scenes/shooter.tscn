@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_y4oe8"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_qpshq"]
-[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="5_mp71e"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_rapbo"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_x6nd1"]
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_cglso"]
 [ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="7_08p06"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_iylj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(72, 186)
@@ -57,7 +57,7 @@ script = ExtResource("5_x6nd1")
 script = ExtResource("3_arjap")
 max_health = 15.0
 
-[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("5_mp71e")]
-health = NodePath("../Health")
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("9_iylj5")
 
 [node name="PlatformDetection" parent="." instance=ExtResource("7_08p06")]

@@ -6,5 +6,5 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	MissionManager.mission = SurvivalMission.new()
 	MissionManager.mission.gold = 10
-	MissionManager.weather = AcidRain.new()
+	MissionManager.weather = Lightning.new()
 	MissionManager.enter_mission()

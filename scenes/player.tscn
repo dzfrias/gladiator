@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="4_oevlo"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
-[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_0pcrb"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
 [ext_resource type="PackedScene" uid="uid://dcp3huoajqaue" path="res://scenes/projectile.tscn" id="6_w2kq1"]
 
@@ -58,11 +58,11 @@ position_smoothing_enabled = true
 [node name="Direction" type="Node" parent="."]
 script = ExtResource("3_70gf3")
 
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("4_oevlo")
+
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_s7yvn")
-
-[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_0pcrb")]
-health = NodePath("../Health")
 
 [node name="Weapon" type="Node2D" parent="."]
 position = Vector2(122, -131)
