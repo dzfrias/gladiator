@@ -8,21 +8,20 @@
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_rapbo"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_x6nd1"]
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_cglso"]
-[ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="7_08p06"]
+[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="7_08p06"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_iylj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(24, 62)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
-radius = 902.29
+radius = 360.0
 
 [node name="Shooter" type="CharacterBody2D"]
 position = Vector2(0, -34)
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_a5ml5")
-y_cutoff = 33.0
 speed = 50.0
 jump_height = -400.0
 stop_dist = 400.0
@@ -58,7 +57,7 @@ script = ExtResource("5_x6nd1")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_arjap")
-max_health = 15.0
+max_health = 9.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("9_iylj5")

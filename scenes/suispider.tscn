@@ -5,17 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_bb8nd"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_2s6ah"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="4_6dvl8"]
-[ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="5_ahv4j"]
+[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="5_ahv4j"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="6_qtcdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouvmv"]
 size = Vector2(141, 90)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7u64g"]
-radius = 959.1
+radius = 360.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_78oek"]
-radius = 311.46
+radius = 100.0
 
 [node name="Suispider" type="CharacterBody2D"]
 collision_layer = 2

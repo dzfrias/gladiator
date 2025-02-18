@@ -17,7 +17,7 @@ size = Vector2(25.92, 66.88)
 size = Vector2(26, 26)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
-radius = 902.29
+radius = 360.0
 
 [node name="IdleShooter" type="CharacterBody2D"]
 collision_layer = 2

@@ -15,7 +15,7 @@ size = Vector2(42, 43)
 size = Vector2(28, 36)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpl7i"]
-radius = 797.023
+radius = 360.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7kjo"]
 atlas = ExtResource("8_ssrod")
@@ -106,9 +106,9 @@ collision_mask = 33
 script = ExtResource("1_4octj")
 attack_speed = 200.0
 attack_windup_time = 0.3
-speed = 100.0
-jump_height = -400.0
-stop_dist = 66.0
+speed = 175.0
+jump_height = -450.0
+stop_dist = 115.0
 impact_particle_prefab = ExtResource("2_8oh5i")
 
 [node name="HealthBarCreator" type="Node" parent="."]
@@ -123,7 +123,7 @@ script = ExtResource("5_cmatn")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_d7ips")
-max_health = 14.0
+max_health = 10.0
 
 [node name="AttackBox" type="Area2D" parent="."]
 collision_layer = 0

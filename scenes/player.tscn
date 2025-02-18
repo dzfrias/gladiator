@@ -23,14 +23,14 @@ z_index = 1
 collision_layer = 18
 collision_mask = 33
 script = ExtResource("1_5wdcp")
-move_speed = 200.0
+move_speed = 300.0
 move_acceleration = 500.0
 move_deceleration = 800.0
-crouch_move_speed = 66.0
+crouch_move_speed = 75.0
 jump_speed = 300.0
-jump_accel = 250.0
+jump_accel = 400.0
 jump_hold_time = 0.2
-roll_speed = 400.0
+roll_speed = 600.0
 roll_cooldown_time = 0.2
 
 [node name="StandingHitbox" type="CollisionShape2D" parent="."]
@@ -55,7 +55,7 @@ texture = ExtResource("1_rjir4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -50)
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="Direction" type="Node" parent="."]

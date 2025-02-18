@@ -15,5 +15,6 @@ map_width = 200
 
 [node name="Player" parent="." instance=ExtResource("3_mkemn")]
 position = Vector2(73, -203)
+move_acceleration = 1000.0
 
 [node name="HUD" parent="." instance=ExtResource("7_c628u")]
