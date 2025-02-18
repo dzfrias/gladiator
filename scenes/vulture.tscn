@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_mrh4i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_c4mip"]
 [ext_resource type="PackedScene" uid="uid://dxkwbttbgrri6" path="res://scenes/vulture_projectile.tscn" id="2_yrlq5"]
-[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="3_7uvll"]
-[ext_resource type="PackedScene" path="res://assets/impact_particles.tscn" id="3_dpgdj"]
+[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_dpgdj"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="6_lxsaj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6s7y"]
 size = Vector2(127, 128)
@@ -22,14 +22,14 @@ attack_idle_time = 0.5
 projectile = ExtResource("2_yrlq5")
 impact_particle_prefab = ExtResource("3_dpgdj")
 
-[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("3_7uvll")]
-health = NodePath("../Health")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mrh4i")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g6s7y")
+
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("6_lxsaj")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_c4mip")

@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="4_eip30"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="5_f8rp7"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_undrq"]
-[ext_resource type="PackedScene" uid="uid://cp8jetrkdcjtc" path="res://scenes/health_bar_creator.tscn" id="6_3hdsg"]
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_irxur"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="6_ofpms"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_1qrsf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(25.92, 66.88)
@@ -68,5 +68,5 @@ script = ExtResource("6_ofpms")
 script = ExtResource("5_f8rp7")
 max_health = 15.0
 
-[node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("6_3hdsg")]
-health = NodePath("../Health")
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("9_1qrsf")
