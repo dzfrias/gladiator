@@ -10,11 +10,12 @@ bg_color = Color(0.310203, 0.822627, 0.514826, 1)
 
 [node name="HealthBar" type="ProgressBar"]
 z_index = 1
-offset_right = 100.0
-offset_bottom = 25.0
+offset_right = 33.0
+offset_bottom = 8.0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/background = SubResource("StyleBoxFlat_k1jq8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_u5mr4")
 value = 100.0
 show_percentage = false
 script = ExtResource("1_5e86q")
+health_bar_offset = Vector2(-16, 33)

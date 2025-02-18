@@ -8,5 +8,5 @@ damage = 4.0
 reload_time = 1.0
 max_ammo = 16
 firing_interval = 0.35
-projectile_speed = 1500.0
+projectile_speed = 500.0
 angle_variance = 0.0245437

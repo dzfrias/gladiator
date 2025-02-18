@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://dcp3huoajqaue" path="res://scenes/projectile.tscn" id="6_w2kq1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
-size = Vector2(106, 192)
+size = Vector2(40, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ynjo"]
-size = Vector2(123, 103)
+size = Vector2(30.5, 21.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdhhq"]
 size = Vector2(109, 99)
@@ -23,36 +23,39 @@ z_index = 1
 collision_layer = 18
 collision_mask = 33
 script = ExtResource("1_5wdcp")
-move_speed = 700.0
-move_acceleration = 1500.0
-move_deceleration = 2400.0
-jump_speed = 1000.0
+move_speed = 200.0
+move_acceleration = 500.0
+move_deceleration = 800.0
+crouch_move_speed = 66.0
+jump_speed = 300.0
 jump_accel = 250.0
 jump_hold_time = 0.2
+roll_speed = 400.0
 roll_cooldown_time = 0.2
 
 [node name="StandingHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -98)
+position = Vector2(-1, -34)
 shape = SubResource("RectangleShape2D_m5kfl")
 
 [node name="CrouchingHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -54.5)
+position = Vector2(-0.25, -13.25)
 shape = SubResource("RectangleShape2D_5ynjo")
 disabled = true
 
 [node name="StandingSprite" type="Sprite2D" parent="."]
-position = Vector2(-1, -99)
-scale = Vector2(1, 1.5)
+position = Vector2(-1, -33)
+scale = Vector2(0.333, 0.5)
 texture = ExtResource("1_rjir4")
 
 [node name="CrouchingSprite" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-1, -49)
-scale = Vector2(1, 0.75)
+position = Vector2(0, -12)
+scale = Vector2(0.25, 0.188)
 texture = ExtResource("1_rjir4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -250)
+offset = Vector2(0, -50)
+zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="Direction" type="Node" parent="."]
@@ -65,17 +68,17 @@ script = ExtResource("3_s7yvn")
 health = NodePath("../Health")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(122, -131)
+position = Vector2(28, -32)
 script = ExtResource("5_crqak")
 weapon_stats = ExtResource("6_0weg3")
 projectile_prefab = ExtResource("6_w2kq1")
 auto_reload = true
 
 [node name="StandingWeaponPosition" type="Node2D" parent="."]
-position = Vector2(123, -131)
+position = Vector2(27, -46)
 
 [node name="CrouchingWeaponPosition" type="Node2D" parent="."]
-position = Vector2(122, -56)
+position = Vector2(28, -13)
 
 [node name="MeleeBox" type="Area2D" parent="."]
 position = Vector2(122, -56)
@@ -86,5 +89,5 @@ collision_mask = 7
 shape = SubResource("RectangleShape2D_xdhhq")
 
 [node name="PlatformRaycast" type="RayCast2D" parent="."]
-position = Vector2(0, -18)
+position = Vector2(0, -10)
 collision_mask = 32

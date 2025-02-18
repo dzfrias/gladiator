@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
-[ext_resource type="PackedScene" path="res://scenes/platform_detection.tscn" id="6_2w8ig"]
+[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="6_2w8ig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
-size = Vector2(128, 127)
+size = Vector2(42, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct54a"]
-size = Vector2(25, 91)
+size = Vector2(28, 36)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpl7i"]
 radius = 797.023
@@ -21,9 +21,11 @@ radius = 797.023
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_4octj")
+attack_speed = 200.0
 attack_windup_time = 0.3
-jump_height = -1000.0
-stop_dist = 200.0
+speed = 100.0
+jump_height = -400.0
+stop_dist = 66.0
 impact_particle_prefab = ExtResource("2_8oh5i")
 
 [node name="HealthBarCreator" parent="." node_paths=PackedStringArray("health") instance=ExtResource("2_0u6iq")]
@@ -31,6 +33,7 @@ health = NodePath("../Health")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -5.96046e-08)
+scale = Vector2(0.33, 0.33)
 texture = ExtResource("1_oje08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -50,7 +53,7 @@ collision_mask = 16
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(58, -5)
+position = Vector2(40, 1)
 shape = SubResource("RectangleShape2D_ct54a")
 disabled = true
 debug_color = Color(0.644145, 0.106926, 0.184851, 0.42)
@@ -65,4 +68,4 @@ monitorable = false
 shape = SubResource("CircleShape2D_wpl7i")
 
 [node name="PlatformDetection" parent="." instance=ExtResource("6_2w8ig")]
-visible = false
+position = Vector2(0, -91)

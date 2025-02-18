@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6n4ygstauqcx"]
+[gd_scene load_steps=13 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
 [ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_wdbwm"]
@@ -11,13 +11,15 @@
 [ext_resource type="Script" path="res://scripts/direction.gd" id="6_ofpms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
-size = Vector2(72, 66.88)
+size = Vector2(25.92, 66.88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe3f6"]
+size = Vector2(26, 26)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
 radius = 902.29
 
 [node name="IdleShooter" type="CharacterBody2D"]
-position = Vector2(0, 74)
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_gcame")
@@ -26,23 +28,22 @@ idle_time = 2.0
 impact_particle_prefab = ExtResource("3_fhmks")
 
 [node name="StandCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-0.959999, -89.06)
+position = Vector2(-0.00800037, -32.06)
 shape = SubResource("RectangleShape2D_d8kds")
 
 [node name="HideCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-0.959999, -39.56)
-shape = SubResource("RectangleShape2D_d8kds")
-disabled = true
+position = Vector2(-0.00800037, -12)
+shape = SubResource("RectangleShape2D_qe3f6")
 
 [node name="StandSprite" type="Sprite2D" parent="."]
-position = Vector2(-7.45058e-09, -90)
-scale = Vector2(0.61, 1.5)
+position = Vector2(-0.00800037, -33)
+scale = Vector2(0.203, 0.499)
 texture = ExtResource("4_eip30")
 
 [node name="HideSprite" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-7.45058e-09, -34)
-scale = Vector2(0.61, 0.625)
+position = Vector2(0, -14)
+scale = Vector2(0.203, 0.208)
 texture = ExtResource("4_eip30")
 
 [node name="DetectionZone" type="Area2D" parent="."]
@@ -55,7 +56,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_oetyt")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(0, -142)
+position = Vector2(0, -48)
 script = ExtResource("5_undrq")
 weapon_stats = ExtResource("6_irxur")
 projectile_prefab = ExtResource("2_wdbwm")

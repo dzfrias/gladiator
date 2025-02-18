@@ -78,4 +78,4 @@ crouch={
 
 [physics]
 
-2d/default_gravity=1400.0
+2d/default_gravity=700.0

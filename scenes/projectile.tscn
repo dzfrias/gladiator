@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_gw7xd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il7q4"]
-size = Vector2(26, 26)
+size = Vector2(8, 8)
 
 [node name="Area2D" type="Area2D"]
 collision_mask = 67
@@ -14,5 +14,5 @@ script = ExtResource("1_7bmss")
 shape = SubResource("RectangleShape2D_il7q4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.067, 0.067)
 texture = ExtResource("2_gw7xd")
