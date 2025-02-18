@@ -182,6 +182,11 @@ func damage(amount: float, direction: Vector2) -> void:
 	print("Player hit")
 	$Health.take_damage(amount, direction)
 
+func _freeze_time():
+	get_tree().paused = true
+	await get_tree().create_timer(0.2).timeout
+	get_tree().paused = false
+
 func _roll() -> void:
 	_state = State.ROLL
 	_is_jumping = false
@@ -205,7 +210,7 @@ func _on_health_died() -> void:
 	print("The player has died")
 
 func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
-	assert(collision_layer == Constants.PLAYER_LAYER | Constants.ENTITY_LAYER)
+	_freeze_time()
 	collision_layer = Constants.INVINCIBLE_LAYER
 	_flash_invincible()
 	await get_tree().create_timer(invincible_time).timeout
