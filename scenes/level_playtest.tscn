@@ -63,18 +63,33 @@ position = Vector2(3350, -362)
 
 [node name="Node2D" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(-226, -37)
+speed = 100.0
+jump_height = -400.0
+stop_dist = 66.0
 
 [node name="Node2D2" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(265, -39)
+speed = 100.0
+jump_height = -400.0
+stop_dist = 66.0
 
 [node name="Node2D3" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(1904, -258)
+speed = 100.0
+jump_height = -400.0
+stop_dist = 66.0
 
 [node name="Node2D4" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(2996, -248)
+speed = 100.0
+jump_height = -400.0
+stop_dist = 66.0
 
 [node name="Node2D5" parent="EnemyGroup" instance=ExtResource("5_jrgqa")]
 position = Vector2(2666, -363)
+speed = 100.0
+jump_height = -400.0
+stop_dist = 66.0
 
 [node name="Shooter7" parent="EnemyGroup" instance=ExtResource("6_akhvg")]
 position = Vector2(3882, -72)

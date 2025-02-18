@@ -1,10 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=23 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
-[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="6_2w8ig"]
+[ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_3l162"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
 
@@ -16,6 +16,9 @@ size = Vector2(28, 36)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wpl7i"]
 radius = 360.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqr8d"]
+size = Vector2(132, 55.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7kjo"]
 atlas = ExtResource("8_ssrod")
@@ -145,8 +148,19 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_wpl7i")
 
-[node name="PlatformDetection" parent="." instance=ExtResource("6_2w8ig")]
+[node name="PlatformDetection" type="Area2D" parent="."]
 position = Vector2(0, -91)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("6_lg3qk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetection"]
+shape = SubResource("RectangleShape2D_wqr8d")
+
+[node name="RayCast2D" type="RayCast2D" parent="PlatformDetection"]
+position = Vector2(0, 91)
+target_position = Vector2(0, 40)
+collision_mask = 32
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.6, 1.6)

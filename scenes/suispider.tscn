@@ -1,18 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://csqqcnv8iucaq"]
+[gd_scene load_steps=12 format=3 uid="uid://csqqcnv8iucaq"]
 
 [ext_resource type="Script" path="res://scripts/enemies/suispider.gd" id="1_5l4np"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_fkk75"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_bb8nd"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_2s6ah"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="4_6dvl8"]
-[ext_resource type="PackedScene" uid="uid://busljhfyyey4s" path="res://scenes/platform_detection.tscn" id="5_ahv4j"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="6_qtcdd"]
+[ext_resource type="Script" path="res://scripts/platform_detection.gd" id="7_850ks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouvmv"]
 size = Vector2(141, 90)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7u64g"]
 radius = 360.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3s3bx"]
+size = Vector2(310, 113.53)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_78oek"]
 radius = 100.0
@@ -52,7 +55,18 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_7u64g")
 
-[node name="PlatformDetection" parent="." instance=ExtResource("5_ahv4j")]
+[node name="PlatformDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("7_850ks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetection"]
+position = Vector2(0, -152.235)
+shape = SubResource("RectangleShape2D_3s3bx")
+
+[node name="RayCast2D" type="RayCast2D" parent="PlatformDetection"]
+target_position = Vector2(0, 66)
+collision_mask = 32
 
 [node name="ExplosionZone" type="Area2D" parent="."]
 visible = false
