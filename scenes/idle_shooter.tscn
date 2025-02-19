@@ -26,8 +26,7 @@ radius = 400.0
 collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_gcame")
-prepare_attack_time = 2.0
-idle_time = 2.0
+prepare_attack_time = 1.0
 impact_particle_prefab = ExtResource("3_fhmks")
 
 [node name="StandCollision" type="CollisionShape2D" parent="."]
@@ -69,7 +68,7 @@ script = ExtResource("6_ofpms")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("5_f8rp7")
-max_health = 15.0
+max_health = 9.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("9_1qrsf")
