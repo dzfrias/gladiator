@@ -33,10 +33,10 @@ func fire(direction: Direction):
 	else:
 		angle = PI
 	angle = randfn(angle, weapon_stats.angle_variance)
+	get_tree().current_scene.add_child(projectile)
 	projectile.fire(weapon_stats.projectile_speed, angle)
 	projectile.damage = weapon_stats.damage
 	projectile.global_position = global_position
-	get_tree().current_scene.add_child(projectile)
 	
 	ammo -= 1
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)

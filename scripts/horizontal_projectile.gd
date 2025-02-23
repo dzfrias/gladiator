@@ -2,6 +2,7 @@ class_name HorizontalProjectile extends Area2D
 
 var velocity: Vector2
 var damage := 15.0
+var lifetime := 0.75
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -9,6 +10,8 @@ func _ready() -> void:
 func fire(speed: float, angle: float):
 	assert(speed >= 0)
 	velocity = Vector2.RIGHT.rotated(angle) * speed
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()
 
 func _process(delta: float) -> void:
 	position += velocity * delta
