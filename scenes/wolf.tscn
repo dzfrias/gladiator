@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
-[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
+[ext_resource type="PackedScene" path="res://assets/impact_particles.tscn" id="2_8oh5i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]

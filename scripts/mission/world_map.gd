@@ -18,7 +18,7 @@ class FillTile:
 		atlas_coords = coords
 		weight = tile_weight
 
-@export var map_width: int = 100
+@export var map_width: int = 200
 
 var _terrain := [
 	WeightedScene.new("res://scenes/modules/terrain/flat.tscn", 0.5),
@@ -59,12 +59,12 @@ func _generate() -> void:
 	var module_origin := Vector2i(0, 0)
 	module_origin += _place_module(module_origin, _start_module)
 
-	var next_encounter := randi_range(3, 5)
+	var next_encounter := randi_range(3, 4)
 	while module_origin.x < map_width:
 		var module: WeightedScene
 		if next_encounter == 0:
 			module = _weighted_choice(_encounters)
-			next_encounter = randi_range(3, 5)
+			next_encounter = randi_range(3, 4)
 		else:
 			module = _weighted_choice(_terrain)
 			next_encounter -= 1

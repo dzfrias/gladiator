@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
 [ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_wdbwm"]
-[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="3_fhmks"]
+[ext_resource type="PackedScene" path="res://assets/impact_particles.tscn" id="3_fhmks"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="4_eip30"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="5_f8rp7"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_undrq"]
