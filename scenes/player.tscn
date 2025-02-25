@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=13 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
@@ -17,6 +17,8 @@ size = Vector2(30.5, 21.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdhhq"]
 size = Vector2(109, 99)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4g4le"]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -91,3 +93,17 @@ shape = SubResource("RectangleShape2D_xdhhq")
 [node name="PlatformRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
 collision_mask = 32
+
+[node name="BulletWall" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="BulletWallRight" type="CollisionShape2D" parent="BulletWall"]
+position = Vector2(1003, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_4g4le")
+
+[node name="BulletWallLeft" type="CollisionShape2D" parent="BulletWall"]
+position = Vector2(-1073, 0)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_4g4le")
