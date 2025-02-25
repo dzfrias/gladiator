@@ -32,8 +32,9 @@ var _encounters := [
 	WeightedScene.new("res://scenes/modules/encounters/encounter3.tscn", 0.25),
 ]
 var _enemies := [
-	WeightedScene.new("res://scenes/wolf.tscn", 0.75),
+	WeightedScene.new("res://scenes/wolf.tscn", 0.5),
 	WeightedScene.new("res://scenes/shooter.tscn", 0.25),
+	WeightedScene.new("res://scenes/suispider.tscn", 0.25),
 ]
 var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn")
 var _fill_tiles: Array[FillTile] = []
