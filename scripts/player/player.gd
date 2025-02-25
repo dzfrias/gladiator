@@ -77,14 +77,14 @@ func _process(delta: float) -> void:
 				standing_sprite.visible = false
 				crouching_hitbox.disabled = false
 				crouching_sprite.visible = true
-				_weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
+				if _weapon: _weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
 			elif !Input.is_action_pressed("crouch") and _is_crouching:
 				_is_crouching = false
 				standing_hitbox.disabled = false
 				standing_sprite.visible = true
 				crouching_hitbox.disabled = true
 				crouching_sprite.visible = false
-				_weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
+				if _weapon: _weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
 			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -114,10 +114,10 @@ func _process(delta: float) -> void:
 			
 			if _is_crouching:
 				_melee_box.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
-				_weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
+				if _weapon: _weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
 			else:
 				_melee_box.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
-				_weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
+				if _weapon: _weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
 		State.ROLL:
 			velocity.x = roll_speed * $Direction.scalar
 		
