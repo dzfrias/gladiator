@@ -91,9 +91,15 @@ func _place_module(origin: Vector2i, module: PackedScene) -> Vector2i:
 		var scene_origin := to_global(map_to_local(origin)) - _tile_size / 2
 		var spawn_points := instance.get_node("SpawnPoints")
 		for child in spawn_points.get_children():
+			var enemy
+			var enemy_instance: Node2D
 			var spawn_point := child as Node2D
-			var enemy = _weighted_choice(_enemies)
-			var enemy_instance := enemy.scene.instantiate() as Node2D
+			if child.get_meta("spawnpoint_type") == "idle_ranged":
+				enemy = load("res://scenes/idle_shooter.tscn")
+				enemy_instance = enemy.instantiate() as Node2D
+			else:
+				enemy = _weighted_choice(_enemies)
+				enemy_instance = enemy.scene.instantiate() as Node2D
 			enemy_instance.position = scene_origin + spawn_point.position * scale.x
 			get_tree().current_scene.add_child(enemy_instance)
 	

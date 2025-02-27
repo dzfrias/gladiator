@@ -20,4 +20,5 @@ position = Vector2(474, -67)
 position = Vector2(474, -216)
 
 [node name="Spawn4" type="Node2D" parent="SpawnPoints"]
-position = Vector2(678, -66)
+position = Vector2(677, -37)
+metadata/spawnpoint_type = "idle_ranged"

@@ -11,7 +11,8 @@ script = ExtResource("2_fjbhw")
 [node name="SpawnPoints" type="Node" parent="."]
 
 [node name="Spawn1" type="Node2D" parent="SpawnPoints"]
-position = Vector2(347, -60)
+position = Vector2(347, -38)
+metadata/spawnpoint_type = &"idle_ranged"
 
 [node name="Spawn2" type="Node2D" parent="SpawnPoints"]
 position = Vector2(516, -59)
