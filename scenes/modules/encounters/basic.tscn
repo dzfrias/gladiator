@@ -14,4 +14,4 @@ script = ExtResource("2_3x1hw")
 position = Vector2(344, -74)
 
 [node name="Spawn2" type="Node2D" parent="SpawnPoints"]
-position = Vector2(266, -77)
+position = Vector2(195, -77)
