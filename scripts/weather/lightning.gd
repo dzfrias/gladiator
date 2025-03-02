@@ -1,6 +1,6 @@
 class_name Lightning extends Node2D
 
-@export var tolerance_time := 4.0
+@export var tolerance_time := 8.0
 @export var damage := 3.0
 
 var current_time := 0.0
