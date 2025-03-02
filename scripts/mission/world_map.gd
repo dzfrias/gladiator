@@ -101,6 +101,7 @@ func _place_module(origin: Vector2i, module: PackedScene) -> Vector2i:
 				enemy = _weighted_choice(_enemies)
 				enemy_instance = enemy.scene.instantiate() as Node2D
 			enemy_instance.position = scene_origin + spawn_point.position * scale.x
+			enemy_instance.add_to_group("enemy")
 			get_tree().current_scene.add_child(enemy_instance)
 	
 	return Vector2i(width, instance.delta_y)
