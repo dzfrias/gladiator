@@ -4,10 +4,14 @@ class_name IdleShooter extends CharacterBody2D
 @export var idle_time: float = 1
 @export var impact_particle_prefab: PackedScene
 
+@onready var weapon: Weapon = $Weapon
 @onready var detection_zone = $DetectionZone
+@onready var box_detection = $BoxDetection
 var _state: State = State.HIDING
 @onready var _tracking: Node2D = Player.Instance
-var _can_stand: bool = true
+
+var box_position: Vector2
+var has_box: bool = false
 
 enum State {
 	HIDING,
@@ -18,6 +22,10 @@ enum State {
 func _ready() -> void:
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
+	await get_tree().create_timer(0.1).timeout
+	if box_detection.is_colliding():
+		has_box = true
+		box_position = box_detection.get_collision_point()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -25,13 +33,16 @@ func _physics_process(delta: float) -> void:
 	
 	match _state:
 		State.HIDING:
+			if !has_box:
+				_state = State.STANDING
+			
 			var xdist := _tracking.position.x - position.x
 			$StandCollision.disabled = true
 			$HideCollision.disabled = false
 			$StandSprite.visible = false
 			$HideSprite.visible = true
 			$Direction.scalar = signf(xdist)
-			if detection_zone.has_overlapping_bodies() and _can_stand:
+			if detection_zone.has_overlapping_bodies() and (weapon.ammo > 0 or !_is_box_inbetween()):
 				_state = State.STANDING
 		State.STANDING:
 			var xdist := _tracking.position.x - position.x
@@ -41,7 +52,12 @@ func _physics_process(delta: float) -> void:
 			$StandSprite.visible = true
 			$HideSprite.visible = false
 			
-			_shoot()
+			if weapon.ammo > 0:
+				_shoot()
+			elif !weapon.is_reloading:
+				weapon.reload()
+			elif has_box and _is_box_inbetween():
+				_hide()
 
 func notify() -> void:
 	for body in $NotifyZone.get_overlapping_bodies():
@@ -53,16 +69,21 @@ func _shoot() -> void:
 	notify()
 	_state = State.SHOOTING
 	await get_tree().create_timer(prepare_attack_time).timeout
-	while $Weapon.ammo > 0:
-		await $Weapon.fire($Direction)
+	while weapon.ammo > 0:
+		await weapon.fire($Direction)
 	await get_tree().create_timer(idle_time).timeout
-	_hide()
+	if box_position and _is_box_inbetween():
+		_hide()
+	else:
+		_state = State.STANDING
+
+func _is_box_inbetween():
+	return sign(global_position.x - box_position.x) == sign(global_position.x - Player.Instance.global_position.x)
 
 func _hide():
 	_state = State.HIDING
-	_can_stand = false
-	await $Weapon.reload()
-	_can_stand = true
+	if !weapon.is_reloading and weapon.ammo <= 0:
+		await weapon.reload()
 
 func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
 	var impact_particles = impact_particle_prefab.instantiate()
