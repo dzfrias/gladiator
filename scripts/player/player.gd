@@ -15,10 +15,6 @@ class_name Player extends CharacterBody2D
 @export var roll_cooldown_time: float = 0.4
 @export var invincible_time: float = 1.0
 
-@export var melee_damage: float = 5
-@export var melee_knockback: Vector2 = Vector2(1000, -500)
-@export var melee_cooldown: float = 2
-
 @onready var standing_hitbox = $StandingHitbox
 @onready var crouching_hitbox = $CrouchingHitbox
 @onready var standing_sprite = $StandingSprite
@@ -27,7 +23,6 @@ class_name Player extends CharacterBody2D
 @onready var crouching_weapon_position = $CrouchingWeaponPosition
 @onready var direction = $Direction
 
-var _can_melee := true
 # NOTE this field can be null (if the player has no weapon)
 var _weapon: Weapon
 var _state := State.CONTROL
@@ -36,7 +31,6 @@ var _is_crouching := false
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
-@onready var _melee_box = $MeleeBox
 static var Instance
 
 signal weapon_changed
@@ -113,10 +107,8 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
 			
 			if _is_crouching:
-				_melee_box.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
 				if _weapon: _weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
 			else:
-				_melee_box.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
 				if _weapon: _weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
 		State.ROLL:
 			velocity.x = roll_speed * $Direction.scalar
@@ -127,26 +119,7 @@ func _input(event: InputEvent) -> void:
 	if _state != State.CONTROL:
 		return
 	if event.is_action_pressed("fire") and _weapon:
-		var hit_enemy := false
-		#if _melee_box.has_overlapping_bodies() and _can_melee:
-			#for body in _melee_box.get_overlapping_bodies():
-				#var took_damage = false
-				#for child in body.get_children():
-					#if child is Health:
-						#var hit_object_health = child as Health
-						#hit_object_health.take_damage(melee_damage, Vector2(_direction, 0))
-						#took_damage = true
-						#hit_enemy = true
-						#melee_timer()
-				#if body is CharacterBody2D and took_damage:
-					## Applies Knockback
-					#var character_body = body as CharacterBody2D
-					#character_body.velocity = Vector2(_direction * melee_knockback.x, melee_knockback.y) 
-				#if body is Vulture:
-					#var vulture = body as Vulture
-					#vulture._velocity = _direction * melee_knockback
-		if !hit_enemy:
-			_weapon.set_firing($Direction)
+		_weapon.set_firing($Direction)
 	if event.is_action_released("fire") and _weapon:
 		_weapon.set_firing(null)
 	if is_on_floor():
@@ -170,11 +143,6 @@ func _input(event: InputEvent) -> void:
 			_weapon.set_firing(null)
 			_weapon = null
 		weapon_changed.emit()
-
-func melee_timer():
-	_can_melee = false
-	await get_tree().create_timer(melee_cooldown).timeout
-	_can_melee = true
 
 func damage(amount: float, direction: Vector2) -> void:
 	if $Health.has_died or collision_layer == Constants.INVINCIBLE_LAYER:
