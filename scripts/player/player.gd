@@ -36,7 +36,7 @@ var _jump_time := 0.0
 var _jump_buffer := 0.0
 static var Instance
 
-signal weapon_changed
+signal on_item_switched(current_item)
 
 enum State {
 	CONTROL,
@@ -127,6 +127,7 @@ func _input(event: InputEvent) -> void:
 		var index := event.as_text().to_int() - 1
 		if index < _items.size():
 			_current_item = _items[index]
+			on_item_switched.emit(_current_item)
 			print(_items[index])
 	
 	if _state != State.CONTROL:
@@ -153,13 +154,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("reload") and _weapon:
 		if !_weapon.is_reloading:
 			_weapon.reload()
-	if event.is_action_pressed("toggle_weapon"):
-		if not _weapon:
-			_weapon = $Weapon
-		else:
-			_weapon.set_firing(null)
-			_weapon = null
-		weapon_changed.emit()
 
 func damage(amount: float, direction: Vector2) -> void:
 	if $Health.has_died or collision_layer == Constants.INVINCIBLE_LAYER:
@@ -201,8 +195,11 @@ func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
 	await get_tree().create_timer(invincible_time).timeout
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
-func get_weapon() -> Weapon:
-	return _weapon
+func is_holding_weapon() -> bool:
+	return _weapon == _current_item
+
+func get_current_item() -> Node2D:
+	return _current_item
 
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
