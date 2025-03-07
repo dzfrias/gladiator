@@ -19,12 +19,15 @@ class_name Player extends CharacterBody2D
 @onready var crouching_hitbox = $CrouchingHitbox
 @onready var standing_sprite = $StandingSprite
 @onready var crouching_sprite = $CrouchingSprite
-@onready var standing_weapon_position = $StandingWeaponPosition
-@onready var crouching_weapon_position = $CrouchingWeaponPosition
+@onready var standing_item_position = $StandingItemPosition
+@onready var crouching_item_position = $CrouchingItemPosition
+@onready var _item_position = $ItemPosition
 @onready var direction = $Direction
 
 # NOTE this field can be null (if the player has no weapon)
-var _weapon: Weapon
+@onready var _weapon: Weapon = $Weapon
+var _current_item
+var _items: Array
 var _state := State.CONTROL
 var _can_roll := true
 var _is_crouching := false
@@ -41,10 +44,14 @@ enum State {
 }
 
 func _ready() -> void:
+	_items.append(_weapon)
+	_items.append(load("res://scenes/gadgets/throwable.tscn"))
+	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
 	Instance = self
-	_weapon = $Weapon
+	_current_item = _weapon
+	_item_position.position = standing_item_position.position
 
 func _process(delta: float) -> void:
 	if _is_jumping and _jump_time < jump_hold_time:
@@ -71,14 +78,12 @@ func _process(delta: float) -> void:
 				standing_sprite.visible = false
 				crouching_hitbox.disabled = false
 				crouching_sprite.visible = true
-				if _weapon: _weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
 			elif !Input.is_action_pressed("crouch") and _is_crouching:
 				_is_crouching = false
 				standing_hitbox.disabled = false
 				standing_sprite.visible = true
 				crouching_hitbox.disabled = true
 				crouching_sprite.visible = false
-				if _weapon: _weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
 			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -93,7 +98,6 @@ func _process(delta: float) -> void:
 				else:
 					velocity.x = maxf(-move_speed, velocity.x - acceleration * delta)
 				direction.is_right = false
-				
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
 				if velocity.x < 0:
@@ -107,21 +111,34 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
 			
 			if _is_crouching:
-				if _weapon: _weapon.position = Vector2(crouching_weapon_position.position.x * direction.scalar, crouching_weapon_position.position.y)
+				_item_position.position = crouching_item_position.position
 			else:
-				if _weapon: _weapon.position = Vector2(standing_weapon_position.position.x * direction.scalar, standing_weapon_position.position.y)
+				_item_position.position = standing_item_position.position
+			_item_position.position = Vector2(_item_position.position.x * direction.scalar, _item_position.position.y)
+			_weapon.position = _item_position.position
 		State.ROLL:
 			velocity.x = roll_speed * $Direction.scalar
 		
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
+	
+	if event.as_text().is_valid_int():
+		var index := event.as_text().to_int() - 1
+		if index < _items.size():
+			_current_item = _items[index]
+			print(_items[index])
+	
 	if _state != State.CONTROL:
 		return
-	if event.is_action_pressed("fire") and _weapon:
-		_weapon.set_firing($Direction)
-	if event.is_action_released("fire") and _weapon:
-		_weapon.set_firing(null)
+	if event.is_action_pressed("fire"):
+		if _current_item == _weapon:
+			_weapon.set_firing($Direction)
+		else:
+			throw(_current_item)
+	if event.is_action_released("fire"):
+		if _current_item == _weapon:
+			_weapon.set_firing(null)
 	if is_on_floor():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
 			_is_jumping = true
@@ -201,6 +218,13 @@ func _flash_invincible() -> void:
 		standing_sprite.visible = !_is_crouching
 		crouching_sprite.visible = _is_crouching
 		await get_tree().create_timer(0.05).timeout
+
+func throw(throwable_prefab: PackedScene):
+	var throwable = throwable_prefab.instantiate()
+	throwable.global_position = _item_position.global_position
+	get_tree().current_scene.add_child(throwable)
+	throwable.apply_force(Vector2(direction.scalar * 12000, -12000))
+	print("Throw")
 	
 func get_health() -> Health:
 	return $Health;

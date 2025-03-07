@@ -72,11 +72,13 @@ weapon_stats = ExtResource("6_0weg3")
 projectile_prefab = ExtResource("6_w2kq1")
 auto_reload = true
 
-[node name="StandingWeaponPosition" type="Node2D" parent="."]
+[node name="StandingItemPosition" type="Node2D" parent="."]
 position = Vector2(27, -46)
 
-[node name="CrouchingWeaponPosition" type="Node2D" parent="."]
+[node name="CrouchingItemPosition" type="Node2D" parent="."]
 position = Vector2(28, -13)
+
+[node name="ItemPosition" type="Node2D" parent="."]
 
 [node name="PlatformRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, -10)

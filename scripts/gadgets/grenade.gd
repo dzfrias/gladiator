@@ -1,9 +1,11 @@
 extends RigidBody2D
 
-@export var explosionTime = 3
+@export var explosionTime = 2
 @export var damage = 3
 
 @onready var explosion_radius = $ExplosionRadius
+var direction: Direction
+
 func _ready() -> void:
 	await get_tree().create_timer(explosionTime).timeout
 	_explode()

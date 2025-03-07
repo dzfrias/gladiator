@@ -1,14 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctjiaujlkr8mh"]
 
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_627db"]
-[ext_resource type="Script" path="res://scripts/gadgets/throwable.gd" id="1_gm2j2"]
+[ext_resource type="Script" path="res://scripts/gadgets/grenade.gd" id="1_gm2j2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03ghe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gufp7"]
-radius = 153.73
+radius = 92.3472
 
 [node name="Throwable" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 33
 script = ExtResource("1_gm2j2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
