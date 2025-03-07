@@ -13,7 +13,6 @@ func _ready() -> void:
 	Player.Instance.on_item_switched.connect(_on_item_switched)
 
 func _on_item_switched(current_item):
-	print('test')
 	if current_item is Weapon:
 		show()
 		if weapon:

@@ -45,7 +45,7 @@ enum State {
 
 func _ready() -> void:
 	_items.append(_weapon)
-	_items.append(load("res://scenes/gadgets/throwable.tscn"))
+	_items.append(load("res://scenes/gadgets/grenade.tscn"))
 	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)

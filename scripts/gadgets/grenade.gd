@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+@export var explosion_prefab: PackedScene
 @export var explosionTime = 2
 @export var damage = 3
 
@@ -11,8 +12,9 @@ func _ready() -> void:
 	_explode()
 
 func _explode():
-	for body in explosion_radius.get_overlapping_bodies():
-		for child in body.get_children():
-			if child is Health:
-				child.take_damage(damage, Vector2.ZERO)
+	var explosion = explosion_prefab.instantiate() as Explosion
+	explosion.damage = damage
+	explosion.global_position = global_position
+	print("set position")
+	get_tree().current_scene.add_child(explosion)
 	queue_free()

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://clgxno3rdacuv"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_oiy3p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_as83y"]
+radius = 167.887
+
+[node name="Explosion" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_oiy3p")
+
+[node name="Radius" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_as83y")
