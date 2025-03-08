@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://dmaj8ebc6tl53"]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_okvej"]
+
+[resource]
+script = ExtResource("1_okvej")
+damage = 15.0
+reload_time = 2.5
+max_ammo = 3
+firing_interval = 1.0
+projectile_speed = 1000.0
+angle_variance = 0.0

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://cpl1w3hqbdphe"]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_yt3au"]
+
+[resource]
+script = ExtResource("1_yt3au")
+damage = 2.0
+reload_time = 1.0
+max_ammo = 5
+firing_interval = 0.5
+projectile_speed = 600.0
+angle_variance = 0.15
+bullets_per_shot = 3

@@ -6,3 +6,4 @@ class_name WeaponStats extends Resource
 @export var firing_interval: float = 0.5
 @export var projectile_speed: float = 900
 @export var angle_variance: float = PI / 128
+@export var bullets_per_shot: int = 1
