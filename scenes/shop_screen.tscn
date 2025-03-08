@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://codkch2r0aa8n"]
+
+[ext_resource type="Script" path="res://scripts/ui/shop_screen.gd" id="1_ksj6c"]
+
+[node name="ShopScreen" type="Node2D"]
+script = ExtResource("1_ksj6c")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Return" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -26.0
+offset_right = 86.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return"

@@ -199,6 +199,11 @@ func _normal_input(event: InputEvent):
 	if event.is_action_pressed("reload") and _weapon:
 		if !_weapon.is_reloading:
 			_weapon.reload()
+	if event.is_action_pressed("interact"):
+		for area in $InteractArea.get_overlapping_areas():
+			for child in area.get_children():
+				if child is Interactable:
+					child.interact()
 
 func damage(amount: float, direction: Vector2) -> void:
 	if $Health.has_died or collision_layer == Constants.INVINCIBLE_LAYER:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=15 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
@@ -20,6 +20,9 @@ size = Vector2(30.5, 21.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmrqr"]
 size = Vector2(20, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndjlv"]
+radius = 220.111
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -118,3 +121,12 @@ script = ExtResource("3_s7yvn")
 
 [node name="HealthBarCreator" type="Node" parent="Shield"]
 script = ExtResource("4_oevlo")
+
+[node name="InteractArea" type="Area2D" parent="."]
+position = Vector2(0, -29.78)
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_ndjlv")
