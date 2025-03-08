@@ -1,5 +1,6 @@
-extends RigidBody2D
+class_name Grenade extends RigidBody2D
 
+@export var explode_on_impact = false
 @export var explosion_prefab: PackedScene
 @export var explosionTime = 2
 @export var damage = 3
@@ -8,13 +9,20 @@ extends RigidBody2D
 var direction: Direction
 
 func _ready() -> void:
-	await get_tree().create_timer(explosionTime).timeout
-	_explode()
+	if explode_on_impact:
+		set_contact_monitor(true)
+		max_contacts_reported = 1
+		body_entered.connect(_body_entered)
+	else:
+		await get_tree().create_timer(explosionTime).timeout
+		_explode()
 
 func _explode():
 	var explosion = explosion_prefab.instantiate() as Explosion
 	explosion.damage = damage
 	explosion.global_position = global_position
-	print("set position")
 	get_tree().current_scene.add_child(explosion)
 	queue_free()
+
+func _body_entered(body: Node2D):
+	_explode()
