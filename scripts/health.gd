@@ -25,6 +25,10 @@ func take_damage(amount: float, direction: Vector2) -> void:
 		_died = true
 		return
 
+func restore() -> void:
+	_health = max_health
+	_died = false
+
 func heal(amount: float) -> void:
 	if _died: return
 	_health = min(_health + amount, max_health)

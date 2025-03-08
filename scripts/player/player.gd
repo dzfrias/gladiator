@@ -23,6 +23,7 @@ class_name Player extends CharacterBody2D
 @onready var crouching_item_position = $CrouchingItemPosition
 @onready var _item_position = $ItemPosition
 @onready var direction = $Direction
+@onready var _original_shield_x = $Shield.position.x
 
 # NOTE this field can be null (if the player has no weapon)
 @onready var _weapon: Weapon = $Weapon
@@ -73,7 +74,7 @@ func _process(delta: float) -> void:
 			else:
 				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 			
-			if Input.is_action_just_pressed("crouch"):
+			if Input.is_action_just_pressed("crouch") and not $Shield.is_enabled():
 				_is_crouching = true
 				standing_hitbox.disabled = true
 				standing_sprite.visible = false
@@ -116,6 +117,7 @@ func _process(delta: float) -> void:
 			else:
 				_item_position.position = standing_item_position.position
 			_item_position.position = Vector2(_item_position.position.x * direction.scalar, _item_position.position.y)
+			$Shield.position = Vector2(_original_shield_x * direction.scalar, $Shield.position.y)
 			_weapon.position = _item_position.position
 		State.ROLL:
 			velocity.x = roll_speed * $Direction.scalar
@@ -133,7 +135,13 @@ func _input(event: InputEvent) -> void:
 	
 	if _state != State.CONTROL:
 		return
-	if event.is_action_pressed("fire"):
+	if event.is_action_pressed("shield") and is_on_floor():
+		$Shield.enable()
+		if _current_item == _weapon:
+			_weapon.set_firing(null)
+	if event.is_action_released("shield"):
+		$Shield.disable()
+	if event.is_action_pressed("fire") and not $Shield.is_enabled():
 		if _current_item == _weapon:
 			_weapon.set_firing($Direction)
 		else:
@@ -141,7 +149,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("fire"):
 		if _current_item == _weapon:
 			_weapon.set_firing(null)
-	if is_on_floor():
+	if is_on_floor() and not $Shield.is_enabled():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
 			_is_jumping = true
 			velocity.y = -jump_speed
@@ -150,7 +158,7 @@ func _input(event: InputEvent) -> void:
 	if _is_jumping and event.is_action_released("jump"):
 		_is_jumping = false
 		_jump_time = 0.0
-	if event.is_action_pressed("roll") and _can_roll:
+	if event.is_action_pressed("roll") and _can_roll and not $Shield.is_enabled():
 		_roll()
 	if event.is_action_pressed("reload") and _weapon:
 		if !_weapon.is_reloading:
