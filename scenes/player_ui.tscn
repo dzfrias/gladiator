@@ -12,21 +12,15 @@ lightning_ui = ExtResource("2_5x1lo")
 acid_rain_ui = ExtResource("3_lbnag")
 survival_ui = ExtResource("4_k0q64")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="AmmoText" type="RichTextLabel" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 31.0
-offset_top = -73.0
-offset_right = 189.0
-offset_bottom = -31.0
+offset_top = -69.0
+offset_right = 290.0
 grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="Ammo" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Ammo: 0/0"
-vertical_alignment = 1
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Ammo:  [img=8,8]assets/infinity_sign.png[/img]"
+autowrap_mode = 0
 script = ExtResource("5_74ny8")

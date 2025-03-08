@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 		fire(_fire_direction)
 
 func fire(direction: Direction):
-	if ammo <= 0 or !can_fire:
+	if ammo == 0 or !can_fire:
 		return
 	
 	var projectile = projectile_prefab.instantiate()
@@ -38,7 +38,8 @@ func fire(direction: Direction):
 	projectile.global_position = global_position
 	get_tree().current_scene.add_child(projectile)
 	
-	ammo -= 1
+	if ammo > 0:
+		ammo -= 1
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
 	if ammo == 0 and auto_reload:
 		reload()
