@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 Debug="*res://scripts/util/Debug.gd"
 MissionManager="*res://scripts/mission/mission_manager.gd"
+Hub="*res://scripts/hub.gd"
 
 [display]
 

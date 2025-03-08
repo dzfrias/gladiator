@@ -1,13 +1,20 @@
-class_name Hub extends Node2D
+extends Node2D
 
 var _shop_scene = preload("res://scenes/shop_screen.tscn")
+var _world_scene = preload("res://scenes/hub.tscn")
+var _world: Node
 
 func open_shop_screen() -> void:
-	$World.process_mode = Node.PROCESS_MODE_DISABLED
-	var shop := _shop_scene.instantiate() as ShopScreen
-	shop.quit.connect(_return_to_world)
-	add_child(shop)
+	_world = get_tree().current_scene
+	get_tree().root.remove_child(_world)
+	var new_scene = _shop_scene.instantiate()
+	get_tree().root.add_child(new_scene)
+	get_tree().current_scene = new_scene
 
-func _return_to_world() -> void:
-	get_child(-1).queue_free()
-	$World.process_mode = Node.PROCESS_MODE_INHERIT
+func return_to_world() -> void:
+	get_tree().current_scene.queue_free()
+	_setup_world.call_deferred()
+
+func _setup_world() -> void:
+	get_tree().root.add_child(_world)
+	get_tree().current_scene = _world
