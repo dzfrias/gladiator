@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://oo5ycbc0c0u4"
+path="res://.godot/imported/buzz or rev.wav-d358c86176d49f4bf95ce0cf30297851.sample"
+
+[deps]
+
+source_file="res://assets/SoundEffects/buzz or rev.wav"
+dest_files=["res://.godot/imported/buzz or rev.wav-d358c86176d49f4bf95ce0cf30297851.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

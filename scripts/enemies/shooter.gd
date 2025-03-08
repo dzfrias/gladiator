@@ -12,3 +12,7 @@ func _attack() -> void:
 func _can_attack() -> bool:
 	var y_distance = abs(global_position.y - Player.Instance.global_position.y);
 	return !$Weapon.is_reloading and y_distance <= y_attack_cutoff
+
+func _on_health_damage_taken(amount: float, direction: Vector2):
+	super(amount, direction)
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/lil hit idk.wav"))

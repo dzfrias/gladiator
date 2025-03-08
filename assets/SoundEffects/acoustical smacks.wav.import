@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3gvtouti56a8"
+path="res://.godot/imported/acoustical smacks.wav-fb4c73813c585b9f24f1d5c40aab0388.sample"
+
+[deps]
+
+source_file="res://assets/SoundEffects/acoustical smacks.wav"
+dest_files=["res://.godot/imported/acoustical smacks.wav-fb4c73813c585b9f24f1d5c40aab0388.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

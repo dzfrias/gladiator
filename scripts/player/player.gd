@@ -239,6 +239,7 @@ func _on_health_died() -> void:
 	print("The player has died")
 
 func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/player uagh.wav"))
 	_freeze_time()
 	collision_layer = Constants.INVINCIBLE_LAYER
 	_flash_invincible()

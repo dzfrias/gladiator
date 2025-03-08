@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6bmp3ogb0ixa"
+path="res://.godot/imported/wet slap.wav-27ab5ec6dfd0c4fbafcd3d59e3d6008a.sample"
+
+[deps]
+
+source_file="res://assets/SoundEffects/wet slap.wav"
+dest_files=["res://.godot/imported/wet slap.wav-27ab5ec6dfd0c4fbafcd3d59e3d6008a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

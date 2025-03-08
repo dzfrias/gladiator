@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bh7g5lnsdqa4e"
+path="res://.godot/imported/shot or click.wav-7c7cb05758ef452f39d75d6ec983842c.sample"
+
+[deps]
+
+source_file="res://assets/SoundEffects/shot or click.wav"
+dest_files=["res://.godot/imported/shot or click.wav-7c7cb05758ef452f39d75d6ec983842c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
