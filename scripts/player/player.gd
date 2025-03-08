@@ -4,6 +4,7 @@ class_name Player extends CharacterBody2D
 @export var move_acceleration: float = 2000
 @export var move_deceleration: float = 2000
 @export var crouch_move_speed: float = 200
+@export var shield_move_speed: float = 200
 @export var direction_change_factor: float = 3
 @export var jump_speed: float = 500
 @export var jump_accel: float = 1000
@@ -35,6 +36,7 @@ var _is_crouching := false
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
+@onready var _current_move_speed = move_speed
 static var Instance
 
 signal on_item_switched(current_item)
@@ -80,12 +82,16 @@ func _process(delta: float) -> void:
 				standing_sprite.visible = false
 				crouching_hitbox.disabled = false
 				crouching_sprite.visible = true
+				_current_move_speed = crouch_move_speed
 			elif !Input.is_action_pressed("crouch") and _is_crouching:
 				_is_crouching = false
 				standing_hitbox.disabled = false
 				standing_sprite.visible = true
 				crouching_hitbox.disabled = true
 				crouching_sprite.visible = false
+				_current_move_speed = move_speed
+			if not _is_crouching and not $Shield.is_enabled():
+				_current_move_speed = move_speed
 			
 			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
 				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
@@ -95,19 +101,13 @@ func _process(delta: float) -> void:
 				# change directions
 				if velocity.x > 0:
 					acceleration *= direction_change_factor
-				if _is_crouching:
-					velocity.x = maxf(-crouch_move_speed, velocity.x - acceleration * delta)
-				else:
-					velocity.x = maxf(-move_speed, velocity.x - acceleration * delta)
+				velocity.x = maxf(-_current_move_speed, velocity.x - acceleration * delta)
 				direction.is_right = false
 			elif Input.is_action_pressed("right"):
 				var acceleration := move_acceleration
 				if velocity.x < 0:
 					acceleration *= direction_change_factor
-				if _is_crouching:
-					velocity.x = minf(crouch_move_speed, velocity.x + acceleration * delta)
-				else:
-					velocity.x = minf(move_speed, velocity.x + acceleration * delta)
+				velocity.x = minf(_current_move_speed, velocity.x + acceleration * delta)
 				direction.is_right = true
 			else:
 				velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
@@ -139,8 +139,10 @@ func _input(event: InputEvent) -> void:
 		$Shield.enable()
 		if _current_item == _weapon:
 			_weapon.set_firing(null)
+		_current_move_speed = shield_move_speed
 	if event.is_action_released("shield"):
 		$Shield.disable()
+		_current_move_speed = move_speed
 	if event.is_action_pressed("fire") and not $Shield.is_enabled():
 		if _current_item == _weapon:
 			_weapon.set_firing($Direction)
