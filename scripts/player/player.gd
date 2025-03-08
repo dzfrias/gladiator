@@ -15,6 +15,7 @@ class_name Player extends CharacterBody2D
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.4
 @export var invincible_time: float = 1.0
+@export var burrow_speed: float = 500
 
 @onready var standing_hitbox = $StandingHitbox
 @onready var crouching_hitbox = $CrouchingHitbox
@@ -44,6 +45,7 @@ signal on_item_switched(current_item)
 enum State {
 	CONTROL,
 	ROLL,
+	UNDERGROUND
 }
 
 func _ready() -> void:
@@ -68,49 +70,26 @@ func _process(delta: float) -> void:
 		if _state == State.CONTROL and is_on_floor():
 			_is_jumping = true
 			velocity.y = -jump_speed
-		
+	
 	match _state:
 		State.CONTROL:
 			if Input.is_action_pressed("crouch") and Input.is_action_pressed("jump"):
-				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+				if is_on_platform():
+					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+				else:
+					_burrow()
+					return
 			else:
 				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 			
 			if Input.is_action_just_pressed("crouch") and not $Shield.is_enabled():
-				_is_crouching = true
-				standing_hitbox.disabled = true
-				standing_sprite.visible = false
-				crouching_hitbox.disabled = false
-				crouching_sprite.visible = true
-				_current_move_speed = crouch_move_speed
+				_crouch()
 			elif !Input.is_action_pressed("crouch") and _is_crouching:
-				_is_crouching = false
-				standing_hitbox.disabled = false
-				standing_sprite.visible = true
-				crouching_hitbox.disabled = true
-				crouching_sprite.visible = false
-				_current_move_speed = move_speed
+				_uncrouch()
 			if not _is_crouching and not $Shield.is_enabled():
 				_current_move_speed = move_speed
 			
-			if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
-				velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
-			elif Input.is_action_pressed("left"):
-				var acceleration := move_acceleration
-				# This will make the movement snappier if the player wants to
-				# change directions
-				if velocity.x > 0:
-					acceleration *= direction_change_factor
-				velocity.x = maxf(-_current_move_speed, velocity.x - acceleration * delta)
-				direction.is_right = false
-			elif Input.is_action_pressed("right"):
-				var acceleration := move_acceleration
-				if velocity.x < 0:
-					acceleration *= direction_change_factor
-				velocity.x = minf(_current_move_speed, velocity.x + acceleration * delta)
-				direction.is_right = true
-			else:
-				velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
+			_apply_horizontal_movement(delta)
 			
 			if _is_crouching:
 				_item_position.position = crouching_item_position.position
@@ -121,18 +100,73 @@ func _process(delta: float) -> void:
 			_weapon.position = _item_position.position
 		State.ROLL:
 			velocity.x = roll_speed * $Direction.scalar
+		State.UNDERGROUND:
+			_apply_horizontal_movement(delta)
 		
 	move_and_slide()
 
+func _apply_horizontal_movement(delta: float):
+	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
+		velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
+	elif Input.is_action_pressed("left"):
+		var acceleration := move_acceleration
+		# This will make the movement snappier if the player wants to
+		# change directions
+		if velocity.x > 0:
+			acceleration *= direction_change_factor
+		velocity.x = maxf(-_current_move_speed, velocity.x - acceleration * delta)
+		direction.is_right = false
+	elif Input.is_action_pressed("right"):
+		var acceleration := move_acceleration
+		if velocity.x < 0:
+			acceleration *= direction_change_factor
+		velocity.x = minf(_current_move_speed, velocity.x + acceleration * delta)
+		direction.is_right = true
+	else:
+		velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
+
+func _crouch():
+	_is_crouching = true
+	standing_hitbox.disabled = true
+	standing_sprite.visible = false
+	crouching_hitbox.disabled = false
+	crouching_sprite.visible = true
+	_current_move_speed = crouch_move_speed
+
+func _uncrouch():
+	_is_crouching = false
+	standing_hitbox.disabled = false
+	standing_sprite.visible = true
+	crouching_hitbox.disabled = true
+	crouching_sprite.visible = false
+	_current_move_speed = move_speed
+
 func _input(event: InputEvent) -> void:
 	
+	if _state == State.CONTROL:
+		_normal_input(event)
+	elif _state == State.UNDERGROUND:
+		if event.is_action_pressed("jump"):
+			standing_sprite.visible = true
+			_current_move_speed = move_speed
+			collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
+			_state = State.CONTROL
+
+func _burrow():
+	_state = State.UNDERGROUND
+	_uncrouch()
+	_current_move_speed = burrow_speed
+	collision_layer = Constants.INVINCIBLE_LAYER
+	standing_sprite.visible = false
+
+func _normal_input(event: InputEvent):
 	if event.as_text().is_valid_int():
 		var index := event.as_text().to_int() - 1
 		if index < _items.size():
 			_current_item = _items[index]
 			on_item_switched.emit(_current_item)
 			print(_items[index])
-	
+
 	if _state != State.CONTROL:
 		return
 	if event.is_action_pressed("shield") and is_on_floor():
@@ -204,7 +238,8 @@ func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
 	collision_layer = Constants.INVINCIBLE_LAYER
 	_flash_invincible()
 	await get_tree().create_timer(invincible_time).timeout
-	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
+	if _state != State.UNDERGROUND:
+		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
 func is_holding_weapon() -> bool:
 	return _weapon == _current_item
@@ -220,6 +255,9 @@ func get_platform_height():
 
 func _flash_invincible() -> void:
 	while collision_layer == Constants.INVINCIBLE_LAYER:
+		# TODO: remove when we get a player underground sprite (mound)
+		if _state == State.UNDERGROUND: break
+		
 		standing_sprite.visible = false
 		crouching_sprite.visible = false
 		await get_tree().create_timer(0.05).timeout
