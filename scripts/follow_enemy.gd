@@ -35,15 +35,15 @@ func _physics_process(delta: float) -> void:
 			var direction := signf(dist)
 			$Direction.scalar = direction
 			
-			var above = Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y and is_on_floor() and _platform_detection.is_detecting_platform()
-			if above:
+			var is_player_above = Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y
+			if is_player_above and _platform_detection.is_detecting_platform() and is_on_floor():
 				_jump_follow_timer += delta
 				if _jump_follow_timer >= jump_follow_cooldown:
 					velocity.y = jump_height
 					_jump_follow_timer = 0.0
 			
-			var below = _platform_detection.is_on_platform() and (!Player.Instance.is_on_platform() or Player.Instance.get_platform_height() > _platform_detection.get_platform_height()) and Player.Instance.is_on_floor()
-			if below:
+			var is_player_below = (!Player.Instance.is_on_platform() or Player.Instance.get_platform_height() > _platform_detection.get_platform_height()) and Player.Instance.is_on_floor()
+			if is_player_below and _platform_detection.is_on_platform():
 				_jump_follow_timer += delta
 				if _jump_follow_timer >= jump_follow_cooldown:
 					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
@@ -51,10 +51,10 @@ func _physics_process(delta: float) -> void:
 			else:
 				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 			
-			if not above and not below:
+			if not is_player_above and not is_player_below:
 				_jump_follow_timer = 0.0
 			
-			if abs(dist) <= stop_dist:
+			if abs(dist) <= stop_dist and !is_player_above:
 				if is_on_floor() and _can_attack() and velocity.y == 0.0:
 					_attack()
 				elif velocity.y != 0.0:
