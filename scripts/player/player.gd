@@ -76,7 +76,7 @@ func _process(delta: float) -> void:
 			if Input.is_action_pressed("crouch") and Input.is_action_pressed("jump"):
 				if is_on_platform():
 					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
-				else:
+				elif is_on_floor():
 					_burrow()
 					return
 			else:
