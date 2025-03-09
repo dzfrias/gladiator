@@ -12,15 +12,15 @@ func enable() -> void:
 	$CollisionShape2D.disabled = false
 
 func disable() -> void:
-	$CollisionShape2D.disabled = true
+	$CollisionShape2D.set_deferred("disabled", true)
 
 func is_enabled() -> bool:
 	return !$CollisionShape2D.disabled
 
 func _on_died() -> void:
-	start_disabled_cooldown()
+	_start_disabled_cooldown()
 
-func start_disabled_cooldown() -> void:
+func _start_disabled_cooldown() -> void:
 	disable()
 	_can_enable = false
 	await get_tree().create_timer(8).timeout
