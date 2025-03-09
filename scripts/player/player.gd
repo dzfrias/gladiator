@@ -1,21 +1,6 @@
 class_name Player extends CharacterBody2D
 
-@export var move_speed: float = 400
-@export var move_acceleration: float = 2000
-@export var move_deceleration: float = 2000
-@export var crouch_move_speed: float = 200
-@export var shield_move_speed: float = 200
-@export var direction_change_factor: float = 3
-@export var jump_speed: float = 500
-@export var jump_accel: float = 1000
-@export var jump_hold_time: float = 0.5
-@export var jump_buffer_time: float = 0.2
-@export var gravity_scale: float = 2.0
-@export var roll_speed: float = 1200
-@export var roll_time: float = 0.2
-@export var roll_cooldown_time: float = 0.4
-@export var invincible_time: float = 1.0
-@export var burrow_speed: float = 500
+@export var movement_settings: Resource
 
 @onready var standing_hitbox = $StandingHitbox
 @onready var crouching_hitbox = $CrouchingHitbox
@@ -37,7 +22,7 @@ var _is_crouching := false
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
-@onready var _current_move_speed = move_speed
+@onready var _current_move_speed = movement_settings.move_speed
 static var Instance
 
 signal on_item_switched(current_item)
@@ -60,16 +45,16 @@ func _ready() -> void:
 	_item_position.position = standing_item_position.position
 
 func _process(delta: float) -> void:
-	if _is_jumping and _jump_time < jump_hold_time:
-		velocity.y -= jump_accel * delta
+	if _is_jumping and _jump_time < movement_settings.jump_hold_time:
+		velocity.y -= movement_settings.jump_accel * delta
 		_jump_time += delta
 	elif not is_on_floor():
-		velocity.y += get_gravity().y * gravity_scale * delta
+		velocity.y += get_gravity().y * movement_settings.gravity_scale * delta
 	if _jump_buffer > 0:
 		_jump_buffer = max(0, _jump_buffer - delta)
 		if _state == State.CONTROL and is_on_floor():
 			_is_jumping = true
-			velocity.y = -jump_speed
+			velocity.y = -movement_settings.jump_speed
 	
 	match _state:
 		State.CONTROL:
@@ -87,7 +72,7 @@ func _process(delta: float) -> void:
 			elif !Input.is_action_pressed("crouch") and _is_crouching:
 				_uncrouch()
 			if not _is_crouching and not $Shield.is_enabled():
-				_current_move_speed = move_speed
+				_current_move_speed = movement_settings.move_speed
 			
 			_apply_horizontal_movement(delta)
 			
@@ -99,7 +84,7 @@ func _process(delta: float) -> void:
 			$Shield.position = Vector2(_original_shield_x * direction.scalar, $Shield.position.y)
 			_weapon.position = _item_position.position
 		State.ROLL:
-			velocity.x = roll_speed * $Direction.scalar
+			velocity.x = movement_settings.roll_speed * $Direction.scalar
 		State.UNDERGROUND:
 			_apply_horizontal_movement(delta)
 		
@@ -107,23 +92,23 @@ func _process(delta: float) -> void:
 
 func _apply_horizontal_movement(delta: float):
 	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
-		velocity.x = move_toward(velocity.x, 0, move_acceleration * delta)
+		velocity.x = move_toward(velocity.x, 0, movement_settings.move_acceleration * delta)
 	elif Input.is_action_pressed("left"):
-		var acceleration := move_acceleration
+		var acceleration = movement_settings.move_acceleration
 		# This will make the movement snappier if the player wants to
 		# change directions
 		if velocity.x > 0:
-			acceleration *= direction_change_factor
+			acceleration *= movement_settings.direction_change_factor
 		velocity.x = maxf(-_current_move_speed, velocity.x - acceleration * delta)
 		direction.is_right = false
 	elif Input.is_action_pressed("right"):
-		var acceleration := move_acceleration
+		var acceleration = movement_settings.move_acceleration
 		if velocity.x < 0:
-			acceleration *= direction_change_factor
+			acceleration *= movement_settings.direction_change_factor
 		velocity.x = minf(_current_move_speed, velocity.x + acceleration * delta)
 		direction.is_right = true
 	else:
-		velocity.x = move_toward(velocity.x, 0, move_deceleration * delta)
+		velocity.x = move_toward(velocity.x, 0, movement_settings.move_deceleration * delta)
 
 func _crouch():
 	_is_crouching = true
@@ -131,7 +116,7 @@ func _crouch():
 	standing_sprite.visible = false
 	crouching_hitbox.disabled = false
 	crouching_sprite.visible = true
-	_current_move_speed = crouch_move_speed
+	_current_move_speed = movement_settings.crouch_move_speed
 
 func _uncrouch():
 	_is_crouching = false
@@ -139,7 +124,7 @@ func _uncrouch():
 	standing_sprite.visible = true
 	crouching_hitbox.disabled = true
 	crouching_sprite.visible = false
-	_current_move_speed = move_speed
+	_current_move_speed = movement_settings.move_speed
 
 func _input(event: InputEvent) -> void:
 	
@@ -148,14 +133,14 @@ func _input(event: InputEvent) -> void:
 	elif _state == State.UNDERGROUND:
 		if event.is_action_pressed("jump"):
 			standing_sprite.visible = true
-			_current_move_speed = move_speed
+			_current_move_speed = movement_settings.move_speed
 			collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 			_state = State.CONTROL
 
 func _burrow():
 	_state = State.UNDERGROUND
 	_uncrouch()
-	_current_move_speed = burrow_speed
+	_current_move_speed = movement_settings.burrow_speed
 	collision_layer = Constants.INVINCIBLE_LAYER
 	standing_sprite.visible = false
 
@@ -173,10 +158,10 @@ func _normal_input(event: InputEvent):
 		$Shield.enable()
 		if _current_item == _weapon:
 			_weapon.set_firing(null)
-		_current_move_speed = shield_move_speed
+		_current_move_speed = movement_settings.shield_move_speed
 	if event.is_action_released("shield"):
 		$Shield.disable()
-		_current_move_speed = move_speed
+		_current_move_speed = movement_settings.move_speed
 	if event.is_action_pressed("fire") and not $Shield.is_enabled():
 		if _current_item == _weapon:
 			_weapon.set_firing($Direction)
@@ -188,9 +173,9 @@ func _normal_input(event: InputEvent):
 	if is_on_floor() and not $Shield.is_enabled():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
 			_is_jumping = true
-			velocity.y = -jump_speed
+			velocity.y = -movement_settings.jump_speed
 	elif event.is_action_pressed("jump"):
-		_jump_buffer = jump_buffer_time
+		_jump_buffer = movement_settings.jump_buffer_time
 	if _is_jumping and event.is_action_released("jump"):
 		_is_jumping = false
 		_jump_time = 0.0
@@ -225,14 +210,14 @@ func _roll() -> void:
 	collision_layer = Constants.INVINCIBLE_LAYER
 	$StandingSprite.flip_v = true
 	$CrouchingSprite.flip_v = true
-	await get_tree().create_timer(roll_time).timeout
+	await get_tree().create_timer(movement_settings.roll_time).timeout
 	_state = State.CONTROL
 	velocity.x *= 0.4
 	$StandingSprite.flip_v = false
 	$CrouchingSprite.flip_v = false
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 	_can_roll = false
-	await get_tree().create_timer(roll_cooldown_time).timeout
+	await get_tree().create_timer(movement_settings.roll_cooldown_time).timeout
 	_can_roll = true
 
 func _on_health_died() -> void:
@@ -243,7 +228,7 @@ func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
 	_freeze_time()
 	collision_layer = Constants.INVINCIBLE_LAYER
 	_flash_invincible()
-	await get_tree().create_timer(invincible_time).timeout
+	await get_tree().create_timer(movement_settings.invincible_time).timeout
 	if _state != State.UNDERGROUND:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
