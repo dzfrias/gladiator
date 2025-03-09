@@ -20,9 +20,11 @@ func set_health(health):
 func _on_health_lost(amount: float, direction: Vector2):
 	value -= amount
 	show()
-	
+
 func _on_health_gained(amount: float):
 	value += amount
+	if ratio == 1.0:
+		hide()
 
 func _on_death():
 	queue_free()
