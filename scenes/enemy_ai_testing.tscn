@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://grcph6sxxnra"]
+[gd_scene load_steps=6 format=4 uid="uid://grcph6sxxnra"]
 
 [ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_bqhvb"]
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="2_lv74h"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="3_wj20f"]
 [ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="4_h5rv7"]
+[ext_resource type="PackedScene" uid="uid://b6n4ygstauqcx" path="res://scenes/idle_shooter.tscn" id="5_xu8fr"]
 
 [node name="EnemyAITesting" type="Node2D"]
 
@@ -12,9 +13,12 @@ tile_map_data = PackedByteArray("AAD7/wAAAwAGAAAAAAD8/wAAAwAGAAAAAAD9/wAAAwAGAAA
 tile_set = ExtResource("1_bqhvb")
 
 [node name="Player" parent="." instance=ExtResource("2_lv74h")]
-position = Vector2(-352, -4)
+position = Vector2(263, -4)
 
 [node name="PlayerUI" parent="." instance=ExtResource("3_wj20f")]
 
 [node name="Shooter" parent="." instance=ExtResource("4_h5rv7")]
 position = Vector2(-716, -34)
+
+[node name="IdleShooter" parent="." instance=ExtResource("5_xu8fr")]
+position = Vector2(-771, -14)

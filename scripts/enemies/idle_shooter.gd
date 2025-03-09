@@ -52,12 +52,14 @@ func _physics_process(delta: float) -> void:
 			$StandSprite.visible = true
 			$HideSprite.visible = false
 			
-			if weapon.ammo > 0:
-				_shoot()
-			elif !weapon.is_reloading:
-				weapon.reload()
-			elif has_box and _is_box_inbetween():
-				_hide()
+		
+			if $DetectionZone.has_overlapping_bodies():
+				if weapon.ammo > 0:
+					_shoot()
+				elif !weapon.is_reloading:
+					weapon.reload()
+				elif has_box and _is_box_inbetween():
+					_hide()
 
 func notify() -> void:
 	for body in $NotifyZone.get_overlapping_bodies():
