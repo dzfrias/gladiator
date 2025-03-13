@@ -245,6 +245,7 @@ func get_current_item() -> Node2D:
 	return inventory.get_held_item()
 
 func _on_item_switched(current_item):
+	_weapon.set_firing(null)
 	if current_item is WeaponStats:
 		_weapon.weapon_stats = current_item
 
