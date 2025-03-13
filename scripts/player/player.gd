@@ -14,18 +14,15 @@ class_name Player extends CharacterBody2D
 
 # NOTE this field can be null (if the player has no weapon)
 @onready var _weapon: Weapon = $Weapon
-var _current_item
-var _items: Array
 var _state := State.CONTROL
 var _can_roll := true
 var _is_crouching := false
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
+@onready var inventory = Inventory.new()
 @onready var _current_move_speed = movement_settings.move_speed
 static var Instance
-
-signal on_item_switched(current_item)
 
 enum State {
 	CONTROL,
@@ -34,14 +31,17 @@ enum State {
 }
 
 func _ready() -> void:
-	_items.append(_weapon)
-	_items.append(load("res://scenes/gadgets/grenade.tscn"))
-	_items.append(load("res://scenes/gadgets/airstrike_grenade.tscn"))
+	inventory.add_item(_weapon)
+	var grenade = Gadget.new()
+	grenade.init(load("res://scenes/gadgets/grenade.tscn"), Gadget.GadgetType.THROWABLE)
+	var airstrike = Gadget.new()
+	airstrike.init(load("res://scenes/gadgets/airstrike_grenade.tscn"), Gadget.GadgetType.THROWABLE)
+	inventory.add_item(grenade)
+	inventory.add_item(airstrike)
 	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
 	Instance = self
-	_current_item = _weapon
 	_item_position.position = standing_item_position.position
 
 func _process(delta: float) -> void:
@@ -147,28 +147,26 @@ func _burrow():
 func _normal_input(event: InputEvent):
 	if event.as_text().is_valid_int():
 		var index := event.as_text().to_int() - 1
-		if index < _items.size():
-			_current_item = _items[index]
-			on_item_switched.emit(_current_item)
-			print(_items[index])
+		if index < inventory.get_size() and index >= 0:
+			inventory.set_held_item(index)
 
 	if _state != State.CONTROL:
 		return
 	if event.is_action_pressed("shield") and is_on_floor():
 		$Shield.enable()
-		if _current_item == _weapon:
+		if inventory.get_held_item() == _weapon:
 			_weapon.set_firing(null)
 		_current_move_speed = movement_settings.shield_move_speed
 	if event.is_action_released("shield"):
 		$Shield.disable()
 		_current_move_speed = movement_settings.move_speed
 	if event.is_action_pressed("fire") and not $Shield.is_enabled():
-		if _current_item == _weapon:
+		if inventory.get_held_item() == _weapon:
 			_weapon.set_firing($Direction)
 		else:
-			throw(_current_item)
+			inventory.get_held_item().use(self, _item_position.global_position, direction)
 	if event.is_action_released("fire"):
-		if _current_item == _weapon:
+		if inventory.get_held_item() == _weapon:
 			_weapon.set_firing(null)
 	if is_on_floor() and not $Shield.is_enabled():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
@@ -233,10 +231,10 @@ func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
 func is_holding_weapon() -> bool:
-	return _weapon == _current_item
+	return _weapon == inventory.get_held_item()
 
 func get_current_item() -> Node2D:
-	return _current_item
+	return inventory.get_held_item()
 
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
@@ -255,13 +253,6 @@ func _flash_invincible() -> void:
 		standing_sprite.visible = !_is_crouching
 		crouching_sprite.visible = _is_crouching
 		await get_tree().create_timer(0.05).timeout
-
-func throw(throwable_prefab: PackedScene):
-	var throwable = throwable_prefab.instantiate()
-	throwable.global_position = _item_position.global_position
-	get_tree().current_scene.add_child(throwable)
-	throwable.apply_force(Vector2(direction.scalar * 12000, -12000))
-	print("Throw")
 	
 func get_health() -> Health:
 	return $Health;

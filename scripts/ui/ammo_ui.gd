@@ -15,7 +15,7 @@ func _ready() -> void:
 		weapon.on_ammo_changed.connect(_on_ammo_changed)
 	else:
 		hide()
-	Player.Instance.on_item_switched.connect(_on_item_switched)
+	Player.Instance.inventory.on_item_switched.connect(_on_item_switched)
 
 func _on_item_switched(current_item):
 	if current_item is Weapon:
