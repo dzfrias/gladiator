@@ -4,9 +4,13 @@ class_name Grenade extends RigidBody2D
 @export var explosion_prefab: PackedScene
 @export var explosionTime = 2
 @export var damage = 3
+@export var throw_force = 12000
 
 @onready var explosion_radius = $ExplosionRadius
 var direction: Direction
+
+func init(direction: Direction) -> void:
+	apply_force(Vector2(direction.scalar * throw_force, -throw_force))
 
 func _ready() -> void:
 	if explode_on_impact:

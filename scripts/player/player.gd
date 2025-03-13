@@ -32,12 +32,12 @@ enum State {
 
 func _ready() -> void:
 	inventory.add_item(_weapon)
-	var grenade = Gadget.new()
-	grenade.init(load("res://scenes/gadgets/grenade.tscn"), Gadget.GadgetType.THROWABLE)
-	var airstrike = Gadget.new()
-	airstrike.init(load("res://scenes/gadgets/airstrike_grenade.tscn"), Gadget.GadgetType.THROWABLE)
+	var grenade = load("res://scenes/gadgets/grenade.tscn")
+	var airstrike = load("res://scenes/gadgets/airstrike_grenade.tscn")
+	var speed_boost = load("res://scenes/gadgets/speed_boost.tscn")
 	inventory.add_item(grenade)
 	inventory.add_item(airstrike)
+	inventory.add_item(speed_boost)
 	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
@@ -164,7 +164,7 @@ func _normal_input(event: InputEvent):
 		if inventory.get_held_item() == _weapon:
 			_weapon.set_firing($Direction)
 		else:
-			inventory.get_held_item().use(self, _item_position.global_position, direction)
+			use_gadget()
 	if event.is_action_released("fire"):
 		if inventory.get_held_item() == _weapon:
 			_weapon.set_firing(null)
@@ -256,3 +256,9 @@ func _flash_invincible() -> void:
 	
 func get_health() -> Health:
 	return $Health;
+
+func use_gadget():
+	var gadget = inventory.get_held_item().instantiate()
+	gadget.init(direction)
+	gadget.global_position = _item_position.global_position
+	get_tree().current_scene.add_child(gadget)

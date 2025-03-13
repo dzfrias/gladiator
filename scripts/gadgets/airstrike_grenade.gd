@@ -6,8 +6,12 @@ extends RigidBody2D
 @export var bombs = 8
 @export var bomb_interval = 0.3
 @export var x_variance = 100
+@export var throw_force = 12000
 
 @onready var airstrike_location = $AirstrikeLocation
+
+func init(direction: Direction) -> void:
+	apply_force(Vector2(direction.scalar * throw_force, -throw_force))
 
 func _ready() -> void:
 	await get_tree().create_timer(airstrike_time).timeout
