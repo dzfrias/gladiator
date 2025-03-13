@@ -4,9 +4,11 @@
 
 [resource]
 script = ExtResource("1_okvej")
+name = "Sniper"
 damage = 15.0
 reload_time = 2.5
 max_ammo = 3
 firing_interval = 1.0
 projectile_speed = 1000.0
 angle_variance = 0.0
+bullets_per_shot = 1

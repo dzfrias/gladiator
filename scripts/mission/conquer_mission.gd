@@ -3,6 +3,7 @@ class_name ConquerMission extends Mission
 var enemies_remaining: int
 
 func _ready() -> void:
+	super()
 	get_tree().node_added.connect(_on_node_added)
 
 func _on_node_added(node: Node2D):

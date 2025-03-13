@@ -1,5 +1,6 @@
 class_name WeaponStats extends Resource
 
+@export var name: String
 @export var damage: float = 5
 @export var reload_time: float = 1
 @export var max_ammo: int = 8

@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://b04m2jwx1r01b"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_vmwyk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ephas"]
+font_size = 22
+
+[node name="Item" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 71.1)
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_vmwyk")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Mega pistol"
+label_settings = SubResource("LabelSettings_ephas")
+
+[node name="Spacer" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PriceLabel" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_ephas")
+
+[node name="BuyButton" type="Button" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Buy"

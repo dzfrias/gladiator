@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_yt3au")
+name = "Shotgun"
 damage = 2.0
 reload_time = 1.0
 max_ammo = 5

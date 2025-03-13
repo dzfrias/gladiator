@@ -4,9 +4,11 @@
 
 [resource]
 script = ExtResource("1_4jv4i")
+name = "Pistol"
 damage = 3.0
 reload_time = 1.0
 max_ammo = -1
 firing_interval = 0.3
 projectile_speed = 600.0
 angle_variance = 0.0
+bullets_per_shot = 1
