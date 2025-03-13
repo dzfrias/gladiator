@@ -9,4 +9,6 @@ func _ready() -> void:
 		for child in body.get_children():
 			if child is Health:
 				child.take_damage(damage, Vector2.ZERO)
+	$CPUParticles2D.emitting = true
+	await $CPUParticles2D.finished
 	queue_free()
