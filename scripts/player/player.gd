@@ -31,7 +31,7 @@ enum State {
 }
 
 func _ready() -> void:
-	inventory.add_item(_weapon)
+	inventory.add_item(_weapon.weapon_stats)
 	var grenade = load("res://scenes/gadgets/grenade.tscn")
 	var airstrike = load("res://scenes/gadgets/airstrike_grenade.tscn")
 	var speed_boost = load("res://scenes/gadgets/speed_boost.tscn")
@@ -41,6 +41,7 @@ func _ready() -> void:
 	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
+	inventory.on_item_switched.connect(_on_item_switched)
 	Instance = self
 	_item_position.position = standing_item_position.position
 
@@ -154,19 +155,19 @@ func _normal_input(event: InputEvent):
 		return
 	if event.is_action_pressed("shield") and is_on_floor():
 		$Shield.enable()
-		if inventory.get_held_item() == _weapon:
+		if inventory.get_held_item() is WeaponStats:
 			_weapon.set_firing(null)
 		_current_move_speed = movement_settings.shield_move_speed
 	if event.is_action_released("shield"):
 		$Shield.disable()
 		_current_move_speed = movement_settings.move_speed
 	if event.is_action_pressed("fire") and not $Shield.is_enabled():
-		if inventory.get_held_item() == _weapon:
+		if inventory.get_held_item() is WeaponStats:
 			_weapon.set_firing($Direction)
 		else:
 			use_gadget()
 	if event.is_action_released("fire"):
-		if inventory.get_held_item() == _weapon:
+		if inventory.get_held_item() is WeaponStats:
 			_weapon.set_firing(null)
 	if is_on_floor() and not $Shield.is_enabled():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
@@ -231,10 +232,14 @@ func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
 func is_holding_weapon() -> bool:
-	return _weapon == inventory.get_held_item()
+	return inventory.get_held_item() is WeaponStats
 
 func get_current_item() -> Node2D:
 	return inventory.get_held_item()
+
+func _on_item_switched(current_item):
+	if current_item is WeaponStats:
+		_weapon.weapon_stats = current_item
 
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
