@@ -88,7 +88,11 @@ func _process(delta: float) -> void:
 			velocity.x = movement_settings.roll_speed * $Direction.scalar
 		State.UNDERGROUND:
 			_apply_horizontal_movement(delta)
-		
+	
+	if abs(velocity.x) > 0 and is_on_floor():
+		$WalkingParticles.emitting = true
+	else:
+		$WalkingParticles.emitting = false
 	move_and_slide()
 
 func _apply_horizontal_movement(delta: float):
@@ -102,14 +106,17 @@ func _apply_horizontal_movement(delta: float):
 			acceleration *= movement_settings.direction_change_factor
 		velocity.x = maxf(-_current_move_speed, velocity.x - acceleration * delta)
 		direction.is_right = false
+		$WalkingParticles.position = abs($WalkingParticles.position)
 	elif Input.is_action_pressed("right"):
 		var acceleration = movement_settings.move_acceleration
 		if velocity.x < 0:
 			acceleration *= movement_settings.direction_change_factor
 		velocity.x = minf(_current_move_speed, velocity.x + acceleration * delta)
 		direction.is_right = true
+		$WalkingParticles.position = -abs($WalkingParticles.position)
 	else:
 		velocity.x = move_toward(velocity.x, 0, movement_settings.move_deceleration * delta)
+	$WalkingParticles.direction.x = direction.scalar
 
 func _crouch():
 	_is_crouching = true
