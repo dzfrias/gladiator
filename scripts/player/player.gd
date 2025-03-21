@@ -37,9 +37,11 @@ func _ready() -> void:
 	var grenade = load("res://scenes/gadgets/grenade.tscn")
 	var airstrike = load("res://scenes/gadgets/airstrike_grenade.tscn")
 	var speed_boost = load("res://scenes/gadgets/speed_boost.tscn")
+	var health_potion = load("res://scenes/gadgets/health_potion.tscn")
 	inventory.add_item(grenade)
 	inventory.add_item(airstrike)
 	inventory.add_item(speed_boost)
+	inventory.add_item(health_potion)
 	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
