@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/suispider.gd" id="1_5l4np"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_fkk75"]
-[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://assets/impact_particles.tscn" id="2_bb8nd"]
+[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_bb8nd"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_2s6ah"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="4_6dvl8"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="6_qtcdd"]

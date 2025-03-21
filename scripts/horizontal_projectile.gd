@@ -17,4 +17,6 @@ func _on_body_entered(body: Node2D) -> void:
 	for child in body.get_children():
 		if child is Health:
 			child.take_damage(damage, velocity.normalized())
+	if body is TileMapParticles:
+		body.hit_tilemap(global_position, velocity.normalized())
 	queue_free()
