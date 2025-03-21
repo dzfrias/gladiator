@@ -18,7 +18,7 @@ func open_mission_select_screen() -> void:
 	_load(scene)
 
 func enter_mission(mission: Mission) -> void:
-	MissionManager.enter_mission(mission, [])
+	MissionManager.enter_mission(mission)
 
 func return_to_world() -> void:
 	get_tree().current_scene.queue_free()

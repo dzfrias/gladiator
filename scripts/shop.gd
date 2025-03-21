@@ -35,7 +35,7 @@ func buy_weapon(weapon: WeaponItem) -> bool:
 	
 	buckles -= weapon.price
 	weapon.bought = true
-	Player.Instance.inventory.add_item(weapon)
+	Player.Instance.inventory().add_item(weapon.stats)
 	return true
 
 func _on_interact() -> void:

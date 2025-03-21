@@ -5,9 +5,9 @@ var mission: Mission
 var _mission_scene = preload("res://scenes/mission.tscn")
 var _home_scene = preload("res://scenes/test_scene.tscn")
 
-func enter_mission(mission: Mission, items: Array) -> void:
+func enter_mission(mission: Mission) -> void:
 	self.mission = mission
-	_goto_mission.call_deferred(mission, items)
+	_goto_mission.call_deferred(mission)
 
 func return_home() -> void:
 	_goto_home.call_deferred()
@@ -15,9 +15,13 @@ func return_home() -> void:
 func _goto_home() -> void:
 	_load_scene(_home_scene)
 
-func _goto_mission(mission: Mission, items: Array) -> void:
+func _goto_mission(mission: Mission) -> void:
+	var items = []
+	for item in Player.Instance.inventory().items:
+		items.append(item)
 	var new_scene := _load_scene(_mission_scene)
 	new_scene.add_child(mission)
+	new_scene.find_child("Player").inventory().items = items
 	mission.mission_finished.connect(return_home)
 
 func _load_scene(scene: PackedScene) -> Node:

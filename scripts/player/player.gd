@@ -22,7 +22,6 @@ var _is_crouching := false
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
-@onready var inventory = Inventory.new()
 @onready var _current_move_speed = movement_settings.move_speed
 static var Instance
 
@@ -33,19 +32,12 @@ enum State {
 }
 
 func _ready() -> void:
-	inventory.add_item(_weapon.weapon_stats)
-	var grenade = load("res://scenes/gadgets/grenade.tscn")
-	var airstrike = load("res://scenes/gadgets/airstrike_grenade.tscn")
-	var speed_boost = load("res://scenes/gadgets/speed_boost.tscn")
-	var health_potion = load("res://scenes/gadgets/health_potion.tscn")
-	inventory.add_item(grenade)
-	inventory.add_item(airstrike)
-	inventory.add_item(speed_boost)
-	inventory.add_item(health_potion)
-	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
-	inventory.on_item_switched.connect(_on_item_switched)
+	$Inventory.on_item_switched.connect(_on_item_switched)
+	if Instance != null:
+		Instance.free()
+		Instance = null
 	Instance = self
 	_item_position.position = standing_item_position.position
 
@@ -143,7 +135,6 @@ func _uncrouch():
 	_current_move_speed = movement_settings.move_speed
 
 func _input(event: InputEvent) -> void:
-	
 	if _state == State.CONTROL:
 		_normal_input(event)
 	elif _state == State.UNDERGROUND:
@@ -163,26 +154,26 @@ func _burrow():
 func _normal_input(event: InputEvent):
 	if event.as_text().is_valid_int():
 		var index := event.as_text().to_int() - 1
-		if index < inventory.get_size() and index >= 0:
-			inventory.set_held_item(index)
+		if index < $Inventory.items.size() and index >= 0:
+			$Inventory.set_held_item(index)
 
 	if _state != State.CONTROL:
 		return
 	if event.is_action_pressed("shield") and is_on_floor():
 		$Shield.enable()
-		if inventory.get_held_item() is WeaponStats:
+		if $Inventory.get_held_item() is WeaponStats:
 			_weapon.set_firing(null)
 		_current_move_speed = movement_settings.shield_move_speed
 	if event.is_action_released("shield"):
 		$Shield.disable()
 		_current_move_speed = movement_settings.move_speed
 	if event.is_action_pressed("fire") and not $Shield.is_enabled():
-		if inventory.get_held_item() is WeaponStats:
+		if $Inventory.get_held_item() is WeaponStats:
 			_weapon.set_firing($Direction)
-		else:
-			use_gadget()
+		elif $Inventory.get_held_item() != null:
+			_use_gadget()
 	if event.is_action_released("fire"):
-		if inventory.get_held_item() is WeaponStats:
+		if $Inventory.get_held_item() is WeaponStats:
 			_weapon.set_firing(null)
 	if is_on_floor() and not $Shield.is_enabled():
 		if event.is_action_pressed("jump") and !Input.is_action_pressed("crouch"):
@@ -247,10 +238,10 @@ func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
 func is_holding_weapon() -> bool:
-	return inventory.get_held_item() is WeaponStats
+	return $Inventory.get_held_item() is WeaponStats
 
 func get_current_item() -> Node2D:
-	return inventory.get_held_item()
+	return $Inventory.get_held_item()
 
 func _on_item_switched(current_item):
 	_weapon.set_firing(null)
@@ -262,6 +253,9 @@ func is_on_platform():
 
 func get_platform_height():
 	return $PlatformRaycast.get_collision_point().y
+
+func inventory() -> Inventory:
+	return $Inventory
 
 func _flash_invincible() -> void:
 	while collision_layer == Constants.INVINCIBLE_LAYER:
@@ -278,8 +272,8 @@ func _flash_invincible() -> void:
 func get_health() -> Health:
 	return $Health;
 
-func use_gadget():
-	var gadget = inventory.get_held_item().instantiate()
+func _use_gadget():
+	var gadget = $Inventory.get_held_item().instantiate()
 	gadget.init(direction)
 	gadget.global_position = _item_position.global_position
 	get_tree().current_scene.add_child(gadget)

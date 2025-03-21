@@ -1,17 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=17 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
-[ext_resource type="PackedScene" uid="uid://nxy8eneyua16" path="res://scenes/particles/land_impact_particles.tscn" id="3_701i6"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="4_oevlo"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
 [ext_resource type="PackedScene" uid="uid://dcp3huoajqaue" path="res://scenes/projectile.tscn" id="6_w2kq1"]
 [ext_resource type="Script" path="res://scripts/player/shield.gd" id="9_um070"]
-[ext_resource type="Script" path="res://scripts/player/player_particles.gd" id="12_a2l42"]
+[ext_resource type="Script" path="res://scripts/player/inventory.gd" id="11_40if5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(40, 62)
@@ -66,6 +65,9 @@ script = ExtResource("4_oevlo")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_s7yvn")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("11_40if5")
 
 [node name="Weapon" type="Node2D" parent="."]
 position = Vector2(28, -32)
@@ -139,7 +141,3 @@ initial_velocity_max = 100.0
 scale_amount_min = 2.0
 scale_amount_max = 3.0
 color = Color(1, 0.996078, 0.509804, 1)
-
-[node name="PlayerParticles" type="Node" parent="."]
-script = ExtResource("12_a2l42")
-land_impact_particles_prefab = ExtResource("3_701i6")
