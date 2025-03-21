@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+signal on_ground_impact(impact_force: float)
+
 @export var movement_settings: Resource
 
 @onready var standing_hitbox = $StandingHitbox
@@ -93,7 +95,11 @@ func _process(delta: float) -> void:
 		$WalkingParticles.emitting = true
 	else:
 		$WalkingParticles.emitting = false
+	
+	var impact_force = velocity.y
 	move_and_slide()
+	if is_on_floor() and impact_force > 0:
+		on_ground_impact.emit(impact_force)
 
 func _apply_horizontal_movement(delta: float):
 	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
