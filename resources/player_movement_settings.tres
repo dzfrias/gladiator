@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_rcu7e")
 move_speed = 300.0
-move_acceleration = 500.0
-move_deceleration = 800.0
+move_acceleration = 900.0
+move_deceleration = 1500.0
 crouch_move_speed = 75.0
 shield_move_speed = 100.0
 direction_change_factor = 3.0
