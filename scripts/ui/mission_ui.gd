@@ -5,6 +5,10 @@ class_name MissionUI extends CanvasLayer
 @export var survival_ui: PackedScene
 
 func _ready() -> void:
+	# TODO: remove this code
+	if MissionManager.mission == null:
+		return
+	
 	# Weather UI
 	if MissionManager.mission.weather is AcidRain:
 		add_child(acid_rain_ui.instantiate())
