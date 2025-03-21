@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxtcamkd24d0b"]
+
+[ext_resource type="Script" path="res://scripts/ui/mission_board_screen.gd" id="1_70ync"]
+
+[node name="MissionBoardScreen" type="Node2D"]
+script = ExtResource("1_70ync")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Return" type="Button" parent="CanvasLayer"]
+offset_left = 47.0
+offset_top = 45.0
+offset_right = 219.0
+offset_bottom = 97.0
+text = "Return"
+
+[node name="BucklesLabel" type="Label" parent="CanvasLayer"]
+offset_left = 46.88
+offset_top = 121.11
+offset_right = 123.88
+offset_bottom = 144.11
+text = "Buckles: 0"
+
+[node name="Missions" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -113.0
+offset_right = 203.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2

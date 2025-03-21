@@ -6,9 +6,9 @@ class_name MissionUI extends CanvasLayer
 
 func _ready() -> void:
 	# Weather UI
-	if MissionManager.weather is AcidRain:
+	if MissionManager.mission.weather is AcidRain:
 		add_child(acid_rain_ui.instantiate())
-	if MissionManager.weather is Lightning:
+	if MissionManager.mission.weather is Lightning:
 		add_child(lightning_ui.instantiate())
 	
 	# Mission UI

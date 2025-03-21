@@ -1,8 +1,13 @@
 class_name Mission extends Node
 
-var gold: int
+var buckles: int
+var weather: Node
 
 signal mission_finished
 
-func _enter_tree() -> void:
-	assert(gold > 0)
+func _ready() -> void:
+	assert(buckles > 0)
+	_setup.call_deferred()
+
+func _setup() -> void:
+	get_tree().current_scene.add_child(weather)

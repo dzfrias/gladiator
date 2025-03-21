@@ -8,15 +8,86 @@ script = ExtResource("1_ksj6c")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Return" type="Button" parent="CanvasLayer"]
+offset_left = 47.0
+offset_top = 45.0
+offset_right = 219.0
+offset_bottom = 97.0
+text = "Return"
+
+[node name="Selection" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(300, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -86.0
-offset_top = -26.0
-offset_right = 86.0
-offset_bottom = 26.0
+offset_left = -370.0
+offset_top = -46.0
+offset_right = 370.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Return"
+alignment = 1
+
+[node name="Weapons" type="Button" parent="CanvasLayer/Selection"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Weapons"
+
+[node name="Armor" type="Button" parent="CanvasLayer/Selection"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Armor"
+
+[node name="Gadgets" type="Button" parent="CanvasLayer/Selection"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Gadgets"
+
+[node name="ItemsContainer" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Items" type="VBoxContainer" parent="CanvasLayer/ItemsContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -305.0
+offset_top = -113.0
+offset_right = 305.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="CanvasLayer/ItemsContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = 130.0
+offset_right = 24.5
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Done"
+
+[node name="BucklesLabel" type="Label" parent="CanvasLayer"]
+offset_left = 46.88
+offset_top = 121.11
+offset_right = 123.88
+offset_bottom = 144.11
+text = "Buckles: 0"
