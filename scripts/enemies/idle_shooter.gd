@@ -3,6 +3,7 @@ class_name IdleShooter extends CharacterBody2D
 @export var prepare_attack_time := 0.25
 @export var idle_time: float = 1
 @export var impact_particle_prefab: PackedScene
+@export var y_attack_cutoff = 50
 
 @onready var weapon: Weapon = $Weapon
 @onready var detection_zone = $DetectionZone
@@ -52,8 +53,8 @@ func _physics_process(delta: float) -> void:
 			$StandSprite.visible = true
 			$HideSprite.visible = false
 			
-		
-			if $DetectionZone.has_overlapping_bodies():
+			var y_distance = abs(global_position.y - Player.Instance.global_position.y)
+			if $DetectionZone.has_overlapping_bodies() and y_distance <= y_attack_cutoff:
 				if weapon.ammo > 0:
 					_shoot()
 				elif !weapon.is_reloading:
