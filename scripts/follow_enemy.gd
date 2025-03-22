@@ -5,20 +5,27 @@ class_name FollowEnemy extends CharacterBody2D
 @export var stop_dist: float = 0.0
 @export var jump_follow_cooldown: float = 0.0
 @export var impact_particle_prefab: PackedScene
+@export var patrol_speed = 50
+@export_range(0.5, 8, 0.1) var min_move_time := 2
+@export_range(0.5, 8, 0.1) var max_move_time := 5
+@export_range(0.5, 8, 0.1) var min_idle_time := 2
+@export_range(0.5, 8, 0.1) var max_idle_time := 5
 
 @onready var _platform_detection = $PlatformDetection
-var _state: State = State.IDLE
+var _state: State
 var _tracking: Node2D
 var _jump_follow_timer := 0.0
 
 enum State {
 	IDLE,
+	PATROL,
 	TRACKING,
 	ATTACKING,
 	TIRED,
 }
 
 func _ready() -> void:
+	_patrol()
 	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
 	$DetectionZone.body_exited.connect(_on_detection_zone_body_exited)
 	$Health.died.connect(_on_health_died)
@@ -66,6 +73,8 @@ func _physics_process(delta: float) -> void:
 		State.IDLE:
 			# TODO make enemy patrol back and forth
 			velocity.x = 0
+		State.PATROL:
+			velocity.x = patrol_speed * $Direction.scalar
 		State.TIRED:
 			velocity.x = 0
 		State.ATTACKING:
@@ -77,7 +86,7 @@ func notify() -> void:
 	if _tracking != null:
 		return
 	_tracking = Player.Instance
-	if _state == State.IDLE:
+	if _state == State.IDLE or _state == State.PATROL:
 		_state = State.TRACKING
 	for body in $NotifyZone.get_overlapping_bodies():
 		body.notify()
@@ -87,6 +96,21 @@ func _attack() -> void:
 
 func _can_attack() -> bool:
 	return true
+
+func _patrol():
+	_state = State.PATROL
+	var patrol_time = randf_range(min_move_time, max_move_time)
+	await get_tree().create_timer(patrol_time).timeout
+	if _state == State.PATROL:
+		_idle()
+
+func _idle():
+	_state = State.IDLE
+	var idle_time = randf_range(min_idle_time, max_idle_time)
+	await get_tree().create_timer(idle_time).timeout
+	if _state == State.IDLE:
+		$Direction.scalar = -$Direction.scalar
+		_patrol()
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
