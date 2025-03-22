@@ -3,8 +3,10 @@
 [ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_yrob0"]
 [ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_s1l7c"]
 
-[node name="SlopeUp" type="TileMapLayer"]
-tile_map_data = PackedByteArray("AAABAP7/AwAJAAIAAAACAP3/AwAHAAEAAAACAP7/AwAJAAIAAAADAPz/AwALAAEAAAADAP3/AwAKAAEAAAADAP7/AwAHAAEAAAAEAPv/AwAJAAEAAAAEAPz/AwAJAAIAAAAEAP3/AwAHAAEAAAAEAP7/AwAKAAEAAAAAAP7/AwAJAAAAAAABAP3/AwAJAAAAAAACAPz/AwAJAAAAAAADAPv/AwAJAAAAAAAEAPr/AwAJAAAAAAA=")
-tile_set = ExtResource("1_yrob0")
+[node name="SlopeUp" type="Node2D"]
 script = ExtResource("2_s1l7c")
 delta_y = -5
+
+[node name="Tiles" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAABAP7/AwAJAAIAAAACAP3/AwAHAAEAAAACAP7/AwAJAAIAAAADAPz/AwALAAEAAAADAP3/AwAKAAEAAAADAP7/AwAHAAEAAAAEAPv/AwAJAAEAAAAEAPz/AwAJAAIAAAAEAP3/AwAHAAEAAAAEAP7/AwAKAAEAAAAAAP7/AwAJAAAAAAABAP3/AwAJAAAAAAACAPz/AwAJAAAAAAADAPv/AwAJAAAAAAAEAPr/AwAJAAAAAAA=")
+tile_set = ExtResource("1_yrob0")

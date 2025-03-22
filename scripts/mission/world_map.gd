@@ -40,6 +40,7 @@ var _enemies := [
 	WeightedScene.new("res://scenes/suispider.tscn", 0.25),
 ]
 var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn")
+var _idle_shooter: PackedScene = preload("res://scenes/idle_shooter.tscn")
 var _fill_tiles: Array[FillTile] = []
 var _fill_source_id: int
 var _tile_size: Vector2
@@ -67,45 +68,32 @@ func _generate() -> void:
 	while module_origin.x < map_width:
 		var module: WeightedScene
 		if next_encounter == 0:
-			module = _weighted_choice(_encounters)
+			module = weighted_choice(_encounters)
 			next_encounter = randi_range(3, 4)
 		else:
-			module = _weighted_choice(_terrain)
+			module = weighted_choice(_terrain)
 			next_encounter -= 1
 		var delta := _place_module(module_origin, module.scene)
 		module_origin += delta
 
 func _place_module(origin: Vector2i, module: PackedScene) -> Vector2i:
 	var instance = module.instantiate() as Module
-	instance.queue_free()
+	var scene_origin := to_global(map_to_local(origin)) - _tile_size / 2
+	instance.global_position = scene_origin
+	instance.tile_size = _tile_size
 	
 	var lowest_y := -100000
-	for tile in instance.get_used_cells():
-		var source_id := instance.get_cell_source_id(tile)
-		var atlas_coords := instance.get_cell_atlas_coords(tile)
-		var coords := origin + tile
+	for tile in instance.tiles().get_used_cells():
+		var source_id = instance.tiles().get_cell_source_id(tile)
+		var atlas_coords = instance.tiles().get_cell_atlas_coords(tile)
+		var coords = origin + tile
 		set_cell(coords, source_id, atlas_coords)
 		lowest_y = maxi(coords.y, lowest_y)
 	
-	var width := instance.get_used_rect().size.x
+	var width = instance.tiles().get_used_rect().size.x
 	_fill(Vector2i(origin.x, lowest_y + 1), width)
 	
-	if instance.has_node("SpawnPoints"):
-		var scene_origin := to_global(map_to_local(origin)) - _tile_size / 2
-		var spawn_points := instance.get_node("SpawnPoints")
-		for child in spawn_points.get_children():
-			var enemy
-			var enemy_instance: Node2D
-			var spawn_point := child as Node2D
-			if child.get_meta("spawnpoint_type") == "idle_ranged":
-				enemy = load("res://scenes/idle_shooter.tscn")
-				enemy_instance = enemy.instantiate() as Node2D
-			else:
-				enemy = _weighted_choice(_enemies)
-				enemy_instance = enemy.scene.instantiate() as Node2D
-			enemy_instance.position = scene_origin + spawn_point.position * scale.x
-			enemy_instance.add_to_group("enemy")
-			get_tree().current_scene.add_child(enemy_instance)
+	add_child(instance)
 	
 	return Vector2i(width, instance.delta_y)
 
@@ -113,14 +101,14 @@ func _fill(origin: Vector2i, width: int) -> void:
 	const Y_HEIGHT = 1000
 	for i in range(width):
 		for j in range(Y_HEIGHT):
-			var fill_tile = _weighted_choice(_fill_tiles)
+			var fill_tile = weighted_choice(_fill_tiles)
 			set_cell(
 				origin + i * Vector2i.RIGHT + j * Vector2i.DOWN,
 				_fill_source_id,
 				fill_tile.atlas_coords
 			)
 
-static func _weighted_choice(array: Array) -> Variant:
+static func weighted_choice(array: Array) -> Variant:
 	var rand := randf()
 	var cumulative := 0.0
 	for item in array:

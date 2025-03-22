@@ -3,7 +3,9 @@
 [ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_tb1qx"]
 [ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_rcl6b"]
 
-[node name="Flat" type="TileMapLayer"]
+[node name="Flat" type="Node2D"]
+script = ExtResource("2_rcl6b")
+
+[node name="Tiles" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAP//AwAGAAAAAAABAP//AwAGAAAAAAACAP//AwAGAAAAAAADAP//AwAGAAAAAAAEAP//AwAGAAAAAAAFAP//AwAGAAAAAAAGAP//AwAGAAAAAAAHAP//AwAGAAAAAAAIAP//AwAGAAAAAAAJAP//AwAGAAAAAAAKAP//AwAGAAAAAAALAP//AwAGAAAAAAAMAP//AwAGAAAAAAA=")
 tile_set = ExtResource("1_tb1qx")
-script = ExtResource("2_rcl6b")
