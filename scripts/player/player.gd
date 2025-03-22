@@ -23,9 +23,6 @@ enum State {
 }
 
 func _ready() -> void:
-	var pistol := preload("res://resources/pistol.tres")
-	$Inventory.add_item(pistol)
-	
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
 	$Inventory.on_item_switched.connect(_on_item_switched)
