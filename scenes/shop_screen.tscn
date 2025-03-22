@@ -1,20 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://codkch2r0aa8n"]
+[gd_scene load_steps=3 format=3 uid="uid://codkch2r0aa8n"]
 
 [ext_resource type="Script" path="res://scripts/ui/shop_screen.gd" id="1_ksj6c"]
+[ext_resource type="Shortcut" uid="uid://66u22astbge4" path="res://resources/quit_shortcut.tres" id="2_gb8sf"]
 
-[node name="ShopScreen" type="Node2D"]
+[node name="ShopScreen" type="CanvasLayer"]
 script = ExtResource("1_ksj6c")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Return" type="Button" parent="CanvasLayer"]
+[node name="Return" type="Button" parent="."]
 offset_left = 47.0
 offset_top = 45.0
 offset_right = 219.0
 offset_bottom = 97.0
+shortcut = ExtResource("2_gb8sf")
 text = "Return"
 
-[node name="Selection" type="HBoxContainer" parent="CanvasLayer"]
+[node name="Selection" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,22 +29,22 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Weapons" type="Button" parent="CanvasLayer/Selection"]
+[node name="Weapons" type="Button" parent="Selection"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Weapons"
 
-[node name="Armor" type="Button" parent="CanvasLayer/Selection"]
+[node name="Armor" type="Button" parent="Selection"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Armor"
 
-[node name="Gadgets" type="Button" parent="CanvasLayer/Selection"]
+[node name="Gadgets" type="Button" parent="Selection"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Gadgets"
 
-[node name="ItemsContainer" type="Control" parent="CanvasLayer"]
+[node name="ItemsContainer" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -55,7 +55,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Items" type="VBoxContainer" parent="CanvasLayer/ItemsContainer"]
+[node name="Items" type="VBoxContainer" parent="ItemsContainer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -69,7 +69,7 @@ offset_bottom = 113.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackButton" type="Button" parent="CanvasLayer/ItemsContainer"]
+[node name="BackButton" type="Button" parent="ItemsContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -85,7 +85,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Done"
 
-[node name="BucklesLabel" type="Label" parent="CanvasLayer"]
+[node name="BucklesLabel" type="Label" parent="."]
 offset_left = 46.88
 offset_top = 121.11
 offset_right = 123.88
