@@ -108,7 +108,7 @@ static func weighted_choice(array: Array) -> Variant:
 	for item in array:
 		cumulative += item.weight
 		assert(cumulative <= 1.0)
-		if cumulative <= rand:
+		if cumulative < rand:
 			continue
 		return item
 	
