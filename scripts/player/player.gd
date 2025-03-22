@@ -12,6 +12,7 @@ var _jump_buffer := 0.0
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_shield_x = $Shield.position.x
 @onready var _original_item_x = $ItemPosition.position.x
+@onready var _original_particles_x = $WalkingParticles.position.x
 
 static var Instance
 
@@ -54,13 +55,24 @@ func _process(delta: float) -> void:
 		State.ROLL:
 			velocity.x = movement_settings.roll_speed * $Direction.scalar
 	
+	if abs(velocity.x) > 0 and is_on_floor():
+		$WalkingParticles.emitting = true
+	else:
+		$WalkingParticles.emitting = false
+	
 	_align()
+	
+	var prev_y := velocity.y
 	move_and_slide()
+	if is_on_floor() and prev_y > 0:
+		on_ground_impact.emit(prev_y)
 
 func _align() -> void:
 	$ItemPosition.position = Vector2(_original_item_x * $Direction.scalar, $ItemPosition.position.y)
 	$Shield.position = Vector2(_original_shield_x * $Direction.scalar, $Shield.position.y)
 	$Weapon.position = $ItemPosition.position
+	$WalkingParticles.position = Vector2(_original_particles_x * $Direction.scalar, $WalkingParticles.position.y)
+	$WalkingParticles.direction.x = $Direction.scalar
 
 func _input(event: InputEvent) -> void:
 	match _state:
