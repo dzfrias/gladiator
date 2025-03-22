@@ -40,6 +40,8 @@ func _process(delta: float) -> void:
 			_is_jumping = false
 	elif not is_on_floor():
 		velocity.y += get_gravity().y * movement_settings.gravity_scale * delta
+	
+	# This gives the player a small window to press the jump button before they hit the ground
 	if _jump_buffer > 0:
 		_jump_buffer = max(0, _jump_buffer - delta)
 		if _state == State.CONTROL and is_on_floor():
@@ -47,14 +49,18 @@ func _process(delta: float) -> void:
 	if not _is_jumping:
 		_jump_time = 0.0
 	
+	# As a last-ditch sanity check, disable the weapon if we're not in the control state
 	if _state != State.CONTROL:
 		$Weapon.set_firing(null)
+	
+	# Handle continuous (horizontal) movement
 	match _state:
 		State.CONTROL, State.SHIELD, State.UNDERGROUND:
 			_apply_horizontal_input(delta)
 		State.ROLL:
 			velocity.x = movement_settings.roll_speed * $Direction.scalar
 	
+	# Handle walking particles
 	if abs(velocity.x) > 0 and is_on_floor():
 		$WalkingParticles.emitting = true
 	else:
@@ -62,8 +68,11 @@ func _process(delta: float) -> void:
 	
 	_align()
 	
+	# This will store our previous y-velocity, which is used to get the speed of impact if we hit
+	# the ground after move_and_slide is called. We use that information for on_ground_impact
 	var prev_y := velocity.y
 	move_and_slide()
+	
 	if is_on_floor() and prev_y > 0:
 		on_ground_impact.emit(prev_y)
 
