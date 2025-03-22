@@ -71,7 +71,6 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = direction * speed
 		State.IDLE:
-			# TODO make enemy patrol back and forth
 			velocity.x = 0
 		State.PATROL:
 			velocity.x = patrol_speed * $Direction.scalar
