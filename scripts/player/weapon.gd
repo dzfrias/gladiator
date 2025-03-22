@@ -17,9 +17,12 @@ func _ready() -> void:
 	
 func set_firing(direction: Direction):
 	_fire_direction = direction
+
+func is_firing() -> bool:
+	return _fire_direction != null
 	
 func _process(_delta: float) -> void:
-	if _fire_direction != null:
+	if is_firing():
 		fire(_fire_direction)
 
 func fire(direction: Direction):

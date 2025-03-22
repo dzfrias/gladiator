@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-@onready var weapon = Player.Instance._weapon
+@onready var weapon = Player.Instance.weapon()
 
 var infinite_ammo_text = "Ammo:  [img=8,8]assets/infinity_sign.png[/img]"
 

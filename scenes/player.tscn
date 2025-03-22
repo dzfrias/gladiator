@@ -77,12 +77,13 @@ projectile_prefab = ExtResource("6_w2kq1")
 auto_reload = true
 
 [node name="StandingItemPosition" type="Node2D" parent="."]
-position = Vector2(27, -46)
+position = Vector2(30, -46)
 
 [node name="CrouchingItemPosition" type="Node2D" parent="."]
-position = Vector2(27, -13)
+position = Vector2(30, -13)
 
 [node name="ItemPosition" type="Node2D" parent="."]
+position = Vector2(30, -46)
 
 [node name="PlatformRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
