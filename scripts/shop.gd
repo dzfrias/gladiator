@@ -1,6 +1,6 @@
 class_name Shop extends Area2D
 
-var buckles: float:
+var buckles: int:
 	get: return _buckles
 	set(amt):
 		_buckles = amt
@@ -15,9 +15,9 @@ class WeaponItem:
 	var price: int
 	var bought: bool = false
 	
-	func _init(stats: WeaponStats, price: int) -> void:
-		self.stats = stats
-		self.price = price
+	func _init(stats_: WeaponStats, price_: int) -> void:
+		stats = stats_
+		price = price_
 
 var weapons: Array[WeaponItem] = [
 	WeaponItem.new(preload("res://resources/pistol.tres"), 10),

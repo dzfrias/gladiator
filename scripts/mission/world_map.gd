@@ -34,13 +34,7 @@ var _encounters := [
 	WeightedScene.new("res://scenes/modules/encounters/outpost_encounter.tscn", 0.15),
 	WeightedScene.new("res://scenes/modules/encounters/campsite_encounter.tscn", 0.175),
 ]
-var _enemies := [
-	WeightedScene.new("res://scenes/wolf.tscn", 0.5),
-	WeightedScene.new("res://scenes/shooter.tscn", 0.25),
-	WeightedScene.new("res://scenes/suispider.tscn", 0.25),
-]
 var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn")
-var _idle_shooter: PackedScene = preload("res://scenes/idle_shooter.tscn")
 var _fill_tiles: Array[FillTile] = []
 var _fill_source_id: int
 var _tile_size: Vector2
@@ -93,7 +87,7 @@ func _place_module(origin: Vector2i, module: PackedScene) -> Vector2i:
 	var width = instance.tiles().get_used_rect().size.x
 	_fill(Vector2i(origin.x, lowest_y + 1), width)
 	
-	add_child(instance)
+	add_child(instance as Object)
 	
 	return Vector2i(width, instance.delta_y)
 

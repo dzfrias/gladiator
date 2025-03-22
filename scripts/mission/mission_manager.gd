@@ -5,9 +5,9 @@ var mission: Mission
 var _mission_scene = preload("res://scenes/mission.tscn")
 var _home_scene = preload("res://scenes/test_scene.tscn")
 
-func enter_mission(mission: Mission) -> void:
-	self.mission = mission
-	_goto_mission.call_deferred(mission)
+func enter_mission(m: Mission) -> void:
+	mission = m
+	_goto_mission.call_deferred()
 
 func return_home() -> void:
 	_goto_home.call_deferred()
@@ -15,7 +15,7 @@ func return_home() -> void:
 func _goto_home() -> void:
 	_load_scene(_home_scene)
 
-func _goto_mission(mission: Mission) -> void:
+func _goto_mission() -> void:
 	var items = []
 	for item in Player.Instance.inventory().items:
 		items.append(item)

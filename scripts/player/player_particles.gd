@@ -10,6 +10,8 @@ func _ready() -> void:
 	get_parent().on_ground_impact.connect(_on_ground_impact)
 
 func _on_ground_impact(impact_force: float):
+	if impact_force < _particle_impact_threshold:
+		return
 	var land_impact_particles = land_impact_particles_prefab.instantiate() as CPUParticles2D
 	get_tree().current_scene.add_child(land_impact_particles)
 	land_impact_particles.global_position = get_parent().global_position

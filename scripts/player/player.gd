@@ -84,6 +84,11 @@ func _align() -> void:
 	$WalkingParticles.direction.x = $Direction.scalar
 
 func _input(event: InputEvent) -> void:
+	if event.as_text().is_valid_int():
+		var index := event.as_text().to_int() - 1
+		if index < $Inventory.items.size() and index >= 0:
+			$Inventory.set_held_item(index)
+	
 	match _state:
 		State.CONTROL:
 			# Jump

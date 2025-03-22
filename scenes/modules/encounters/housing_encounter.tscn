@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=4 uid="uid://blerf1oy40wik"]
+[gd_scene load_steps=3 format=4 uid="uid://dc14wkod6yim8"]
 
 [ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_vynlx"]
 [ext_resource type="Script" path="res://scripts/combat_encounter.gd" id="2_v3yv3"]

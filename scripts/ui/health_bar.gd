@@ -11,13 +11,13 @@ func _ready() -> void:
 	health.died.connect(_on_death)
 	hide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	global_position = health.get_parent().global_position + health_bar_offset
 
-func set_health(health):
-	self.health = health
+func set_health(obj: Health):
+	health = obj
 
-func _on_health_lost(amount: float, direction: Vector2):
+func _on_health_lost(amount: float, _direction: Vector2):
 	value -= amount
 	show()
 
