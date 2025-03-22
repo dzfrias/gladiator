@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=4 uid="uid://j7a2yyak1oh2"]
+
+[ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_7nmd0"]
+[ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_ir2he"]
+
+[node name="CampsiteEncounter" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAABAP//AwAGAAAAAAAAAP//AwAGAAAAAAAHAP//AwAGAAAAAAAIAP//AwAGAAAAAAAJAP//AwAGAAAAAAAKAP//AwAGAAAAAAALAP//AwAGAAAAAAAMAP//AwAGAAAAAAANAP7/AwAHAAIAAAANAP//AwAGAAAAAAAOAP//AwAGAAAAAAAPAP//AwAGAAAAAAAQAP7/AwADAAMAAAAQAP//AwAGAAAAAAARAP7/AwADAAMAAAARAP//AwAGAAAAAAASAP//AwAGAAAAAAATAP//AwAGAAAAAAAUAP//AwAGAAAAAAAVAP7/AwADAAMAAAAVAP//AwAGAAAAAAAWAP//AwAGAAAAAAAXAP//AwAGAAAAAAAYAP//AwAGAAAAAAAZAP//AwAGAAAAAAAaAP//AwAGAAAAAAAbAP//AwAGAAAAAAAcAP//AwAGAAAAAAAdAP//AwAGAAAAAAAeAP//AwAGAAAAAAAfAP//AwAGAAAAAAAgAP//AwAGAAAAAAAhAP//AwAGAAAAAAAiAP//AwAGAAAAAAAJAP7/AwAHAAIAAAAKAP3/AwAHAAIAAAALAPz/AwAHAAIAAAAMAP3/AwAHAAIAAAASAP7/AwADAAMAAAAWAP7/AwADAAMAAAAaAP7/AwAHAAIAAAAbAP3/AwAHAAIAAAAcAPz/AwAHAAIAAAAdAP3/AwAHAAIAAAAeAP7/AwAHAAIAAAAgAP7/AwAHAAIAAAAhAP3/AwAHAAIAAAAiAPz/AwAHAAIAAAAjAP3/AwAHAAIAAAAjAP//AwAGAAAAAAAkAP7/AwAHAAIAAAAkAP//AwAGAAAAAAAlAP//AwAGAAAAAAAmAP//AwAGAAAAAAAnAP//AwAGAAAAAAAGAP//AwAGAAAAAAAFAP//AwAGAAAAAAAEAP//AwAGAAAAAAADAP//AwAGAAAAAAACAP//AwAGAAAAAAA=")
+tile_set = ExtResource("1_7nmd0")
+script = ExtResource("2_ir2he")
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Spawn1" type="Node2D" parent="SpawnPoints"]
+position = Vector2(170, -35)
+
+[node name="Spawn2" type="Node2D" parent="SpawnPoints"]
+position = Vector2(701, -37)
+metadata/spawnpoint_type = &"idle_ranged"
+
+[node name="Spawn3" type="Node2D" parent="SpawnPoints"]
+position = Vector2(1038, -35)
+
+[node name="Spawn4" type="Node2D" parent="SpawnPoints"]
+position = Vector2(1191, -38)

@@ -11,6 +11,7 @@
 tile_set = ExtResource("1_dxwm2")
 collision_visibility_mode = 1
 script = ExtResource("2_3qno5")
+map_width = 400
 
 [node name="Player" parent="." instance=ExtResource("3_mkemn")]
 position = Vector2(73, -203)
