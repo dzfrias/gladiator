@@ -5,6 +5,8 @@
 
 [node name="Basic" type="Node2D"]
 script = ExtResource("1_xjeap")
+spawn_during_wave_min = 2
+spawn_during_wave_max = 3
 
 [node name="SpawnPoints" type="Node" parent="."]
 

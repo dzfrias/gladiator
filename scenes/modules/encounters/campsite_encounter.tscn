@@ -5,6 +5,8 @@
 
 [node name="CampsiteEncounter" type="Node2D"]
 script = ExtResource("2_wdohd")
+spawn_during_wave_min = 3
+spawn_during_wave_max = 5
 
 [node name="SpawnPoints" type="Node" parent="."]
 
