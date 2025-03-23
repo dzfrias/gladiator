@@ -11,4 +11,5 @@ func _ready() -> void:
 	_setup.call_deferred()
 
 func _setup() -> void:
-	get_tree().current_scene.add_child(weather)
+	if weather:
+		get_tree().current_scene.add_child(weather)

@@ -6,7 +6,7 @@ func _ready() -> void:
 	super()
 	get_tree().node_added.connect(_on_node_added)
 
-func _on_node_added(node: Node2D):
+func _on_node_added(node: Node):
 	if node.is_in_group("enemy"):
 		enemies_remaining += 1
 		for child in node.get_children():
