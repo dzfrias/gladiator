@@ -9,6 +9,7 @@ func add_item(item):
 	items.append(item)
 	if items.size() == 1:
 		_current_item = item
+		on_item_switched.emit(_current_item)
 
 func set_held_item(index: int):
 	_current_item = items[index]
