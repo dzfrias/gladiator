@@ -23,7 +23,7 @@ func set_to_mission(mission: Mission):
 	elif mission.weather is AcidRain:
 		weather_name = "Acid Rain"
 	else:
-		remove_child($WeatherLabel)
+		weather_name = "None"
 	
 	$Description/MissionLabel.text = mission_name
 	$Description/BucklesLabel.text = str(mission.buckles)
