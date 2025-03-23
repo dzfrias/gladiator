@@ -7,19 +7,22 @@ class_name FollowEnemy extends CharacterBody2D
 @export var impact_particle_prefab: PackedScene
 @export var patrol_speed = 50
 @export var notify_depth = 2
-@export_range(0.5, 8, 0.1) var min_move_time := 2
-@export_range(0.5, 8, 0.1) var max_move_time := 5
+@export_range(0.5, 8, 0.1) var min_move_time := 1.5
+@export_range(0.5, 8, 0.1) var max_move_time := 2.5
 @export_range(0.5, 8, 0.1) var min_idle_time := 2
-@export_range(0.5, 8, 0.1) var max_idle_time := 5
+@export_range(0.5, 8, 0.1) var max_idle_time := 3
+@export_range(0.5, 8, 0.1) var initial_patrol_wait_max := 4
 
 @onready var _platform_detection = $PlatformDetection
 var _state: State
 var _tracking: Node2D
 var _jump_follow_timer := 0.0
+@onready var _original_patrol_speed = patrol_speed
+var _left_ray: RayCast2D
+var _right_ray: RayCast2D
 
 enum State {
 	IDLE,
-	PATROL,
 	TRACKING,
 	ATTACKING,
 	TIRED,
@@ -31,6 +34,22 @@ func _ready() -> void:
 	$DetectionZone.body_exited.connect(_on_detection_zone_body_exited)
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
+	
+	_left_ray = _create_ray(true)
+	add_child(_left_ray)
+	_right_ray = _create_ray(false)
+	add_child(_right_ray)
+
+func _create_ray(left: bool) -> RayCast2D:
+	var bounding_box: Rect2 = $CollisionShape2D.shape.get_rect()
+	var ray := RayCast2D.new()
+	ray.collision_mask = Constants.PLATFORM_LAYER | Constants.ENVIRONMENT_LAYER
+	ray.target_position = Vector2(0.0, bounding_box.size.y / 2)
+	ray.position.x = bounding_box.size.x / 2 + 10
+	if left:
+		ray.position.x *= -1
+	ray.position.y += bounding_box.size.y / 2 - 10
+	return ray
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -72,9 +91,10 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = direction * speed
 		State.IDLE:
-			velocity.x = 0
-		State.PATROL:
 			velocity.x = patrol_speed * $Direction.scalar
+			# Check reaching the edge of a platform or the environment
+			if (not _left_ray.is_colliding() and velocity.x < 0) or (not _right_ray.is_colliding() and velocity.x > 0):
+				$Direction.switch()
 		State.TIRED:
 			velocity.x = 0
 		State.ATTACKING:
@@ -86,32 +106,39 @@ func notify(depth: int) -> void:
 	if _tracking != null:
 		return
 	_tracking = Player.Instance
-	if _state == State.IDLE or _state == State.PATROL:
+	if _state == State.IDLE:
 		_state = State.TRACKING
 	if depth > 0:
 		for body in $NotifyZone.get_overlapping_bodies():
 			body.notify(depth - 1)
+
+func _patrol() -> void:
+	_state = State.IDLE
+	patrol_speed = 0.0
+	var wait_time := randf_range(0.0, initial_patrol_wait_max)
+	await get_tree().create_timer(wait_time).timeout
+	patrol_speed = _original_patrol_speed
+	
+	while _state == State.IDLE:
+		var move_time := randf_range(min_move_time, max_move_time)
+		await get_tree().create_timer(move_time).timeout
+		if _state != State.IDLE:
+			break
+		patrol_speed = 0.0
+		var idle_time := randf_range(min_idle_time, max_idle_time)
+		await get_tree().create_timer(idle_time).timeout
+		if _state != State.IDLE:
+			break
+		$Direction.switch()
+		patrol_speed = _original_patrol_speed
+	
+	patrol_speed = _original_patrol_speed
 
 func _attack() -> void:
 	pass
 
 func _can_attack() -> bool:
 	return true
-
-func _patrol():
-	_state = State.PATROL
-	var patrol_time = randf_range(min_move_time, max_move_time)
-	await get_tree().create_timer(patrol_time).timeout
-	if _state == State.PATROL:
-		_idle()
-
-func _idle():
-	_state = State.IDLE
-	var idle_time = randf_range(min_idle_time, max_idle_time)
-	await get_tree().create_timer(idle_time).timeout
-	if _state == State.IDLE:
-		$Direction.scalar = -$Direction.scalar
-		_patrol()
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:

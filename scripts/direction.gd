@@ -13,3 +13,6 @@ var scalar: float:
 			is_right = true
 		else:
 			is_right = false
+
+func switch() -> void:
+	is_right = !is_right
