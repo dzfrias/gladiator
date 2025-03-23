@@ -9,7 +9,7 @@ class_name Grenade extends RigidBody2D
 @onready var explosion_radius = $ExplosionRadius
 var direction: Direction
 
-func init(direction: Direction) -> void:
+func init(_direction: Direction) -> void:
 	apply_force(Vector2(direction.scalar * throw_force, -throw_force))
 
 func _ready() -> void:
@@ -28,5 +28,5 @@ func _explode():
 	get_tree().current_scene.add_child(explosion)
 	queue_free()
 
-func _body_entered(body: Node2D):
+func _body_entered(_body: Node2D):
 	_explode()

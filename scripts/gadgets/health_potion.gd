@@ -2,7 +2,7 @@ class_name HealthPotion extends Node
 
 var health_increase_amount = 5
 
-func init(direction: Direction):
+func init(_direction: Direction):
 	pass
 
 func _ready() -> void:
