@@ -6,6 +6,7 @@ class_name CombatEncounter extends Module
 @export var spawn_in_cooldown: float = 3.5
 @export var spawn_in_delay_mean: float = 0.7
 @export var spawn_in_delay_sd: float = 0.1
+@export var spawn_in_tired_time: float = 1.5
 
 var _started := false
 var _spawn_during_wave: int
@@ -99,6 +100,7 @@ func _spawn_in() -> void:
 			var enemy := _spawn(spawn_points[choice], false)
 			# Automatically track player after being spawned
 			enemy.notify()
+			enemy.make_tired(spawn_in_tired_time)
 			await get_tree().create_timer(randfn(spawn_in_delay_mean, spawn_in_delay_sd)).timeout
 		
 		await get_tree().create_timer(spawn_in_cooldown).timeout

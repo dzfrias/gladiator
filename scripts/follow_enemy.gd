@@ -31,7 +31,6 @@ enum State {
 func _ready() -> void:
 	_patrol()
 	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
-	$DetectionZone.body_exited.connect(_on_detection_zone_body_exited)
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
 	
@@ -102,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func notify(depth: int) -> void:
+func notify(depth: int = 0) -> void:
 	if _tracking != null:
 		return
 	_tracking = Player.Instance
@@ -111,6 +110,13 @@ func notify(depth: int) -> void:
 	if depth > 0:
 		for body in $NotifyZone.get_overlapping_bodies():
 			body.notify(depth - 1)
+
+func make_tired(duration: float) -> void:
+	var previous_state := _state
+	_state = State.TIRED
+	await get_tree().create_timer(duration).timeout
+	assert(_state == State.TIRED)
+	_state = previous_state
 
 func _patrol() -> void:
 	_state = State.IDLE
@@ -143,9 +149,6 @@ func _can_attack() -> bool:
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
 		notify(notify_depth)
-
-func _on_detection_zone_body_exited(_body: Node2D) -> void:
-	pass
 
 func _on_health_damage_taken(_amount: float, direction: Vector2) -> void:
 	var impact_particles = impact_particle_prefab.instantiate()
