@@ -4,6 +4,7 @@ class_name IdleShooter extends CharacterBody2D
 @export var idle_time: float = 1
 @export var impact_particle_prefab: PackedScene
 @export var y_attack_cutoff = 50
+@export var notify_depth = 2
 
 @onready var weapon: Weapon = $Weapon
 @onready var detection_zone = $DetectionZone
@@ -62,14 +63,15 @@ func _physics_process(delta: float) -> void:
 				elif has_box and _is_box_inbetween():
 					_hide()
 
-func notify() -> void:
-	for body in $NotifyZone.get_overlapping_bodies():
-		if body == self:
-			continue
-		body.notify()
+func notify(depth: int) -> void:
+	if depth > 0:
+		for body in $NotifyZone.get_overlapping_bodies():
+			if body == self:
+				continue
+			body.notify(depth - 1)
 
 func _shoot() -> void:
-	notify()
+	notify(notify_depth)
 	_state = State.SHOOTING
 	await get_tree().create_timer(prepare_attack_time).timeout
 	while weapon.ammo > 0:

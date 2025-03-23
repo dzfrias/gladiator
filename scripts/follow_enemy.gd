@@ -6,6 +6,7 @@ class_name FollowEnemy extends CharacterBody2D
 @export var jump_follow_cooldown: float = 0.0
 @export var impact_particle_prefab: PackedScene
 @export var patrol_speed = 50
+@export var notify_depth = 2
 @export_range(0.5, 8, 0.1) var min_move_time := 2
 @export_range(0.5, 8, 0.1) var max_move_time := 5
 @export_range(0.5, 8, 0.1) var min_idle_time := 2
@@ -81,14 +82,15 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func notify() -> void:
+func notify(depth: int) -> void:
 	if _tracking != null:
 		return
 	_tracking = Player.Instance
 	if _state == State.IDLE or _state == State.PATROL:
 		_state = State.TRACKING
-	for body in $NotifyZone.get_overlapping_bodies():
-		body.notify()
+	if depth > 0:
+		for body in $NotifyZone.get_overlapping_bodies():
+			body.notify(depth - 1)
 
 func _attack() -> void:
 	pass
@@ -113,7 +115,7 @@ func _idle():
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
-		notify()
+		notify(notify_depth)
 
 func _on_detection_zone_body_exited(_body: Node2D) -> void:
 	pass
@@ -126,7 +128,7 @@ func _on_health_damage_taken(_amount: float, direction: Vector2) -> void:
 	impact_particles.emitting = true
 	
 	if _tracking == null:
-		notify()
+		notify(notify_depth)
 
 func _on_health_died() -> void:
 	queue_free()
