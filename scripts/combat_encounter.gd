@@ -94,9 +94,15 @@ func _spawn_in() -> void:
 		_spawn_during_wave -= to_spawn
 		assert(_spawn_during_wave >= 0)
 		
+		# Keeps track of available spawn points to prevent re-use
+		var available: Array[Node] = []
 		for _i in range(to_spawn):
-			var choice := randi_range(0, spawn_points.size() - 1)
-			var enemy := _spawn(spawn_points[choice], false)
+			var spawn_point = available.pop_back()
+			if spawn_point == null:
+				available = spawn_points.duplicate()
+				available.shuffle()
+				spawn_point = available.pop_back()
+			var enemy := _spawn(spawn_point as Node2D, false)
 			# Automatically track player after being spawned
 			enemy.notify()
 			enemy.make_tired(spawn_in_tired_time)
