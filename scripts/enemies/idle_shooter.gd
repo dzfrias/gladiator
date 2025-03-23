@@ -62,6 +62,8 @@ func _physics_process(delta: float) -> void:
 					weapon.reload()
 				elif has_box and _is_box_inbetween():
 					_hide()
+	
+	move_and_slide()
 
 func notify(depth: int) -> void:
 	if depth > 0:

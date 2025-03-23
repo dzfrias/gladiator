@@ -18,11 +18,11 @@ position = Vector2(761, -53)
 position = Vector2(852, -183)
 
 [node name="Spawn5" type="Node2D" parent="SpawnPoints"]
-position = Vector2(236, -36)
+position = Vector2(236, -69.44)
 metadata/spawnpoint_type = "idle_ranged"
 
 [node name="Spawn6" type="Node2D" parent="SpawnPoints"]
-position = Vector2(1000, -36)
+position = Vector2(1000, -66.63)
 metadata/spawnpoint_type = "idle_ranged"
 
 [node name="Tiles" type="TileMapLayer" parent="."]

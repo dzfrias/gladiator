@@ -12,7 +12,7 @@ script = ExtResource("1_sasvn")
 position = Vector2(531, -158)
 
 [node name="Spawn2" type="Node2D" parent="SpawnPoints"]
-position = Vector2(745, -41)
+position = Vector2(745, -64.66)
 metadata/spawnpoint_type = &"idle_ranged"
 
 [node name="Spawn3" type="Node2D" parent="SpawnPoints"]
