@@ -15,7 +15,8 @@ class_name PlayerMovementSettings extends Resource
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.2
 @export var invincible_time: float = 1.0
-@export var burrow_speed: float = 500
+@export var burrow_speed: float = 500.0
+@export var burrow_speed_boost: float = 700.0
 @export var max_burrow_time: float = 3.0
 @export var burrow_increment_factor: float = 2.0
 @export var burrow_decrement_factor: float = 0.5

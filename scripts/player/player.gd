@@ -183,11 +183,11 @@ func _apply_horizontal_input(delta: float) -> void:
 	if left:
 		if velocity.x > 0:
 			acceleration *= movement_settings.direction_change_factor
-		velocity.x = maxf(-_current_move_speed, velocity.x - acceleration * delta)
+		velocity.x = move_toward(velocity.x, -_current_move_speed, acceleration * delta)
 	if right:
 		if velocity.x < 0:
 			acceleration *= movement_settings.direction_change_factor
-		velocity.x = minf(_current_move_speed, velocity.x + acceleration * delta)
+		velocity.x = move_toward(velocity.x, _current_move_speed, acceleration * delta)
 
 func _jump() -> void:
 	_is_jumping = true
@@ -220,6 +220,7 @@ func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
 	_state = State.UNDERGROUND
 	_current_move_speed = movement_settings.burrow_speed
+	velocity.x = movement_settings.burrow_speed_boost * $Direction.scalar
 	$StandingSprite.visible = false
 	collision_layer = Constants.INVINCIBLE_LAYER
 
