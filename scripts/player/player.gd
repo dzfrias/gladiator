@@ -159,7 +159,7 @@ func _apply_horizontal_input(delta: float) -> void:
 	# 1. Both left and right and being pressed
 	# 2. Neither left nor right are being pressed
 	if (left and right) or not (left or right):
-		velocity.x = move_toward(velocity.x, 0, movement_settings.move_acceleration * delta)
+		velocity.x = move_toward(velocity.x, 0, movement_settings.move_deceleration * delta)
 		return
 	
 	$Direction.is_right = right

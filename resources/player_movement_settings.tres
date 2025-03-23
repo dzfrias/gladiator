@@ -20,3 +20,6 @@ roll_time = 0.2
 roll_cooldown_time = 0.2
 invincible_time = 1.0
 burrow_speed = 500.0
+max_burrow_time = 3.0
+burrow_increment_factor = 2.0
+burrow_decrement_factor = 0.5
