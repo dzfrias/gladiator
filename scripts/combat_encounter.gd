@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 		return
 	
 	# Check if all enemies have been killed and there are no more enemies left to spawn
-	if get_tree().get_node_count_in_group(_group_name) and _spawn_during_wave == 0:
+	if get_tree().get_node_count_in_group(_group_name) == 0 and _spawn_during_wave == 0:
 		_set_barriers_enabled(false)
 
 static func _create_boundary(x: float) -> StaticBody2D:
