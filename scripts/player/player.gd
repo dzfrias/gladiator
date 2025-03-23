@@ -10,6 +10,7 @@ var _can_roll := true
 var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
+var _wants_burrow := false
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_shield_x = $Shield.position.x
 @onready var _original_item_x = $ItemPosition.position.x
@@ -56,7 +57,13 @@ func _process(delta: float) -> void:
 	
 	# Handle continuous (horizontal) movement
 	match _state:
-		State.CONTROL, State.SHIELD:
+		State.CONTROL:
+			_underground_time = maxf(_underground_time - delta * movement_settings.burrow_decrement_factor, 0.0)
+			_apply_horizontal_input(delta)
+			if _wants_burrow and is_on_floor():
+				_burrow()
+				_wants_burrow = false
+		State.SHIELD:
 			_underground_time = maxf(_underground_time - delta * movement_settings.burrow_decrement_factor, 0.0)
 			_apply_horizontal_input(delta)
 		State.UNDERGROUND:
@@ -118,8 +125,13 @@ func _input(event: InputEvent) -> void:
 				_current_move_speed = movement_settings.shield_move_speed
 			
 			# Burrow
-			if event.is_action_pressed("burrow") and is_on_floor():
-				_burrow()
+			if event.is_action_pressed("burrow"):
+				if is_on_floor():
+					_burrow()
+				else:
+					_wants_burrow = true
+			if event.is_action_released("burrow"):
+				_wants_burrow = false
 			
 			# Roll
 			if event.is_action_pressed("roll"):
@@ -144,6 +156,9 @@ func _input(event: InputEvent) -> void:
 		State.UNDERGROUND:
 			if event.is_action_released("burrow"):
 				_unburrow()
+			if event.is_action_pressed("jump"):
+				_unburrow()
+				_jump_buffer = movement_settings.jump_buffer_time
 		
 		State.SHIELD:
 			if event.is_action_released("shield"):
