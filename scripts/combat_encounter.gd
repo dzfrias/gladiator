@@ -56,8 +56,7 @@ func _process(_delta: float) -> void:
 
 static func _create_boundary(x: float) -> StaticBody2D:
 	var boundary := StaticBody2D.new()
-	boundary.collision_layer = Constants.ENVIRONMENT_LAYER
-	boundary.collision_mask = Constants.PLAYER_LAYER
+	boundary.collision_layer = Constants.PLAYER_BOUNDARY_LAYER
 	var collision_shape := CollisionShape2D.new()
 	collision_shape.disabled = true
 	var shape := WorldBoundaryShape2D.new()

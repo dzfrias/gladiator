@@ -96,6 +96,7 @@ fallthrough={
 2d_physics/layer_8="Enemy"
 2d_physics/layer_9="BulletWall"
 2d_physics/layer_10="Interactable"
+2d_physics/layer_11="PlayerBoundary"
 
 [physics]
 
