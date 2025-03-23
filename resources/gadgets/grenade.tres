@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GadgetInfo" load_steps=3 format=3 uid="uid://csu62y5mt8j1i"]
+
+[ext_resource type="PackedScene" uid="uid://ctjiaujlkr8mh" path="res://scenes/gadgets/grenade.tscn" id="1_7gul0"]
+[ext_resource type="Script" path="res://scripts/resources/gadget_info.gd" id="2_bsjue"]
+
+[resource]
+script = ExtResource("2_bsjue")
+name = "Grenade"
+scene = ExtResource("1_7gul0")

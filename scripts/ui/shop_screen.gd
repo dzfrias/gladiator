@@ -36,18 +36,23 @@ func _open_details_screen(kind: ScreenKind) -> void:
 	_screen = kind
 	match kind:
 		ScreenKind.WEAPONS:
-			for weapon in _shop.weapons:
-				var item = _shop_item_scene.instantiate()
-				item.find_child("Label").text = weapon.stats.name
-				item.find_child("PriceLabel").text = str(weapon.price)
-				var btn = item.find_child("BuyButton")
-				btn.pressed.connect(_on_weapon_buy.bind(btn, weapon))
-				$ItemsContainer/Items.add_child(item)
+			_show_item_details(_shop.weapons)
+		ScreenKind.GADGETS:
+			_show_item_details(_shop.gadgets)
 
-func _on_weapon_buy(btn: Button, weapon: Shop.WeaponItem) -> void:
-	_shop.buy_weapon(weapon)
-	if weapon.bought:
+func _on_inventory_item_buy(btn: Button, item: Shop.ShopItem) -> void:
+	_shop.buy_inventory_item(item)
+	if item.bought:
 		btn.disabled = true
+
+func _show_item_details(items: Array[Shop.ShopItem]) -> void:
+	for shop_item in items:
+		var item = _shop_item_scene.instantiate()
+		item.find_child("Label").text = shop_item.item.name
+		item.find_child("PriceLabel").text = str(shop_item.price)
+		var btn = item.find_child("BuyButton")
+		btn.pressed.connect(_on_inventory_item_buy.bind(btn, shop_item))
+		$ItemsContainer/Items.add_child(item)
 
 func _update_buckles_label() -> void:
 	$BucklesLabel.text = "Buckles: " + str(_shop.buckles)

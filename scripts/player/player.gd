@@ -139,10 +139,11 @@ func _input(event: InputEvent) -> void:
 			
 			# Fire
 			if event.is_action_pressed("fire"):
-				if $Inventory.get_held_item() is WeaponStats:
+				var item = $Inventory.get_held_item()
+				if item is WeaponStats:
 					$Weapon.set_firing($Direction)
-				elif $Inventory.get_held_item() != null:
-					_use_gadget()
+				elif item is GadgetInfo:
+					_use_gadget(item)
 			if event.is_action_released("fire"):
 				$Weapon.set_firing(null)
 			
@@ -281,8 +282,8 @@ func _flash_invincible() -> void:
 func get_health() -> Health:
 	return $Health;
 
-func _use_gadget():
-	var gadget = $Inventory.get_held_item().instantiate()
+func _use_gadget(info: GadgetInfo):
+	var gadget = info.scene.instantiate()
 	gadget.init($Direction)
 	gadget.global_position = $ItemPosition.global_position
 	get_tree().current_scene.add_child(gadget)

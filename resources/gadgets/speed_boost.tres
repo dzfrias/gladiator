@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GadgetInfo" load_steps=3 format=3 uid="uid://b4khexe12ck7f"]
+
+[ext_resource type="PackedScene" uid="uid://bcgsrka75ll5n" path="res://scenes/gadgets/speed_boost.tscn" id="1_qwvpp"]
+[ext_resource type="Script" path="res://scripts/resources/gadget_info.gd" id="2_mvhua"]
+
+[resource]
+script = ExtResource("2_mvhua")
+name = "Speed Boost"
+scene = ExtResource("1_qwvpp")
