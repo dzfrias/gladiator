@@ -96,7 +96,9 @@ func _spawn_in() -> void:
 		
 		for _i in range(to_spawn):
 			var choice := randi_range(0, spawn_points.size() - 1)
-			_spawn(spawn_points[choice], false)
+			var enemy := _spawn(spawn_points[choice], false)
+			# Automatically track player after being spawned
+			enemy.notify()
 			await get_tree().create_timer(randfn(spawn_in_delay_mean, spawn_in_delay_sd)).timeout
 		
 		await get_tree().create_timer(spawn_in_cooldown).timeout
@@ -110,7 +112,7 @@ func _spawn_enemies() -> void:
 		var spawn_point := child as Node2D
 		_spawn(spawn_point)
 
-func _spawn(spawn_point: Node2D, allow_meta: bool = true) -> void:
+func _spawn(spawn_point: Node2D, allow_meta: bool = true) -> Node2D:
 	var enemy_scene: PackedScene
 	if allow_meta:
 		match spawn_point.get_meta("spawnpoint_type", "any"):
@@ -129,3 +131,4 @@ func _spawn(spawn_point: Node2D, allow_meta: bool = true) -> void:
 	enemy_instance.add_to_group(_group_name)
 	enemy_instance.add_to_group("enemy")
 	get_tree().current_scene.add_child(enemy_instance)
+	return enemy_instance
