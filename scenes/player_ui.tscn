@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=9 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
 [ext_resource type="PackedScene" uid="uid://bm0hxwrfnl0cc" path="res://scenes/lightning_indicator.tscn" id="2_5x1lo"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="3_lbnag"]
 [ext_resource type="PackedScene" uid="uid://beu7cb0rnolxb" path="res://scenes/survival_ui.tscn" id="4_k0q64"]
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
+[ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0e2u"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjwni"]
+bg_color = Color(0.264919, 0.60077, 0.618488, 1)
 
 [node name="PlayerUI" type="CanvasLayer"]
 script = ExtResource("1_bm8m2")
@@ -24,3 +31,16 @@ bbcode_enabled = true
 text = "Ammo:  [img=8,8]assets/infinity_sign.png[/img]"
 autowrap_mode = 0
 script = ExtResource("5_74ny8")
+
+[node name="BurrowBar" type="ProgressBar" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -106.0
+offset_right = 293.0
+offset_bottom = -61.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_n0e2u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rjwni")
+show_percentage = false
+script = ExtResource("6_6nq0s")

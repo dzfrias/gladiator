@@ -7,7 +7,7 @@ var current_time := 0.0
 
 func _process(delta: float) -> void:
 	var player: Player = Player.Instance
-	if player.is_holding_weapon():
+	if player.is_holding_weapon() and not player.is_underground():
 		current_time += delta
 		if current_time >= tolerance_time:
 			current_time = 0

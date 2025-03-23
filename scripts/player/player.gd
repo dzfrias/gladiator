@@ -4,6 +4,7 @@ signal on_ground_impact(impact_force: float)
 
 @export var movement_settings: Resource
 
+var _underground_time := 0.0
 var _state := State.CONTROL
 var _can_roll := true
 var _is_jumping := false
@@ -55,9 +56,16 @@ func _process(delta: float) -> void:
 	
 	# Handle continuous (horizontal) movement
 	match _state:
-		State.CONTROL, State.SHIELD, State.UNDERGROUND:
+		State.CONTROL, State.SHIELD:
+			_underground_time = maxf(_underground_time - delta * movement_settings.burrow_decrement_factor, 0.0)
 			_apply_horizontal_input(delta)
+		State.UNDERGROUND:
+			_underground_time += delta * movement_settings.burrow_increment_factor
+			_apply_horizontal_input(delta)
+			if _underground_time >= movement_settings.max_burrow_time:
+				_unburrow()
 		State.ROLL:
+			_underground_time = maxf(_underground_time - delta * movement_settings.burrow_decrement_factor, 0.0)
 			velocity.x = movement_settings.roll_speed * $Direction.scalar
 	
 	# Handle walking particles
@@ -89,6 +97,11 @@ func _input(event: InputEvent) -> void:
 		if index < $Inventory.items.size() and index >= 0:
 			$Inventory.set_held_item(index)
 	
+	if event.is_action_pressed("fallthrough"):
+		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+	if event.is_action_released("fallthrough"):
+		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+	
 	match _state:
 		State.CONTROL:
 			# Jump
@@ -104,21 +117,9 @@ func _input(event: InputEvent) -> void:
 				$Weapon.set_firing(null)
 				_current_move_speed = movement_settings.shield_move_speed
 			
-			# There are two scenarios when the crouch button is pressed:
-			# 1. On the floor to start a burrow
-			# 2. On platform to fall through it
-			if event.is_action_pressed("crouch"):
-				if is_on_floor() and not is_on_platform():
-					_state = State.UNDERGROUND
-					_current_move_speed = movement_settings.burrow_speed
-					$StandingSprite.visible = false
-					collision_layer = Constants.INVINCIBLE_LAYER
-				else:
-					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
-			# If the crouch button is released while in the control state, we used it to fall
-			# through a platform, so we should re-enable the platform layer
-			if event.is_action_released("crouch"):
-				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+			# Burrow
+			if event.is_action_pressed("burrow") and is_on_floor():
+				_burrow()
 			
 			# Roll
 			if event.is_action_pressed("roll"):
@@ -141,11 +142,8 @@ func _input(event: InputEvent) -> void:
 							child.interact()
 		
 		State.UNDERGROUND:
-			if event.is_action_released("crouch"):
-				_state = State.CONTROL
-				_current_move_speed = movement_settings.move_speed
-				$StandingSprite.visible = true
-				collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
+			if event.is_action_released("burrow"):
+				_unburrow()
 		
 		State.SHIELD:
 			if event.is_action_released("shield"):
@@ -202,6 +200,20 @@ func _roll() -> void:
 	await get_tree().create_timer(movement_settings.roll_cooldown_time).timeout
 	_can_roll = true
 
+func _burrow() -> void:
+	assert(_state != State.UNDERGROUND)
+	_state = State.UNDERGROUND
+	_current_move_speed = movement_settings.burrow_speed
+	$StandingSprite.visible = false
+	collision_layer = Constants.INVINCIBLE_LAYER
+
+func _unburrow() -> void:
+	assert(_state == State.UNDERGROUND)
+	_state = State.CONTROL
+	_current_move_speed = movement_settings.move_speed
+	$StandingSprite.visible = true
+	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
+
 func _on_health_died() -> void:
 	print("The player has died")
 
@@ -229,6 +241,9 @@ func _on_item_switched(current_item):
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
 
+func is_underground():
+	return _state == State.UNDERGROUND
+
 func get_platform_height():
 	return $PlatformRaycast.get_collision_point().y
 
@@ -237,6 +252,9 @@ func inventory() -> Inventory:
 
 func weapon() -> Weapon:
 	return $Weapon
+
+func burrow_percentage() -> float:
+	return _underground_time / movement_settings.max_burrow_time
 
 func _flash_invincible() -> void:
 	while collision_layer == Constants.INVINCIBLE_LAYER:
