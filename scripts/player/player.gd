@@ -220,7 +220,12 @@ func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
 	_state = State.UNDERGROUND
 	_current_move_speed = movement_settings.burrow_speed
-	velocity.x = movement_settings.burrow_speed_boost * $Direction.scalar
+	var right := Input.is_action_pressed("right")
+	var left := Input.is_action_pressed("left")
+	# Equivalent to logical exclusive-or; do not give a spped boost if they're not pressing left
+	# or right.
+	if left != right:
+		velocity.x = movement_settings.burrow_speed_boost * $Direction.scalar
 	$StandingSprite.visible = false
 	collision_layer = Constants.INVINCIBLE_LAYER
 
