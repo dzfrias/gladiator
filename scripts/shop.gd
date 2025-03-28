@@ -3,6 +3,8 @@ class_name Shop extends Area2D
 var buckles: int:
 	get: return _buckles
 	set(amt):
+		# TODO: we should have some sort of PersistentDataManager to store buckles along side
+		# this in main memory. Then, the usage of this would be completely fluid.
 		_buckles = amt
 		buckles_changed.emit()
 

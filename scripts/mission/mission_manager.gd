@@ -3,7 +3,6 @@ extends Node
 var mission: Mission
 
 var _mission_scene = preload("res://scenes/mission.tscn")
-var _home_scene = preload("res://scenes/test_scene.tscn")
 
 func enter_mission(m: Mission) -> void:
 	mission = m
@@ -13,7 +12,8 @@ func return_home() -> void:
 	_goto_home.call_deferred()
 
 func _goto_home() -> void:
-	_load_scene(_home_scene)
+	HubManager.go_to_hub()
+	HubManager.world.shop.buckles += mission.buckles
 
 func _goto_mission() -> void:
 	var items = []

@@ -19,6 +19,22 @@ func open_mission_select_screen() -> void:
 
 func enter_mission(mission: Mission) -> void:
 	MissionManager.enter_mission(mission)
+	world.queue_free()
+
+func go_to_hub() -> void:
+	var items = []
+	for item in Player.Instance.inventory().items:
+		items.append(item)
+	var alt_weapon = Player.Instance.alt_weapon
+	
+	world = _world_scene.instantiate()
+	var new_player := world.find_child("Player") as Player
+	for item in items:
+		new_player.inventory().add_item(item)
+	new_player.alt_weapon = alt_weapon
+	
+	get_tree().current_scene.queue_free()
+	_setup_world.call_deferred()
 
 func return_to_world() -> void:
 	get_tree().current_scene.queue_free()
