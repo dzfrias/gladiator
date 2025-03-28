@@ -3,7 +3,7 @@ class_name Inventory extends Node
 signal on_item_switched(current_item)
 
 var _current_item: Variant
-var items: Array
+var items: Array = []
 
 func add_item(item):
 	items.append(item)

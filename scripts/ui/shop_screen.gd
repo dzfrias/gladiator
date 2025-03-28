@@ -45,13 +45,22 @@ func _on_inventory_item_buy(btn: Button, item: Shop.ShopItem) -> void:
 	if item.bought:
 		btn.disabled = true
 
+func _on_alt_weapon_buy(btn: Button, item: Shop.ShopItem) -> void:
+	_shop.buy_alt_weapon(item)
+	if item.bought:
+		btn.disabled = true
+
 func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 	for shop_item in items:
 		var item = _shop_item_scene.instantiate()
 		item.find_child("Label").text = shop_item.item.name
 		item.find_child("PriceLabel").text = str(shop_item.price)
 		var btn = item.find_child("BuyButton")
-		btn.pressed.connect(_on_inventory_item_buy.bind(btn, shop_item))
+		match _screen:
+			ScreenKind.WEAPONS:
+				btn.pressed.connect(_on_alt_weapon_buy.bind(btn, shop_item))
+			ScreenKind.GADGETS:
+				btn.pressed.connect(_on_inventory_item_buy.bind(btn, shop_item))
 		$ItemsContainer/Items.add_child(item)
 
 func _update_buckles_label() -> void:

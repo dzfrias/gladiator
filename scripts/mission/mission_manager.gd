@@ -19,11 +19,13 @@ func _goto_mission() -> void:
 	var items = []
 	for item in Player.Instance.inventory().items:
 		items.append(item)
+	var alt_weapon = Player.Instance.alt_weapon
 	var new_scene := _load_scene(_mission_scene)
 	new_scene.add_child(mission)
-	var player_inventory: Inventory = new_scene.find_child("Player").inventory()
+	var player := new_scene.find_child("Player") as Player
 	for item in items:
-		player_inventory.add_item(item)
+		player.inventory().add_item(item)
+	player.alt_weapon = alt_weapon
 	mission.mission_finished.connect(return_home)
 
 func _load_scene(scene: PackedScene) -> Node:

@@ -3,6 +3,8 @@ class_name Player extends CharacterBody2D
 signal on_ground_impact(impact_force: float)
 
 @export var movement_settings: Resource
+@export var main_weapon: WeaponStats = preload("res://resources/pistol.tres")
+@export var alt_weapon: WeaponStats
 
 var _underground_time := 0.0
 var _state := State.CONTROL
@@ -25,6 +27,8 @@ enum State {
 	UNDERGROUND
 }
 
+const WEAPON_INDICATOR = "!!WEAPON!!"
+
 func _ready() -> void:
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
@@ -33,6 +37,8 @@ func _ready() -> void:
 		Instance.free()
 		Instance = null
 	Instance = self
+	$Weapon.weapon_stats = main_weapon
+	$Inventory.add_item(WEAPON_INDICATOR)
 
 func _process(delta: float) -> void:
 	if _is_jumping:
@@ -109,6 +115,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("fallthrough"):
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 	
+	if event.is_action_pressed("toggle_alt") and alt_weapon != null:
+		if $Weapon.weapon_stats == main_weapon:
+			$Weapon.weapon_stats = alt_weapon
+		else:
+			assert($Weapon.weapon_stats == alt_weapon)
+			$Weapon.weapon_stats = main_weapon
+	
 	match _state:
 		State.CONTROL:
 			# Jump
@@ -140,9 +153,10 @@ func _input(event: InputEvent) -> void:
 			# Fire
 			if event.is_action_pressed("fire"):
 				var item = $Inventory.get_held_item()
-				if item is WeaponStats:
+				if item == WEAPON_INDICATOR:
 					$Weapon.set_firing($Direction)
-				elif item is GadgetInfo:
+				else:
+					assert(item is GadgetInfo)
 					_use_gadget(item)
 			if event.is_action_released("fire"):
 				$Weapon.set_firing(null)
@@ -255,10 +269,8 @@ func _freeze_time():
 func is_holding_weapon() -> bool:
 	return $Inventory.get_held_item() is WeaponStats
 
-func _on_item_switched(current_item):
+func _on_item_switched(_current_item):
 	$Weapon.set_firing(null)
-	if current_item is WeaponStats:
-		$Weapon.weapon_stats = current_item
 
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()

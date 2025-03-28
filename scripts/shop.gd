@@ -42,5 +42,15 @@ func buy_inventory_item(item: ShopItem) -> bool:
 	Player.Instance.inventory().add_item(item.item)
 	return true
 
+func buy_alt_weapon(weapon: ShopItem) -> bool:
+	if buckles < weapon.price:
+		return false
+	
+	buckles -= weapon.price
+	weapon.bought = true
+	Player.Instance.alt_weapon = weapon.item
+	
+	return true
+
 func _on_interact() -> void:
 	HubManager.open_shop_screen()
