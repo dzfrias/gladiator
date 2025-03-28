@@ -89,7 +89,7 @@ position = Vector2(30, -46)
 position = Vector2(30, -13)
 
 [node name="ItemPosition" type="Node2D" parent="."]
-position = Vector2(30, -46)
+position = Vector2(43, -46)
 
 [node name="PlatformRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
