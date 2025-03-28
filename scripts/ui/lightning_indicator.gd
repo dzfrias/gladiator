@@ -9,4 +9,5 @@ func _ready() -> void:
 	max_value = _lightning.tolerance_time
 
 func _process(_delta: float) -> void:
+	visible = MissionManager.mission.in_combat
 	value = _lightning.current_time

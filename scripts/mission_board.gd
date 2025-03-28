@@ -6,7 +6,7 @@ func _ready() -> void:
 	$Interactable.did_interact.connect(_on_interact)
 	var mission := ConquerMission.new()
 	mission.buckles = 20
-	# mission.weather = Lightning.new()
+	mission.weather = Lightning.new()
 	missions.append(mission)
 
 func _on_interact() -> void:

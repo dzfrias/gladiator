@@ -53,6 +53,7 @@ func _process(_delta: float) -> void:
 	# Check if all enemies have been killed and there are no more enemies left to spawn
 	if get_tree().get_node_count_in_group(_group_name) == 0 and _spawn_during_wave == 0:
 		_set_barriers_enabled(false)
+		MissionManager.mission.in_combat = false
 
 static func _create_boundary(x: float) -> StaticBody2D:
 	var boundary := StaticBody2D.new()
@@ -75,6 +76,7 @@ func _start_wave() -> void:
 	_started = true
 	_set_barriers_enabled(true)
 	_spawn_in()
+	MissionManager.mission.in_combat = true
 
 func _spawn_in() -> void:
 	assert(_started)
