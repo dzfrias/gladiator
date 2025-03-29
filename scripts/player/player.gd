@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal on_ground_impact(impact_force: float)
+signal on_weapon_switch
 
 @export var movement_settings: Resource
 @export var main_weapon: WeaponStats = preload("res://resources/pistol.tres")
@@ -121,6 +122,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			assert($Weapon.weapon_stats == alt_weapon)
 			$Weapon.weapon_stats = main_weapon
+		on_weapon_switch.emit()
 	
 	match _state:
 		State.CONTROL:
