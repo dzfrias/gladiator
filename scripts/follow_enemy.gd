@@ -22,6 +22,7 @@ var _left_ray: RayCast2D
 var _right_ray: RayCast2D
 
 signal hit_floor
+signal on_state_changed(state)
 
 enum State {
 	IDLE,
@@ -112,6 +113,7 @@ func notify(depth: int = 0) -> void:
 	_tracking = Player.Instance
 	if _state == State.IDLE:
 		_state = State.TRACKING
+		on_state_changed.emit(_state)
 	if depth > 0:
 		for body in $NotifyZone.get_overlapping_bodies():
 			body.notify(depth - 1)
@@ -119,12 +121,15 @@ func notify(depth: int = 0) -> void:
 func make_tired(duration: float) -> void:
 	var previous_state := _state
 	_state = State.TIRED
+	on_state_changed.emit(_state)
 	await get_tree().create_timer(duration).timeout
 	assert(_state == State.TIRED)
 	_state = previous_state
+	on_state_changed.emit(_state)
 
 func _patrol() -> void:
 	_state = State.IDLE
+	on_state_changed.emit(_state)
 	patrol_speed = 0.0
 	var wait_time := randf_range(0.0, initial_patrol_wait_max)
 	await get_tree().create_timer(wait_time).timeout

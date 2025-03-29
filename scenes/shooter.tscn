@@ -1,15 +1,99 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=28 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_5g1nj"]
-[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_y4oe8"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
+[ext_resource type="Texture2D" uid="uid://xjtn8nlrk00x" path="res://assets/Art/enemy_walk_spritesheet.png" id="3_of8la"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="3_qpshq"]
+[ext_resource type="Texture2D" uid="uid://dtqibqr63q0r2" path="res://assets/Art/shooter_idle.png" id="3_voear"]
+[ext_resource type="Texture2D" uid="uid://pg03u11dtteq" path="res://assets/Art/shooter_attacking_spritesheet.png" id="3_x6enn"]
+[ext_resource type="Script" path="res://scripts/enemies/shooter_animations.gd" id="5_cynpy"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_rapbo"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_x6nd1"]
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_cglso"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_iylj5"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_perck"]
+atlas = ExtResource("3_voear")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvcl7"]
+atlas = ExtResource("3_x6enn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ve4ly"]
+atlas = ExtResource("3_x6enn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7dd3"]
+atlas = ExtResource("3_of8la")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4gqw"]
+atlas = ExtResource("3_of8la")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b12kn"]
+atlas = ExtResource("3_of8la")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_470ng"]
+atlas = ExtResource("3_of8la")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r21po"]
+atlas = ExtResource("3_of8la")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5gha"]
+atlas = ExtResource("3_of8la")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62hpk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_perck")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvcl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ve4ly")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7dd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4gqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b12kn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_470ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r21po")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5gha")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(24, 62)
@@ -34,14 +118,17 @@ stop_dist = 400.0
 jump_follow_cooldown = 1.0
 impact_particle_prefab = ExtResource("3_qpshq")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
+position = Vector2(2, 0)
+scale = Vector2(2.0625, 2.0625)
+sprite_frames = SubResource("SpriteFrames_62hpk")
+animation = &"idle"
+script = ExtResource("5_cynpy")
+shooter = NodePath("..")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.00800037, 1)
 shape = SubResource("RectangleShape2D_d8kds")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.00800037, 1)
-scale = Vector2(0.203, 0.499)
-texture = ExtResource("2_y4oe8")
 
 [node name="DetectionZone" type="Area2D" parent="."]
 visible = false

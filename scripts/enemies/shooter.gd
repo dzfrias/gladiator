@@ -4,9 +4,11 @@ class_name Shooter extends FollowEnemy
 
 func _attack() -> void:
 	_state = State.ATTACKING
+	on_state_changed.emit(_state)
 	while $Weapon.ammo > 0:
 		await $Weapon.fire($Direction)
 	_state = State.TRACKING
+	on_state_changed.emit(_state)
 	await $Weapon.reload()
 
 func _can_attack() -> bool:
