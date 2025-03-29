@@ -17,7 +17,7 @@ func _ready() -> void:
 	Player.Instance.inventory().on_item_switched.connect(_on_item_switched)
 
 func _on_item_switched(current_item):
-	if current_item is WeaponStats:
+	if current_item == Player.WEAPON_INDICATOR:
 		show()
 		if weapon:
 			weapon.on_ammo_changed.disconnect(_on_ammo_changed)
