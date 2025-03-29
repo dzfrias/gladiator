@@ -276,7 +276,7 @@ func _freeze_time():
 	get_tree().paused = false
 
 func is_holding_weapon() -> bool:
-	return $Inventory.get_held_item() is WeaponStats
+	return $Inventory.get_held_item() == WEAPON_INDICATOR
 
 func _on_item_switched(_current_item):
 	selected_weapon.set_firing(null)
