@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm1txmx0h3er"
-path="res://.godot/imported/infinity_sign.png-0614caa049e242e1df4ef756009c2491.ctex"
+uid="uid://x4pn0woh6rtk"
+path="res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac23e3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/infinity_sign.png"
-dest_files=["res://.godot/imported/infinity_sign.png-0614caa049e242e1df4ef756009c2491.ctex"]
+source_file="res://assets/Art/laser_pistol.png"
+dest_files=["res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac23e3b.ctex"]
 
 [params]
 

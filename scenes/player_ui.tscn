@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=12 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
 [ext_resource type="PackedScene" uid="uid://bm0hxwrfnl0cc" path="res://scenes/lightning_indicator.tscn" id="2_5x1lo"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
 [ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
 [ext_resource type="Texture2D" uid="uid://bwam1j3kd5gx0" path="res://assets/Art/burrow_bar.png" id="7_rtk66"]
+[ext_resource type="Texture2D" uid="uid://x4pn0woh6rtk" path="res://assets/Art/laser_pistol.png" id="7_wk7so"]
+[ext_resource type="Texture2D" uid="uid://m43smj7sx1ie" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0e2u"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -20,29 +22,14 @@ lightning_ui = ExtResource("2_5x1lo")
 acid_rain_ui = ExtResource("3_lbnag")
 survival_ui = ExtResource("4_k0q64")
 
-[node name="AmmoText" type="RichTextLabel" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 13.0
-offset_top = -70.0
-offset_right = 521.0
-offset_bottom = -1.0
-grow_vertical = 0
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "Ammo:  [img=8,8]assets/infinity_sign.png[/img]"
-autowrap_mode = 0
-script = ExtResource("5_74ny8")
-
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 9.0
-offset_top = -168.0
+offset_top = -131.0
 offset_right = 308.0
-offset_bottom = -66.0
+offset_bottom = -29.0
 grow_vertical = 0
 texture = ExtResource("7_rtk66")
 stretch_mode = 4
@@ -62,3 +49,44 @@ theme_override_styles/background = SubResource("StyleBoxFlat_n0e2u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rjwni")
 show_percentage = false
 script = ExtResource("6_6nq0s")
+
+[node name="WeaponUI" type="Control" parent="." node_paths=PackedStringArray("infinite_ammo_image", "ammo_text")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 523.0
+offset_right = 75.0
+offset_bottom = 563.0
+script = ExtResource("5_74ny8")
+infinite_ammo_image = NodePath("TextureRect")
+ammo_text = NodePath("AmmoText")
+
+[node name="TextureRect2" type="TextureRect" parent="WeaponUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -67.0
+offset_right = 59.0
+offset_bottom = 4.0
+grow_vertical = 0
+texture = ExtResource("7_wk7so")
+
+[node name="TextureRect" type="TextureRect" parent="WeaponUI"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 26.0
+offset_right = 78.0
+offset_bottom = 48.0
+texture = ExtResource("9_1ehpv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AmmoText" type="RichTextLabel" parent="WeaponUI"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 24.0
+offset_right = 81.0
+offset_bottom = 48.0
+text = "000"
