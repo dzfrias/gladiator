@@ -13,7 +13,8 @@ var can_fire: bool = true
 var _fire_direction: Direction = null
 
 func _ready() -> void:
-	ammo = weapon_stats.max_ammo
+	if weapon_stats != null:
+		ammo = weapon_stats.max_ammo
 	
 func set_firing(direction: Direction):
 	_fire_direction = direction

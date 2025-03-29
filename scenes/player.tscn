@@ -75,12 +75,16 @@ script = ExtResource("11_40if5")
 script = ExtResource("8_7w5qy")
 land_impact_particles_prefab = ExtResource("9_3vhi0")
 
-[node name="Weapon" type="Node2D" parent="."]
+[node name="MainWeapon" type="Node2D" parent="."]
 position = Vector2(28, -32)
 script = ExtResource("5_crqak")
 weapon_stats = ExtResource("6_0weg3")
 projectile_prefab = ExtResource("6_w2kq1")
-auto_reload = true
+
+[node name="AltWeapon" type="Node2D" parent="."]
+position = Vector2(28, -32)
+script = ExtResource("5_crqak")
+projectile_prefab = ExtResource("6_w2kq1")
 
 [node name="StandingItemPosition" type="Node2D" parent="."]
 position = Vector2(30, -46)

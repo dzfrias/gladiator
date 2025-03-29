@@ -25,7 +25,7 @@ func _goto_mission() -> void:
 	var player := new_scene.find_child("Player") as Player
 	for item in items:
 		player.inventory().add_item(item)
-	player.alt_weapon = alt_weapon
+	player.set_alt_weapon(alt_weapon)
 	mission.mission_finished.connect(return_home)
 
 func _load_scene(scene: PackedScene) -> Node:

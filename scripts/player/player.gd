@@ -6,6 +6,7 @@ signal on_weapon_switch
 @export var movement_settings: Resource
 @export var main_weapon: WeaponStats = preload("res://resources/pistol.tres")
 @export var alt_weapon: WeaponStats
+@onready var selected_weapon = $MainWeapon
 
 var _underground_time := 0.0
 var _state := State.CONTROL
@@ -38,7 +39,7 @@ func _ready() -> void:
 		Instance.free()
 		Instance = null
 	Instance = self
-	$Weapon.weapon_stats = main_weapon
+	$MainWeapon.weapon_stats = main_weapon
 	$Inventory.add_item(WEAPON_INDICATOR)
 
 func _process(delta: float) -> void:
@@ -60,7 +61,7 @@ func _process(delta: float) -> void:
 	
 	# As a last-ditch sanity check, disable the weapon if we're not in the control state
 	if _state != State.CONTROL:
-		$Weapon.set_firing(null)
+		selected_weapon.set_firing(null)
 	
 	# Handle continuous (horizontal) movement
 	match _state:
@@ -101,7 +102,7 @@ func _process(delta: float) -> void:
 func _align() -> void:
 	$ItemPosition.position = Vector2(_original_item_x * $Direction.scalar, $ItemPosition.position.y)
 	$Shield.position = Vector2(_original_shield_x * $Direction.scalar, $Shield.position.y)
-	$Weapon.position = $ItemPosition.position
+	selected_weapon.position = $ItemPosition.position
 	$WalkingParticles.position = Vector2(_original_particles_x * $Direction.scalar, $WalkingParticles.position.y)
 	$WalkingParticles.direction.x = $Direction.scalar
 
@@ -117,11 +118,12 @@ func _input(event: InputEvent) -> void:
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 	
 	if event.is_action_pressed("toggle_alt") and alt_weapon != null:
-		if $Weapon.weapon_stats == main_weapon:
-			$Weapon.weapon_stats = alt_weapon
+		selected_weapon.set_firing(null)
+		if selected_weapon == $MainWeapon:
+			selected_weapon = $AltWeapon
 		else:
-			assert($Weapon.weapon_stats == alt_weapon)
-			$Weapon.weapon_stats = main_weapon
+			assert(selected_weapon.weapon_stats == alt_weapon)
+			selected_weapon = $MainWeapon
 		on_weapon_switch.emit()
 	
 	match _state:
@@ -136,7 +138,7 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("shield"):
 				$Shield.enable()
 				_state = State.SHIELD
-				$Weapon.set_firing(null)
+				selected_weapon.set_firing(null)
 				_current_move_speed = movement_settings.shield_move_speed
 			
 			# Burrow
@@ -156,12 +158,12 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("fire"):
 				var item = $Inventory.get_held_item()
 				if item == WEAPON_INDICATOR:
-					$Weapon.set_firing($Direction)
+					selected_weapon.set_firing($Direction)
 				else:
 					assert(item is GadgetInfo)
 					_use_gadget(item)
 			if event.is_action_released("fire"):
-				$Weapon.set_firing(null)
+				selected_weapon.set_firing(null)
 			
 			# Interact
 			if event.is_action_pressed("interact"):
@@ -232,6 +234,11 @@ func _roll() -> void:
 	await get_tree().create_timer(movement_settings.roll_cooldown_time).timeout
 	_can_roll = true
 
+func set_alt_weapon(alt_weapon_stats):
+	self.alt_weapon = alt_weapon_stats
+	$AltWeapon.weapon_stats = alt_weapon
+	$AltWeapon.ammo = alt_weapon.max_ammo
+
 func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
 	_state = State.UNDERGROUND
@@ -272,7 +279,7 @@ func is_holding_weapon() -> bool:
 	return $Inventory.get_held_item() is WeaponStats
 
 func _on_item_switched(_current_item):
-	$Weapon.set_firing(null)
+	selected_weapon.set_firing(null)
 
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
@@ -287,7 +294,7 @@ func inventory() -> Inventory:
 	return $Inventory
 
 func weapon() -> Weapon:
-	return $Weapon
+	return selected_weapon
 
 func burrow_percentage() -> float:
 	return _underground_time / movement_settings.max_burrow_time

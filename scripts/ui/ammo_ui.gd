@@ -33,6 +33,9 @@ func _on_item_switched(current_item):
 		hide()
 
 func _on_weapon_switched():
+	weapon.on_ammo_changed.disconnect(_on_ammo_changed)
+	weapon = Player.Instance.weapon()
+	weapon.on_ammo_changed.connect(_on_ammo_changed)
 	if weapon.weapon_stats.max_ammo == -1:
 		show_infinite_ammo_image()
 	else:
@@ -47,7 +50,7 @@ func _on_ammo_changed(ammo: int, max_ammo: int) -> void:
 func show_ammo_text():
 	ammo_text.show()
 	infinite_ammo_image.hide()
-	ammo_text.text = str(weapon.weapon_stats.max_ammo)
+	ammo_text.text = str(weapon.ammo)
 
 func show_infinite_ammo_image():
 	ammo_text.hide()
