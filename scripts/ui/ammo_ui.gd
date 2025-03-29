@@ -6,7 +6,7 @@ var infinite_ammo_text = "Ammo:  [img=8,8]assets/infinity_sign.png[/img]"
 
 func _ready() -> void:
 	var item = Player.Instance.inventory().get_held_item()
-	if item is WeaponStats:
+	if item == Player.WEAPON_INDICATOR:
 		if weapon.weapon_stats.max_ammo == -1:
 			text = infinite_ammo_text
 		else:
