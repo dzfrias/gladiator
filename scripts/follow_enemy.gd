@@ -21,6 +21,8 @@ var _jump_follow_timer := 0.0
 var _left_ray: RayCast2D
 var _right_ray: RayCast2D
 
+signal hit_floor
+
 enum State {
 	IDLE,
 	TRACKING,
@@ -86,7 +88,7 @@ func _physics_process(delta: float) -> void:
 				elif velocity.y != 0.0:
 					velocity.x = direction * speed
 				else:
-					velocity.x = 0.0
+					_process_stopped(delta)
 			else:
 				velocity.x = direction * speed
 		State.IDLE:
@@ -99,7 +101,10 @@ func _physics_process(delta: float) -> void:
 		State.ATTACKING:
 			pass
 	
+	var was_on_floor := is_on_floor()
 	move_and_slide()
+	if not was_on_floor and is_on_floor():
+		hit_floor.emit()
 
 func notify(depth: int = 0) -> void:
 	if _tracking != null:
@@ -142,6 +147,9 @@ func _patrol() -> void:
 
 func _attack() -> void:
 	pass
+
+func _process_stopped(_delta: float) -> void:
+	velocity.x = 0.0
 
 func _can_attack() -> bool:
 	return true
