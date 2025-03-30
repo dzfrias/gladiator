@@ -4,8 +4,6 @@ signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
 
 @export var movement_settings: Resource
-@export var main_weapon: WeaponStats = preload("res://resources/pistol.tres")
-@export var alt_weapon: WeaponStats
 @onready var selected_weapon = $MainWeapon
 
 var _underground_time := 0.0
@@ -39,7 +37,6 @@ func _ready() -> void:
 		Instance.free()
 		Instance = null
 	Instance = self
-	$MainWeapon.weapon_stats = main_weapon
 	$Inventory.add_item(WEAPON_INDICATOR)
 
 func _process(delta: float) -> void:
@@ -117,12 +114,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("fallthrough"):
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 	
-	if event.is_action_pressed("toggle_alt") and alt_weapon != null:
+	if event.is_action_pressed("toggle_alt") and $AltWeapon.weapon_stats != null:
 		selected_weapon.set_firing(null)
 		if selected_weapon == $MainWeapon:
 			selected_weapon = $AltWeapon
 		else:
-			assert(selected_weapon.weapon_stats == alt_weapon)
+			assert(selected_weapon == $AltWeapon)
 			selected_weapon = $MainWeapon
 		on_weapon_switch.emit()
 	
@@ -234,10 +231,11 @@ func _roll() -> void:
 	await get_tree().create_timer(movement_settings.roll_cooldown_time).timeout
 	_can_roll = true
 
-func set_alt_weapon(alt_weapon_stats):
-	self.alt_weapon = alt_weapon_stats
-	$AltWeapon.weapon_stats = alt_weapon
-	$AltWeapon.ammo = alt_weapon.max_ammo
+func set_alt_weapon(stats: WeaponStats) -> void:
+	if stats == null:
+		return
+	$AltWeapon.weapon_stats = stats
+	$AltWeapon.ammo = stats.max_ammo
 
 func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
@@ -295,6 +293,12 @@ func inventory() -> Inventory:
 
 func weapon() -> Weapon:
 	return selected_weapon
+
+func alt_weapon() -> Weapon:
+	return $AltWeapon
+
+func main_weapon() -> Weapon:
+	return $MainWeapon
 
 func burrow_percentage() -> float:
 	return _underground_time / movement_settings.max_burrow_time

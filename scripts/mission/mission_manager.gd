@@ -19,7 +19,7 @@ func _goto_mission() -> void:
 	var items = []
 	for item in Player.Instance.inventory().items:
 		items.append(item)
-	var alt_weapon = Player.Instance.alt_weapon
+	var alt_weapon: WeaponStats = Player.Instance.alt_weapon().weapon_stats
 	var new_scene := _load_scene(_mission_scene)
 	new_scene.add_child(mission)
 	var player := new_scene.find_child("Player") as Player
