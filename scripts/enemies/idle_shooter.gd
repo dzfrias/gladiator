@@ -78,7 +78,6 @@ func notify(depth: int) -> void:
 
 func _shoot() -> void:
 	notify(notify_depth)
-	print("SHOOT")
 	preparing_to_fire = true
 	await get_tree().create_timer(prepare_attack_time).timeout
 	_state = State.SHOOTING
