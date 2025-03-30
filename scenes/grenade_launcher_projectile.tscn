@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvj5rdc0rljkq"]
+
+[ext_resource type="Script" path="res://scripts/gadgets/grenade.gd" id="1_ovgot"]
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="3_pikt6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_03ghe"]
+
+[node name="GrenadeLauncherProjectile" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 33
+mass = 0.5
+script = ExtResource("1_ovgot")
+explosion_time = 1.0
+damage = 6.0
+launch_angle = 0.524
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("3_pikt6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_03ghe")
