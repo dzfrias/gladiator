@@ -1,6 +1,5 @@
-[gd_scene load_steps=16 format=4 uid="uid://c5seai2rapw4u"]
+[gd_scene load_steps=15 format=4 uid="uid://c5seai2rapw4u"]
 
-[ext_resource type="Script" path="res://scripts/level_playtest.gd" id="1_8qddb"]
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="2_arsj3"]
 [ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="3_i65ca"]
 [ext_resource type="Script" path="res://scripts/tilemap.gd" id="3_kj5bd"]
@@ -18,7 +17,6 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8pxj3"]
 
 [node name="PlaytestScene" type="Node2D"]
-script = ExtResource("1_8qddb")
 
 [node name="Player" parent="." instance=ExtResource("2_arsj3")]
 z_index = 0
