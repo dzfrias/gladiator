@@ -11,9 +11,13 @@ class_name IdleShooter extends CharacterBody2D
 @onready var box_detection = $BoxDetection
 var _state: State = State.HIDING
 @onready var _tracking: Node2D = Player.Instance
+var preparing_to_fire = false
+var is_idle = false
 
 var box_position: Vector2
 var has_box: bool = false
+
+signal on_state_changed(state)
 
 enum State {
 	HIDING,
@@ -37,31 +41,31 @@ func _physics_process(delta: float) -> void:
 		State.HIDING:
 			if !has_box:
 				_state = State.STANDING
+				on_state_changed.emit(_state)
 			
 			var xdist := _tracking.position.x - position.x
 			$StandCollision.disabled = true
 			$HideCollision.disabled = false
-			$StandSprite.visible = false
-			$HideSprite.visible = true
 			$Direction.scalar = signf(xdist)
 			if detection_zone.has_overlapping_bodies() and (weapon.ammo > 0 or !_is_box_inbetween()):
 				_state = State.STANDING
+				on_state_changed.emit(_state)
 		State.STANDING:
 			var xdist := _tracking.position.x - position.x
 			$Direction.scalar = signf(xdist)
 			$HideCollision.disabled = true
 			$StandCollision.disabled = false
-			$StandSprite.visible = true
-			$HideSprite.visible = false
 			
 			var y_distance = abs(global_position.y - Player.Instance.global_position.y)
 			if $DetectionZone.has_overlapping_bodies() and y_distance <= y_attack_cutoff:
 				if weapon.ammo > 0:
-					_shoot()
-				elif !weapon.is_reloading:
-					weapon.reload()
-				elif has_box and _is_box_inbetween():
-					_hide()
+					if !preparing_to_fire:
+						_shoot()
+				elif !is_idle:
+					if !weapon.is_reloading:
+						weapon.reload()
+					elif has_box and _is_box_inbetween():
+						_hide()
 	
 	move_and_slide()
 
@@ -74,21 +78,28 @@ func notify(depth: int) -> void:
 
 func _shoot() -> void:
 	notify(notify_depth)
-	_state = State.SHOOTING
+	print("SHOOT")
+	preparing_to_fire = true
 	await get_tree().create_timer(prepare_attack_time).timeout
+	_state = State.SHOOTING
+	on_state_changed.emit(_state)
+	preparing_to_fire = false
 	while weapon.ammo > 0:
 		await weapon.fire($Direction)
+	_state = State.STANDING
+	on_state_changed.emit(_state)
+	is_idle = true
 	await get_tree().create_timer(idle_time).timeout
+	is_idle = false
 	if box_position and _is_box_inbetween():
 		_hide()
-	else:
-		_state = State.STANDING
 
 func _is_box_inbetween():
 	return sign(global_position.x - box_position.x) == sign(global_position.x - Player.Instance.global_position.x)
 
 func _hide():
 	_state = State.HIDING
+	on_state_changed.emit(_state)
 	if !weapon.is_reloading and weapon.ammo <= 0:
 		await weapon.reload()
 
