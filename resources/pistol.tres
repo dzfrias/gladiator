@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://cbyts5spi0ken"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://cbyts5spi0ken"]
 
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_4jv4i"]
+[ext_resource type="PackedScene" uid="uid://dcp3huoajqaue" path="res://scenes/pistol_projectile.tscn" id="1_rrd5j"]
 
 [resource]
 script = ExtResource("1_4jv4i")
@@ -11,4 +12,5 @@ max_ammo = -1
 firing_interval = 0.3
 projectile_speed = 800.0
 angle_variance = 0.0
+projectile = ExtResource("1_rrd5j")
 bullets_per_shot = 1

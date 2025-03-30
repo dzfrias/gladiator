@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://jpk22ssaoqrr"]
+
+[ext_resource type="Script" path="res://scripts/shotgun_shell.gd" id="1_i111i"]
+[ext_resource type="PackedScene" uid="uid://1vfurpipajau" path="res://scenes/shotgun_projectile.tscn" id="2_yrqpx"]
+
+[node name="ShotgunShell" type="Node2D"]
+script = ExtResource("1_i111i")
+child_projectile = ExtResource("2_yrqpx")
+angle_sd = 0.049

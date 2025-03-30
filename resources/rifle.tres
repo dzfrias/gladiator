@@ -1,14 +1,12 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://sxcr6arn47f2"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://sxcr6arn47f2"]
 
+[ext_resource type="PackedScene" uid="uid://dagckhap6xw0b" path="res://scenes/rifle_projectile.tscn" id="1_uuuk0"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_y4h8b"]
 
 [resource]
 script = ExtResource("1_y4h8b")
 name = "Rifle"
-damage = 2.0
 reload_time = 1.0
 max_ammo = 30
 firing_interval = 0.2
-projectile_speed = 800.0
-angle_variance = 0.0
-bullets_per_shot = 1
+projectile = ExtResource("1_uuuk0")

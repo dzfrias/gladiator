@@ -6,7 +6,6 @@ class_name Weapon extends Node2D
 		if stats != null:
 			ammo = stats.max_ammo
 		_weapon_stats = stats
-@export var projectile_prefab: PackedScene
 @export var auto_reload = false
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
@@ -17,7 +16,7 @@ var is_reloading: bool = false
 var can_fire: bool = true
 # NOTE when this field is null, we are not firing
 var _fire_direction: Direction = null
-	
+
 func set_firing(direction: Direction):
 	_fire_direction = direction
 
@@ -32,18 +31,11 @@ func fire(direction: Direction):
 	if ammo == 0 or !can_fire:
 		return
 	
-	for i in range(weapon_stats.bullets_per_shot):
-		var projectile = projectile_prefab.instantiate()
-		var angle: float
-		if direction.is_right:
-			angle = 0.0
-		else:
-			angle = PI
-		angle = randfn(angle, weapon_stats.angle_variance)
-		projectile.fire(weapon_stats.projectile_speed, angle)
-		projectile.damage = weapon_stats.damage
-		projectile.global_position = global_position
-		get_tree().current_scene.add_child(projectile)
+	var projectile := weapon_stats.projectile.instantiate()
+	get_tree().current_scene.add_child(projectile)
+	var angle := 0.0 if direction.is_right else PI
+	projectile.fire(angle)
+	projectile.global_position = global_position
 	
 	if ammo > 0:
 		ammo -= 1

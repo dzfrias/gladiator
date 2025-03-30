@@ -1,14 +1,13 @@
 class_name HorizontalProjectile extends Area2D
 
-var velocity: Vector2
-var damage := 15.0
+@export var velocity: Vector2
+@export var damage: float = 15.0
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
-func fire(speed: float, angle: float):
-	assert(speed >= 0)
-	velocity = Vector2.RIGHT.rotated(angle) * speed
+func fire(angle: float):
+	velocity = velocity.rotated(angle)
 
 func _process(delta: float) -> void:
 	position += velocity * delta

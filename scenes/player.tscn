@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=18 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="4_oevlo"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
-[ext_resource type="PackedScene" uid="uid://dcp3huoajqaue" path="res://scenes/projectile.tscn" id="6_w2kq1"]
 [ext_resource type="Script" path="res://scripts/player/player_particles.gd" id="8_7w5qy"]
 [ext_resource type="PackedScene" uid="uid://nxy8eneyua16" path="res://scenes/particles/land_impact_particles.tscn" id="9_3vhi0"]
 [ext_resource type="Script" path="res://scripts/player/shield.gd" id="9_um070"]
@@ -79,12 +78,10 @@ land_impact_particles_prefab = ExtResource("9_3vhi0")
 position = Vector2(28, -32)
 script = ExtResource("5_crqak")
 weapon_stats = ExtResource("6_0weg3")
-projectile_prefab = ExtResource("6_w2kq1")
 
 [node name="AltWeapon" type="Node2D" parent="."]
 position = Vector2(28, -32)
 script = ExtResource("5_crqak")
-projectile_prefab = ExtResource("6_w2kq1")
 
 [node name="StandingItemPosition" type="Node2D" parent="."]
 position = Vector2(30, -46)

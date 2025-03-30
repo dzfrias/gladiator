@@ -1,14 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://dcp3huoajqaue"]
 
-[ext_resource type="Script" path="res://scripts/horizontal_projectile.gd" id="1_7bmss"]
-[ext_resource type="Texture2D" uid="uid://ntk0uvqnuwvo" path="res://assets/Art/player_laser.png" id="2_nkslk"]
+[ext_resource type="Script" path="res://scripts/horizontal_projectile.gd" id="1_0iaw4"]
+[ext_resource type="Texture2D" uid="uid://ntk0uvqnuwvo" path="res://assets/Art/player_laser.png" id="2_17r3f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il7q4"]
 size = Vector2(25, 12)
 
-[node name="Area2D" type="Area2D"]
+[node name="PistolProjectile" type="Area2D"]
 collision_mask = 323
-script = ExtResource("1_7bmss")
+script = ExtResource("1_0iaw4")
+velocity = Vector2(800, 0)
+damage = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
@@ -16,4 +18,4 @@ shape = SubResource("RectangleShape2D_il7q4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.89175, 0.89175)
-texture = ExtResource("2_nkslk")
+texture = ExtResource("2_17r3f")

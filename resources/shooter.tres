@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://cm6ckunk22kfc"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://cm6ckunk22kfc"]
 
+[ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="1_736xc"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_axwou"]
 
 [resource]
@@ -11,4 +12,5 @@ max_ammo = 2
 firing_interval = 0.2
 projectile_speed = 266.0
 angle_variance = 0.0
+projectile = ExtResource("1_736xc")
 bullets_per_shot = 1

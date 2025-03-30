@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://cpl1w3hqbdphe"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://cpl1w3hqbdphe"]
 
+[ext_resource type="PackedScene" uid="uid://jpk22ssaoqrr" path="res://scenes/shotgun_shell.tscn" id="1_2w6nu"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_yt3au"]
 
 [resource]
@@ -11,4 +12,5 @@ max_ammo = 5
 firing_interval = 0.5
 projectile_speed = 600.0
 angle_variance = 0.15
+projectile = ExtResource("1_2w6nu")
 bullets_per_shot = 3
