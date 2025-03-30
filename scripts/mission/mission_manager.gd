@@ -13,7 +13,6 @@ func return_home() -> void:
 
 func _goto_home() -> void:
 	HubManager.go_to_hub()
-	HubManager.world.shop.buckles += mission.buckles
 
 func _goto_mission() -> void:
 	var items = []

@@ -33,7 +33,7 @@ func go_to_hub() -> void:
 		new_player.inventory().add_item(item)
 	new_player.set_alt_weapon(alt_weapon)
 	
-	get_tree().current_scene.queue_free()
+	get_tree().current_scene.free()
 	_setup_world.call_deferred()
 
 func return_to_world() -> void:
