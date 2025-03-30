@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 	
 	# As a last-ditch sanity check, disable the weapon if we're not in the control state
 	if _state != State.CONTROL:
-		selected_weapon.set_firing(null)
+		_stop_firing()
 	
 	# Handle continuous (horizontal) movement
 	match _state:
@@ -99,7 +99,8 @@ func _process(delta: float) -> void:
 func _align() -> void:
 	$ItemPosition.position = Vector2(_original_item_x * $Direction.scalar, $ItemPosition.position.y)
 	$Shield.position = Vector2(_original_shield_x * $Direction.scalar, $Shield.position.y)
-	selected_weapon.position = $ItemPosition.position
+	$MainWeapon.position = $ItemPosition.position
+	$AltWeapon.position = $ItemPosition.position
 	$WalkingParticles.position = Vector2(_original_particles_x * $Direction.scalar, $WalkingParticles.position.y)
 	$WalkingParticles.direction.x = $Direction.scalar
 
@@ -115,7 +116,7 @@ func _input(event: InputEvent) -> void:
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 	
 	if event.is_action_pressed("toggle_alt") and $AltWeapon.weapon_stats != null:
-		selected_weapon.set_firing(null)
+		_stop_firing()
 		if selected_weapon == $MainWeapon:
 			selected_weapon = $AltWeapon
 		else:
@@ -135,7 +136,7 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("shield"):
 				$Shield.enable()
 				_state = State.SHIELD
-				selected_weapon.set_firing(null)
+				_stop_firing()
 				_current_move_speed = movement_settings.shield_move_speed
 			
 			# Burrow
@@ -160,7 +161,16 @@ func _input(event: InputEvent) -> void:
 					assert(item is GadgetInfo)
 					_use_gadget(item)
 			if event.is_action_released("fire"):
-				selected_weapon.set_firing(null)
+				_stop_firing()
+			
+			if event.is_action_pressed("fire_alt") and $AltWeapon.weapon_stats != null:
+				if selected_weapon == $MainWeapon:
+					$AltWeapon.set_firing($Direction)
+				else:
+					assert(selected_weapon == $AltWeapon)
+					$MainWeapon.set_firing($Direction)
+			if event.is_action_released("fire_alt"):
+				_stop_firing()
 			
 			# Interact
 			if event.is_action_pressed("interact"):
@@ -299,6 +309,10 @@ func main_weapon() -> Weapon:
 
 func burrow_percentage() -> float:
 	return _underground_time / movement_settings.max_burrow_time
+
+func _stop_firing() -> void:
+	$MainWeapon.set_firing(null)
+	$AltWeapon.set_firing(null)
 
 func _flash_invincible() -> void:
 	while collision_layer == Constants.INVINCIBLE_LAYER:
