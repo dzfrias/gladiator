@@ -1,20 +1,22 @@
 class_name Weapon extends Node2D
 
-@export var weapon_stats: WeaponStats
+@export var weapon_stats: WeaponStats:
+	get: return _weapon_stats
+	set(stats):
+		if stats != null:
+			ammo = stats.max_ammo
+		_weapon_stats = stats
 @export var projectile_prefab: PackedScene
 @export var auto_reload = false
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
 
 var ammo: int
+var _weapon_stats: WeaponStats
 var is_reloading: bool = false
 var can_fire: bool = true
 # NOTE when this field is null, we are not firing
 var _fire_direction: Direction = null
-
-func _ready() -> void:
-	if weapon_stats != null:
-		ammo = weapon_stats.max_ammo
 	
 func set_firing(direction: Direction):
 	_fire_direction = direction

@@ -232,10 +232,7 @@ func _roll() -> void:
 	_can_roll = true
 
 func set_alt_weapon(stats: WeaponStats) -> void:
-	if stats == null:
-		return
 	$AltWeapon.weapon_stats = stats
-	$AltWeapon.ammo = stats.max_ammo
 
 func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
