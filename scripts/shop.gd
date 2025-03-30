@@ -50,7 +50,7 @@ func buy_alt_weapon(weapon: ShopItem) -> bool:
 	
 	buckles -= weapon.price
 	weapon.bought = true
-	Player.Instance.alt_weapon = weapon.item
+	Player.Instance.set_alt_weapon(weapon.item)
 	
 	return true
 
