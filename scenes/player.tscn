@@ -82,6 +82,7 @@ weapon_stats = ExtResource("6_0weg3")
 [node name="AltWeapon" type="Node2D" parent="."]
 position = Vector2(28, -32)
 script = ExtResource("5_crqak")
+auto_activate_effects = false
 
 [node name="StandingItemPosition" type="Node2D" parent="."]
 position = Vector2(30, -46)

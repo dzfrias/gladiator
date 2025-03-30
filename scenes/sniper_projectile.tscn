@@ -9,7 +9,7 @@ size = Vector2(25, 12)
 [node name="SniperProjectile" type="Area2D"]
 collision_mask = 323
 script = ExtResource("1_lnqnr")
-velocity = Vector2(1500, 0)
+velocity = Vector2(2000, 0)
 damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

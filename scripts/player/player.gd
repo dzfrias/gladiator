@@ -80,6 +80,19 @@ func _process(delta: float) -> void:
 			_underground_time = maxf(_underground_time - delta * movement_settings.burrow_decrement_factor, 0.0)
 			velocity.x = movement_settings.roll_speed * $Direction.scalar
 	
+	# Switch direction based on mouse if using omnidirectionally-aiming weapon
+	if selected_weapon.weapon_stats.aim_mode == WeaponStats.AimMode.OMNIDIRECTIONAL:
+		var mouse_angle = selected_weapon.get_angle_to(get_global_mouse_position())
+		var mouse_v := Vector2.RIGHT.rotated(mouse_angle)
+		$Direction.is_right = mouse_v.x > 0
+		Debug.draw_line(
+			selected_weapon.global_position,
+			selected_weapon.global_position + mouse_v * 100,
+			5.0,
+			Color.RED,
+			0.01,
+		)
+	
 	# Handle walking particles
 	if abs(velocity.x) > 0 and is_on_floor():
 		$WalkingParticles.emitting = true
@@ -118,10 +131,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_alt") and $AltWeapon.weapon_stats != null:
 		_stop_firing()
 		if selected_weapon == $MainWeapon:
+			$MainWeapon.deactivate_effects()
 			selected_weapon = $AltWeapon
 		else:
 			assert(selected_weapon == $AltWeapon)
+			$AltWeapon.deactivate_effects()
 			selected_weapon = $MainWeapon
+		selected_weapon.activate_effects()
 		on_weapon_switch.emit()
 	
 	match _state:
@@ -253,7 +269,8 @@ func _burrow() -> void:
 	# Equivalent to logical exclusive-or; do not give a spped boost if they're not pressing left
 	# or right.
 	if left != right:
-		velocity.x = movement_settings.burrow_speed_boost * $Direction.scalar
+		var k := 1.0 if right else -1.0
+		velocity.x = movement_settings.burrow_speed_boost * k
 	$StandingSprite.visible = false
 	collision_layer = Constants.INVINCIBLE_LAYER
 
@@ -309,6 +326,9 @@ func main_weapon() -> Weapon:
 
 func burrow_percentage() -> float:
 	return _underground_time / movement_settings.max_burrow_time
+
+func camera() -> Camera2D:
+	return $Camera2D
 
 func _stop_firing() -> void:
 	$MainWeapon.set_firing(null)

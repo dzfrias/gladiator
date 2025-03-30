@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqo8lubvamrsa"]
+
+[ext_resource type="Script" path="res://scripts/sniper_effects.gd" id="1_hxew6"]
+
+[node name="SniperEffects" type="Node"]
+script = ExtResource("1_hxew6")
