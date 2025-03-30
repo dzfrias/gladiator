@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://brjglblolcxxv"]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_8uqcg"]
+[ext_resource type="PackedScene" uid="uid://day1echqxjxhs" path="res://scenes/flamethrower_projectile.tscn" id="1_jl7la"]
+
+[resource]
+script = ExtResource("1_8uqcg")
+name = "Flamethrower"
+reload_time = 1.0
+max_ammo = 8
+firing_interval = 0.0
+aim_mode = 0
+projectile = ExtResource("1_jl7la")

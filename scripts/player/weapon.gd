@@ -5,6 +5,7 @@ class_name Weapon extends Node2D
 	set(stats):
 		if stats != null:
 			ammo = stats.max_ammo
+			_ammo_time = stats.max_ammo
 		_weapon_stats = stats
 @export var auto_reload = false
 @export var auto_activate_effects = true
@@ -18,6 +19,8 @@ var is_reloading: bool = false
 var can_fire: bool = true
 # NOTE when this field is null, we are not firing
 var _fire_direction: Direction = null
+var _continuous_projectile: Node2D
+var _ammo_time: float
 
 func _ready() -> void:
 	if auto_activate_effects:
@@ -43,9 +46,29 @@ func deactivate_effects() -> void:
 	effects.queue_free()
 	effects = null
 
-func _process(_delta: float) -> void:
-	if is_firing():
+func _process(delta: float) -> void:
+	if not is_firing():
+		if _continuous_projectile != null:
+			_continuous_projectile.queue_free()
+			_continuous_projectile = null
+		return
+	
+	if weapon_stats.firing_interval > 0:
 		fire(_fire_direction)
+	elif _continuous_projectile == null and ammo > 0:
+		_continuous_projectile = weapon_stats.projectile.instantiate()
+		_continuous_projectile.set_direction(_fire_direction)
+		add_child(_continuous_projectile)
+	
+	if _continuous_projectile != null:
+		var prev = int(_ammo_time)
+		_ammo_time -= delta
+		if int(_ammo_time) != prev:
+			ammo -= 1
+			on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
+		if _ammo_time <= 0:
+			_continuous_projectile.queue_free()
+			_continuous_projectile = null
 
 func fire(direction: Direction):
 	if ammo == 0 or !can_fire:

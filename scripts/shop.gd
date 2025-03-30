@@ -27,6 +27,7 @@ var weapons: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/shotgun.tres"), 30),
 	ShopItem.new(preload("res://resources/sniper.tres"), 30),
 	ShopItem.new(preload("res://resources/grenade_launcher.tres"), 50),
+	ShopItem.new(preload("res://resources/flamethrower.tres"), 50),
 ]
 var gadgets: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/gadgets/grenade.tres"), 10),
