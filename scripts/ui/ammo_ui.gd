@@ -1,7 +1,8 @@
 extends Control
 
-@onready var weapon = Player.Instance.weapon()
+@onready var weapon: Weapon = Player.Instance.weapon()
 
+@export var weapon_image: TextureRect
 @export var infinite_ammo_image: TextureRect
 @export var ammo_text: RichTextLabel
 
@@ -36,6 +37,8 @@ func _on_weapon_switched():
 	weapon.on_ammo_changed.disconnect(_on_ammo_changed)
 	weapon = Player.Instance.weapon()
 	weapon.on_ammo_changed.connect(_on_ammo_changed)
+	if weapon.weapon_stats.image != null:
+		weapon_image.texture = weapon.weapon_stats.image
 	if weapon.weapon_stats.max_ammo == -1:
 		show_infinite_ammo_image()
 	else:

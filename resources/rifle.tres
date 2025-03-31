@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://sxcr6arn47f2"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://sxcr6arn47f2"]
 
 [ext_resource type="PackedScene" uid="uid://dagckhap6xw0b" path="res://scenes/rifle_projectile.tscn" id="1_uuuk0"]
+[ext_resource type="Texture2D" uid="uid://beognjwthnlei" path="res://assets/Art/laser_rifle.png" id="1_wc233"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_y4h8b"]
 
 [resource]
@@ -9,4 +10,6 @@ name = "Rifle"
 reload_time = 1.0
 max_ammo = 30
 firing_interval = 0.2
+image = ExtResource("1_wc233")
+aim_mode = 0
 projectile = ExtResource("1_uuuk0")

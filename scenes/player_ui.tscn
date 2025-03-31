@@ -50,7 +50,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_rjwni")
 show_percentage = false
 script = ExtResource("6_6nq0s")
 
-[node name="WeaponUI" type="Control" parent="." node_paths=PackedStringArray("infinite_ammo_image", "ammo_text")]
+[node name="WeaponUI" type="Control" parent="." node_paths=PackedStringArray("weapon_image", "infinite_ammo_image", "ammo_text")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 35.0
@@ -58,22 +58,24 @@ offset_top = 523.0
 offset_right = 75.0
 offset_bottom = 563.0
 script = ExtResource("5_74ny8")
-infinite_ammo_image = NodePath("TextureRect")
+weapon_image = NodePath("WeaponImage")
+infinite_ammo_image = NodePath("InfiniteAmmoSymbol")
 ammo_text = NodePath("AmmoText")
 
-[node name="TextureRect2" type="TextureRect" parent="WeaponUI"]
+[node name="WeaponImage" type="TextureRect" parent="WeaponUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = -23.0
 offset_top = -67.0
-offset_right = 59.0
+offset_right = 75.0
 offset_bottom = 4.0
 grow_vertical = 0
 texture = ExtResource("7_wk7so")
+stretch_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="WeaponUI"]
+[node name="InfiniteAmmoSymbol" type="TextureRect" parent="WeaponUI"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 26.0
