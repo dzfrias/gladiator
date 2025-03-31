@@ -102,12 +102,10 @@ collision_layer = 256
 collision_mask = 0
 
 [node name="BulletWallRight" type="CollisionShape2D" parent="BulletWall"]
-position = Vector2(1003, 0)
 rotation = -1.5708
 shape = SubResource("WorldBoundaryShape2D_4g4le")
 
 [node name="BulletWallLeft" type="CollisionShape2D" parent="BulletWall"]
-position = Vector2(-1073, 0)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_4g4le")
 

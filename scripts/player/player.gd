@@ -4,6 +4,7 @@ signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
 
 @export var movement_settings: Resource
+@export var bullet_wall_delta: float = 100.0
 @onready var selected_weapon = $MainWeapon
 
 var _underground_time := 0.0
@@ -100,6 +101,7 @@ func _process(delta: float) -> void:
 		$WalkingParticles.emitting = false
 	
 	_align()
+	_adjust_bullet_walls()
 	
 	# This will store our previous y-velocity, which is used to get the speed of impact if we hit
 	# the ground after move_and_slide is called. We use that information for on_ground_impact
@@ -116,6 +118,13 @@ func _align() -> void:
 	$AltWeapon.position = $ItemPosition.position
 	$WalkingParticles.position = Vector2(_original_particles_x * $Direction.scalar, $WalkingParticles.position.y)
 	$WalkingParticles.direction.x = $Direction.scalar
+
+func _adjust_bullet_walls() -> void:
+	var camera_size = get_viewport_rect().size / $Camera2D.zoom
+	var left: float = global_position.x - (camera_size.x / 2)
+	var right: float = global_position.x + (camera_size.x / 2)
+	$BulletWall/BulletWallLeft.global_position.x = left - bullet_wall_delta
+	$BulletWall/BulletWallRight.global_position.x = right + bullet_wall_delta
 
 func _input(event: InputEvent) -> void:
 	if event.as_text().is_valid_int():
