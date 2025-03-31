@@ -341,8 +341,8 @@ func burrow_percentage() -> float:
 func camera() -> Camera2D:
 	return $Camera2D
 
-func _on_weapon_fired(weapon: Weapon) -> void:
-	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon.weapon_stats.strength
+func _on_weapon_fired(weapon_: Weapon) -> void:
+	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon_.weapon_stats.strength
 	$Camera2D.move(strength)
 
 func _stop_firing() -> void:

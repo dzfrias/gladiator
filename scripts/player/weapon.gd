@@ -23,6 +23,7 @@ var _fire_direction: Direction = null
 var _continuous_projectile: Node2D
 var _ammo_time: float
 var _muzzle_flash_scene: PackedScene = preload("res://scenes/muzzle_flash.tscn")
+var _bullet_case_scene: PackedScene = preload("res://scenes/bullet_case.tscn")
 
 func _ready() -> void:
 	if auto_activate_effects:
@@ -88,7 +89,7 @@ func fire(direction: Direction):
 	
 	projectile.fire(angle)
 	fired.emit()
-	_muzzle_flash(direction)
+	_do_effects(direction)
 	projectile.global_position = global_position
 	
 	if ammo > 0:
@@ -112,9 +113,20 @@ func reload():
 	can_fire = true
 	is_reloading = false
 
-func _muzzle_flash(direction: Direction) -> void:
+func _do_effects(direction: Direction) -> void:
 	var muzzle_flash := _muzzle_flash_scene.instantiate() as MuzzleFlash
+	# We don't want the size of the muzzle flash to be linearly related to the strength of the
+	# weapon. Instead, we're using a function with a decreasing rate of change (sqrt).
 	muzzle_flash.end_scale = 3 * sqrt(weapon_stats.strength)
 	muzzle_flash.position += Vector2(5 * direction.scalar, -5)
 	add_child(muzzle_flash)
 	muzzle_flash.activate()
+	
+	var bullet_case := _bullet_case_scene.instantiate() as BulletCase
+	var angle := -2 * PI / 3 if direction.is_right else -PI / 3
+	bullet_case.launch(angle)
+	bullet_case.global_position = global_position
+	# Similar to the muzzle flash scenario, bullet casing size shouldn't be linearly related to
+	# strength.
+	bullet_case.scale = Vector2.ONE * sqrt(weapon_stats.strength)
+	get_tree().current_scene.add_child(bullet_case)

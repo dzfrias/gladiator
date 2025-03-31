@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=5 format=3 uid="uid://dmaj8ebc6tl53"]
 
-[ext_resource type="PackedScene" path="res://scenes/sniper_effects.tscn" id="1_4bx6g"]
+[ext_resource type="PackedScene" uid="uid://cqo8lubvamrsa" path="res://scenes/sniper_effects.tscn" id="1_4bx6g"]
 [ext_resource type="PackedScene" uid="uid://readfnhu1k2i" path="res://scenes/sniper_projectile.tscn" id="1_7fysk"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_okvej"]
 [ext_resource type="Texture2D" uid="uid://bigdw4j541t1n" path="res://assets/Art/laser_sniper.png" id="2_vh1nt"]

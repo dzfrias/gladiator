@@ -12,4 +12,5 @@ max_ammo = 30
 firing_interval = 0.2
 image = ExtResource("1_wc233")
 aim_mode = 0
+strength = 0.5
 projectile = ExtResource("1_uuuk0")
