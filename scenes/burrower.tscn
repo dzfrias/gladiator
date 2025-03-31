@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dx2tj61huaph8"]
+[gd_scene load_steps=15 format=3 uid="uid://dx2tj61huaph8"]
 
 [ext_resource type="Script" path="res://scripts/enemies/burrower.gd" id="1_kpvsw"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_d6ydq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="6_t3u6u"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="6_tgkps"]
 [ext_resource type="Resource" uid="uid://i5hbuwgpus4y" path="res://resources/burrower_shotgun.tres" id="7_e1ahf"]
+[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="10_87iif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(42, 86)
@@ -85,3 +86,8 @@ shape = SubResource("RectangleShape2D_xlwe0")
 position = Vector2(0, 20)
 target_position = Vector2(0, 40)
 collision_mask = 32
+
+[node name="HitFlash" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+script = ExtResource("10_87iif")

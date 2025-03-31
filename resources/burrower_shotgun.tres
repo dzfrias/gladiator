@@ -6,11 +6,9 @@
 [resource]
 script = ExtResource("1_fl2n7")
 name = "Burrower's Shotgun"
-damage = 2.0
 reload_time = 2.0
 max_ammo = 1
 firing_interval = 0.5
-projectile_speed = 400.0
-angle_variance = 0.05
+aim_mode = 0
+strength = 0.5
 projectile = ExtResource("1_0k25i")
-bullets_per_shot = 4
