@@ -6,8 +6,8 @@ var is_tracking = true
 func _ready() -> void:
 	shooter.on_state_changed.connect(_on_state_changed)
 
-func _process(delta: float) -> void:
-	flip_h = get_node("../Direction").scalar == 1
+func _process(_delta: float) -> void:
+	flip_h = get_node("../Direction").is_right
 	if is_tracking:
 		if abs(shooter.velocity.x) > 0:
 			play("walk")
