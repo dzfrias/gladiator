@@ -5,7 +5,6 @@ class_name SniperEffects extends Node
 @export var speed_factor: float = 0.9
 
 var _cam: Camera2D
-var _original_speed: float
 
 func _ready() -> void:
 	_cam = Player.Instance.camera() as Camera2D

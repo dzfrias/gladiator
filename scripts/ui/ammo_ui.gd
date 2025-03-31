@@ -41,7 +41,7 @@ func _on_weapon_switched():
 	else:
 		show_ammo_text()
 
-func _on_ammo_changed(ammo: int, max_ammo: int) -> void:
+func _on_ammo_changed(_ammo: int, max_ammo: int) -> void:
 	if weapon.weapon_stats.max_ammo == -1:
 		show_infinite_ammo_image()
 	else:
