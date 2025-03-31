@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il7q4"]
 size = Vector2(25, 12)
 
-[node name="SniperProjectile" type="Area2D"]
+[node name="SniperProjectile" type="StaticBody2D"]
+collision_layer = 0
 collision_mask = 323
 script = ExtResource("1_lnqnr")
 velocity = Vector2(2000, 0)
