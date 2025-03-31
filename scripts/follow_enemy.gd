@@ -20,6 +20,7 @@ var _jump_follow_timer := 0.0
 @onready var _original_patrol_speed = patrol_speed
 var _left_ray: RayCast2D
 var _right_ray: RayCast2D
+var _stunned: bool
 
 signal hit_floor
 signal on_state_changed(state)
@@ -102,10 +103,18 @@ func _physics_process(delta: float) -> void:
 		State.ATTACKING:
 			pass
 	
+	var prev_velocity := velocity
+	if _stunned:
+		velocity = Vector2.ZERO
+	
 	var was_on_floor := is_on_floor()
 	move_and_slide()
 	if not was_on_floor and is_on_floor():
 		hit_floor.emit()
+	
+	if _stunned:
+		# Restore old velocity
+		velocity = prev_velocity
 
 func notify(depth: int = 0) -> void:
 	if _tracking != null:
@@ -172,6 +181,10 @@ func _on_health_damage_taken(_amount: float, direction: Vector2) -> void:
 	
 	if _tracking == null:
 		notify(notify_depth)
+	
+	_stunned = true
+	await get_tree().create_timer(0.1).timeout
+	_stunned = false
 
 func _on_health_died() -> void:
 	queue_free()
