@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://brjglblolcxxv"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://db1hsmrm86bfc"]
 
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_8uqcg"]
-[ext_resource type="PackedScene" uid="uid://day1echqxjxhs" path="res://scenes/flamethrower_projectile.tscn" id="1_jl7la"]
+[ext_resource type="PackedScene" path="res://scenes/flamethrower_projectile.tscn" id="1_jl7la"]
 [ext_resource type="Texture2D" uid="uid://cxqr05mbx6krl" path="res://assets/Art/laser_flamethrower.png" id="1_txu8h"]
 
 [resource]
@@ -12,4 +12,5 @@ max_ammo = 8
 firing_interval = 0.0
 image = ExtResource("1_txu8h")
 aim_mode = 0
+strength = 0.0
 projectile = ExtResource("1_jl7la")

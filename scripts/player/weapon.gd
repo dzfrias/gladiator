@@ -11,6 +11,7 @@ class_name Weapon extends Node2D
 @export var auto_activate_effects = true
 
 signal on_ammo_changed(ammo: int, max_ammo: int)
+signal fired
 
 var ammo: int
 var effects: Node
@@ -21,6 +22,7 @@ var can_fire: bool = true
 var _fire_direction: Direction = null
 var _continuous_projectile: Node2D
 var _ammo_time: float
+var _muzzle_flash_scene: PackedScene = preload("res://scenes/muzzle_flash.tscn")
 
 func _ready() -> void:
 	if auto_activate_effects:
@@ -85,6 +87,8 @@ func fire(direction: Direction):
 			angle = get_angle_to(get_global_mouse_position())
 	
 	projectile.fire(angle)
+	fired.emit()
+	_muzzle_flash(direction)
 	projectile.global_position = global_position
 	
 	if ammo > 0:
@@ -107,3 +111,10 @@ func reload():
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
 	can_fire = true
 	is_reloading = false
+
+func _muzzle_flash(direction: Direction) -> void:
+	var muzzle_flash := _muzzle_flash_scene.instantiate() as MuzzleFlash
+	muzzle_flash.end_scale = 3 * sqrt(weapon_stats.strength)
+	muzzle_flash.position += Vector2(5 * direction.scalar, -5)
+	add_child(muzzle_flash)
+	muzzle_flash.activate()

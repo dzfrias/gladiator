@@ -39,6 +39,8 @@ func _ready() -> void:
 		Instance = null
 	Instance = self
 	$Inventory.add_item(WEAPON_INDICATOR)
+	$MainWeapon.fired.connect(_on_weapon_fired.bind($MainWeapon))
+	$AltWeapon.fired.connect(_on_weapon_fired.bind($AltWeapon))
 
 func _process(delta: float) -> void:
 	if _is_jumping:
@@ -338,6 +340,10 @@ func burrow_percentage() -> float:
 
 func camera() -> Camera2D:
 	return $Camera2D
+
+func _on_weapon_fired(weapon: Weapon) -> void:
+	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon.weapon_stats.strength
+	$Camera2D.move(strength)
 
 func _stop_firing() -> void:
 	$MainWeapon.set_firing(null)

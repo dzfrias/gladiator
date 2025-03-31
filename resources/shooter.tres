@@ -6,11 +6,9 @@
 [resource]
 script = ExtResource("1_axwou")
 name = "Raider's Gun"
-damage = 3.0
 reload_time = 2.5
 max_ammo = 2
 firing_interval = 0.2
-projectile_speed = 266.0
-angle_variance = 0.0
+aim_mode = 0
+strength = 0.2
 projectile = ExtResource("1_736xc")
-bullets_per_shot = 1

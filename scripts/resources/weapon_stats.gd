@@ -11,5 +11,6 @@ enum AimMode {
 @export var firing_interval: float = 0.5
 @export var image: Texture
 @export var aim_mode: AimMode = AimMode.BIDIRECTIONAL
+@export_range(0.0, 1.0) var strength: float = 0.5
 @export var projectile: PackedScene
 @export var effects: PackedScene
