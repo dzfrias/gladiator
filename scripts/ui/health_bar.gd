@@ -1,8 +1,8 @@
 extends ProgressBar
 
 @export var health: Health
-
-@export var health_bar_offset = Vector2 (-50, 100)
+@export var tween_duration: float = 0.05
+@export var health_bar_offset = Vector2(-50, 100)
 
 func _ready() -> void:
 	max_value = health.max_health
@@ -18,11 +18,16 @@ func set_health(obj: Health):
 	health = obj
 
 func _on_health_lost(amount: float, _direction: Vector2):
-	value -= amount
+	var tween := get_tree().create_tween()
+	tween.tween_property(self, "value", value - amount, tween_duration)
+	tween.set_ease(Tween.EaseType.EASE_IN)
 	show()
 
 func _on_health_gained(amount: float):
-	value += amount
+	var tween := get_tree().create_tween()
+	tween.tween_property(self, "value", value + amount, tween_duration)
+	tween.set_ease(Tween.EaseType.EASE_IN)
+	await tween.finished
 	if ratio == 1.0:
 		hide()
 
