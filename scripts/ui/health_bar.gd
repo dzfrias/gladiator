@@ -17,15 +17,15 @@ func _process(_delta: float) -> void:
 func set_health(obj: Health):
 	health = obj
 
-func _on_health_lost(amount: float, _direction: Vector2):
+func _on_health_lost(_amount: float, _direction: Vector2):
 	var tween := get_tree().create_tween()
-	tween.tween_property(self, "value", value - amount, tween_duration)
+	tween.tween_property(self, "value", health.health, tween_duration)
 	tween.set_ease(Tween.EaseType.EASE_IN)
 	show()
 
-func _on_health_gained(amount: float):
+func _on_health_gained(_amount: float):
 	var tween := get_tree().create_tween()
-	tween.tween_property(self, "value", value + amount, tween_duration)
+	tween.tween_property(self, "value", health.health, tween_duration)
 	tween.set_ease(Tween.EaseType.EASE_IN)
 	await tween.finished
 	if ratio == 1.0:
