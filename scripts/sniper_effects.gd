@@ -6,7 +6,7 @@ class_name SniperEffects extends Node
 
 var _cam: Camera2D
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	_cam = Player.Instance.camera() as Camera2D
 	var tween = get_tree().create_tween()
 	tween.tween_property(_cam, "zoom", _cam.zoom - Vector2(zoom_delta, zoom_delta), tween_duration)
