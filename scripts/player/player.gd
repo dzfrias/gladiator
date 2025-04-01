@@ -338,7 +338,7 @@ func main_weapon() -> Weapon:
 func burrow_percentage() -> float:
 	return _underground_time / movement_settings.max_burrow_time
 
-func camera() -> Camera2D:
+func camera() -> PlayerCamera:
 	return $Camera2D
 
 func _on_weapon_fired(weapon_: Weapon) -> void:

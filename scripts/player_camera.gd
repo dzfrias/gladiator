@@ -25,7 +25,7 @@ func _process(delta):
 	if trauma:
 		trauma = max(trauma - decay * delta, 0)
 		_shake()
-	elif offset.x != 0 or offset.y != 0 or rotation != 0:
+	elif offset != _original_offset or rotation != 0:
 		offset = offset.lerp(_original_offset, delta * 10)
 		lerp(rotation, 0.0, 1)
 
@@ -33,5 +33,5 @@ func _shake():
 	var amt := pow(trauma, trauma_pwr)
 	noise_y += 1
 	rotation = max_roll * amt * noise.get_noise_2d(0, noise_y)
-	offset.x = max_offset.x * amt * noise.get_noise_2d(1000, noise_y)
-	offset.y = max_offset.y * amt * noise.get_noise_2d(2000, noise_y)
+	offset.x = _original_offset.x + max_offset.x * amt * noise.get_noise_2d(1000, noise_y)
+	offset.y = _original_offset.y + max_offset.y * amt * noise.get_noise_2d(2000, noise_y)
