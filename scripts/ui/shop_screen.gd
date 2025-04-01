@@ -11,7 +11,7 @@ func _ready() -> void:
 	$Selection/Gadgets.pressed.connect(_open_details_screen.bind(ScreenKind.GADGETS))
 	$ItemsContainer/BackButton.pressed.connect(_on_back_button_pressed)
 	_shop = HubManager.world.shop
-	_shop.buckles_changed.connect(_update_buckles_label)
+	PersistentData.buckles_changed.connect(_update_buckles_label)
 	_update_buckles_label()
 
 enum ScreenKind {
@@ -64,4 +64,4 @@ func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 		$ItemsContainer/Items.add_child(item)
 
 func _update_buckles_label() -> void:
-	$BucklesLabel.text = "Buckles: " + str(_shop.buckles)
+	$BucklesLabel.text = "Buckles: " + str(PersistentData.buckles)

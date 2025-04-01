@@ -1,17 +1,5 @@
 class_name Shop extends Area2D
 
-var buckles: int:
-	get: return _buckles
-	set(amt):
-		# TODO: we should have some sort of PersistentDataManager to store buckles along side
-		# this in main memory. Then, the usage of this would be completely fluid.
-		_buckles = amt
-		buckles_changed.emit()
-
-signal buckles_changed
-
-var _buckles: int = 50
-
 class ShopItem:
 	var item
 	var price: int
@@ -38,19 +26,19 @@ func _ready() -> void:
 	$Interactable.did_interact.connect(_on_interact)
 
 func buy_inventory_item(item: ShopItem) -> bool:
-	if buckles < item.price:
+	if PersistentData.buckles < item.price:
 		return false
 	
-	buckles -= item.price
+	PersistentData.buckles -= item.price
 	item.bought = true
 	Player.Instance.inventory().add_item(item.item)
 	return true
 
 func buy_alt_weapon(weapon: ShopItem) -> bool:
-	if buckles < weapon.price:
+	if PersistentData.buckles < weapon.price:
 		return false
 	
-	buckles -= weapon.price
+	PersistentData.buckles -= weapon.price
 	weapon.bought = true
 	Player.Instance.set_alt_weapon(weapon.item)
 	

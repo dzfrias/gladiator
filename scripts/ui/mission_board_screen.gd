@@ -4,7 +4,7 @@ var _board_item_scene = preload("res://scenes/mission_board_item.tscn")
 
 func _ready() -> void:
 	$Return.pressed.connect(_on_quit_pressed)
-	var buckles := HubManager.world.shop.buckles
+	var buckles := PersistentData.buckles
 	$BucklesLabel.text = "Buckles: " + str(buckles)
 	
 	for mission in HubManager.world.mission_board.missions:
