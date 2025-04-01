@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctjiaujlkr8mh"]
+[gd_scene load_steps=4 format=3 uid="uid://ctjiaujlkr8mh"]
 
 [ext_resource type="Script" path="res://scripts/gadgets/grenade.gd" id="1_2whni"]
-[ext_resource type="PackedScene" uid="uid://clgxno3rdacuv" path="res://scenes/explosion.tscn" id="2_0ap76"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="3_y0jbd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03ghe"]
@@ -10,7 +9,6 @@
 collision_layer = 0
 collision_mask = 33
 script = ExtResource("1_2whni")
-explosion_prefab = ExtResource("2_0ap76")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 4.76837e-07)
