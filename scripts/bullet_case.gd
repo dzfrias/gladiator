@@ -2,7 +2,7 @@ class_name BulletCase extends StaticBody2D
 
 @export var initial_speed: float = 500.0
 @export var angle_sd: float = PI / 32
-@export var rps: float = 10 * PI
+@export var rps: float = 6 * PI
 @export var gravity_factor: float = 3.0
 
 var velocity: Vector2
