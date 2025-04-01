@@ -6,10 +6,16 @@ var buckles: int:
 		_buckles = amt
 		buckles_changed.emit()
 		save()
+var alternate: WeaponStats:
+	get: return _alternate
+	set(alt):
+		_alternate = alt
+		save()
 
 signal buckles_changed
 
 var _buckles: int
+var _alternate: WeaponStats
 
 func _ready() -> void:
 	if not FileAccess.file_exists("user://savegame.json"):
@@ -22,6 +28,7 @@ func save() -> void:
 	var file := FileAccess.open("user://savegame.json", FileAccess.WRITE)
 	var data := {
 		"buckles": buckles,
+		"alternate": alternate.serialize() if alternate != null else null,
 	}
 	file.store_line(JSON.stringify(data))
 
@@ -38,7 +45,10 @@ func load_data() -> void:
 			continue
 		
 		_buckles = json.data["buckles"]
+		var alt = json.data["alternate"]
+		_alternate = WeaponStats.deserialize(alt) if alt != null else null
 
 func reset() -> void:
 	_buckles = 100
+	_alternate = null
 	save()

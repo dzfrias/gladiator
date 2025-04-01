@@ -25,13 +25,12 @@ func go_to_hub() -> void:
 	var items = []
 	for item in Player.Instance.inventory().items:
 		items.append(item)
-	var alt_weapon: WeaponStats = Player.Instance.alt_weapon().weapon_stats
 	
 	world = _world_scene.instantiate()
 	var new_player := world.find_child("Player") as Player
 	for item in items:
 		new_player.inventory().add_item(item)
-	new_player.set_alt_weapon(alt_weapon)
+	new_player.set_alt_weapon(PersistentData.alternate)
 	
 	get_tree().current_scene.free()
 	_setup_world.call_deferred()

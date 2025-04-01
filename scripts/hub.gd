@@ -10,3 +10,4 @@ func _ready() -> void:
 	mission_board = $MissionBoard
 	if reset_save:
 		PersistentData.reset()
+	$Player.set_alt_weapon(PersistentData.alternate)

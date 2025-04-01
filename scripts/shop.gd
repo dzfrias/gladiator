@@ -40,6 +40,7 @@ func buy_alt_weapon(weapon: ShopItem) -> bool:
 	
 	PersistentData.buckles -= weapon.price
 	weapon.bought = true
+	PersistentData.alternate = weapon.item
 	Player.Instance.set_alt_weapon(weapon.item)
 	
 	return true
