@@ -5,6 +5,7 @@ class_name HorizontalProjectile extends StaticBody2D
 
 func fire(angle: float):
 	velocity = velocity.rotated(angle)
+	$Sprite2D.rotation = angle
 
 func _process(delta: float) -> void:
 	var collision := move_and_collide(velocity * delta)

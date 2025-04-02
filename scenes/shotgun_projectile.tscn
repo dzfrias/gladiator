@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://1vfurpipajau"]
 
 [ext_resource type="Script" path="res://scripts/horizontal_projectile.gd" id="1_lp50h"]
-[ext_resource type="Texture2D" uid="uid://ntk0uvqnuwvo" path="res://assets/Art/player_laser.png" id="2_okdbu"]
+[ext_resource type="Texture2D" uid="uid://blbtwr24by4rg" path="res://resources/white_gradient.tres" id="2_lgs0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_il7q4"]
 size = Vector2(25, 12)
@@ -18,5 +18,5 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_il7q4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.89175, 0.89175)
-texture = ExtResource("2_okdbu")
+scale = Vector2(0.402, 0.052)
+texture = ExtResource("2_lgs0r")
