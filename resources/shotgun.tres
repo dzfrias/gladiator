@@ -1,10 +1,8 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://cpl1w3hqbdphe"]
 
 [ext_resource type="PackedScene" uid="uid://jpk22ssaoqrr" path="res://scenes/shotgun_shell.tscn" id="1_2w6nu"]
+[ext_resource type="Texture2D" uid="uid://c002sx67q5ot" path="res://assets/Art/laser_shotgun.png" id="1_ktg4p"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_yt3au"]
-
-[sub_resource type="Resource" id="Resource_411v0"]
-metadata/__load_path__ = "res://assets/Art/laser_shotgun.png"
 
 [resource]
 script = ExtResource("1_yt3au")
@@ -12,7 +10,7 @@ name = "Shotgun"
 reload_time = 1.0
 max_ammo = 20
 firing_interval = 0.5
-image = SubResource("Resource_411v0")
+image = ExtResource("1_ktg4p")
 aim_mode = 0
 strength = 0.6
 projectile = ExtResource("1_2w6nu")
