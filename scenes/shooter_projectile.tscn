@@ -1,9 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ft1sjche2hl"]
+[gd_scene load_steps=5 format=3 uid="uid://b1ft1sjche2hl"]
 
 [ext_resource type="Script" path="res://scripts/horizontal_projectile.gd" id="1_q7bol"]
-[ext_resource type="Texture2D" uid="uid://dcnoa66xsnn8v" path="res://assets/Art/enemy_laser.png" id="2_lgt62"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f5hw0"]
+[sub_resource type="Gradient" id="Gradient_u5ani"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.19, 0.19, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nowkg"]
+gradient = SubResource("Gradient_u5ani")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hg24q"]
+size = Vector2(20, 4)
 
 [node name="ShooterProjectile" type="StaticBody2D"]
 collision_layer = 0
@@ -13,8 +20,9 @@ velocity = Vector2(266, 0)
 damage = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.879, 0.879)
-texture = ExtResource("2_lgt62")
+position = Vector2(3.57628e-07, 0)
+scale = Vector2(0.3125, 0.046875)
+texture = SubResource("GradientTexture2D_nowkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_f5hw0")
+shape = SubResource("RectangleShape2D_hg24q")
