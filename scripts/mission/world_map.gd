@@ -19,6 +19,7 @@ class FillTile:
 		weight = tile_weight
 
 @export var map_width: int = 200
+@export var y_max: int = 10
 
 var _terrain := [
 	WeightedScene.new("res://scenes/modules/terrain/flat.tscn", 0.5),
@@ -56,7 +57,7 @@ func _ready() -> void:
 
 func _generate() -> void:
 	var module_origin := Vector2i(0, 0)
-	module_origin += _place_module(module_origin, _start_module)
+	module_origin += _place_module(module_origin, _start_module.instantiate())
 
 	var next_encounter := randi_range(3, 4)
 	while module_origin.x < map_width:
@@ -67,11 +68,13 @@ func _generate() -> void:
 		else:
 			module = weighted_choice(_terrain)
 			next_encounter -= 1
-		var delta := _place_module(module_origin, module.scene)
+		var instance := module.scene.instantiate() as Module
+		if module_origin.y + instance.delta_y < -y_max or module_origin.y + instance.delta_y > 0:
+			continue
+		var delta := _place_module(module_origin, instance)
 		module_origin += delta
 
-func _place_module(origin: Vector2i, module: PackedScene) -> Vector2i:
-	var instance = module.instantiate() as Module
+func _place_module(origin: Vector2i, instance: Module) -> Vector2i:
 	var scene_origin := to_global(map_to_local(origin)) - _tile_size / 2
 	instance.global_position = scene_origin
 	instance.tile_size = _tile_size
