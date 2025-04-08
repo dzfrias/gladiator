@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ck7voiwb6svy4"]
+
+[ext_resource type="Shader" path="res://resources/shaders/dust.gdshader" id="1_5xrhh"]
+
+[resource]
+shader = ExtResource("1_5xrhh")
+shader_parameter/rain_amount = 50.0
+shader_parameter/near_rain_length = 0.01
+shader_parameter/far_rain_length = 0.01
+shader_parameter/near_rain_width = 0.1
+shader_parameter/far_rain_width = 0.1
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 1.0
+shader_parameter/rain_color = Color(1, 0.728667, 0.56, 1)
+shader_parameter/base_rain_speed = 0.1
+shader_parameter/additional_rain_speed = 0.1
+shader_parameter/slant = -0.483
