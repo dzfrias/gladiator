@@ -11,6 +11,7 @@ class_name IdleShooter extends CharacterBody2D
 var _state: State = State.HIDING
 @onready var _tracking: Node2D = Player.Instance
 var _is_shooting: bool = false
+var _notified: bool = false
 
 signal on_state_changed(state)
 
@@ -24,6 +25,7 @@ func _ready() -> void:
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
 	$Direction.is_right = initially_is_right
+	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -35,7 +37,9 @@ func _physics_process(delta: float) -> void:
 			$StandCollision.disabled = true
 			$HideCollision.disabled = false
 			$Direction.scalar = signf(xdist)
-			if ($DetectionZone.has_overlapping_bodies() and weapon.ammo > 0) or _tracking_is_behind():
+			
+			var y_distance = abs(global_position.y - Player.Instance.global_position.y)
+			if (weapon.ammo > 0 or _tracking_is_behind()) and _notified and y_distance <= y_attack_cutoff:
 				_state = State.STANDING
 				on_state_changed.emit(_state)
 		State.STANDING:
@@ -44,13 +48,13 @@ func _physics_process(delta: float) -> void:
 			$HideCollision.disabled = true
 			$StandCollision.disabled = false
 			
-			var y_distance = abs(global_position.y - Player.Instance.global_position.y)
-			if $DetectionZone.has_overlapping_bodies() and y_distance <= y_attack_cutoff and not _is_shooting and weapon.ammo > 0:
+			if not _is_shooting and weapon.ammo > 0:
 				_shoot()
 	
 	move_and_slide()
 
 func notify(depth: int) -> void:
+	_notified = true
 	if depth > 0:
 		for body in $NotifyZone.get_overlapping_bodies():
 			if body == self:
@@ -86,6 +90,10 @@ func _hide():
 
 func _tracking_is_behind() -> bool:
 	return $Direction.is_right != initially_is_right
+
+func _on_detection_zone_body_entered(body: Node2D) -> void:
+	if body is Player:
+		notify(notify_depth)
 
 func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
 	var impact_particles = impact_particle_prefab.instantiate()
