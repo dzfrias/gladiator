@@ -111,11 +111,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
 shape = SubResource("CircleShape2D_c2f02")
 
-[node name="BoxDetection" type="RayCast2D" parent="."]
-position = Vector2(0, -20)
-target_position = Vector2(-60, 0)
-collision_mask = 64
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
 position = Vector2(1, -35)
 scale = Vector2(2.15625, 2.15625)
