@@ -105,6 +105,8 @@ func fire(direction: Direction):
 		can_fire = true
 
 func reload():
+	if is_reloading:
+		return
 	is_reloading = true
 	can_fire = false
 	await get_tree().create_timer(weapon_stats.reload_time).timeout

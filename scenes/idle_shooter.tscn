@@ -17,7 +17,7 @@
 size = Vector2(25.92, 66.88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qe3f6"]
-size = Vector2(26, 49)
+size = Vector2(26, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
 radius = 360.0
@@ -75,7 +75,7 @@ position = Vector2(-0.00800037, -32.06)
 shape = SubResource("RectangleShape2D_d8kds")
 
 [node name="HideCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-0.00800037, -23.5)
+position = Vector2(-0.00800037, -14)
 shape = SubResource("RectangleShape2D_qe3f6")
 
 [node name="DetectionZone" type="Area2D" parent="."]
