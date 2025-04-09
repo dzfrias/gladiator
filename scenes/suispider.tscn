@@ -19,7 +19,7 @@ radius = 200.0
 size = Vector2(186, 65.53)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_78oek"]
-radius = 100.0
+radius = 228.002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8a7t2"]
 radius = 400.0
@@ -28,8 +28,7 @@ radius = 400.0
 collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_5l4np")
-distraction_jump_velocity = Vector2(200, -300)
-distraction_jump_time = 1.25
+distraction_jump_velocity = Vector2(150, -350)
 speed = 200.0
 jump_height = -250.0
 stop_dist = 50.0
@@ -76,7 +75,6 @@ target_position = Vector2(0, 66)
 collision_mask = 32
 
 [node name="ExplosionZone" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 16
 
