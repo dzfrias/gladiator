@@ -12,8 +12,8 @@ func return_home() -> void:
 	_goto_home.call_deferred()
 
 func _goto_home() -> void:
-	HubManager.go_to_hub()
 	PersistentData.buckles += mission.buckles
+	HubManager.go_to_hub()
 
 func _goto_mission() -> void:
 	var items = []

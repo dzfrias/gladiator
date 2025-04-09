@@ -1,8 +1,12 @@
 class_name Shooter extends FollowEnemy
 
 @export var y_attack_cutoff := 50
+@export var attack_windup_time := 0.75
 
 func _attack() -> void:
+	_state = State.TIRED
+	on_state_changed.emit(_state)
+	await get_tree().create_timer(attack_windup_time).timeout
 	_state = State.ATTACKING
 	on_state_changed.emit(_state)
 	while $Weapon.ammo > 0:
