@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=26 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_8oh5i"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_3l162"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_kg58i"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/health_spawner.tscn" id="9_fse3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(42, 43)
@@ -185,3 +186,5 @@ shape = SubResource("CircleShape2D_xrhg1")
 wait_time = 0.1
 one_shot = true
 script = ExtResource("8_kg58i")
+
+[node name="HealthSpawner" parent="." instance=ExtResource("9_fse3b")]

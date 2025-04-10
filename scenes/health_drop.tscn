@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ovsmdmhj2sbv"]
+
+[ext_resource type="Texture2D" uid="uid://dt5jsmiu5gu57" path="res://assets/Art/white_circle.png" id="1_ae1js"]
+[ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="1_gh0la"]
+[ext_resource type="Script" path="res://scripts/health_drop.gd" id="1_p4l2g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w0ga1"]
+shader = ExtResource("1_gh0la")
+shader_parameter/color = Color(0.3024, 0.72, 0.3024, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fwx73"]
+radius = 11.0
+
+[node name="HealthDrop" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 20
+script = ExtResource("1_p4l2g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_w0ga1")
+position = Vector2(1.98, -1.24)
+scale = Vector2(0.817858, 0.810372)
+texture = ExtResource("1_ae1js")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fwx73")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 4
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
