@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://codvbdy32tkya"]
 
 [ext_resource type="Texture2D" uid="uid://basvbkgfc36ee" path="res://assets/Art/laser_grenade_launcher.png" id="1_a0rp6"]
-[ext_resource type="PackedScene" uid="uid://dvj5rdc0rljkq" path="res://scenes/grenade_launcher_projectile.tscn" id="1_vtu1e"]
+[ext_resource type="PackedScene" path="res://scenes/grenade_launcher_projectile.tscn" id="1_vtu1e"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="2_ep407"]
 
 [resource]

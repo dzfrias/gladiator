@@ -68,6 +68,15 @@ func _process(delta: float) -> void:
 		State.CONTROL:
 			_underground_time = maxf(_underground_time - delta * movement_settings.burrow_decrement_factor, 0.0)
 			_apply_horizontal_input(delta)
+			
+			if $AnimatedSprite2D.get_animation() != "jump" or !$AnimatedSprite2D.is_playing():
+				if abs(velocity.x) > 0:
+					$AnimatedSprite2D.play("walk")
+				elif selected_weapon.is_firing():
+					$AnimatedSprite2D.play("fire")
+				elif $AnimatedSprite2D.get_animation() != "fire":
+					$AnimatedSprite2D.play("idle")
+			
 			if _wants_burrow and is_on_floor():
 				_burrow()
 				_wants_burrow = false
@@ -120,6 +129,7 @@ func _align() -> void:
 	$AltWeapon.position = $ItemPosition.position
 	$WalkingParticles.position = Vector2(_original_particles_x * $Direction.scalar, $WalkingParticles.position.y)
 	$WalkingParticles.direction.x = $Direction.scalar
+	$AnimatedSprite2D.flip_h = $Direction.scalar == -1
 
 func _adjust_bullet_walls() -> void:
 	var camera_size = get_viewport_rect().size / $Camera2D.zoom
@@ -184,10 +194,12 @@ func _input(event: InputEvent) -> void:
 				var item = $Inventory.get_held_item()
 				if item == WEAPON_INDICATOR:
 					selected_weapon.set_firing($Direction)
+					$AnimatedSprite2D.play("fire")
 				else:
 					assert(item is GadgetInfo)
 					_use_gadget(item)
 			if event.is_action_released("fire"):
+				$AnimatedSprite2D.stop()
 				_stop_firing()
 			
 			if event.is_action_pressed("fire_alt") and $AltWeapon.weapon_stats != null:
@@ -242,6 +254,8 @@ func _apply_horizontal_input(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, _current_move_speed, acceleration * delta)
 
 func _jump() -> void:
+	$AnimatedSprite2D.stop()
+	$AnimatedSprite2D.play("jump")
 	_is_jumping = true
 	velocity.y = -movement_settings.jump_speed
 
@@ -256,12 +270,10 @@ func _roll() -> void:
 	_is_jumping = false
 	_jump_buffer = 0.0
 	collision_layer = Constants.INVINCIBLE_LAYER
-	$StandingSprite.flip_v = true
 	$CrouchingSprite.flip_v = true
 	await get_tree().create_timer(movement_settings.roll_time).timeout
 	_state = State.CONTROL
 	velocity.x *= 0.4
-	$StandingSprite.flip_v = false
 	$CrouchingSprite.flip_v = false
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 	_can_roll = false
@@ -284,14 +296,14 @@ func _burrow() -> void:
 	if left != right:
 		var k := 1.0 if right else -1.0
 		velocity.x = movement_settings.burrow_speed_boost * k
-	$StandingSprite.visible = false
+	$AnimatedSprite2D.visible = false
 	collision_layer = Constants.INVINCIBLE_LAYER
 
 func _unburrow() -> void:
 	assert(_state == State.UNDERGROUND)
 	_state = State.CONTROL
 	_current_move_speed = movement_settings.move_speed
-	$StandingSprite.visible = true
+	$AnimatedSprite2D.visible = true
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
 func _on_health_died() -> void:
@@ -353,9 +365,9 @@ func _stop_firing() -> void:
 
 func _flash_invincible() -> void:
 	while collision_layer == Constants.INVINCIBLE_LAYER:
-		$StandingSprite.visible = false
+		$AnimatedSprite2D.visible = false
 		await get_tree().create_timer(0.05).timeout
-		$StandingSprite.visible = true
+		$AnimatedSprite2D.visible = true
 		await get_tree().create_timer(0.05).timeout
 	
 func get_health() -> Health:
