@@ -3,6 +3,9 @@ class_name Chest extends StaticBody2D
 @export var health_drop: PackedScene = preload("res://scenes/health_drop.tscn")
 @export var health_drop_amount: float = 8.0
 
+@onready var _original_material: Material = $Sprite2D.material
+var _white_material: Material = preload("res://resources/materials/white_material.tres")
+
 var _did_collect := false
 var _velocity: Vector2
 
@@ -19,10 +22,17 @@ func _collect() -> void:
 	if _did_collect:
 		return
 	
+	_did_collect = true
+	await _flash()
+	
 	var drop := health_drop.instantiate() as HealthDrop
 	drop.heal_amount = health_drop_amount
 	drop.global_position = global_position
 	get_tree().current_scene.add_child(drop)
-	_did_collect = true
 	# TODO: change this when we actually have a model
 	$Sprite2D.flip_v = true
+
+func _flash() -> void:
+	$Sprite2D.material = _white_material
+	await get_tree().create_timer(0.3).timeout
+	$Sprite2D.material = _original_material
