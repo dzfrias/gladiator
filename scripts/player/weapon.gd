@@ -116,13 +116,12 @@ func reload():
 	is_reloading = false
 
 func _do_effects(direction: Direction) -> void:
-	var muzzle_flash := _muzzle_flash_scene.instantiate() as MuzzleFlash
+	var muzzle_flash := _muzzle_flash_scene.instantiate() as TweenedScaler
 	# We don't want the size of the muzzle flash to be linearly related to the strength of the
 	# weapon. Instead, we're using a function with a decreasing rate of change (sqrt).
 	muzzle_flash.end_scale = 3 * sqrt(weapon_stats.strength)
 	muzzle_flash.position += Vector2(5 * direction.scalar, -5)
 	add_child(muzzle_flash)
-	muzzle_flash.activate()
 	
 	var bullet_case := _bullet_case_scene.instantiate() as BulletCase
 	var angle := -2 * PI / 3 if direction.is_right else -PI / 3

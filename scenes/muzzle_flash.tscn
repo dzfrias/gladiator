@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2w2s0jooafxn"]
 
 [ext_resource type="Texture2D" uid="uid://dt5jsmiu5gu57" path="res://assets/Art/white_circle.png" id="1_k48q8"]
-[ext_resource type="Script" path="res://scripts/muzzle_flash.gd" id="2_8450u"]
+[ext_resource type="Script" path="res://scripts/tweened_scaler.gd" id="2_8450u"]
 
 [node name="MuzzleFlash" type="Sprite2D"]
 texture = ExtResource("1_k48q8")
