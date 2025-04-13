@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_c628u"]
 [ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="8_5b6fl"]
 [ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="9_neff4"]
-[ext_resource type="Material" path="res://resources/materials/dust.tres" id="11_mqly5"]
+[ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="11_mqly5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fusu6"]
 blend_mode = 1
