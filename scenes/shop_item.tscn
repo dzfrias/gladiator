@@ -12,6 +12,7 @@ custom_minimum_size = Vector2(0, 71.1)
 layout_mode = 2
 texture = ExtResource("1_vmwyk")
 expand_mode = 2
+stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(10, 0)

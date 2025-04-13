@@ -53,6 +53,7 @@ func _on_alt_weapon_buy(btn: Button, item: Shop.ShopItem) -> void:
 func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 	for shop_item in items:
 		var item = _shop_item_scene.instantiate()
+		item.find_child("Icon").texture = shop_item.item.image
 		item.find_child("Label").text = shop_item.item.name
 		item.find_child("PriceLabel").text = str(shop_item.price)
 		var btn = item.find_child("BuyButton")
