@@ -9,6 +9,7 @@ script = ExtResource("1_8uqcg")
 name = "Flamethrower"
 reload_time = 1.0
 max_ammo = 10
+ammo_collect_amount = 5
 firing_interval = 0.0
 image = ExtResource("1_txu8h")
 aim_mode = 0

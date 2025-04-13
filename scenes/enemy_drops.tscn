@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbrt4ailoxbv5"]
+
+[ext_resource type="Script" path="res://scripts/enemy_drops.gd" id="1_yps6m"]
+[ext_resource type="PackedScene" uid="uid://cucg62428dukr" path="res://scenes/ammo_collectable.tscn" id="2_jajm4"]
+
+[node name="EnemyDrops" type="Node"]
+script = ExtResource("1_yps6m")
+ammo_drop = ExtResource("2_jajm4")

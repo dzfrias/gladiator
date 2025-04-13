@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=29 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_iylj5"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_yimym"]
+[ext_resource type="PackedScene" uid="uid://cbrt4ailoxbv5" path="res://scenes/enemy_drops.tscn" id="14_es23i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_perck"]
 atlas = ExtResource("3_voear")
@@ -182,3 +183,5 @@ shape = SubResource("CircleShape2D_c0ujg")
 wait_time = 0.1
 one_shot = true
 script = ExtResource("13_yimym")
+
+[node name="EnemyDrops" parent="." instance=ExtResource("14_es23i")]

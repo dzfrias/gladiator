@@ -9,6 +9,7 @@ script = ExtResource("1_4jv4i")
 name = "Pistol"
 reload_time = 1.0
 max_ammo = -1
+ammo_collect_amount = -1
 firing_interval = 0.3
 image = ExtResource("1_hmcxc")
 aim_mode = 0

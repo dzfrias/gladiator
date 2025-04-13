@@ -29,6 +29,10 @@ func _ready() -> void:
 	if auto_activate_effects:
 		activate_effects()
 
+func add_ammo(ammo):
+	self.ammo += ammo
+	on_ammo_changed.emit(self.ammo, weapon_stats.max_ammo)
+
 func set_firing(direction: Direction):
 	_fire_direction = direction
 

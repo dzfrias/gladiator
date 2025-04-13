@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cucg62428dukr"]
+
+[ext_resource type="Script" path="res://scripts/ammo_collectable.gd" id="1_jcd02"]
+[ext_resource type="Texture2D" uid="uid://dt5jsmiu5gu57" path="res://assets/Art/white_circle.png" id="1_wfolt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flse5"]
+size = Vector2(13, 14)
+
+[node name="AmmoCollectable" type="Area2D"]
+collision_mask = 16
+script = ExtResource("1_jcd02")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_flse5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.442857, 0.442857)
+texture = ExtResource("1_wfolt")

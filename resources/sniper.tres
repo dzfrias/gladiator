@@ -10,6 +10,7 @@ script = ExtResource("1_okvej")
 name = "Sniper"
 reload_time = 2.5
 max_ammo = 10
+ammo_collect_amount = 6
 firing_interval = 1.0
 image = ExtResource("2_vh1nt")
 aim_mode = 1
