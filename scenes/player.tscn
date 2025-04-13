@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=36 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_rjir4"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
 [ext_resource type="Script" path="res://scripts/player/player_particles.gd" id="8_7w5qy"]
-[ext_resource type="PackedScene" uid="uid://nxy8eneyua16" path="res://scenes/particles/land_impact_particles.tscn" id="9_3vhi0"]
 [ext_resource type="Script" path="res://scripts/player/shield.gd" id="9_um070"]
 [ext_resource type="Script" path="res://scripts/player/inventory.gd" id="11_40if5"]
 [ext_resource type="Texture2D" uid="uid://du6qc0vrqayb0" path="res://assets/Art/Player_Shoot.png" id="14_kscrq"]
@@ -192,7 +191,6 @@ script = ExtResource("11_40if5")
 
 [node name="Particles" type="Node" parent="."]
 script = ExtResource("8_7w5qy")
-land_impact_particles_prefab = ExtResource("9_3vhi0")
 
 [node name="MainWeapon" type="Node2D" parent="."]
 position = Vector2(17.17, -38.38)
@@ -248,20 +246,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_ndjlv")
-
-[node name="WalkingParticles" type="CPUParticles2D" parent="."]
-z_index = -1
-position = Vector2(-20, 0)
-amount = 10
-lifetime = 0.3
-direction = Vector2(-1, -1)
-spread = 0.0
-gravity = Vector2(0, 200)
-initial_velocity_min = 50.0
-initial_velocity_max = 100.0
-scale_amount_min = 2.0
-scale_amount_max = 3.0
-color = Color(1, 0.996078, 0.509804, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -37)

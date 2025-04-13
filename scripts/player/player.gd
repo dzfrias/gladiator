@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
+signal jumped
 
 @export var movement_settings: Resource
 @export var bullet_wall_delta: float = 100.0
@@ -17,7 +18,6 @@ var _wants_burrow := false
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_shield_x = $Shield.position.x
 @onready var _original_item_x = $ItemPosition.position.x
-@onready var _original_particles_x = $WalkingParticles.position.x
 
 static var Instance
 
@@ -103,12 +103,6 @@ func _process(delta: float) -> void:
 			0.01,
 		)
 	
-	# Handle walking particles
-	if abs(velocity.x) > 0 and is_on_floor():
-		$WalkingParticles.emitting = true
-	else:
-		$WalkingParticles.emitting = false
-	
 	_align()
 	_adjust_bullet_walls()
 	
@@ -125,8 +119,6 @@ func _align() -> void:
 	$Shield.position = Vector2(_original_shield_x * $Direction.scalar, $Shield.position.y)
 	$MainWeapon.position = $ItemPosition.position
 	$AltWeapon.position = $ItemPosition.position
-	$WalkingParticles.position = Vector2(_original_particles_x * $Direction.scalar, $WalkingParticles.position.y)
-	$WalkingParticles.direction.x = $Direction.scalar
 	$AnimatedSprite2D.flip_h = not $Direction.is_right
 
 func _adjust_bullet_walls() -> void:
@@ -251,6 +243,7 @@ func _apply_horizontal_input(delta: float) -> void:
 func _jump() -> void:
 	$AnimatedSprite2D.stop()
 	$AnimatedSprite2D.play("jump")
+	jumped.emit()
 	_is_jumping = true
 	velocity.y = -movement_settings.jump_speed
 
