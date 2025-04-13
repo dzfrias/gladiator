@@ -20,7 +20,7 @@ class FillTile:
 
 @export var map_width: int = 200
 @export var y_max: int = 10
-@export var starting_chest_spawn_chance: float = 1.0
+@export var starting_chest_spawn_chance: float = 0.2
 @export var chest_spawn_chance_increment: float = 0.2
 
 var _terrain := [
