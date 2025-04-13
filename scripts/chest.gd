@@ -13,7 +13,7 @@ func _ready() -> void:
 	$InteractArea.did_interact.connect(_collect)
 
 func _physics_process(delta: float) -> void:
-	_velocity.y += 9.81
+	_velocity.y += 981 * delta
 	var collision := move_and_collide(_velocity * delta, false, 0.08, true)
 	if collision != null:
 		$CollisionShape2D.shape.get_rect().end = collision.get_position()
