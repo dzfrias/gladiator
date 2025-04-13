@@ -69,11 +69,9 @@ func _process(delta: float) -> void:
 			_underground_time = maxf(_underground_time - delta * movement_settings.burrow_decrement_factor, 0.0)
 			_apply_horizontal_input(delta)
 			
-			if $AnimatedSprite2D.get_animation() != "jump" or !$AnimatedSprite2D.is_playing():
+			if is_on_floor() and not _is_jumping:
 				if abs(velocity.x) > 0:
 					$AnimatedSprite2D.play("walk")
-				elif selected_weapon.is_firing():
-					$AnimatedSprite2D.play("fire")
 				elif $AnimatedSprite2D.get_animation() != "fire":
 					$AnimatedSprite2D.play("idle")
 			
@@ -129,7 +127,7 @@ func _align() -> void:
 	$AltWeapon.position = $ItemPosition.position
 	$WalkingParticles.position = Vector2(_original_particles_x * $Direction.scalar, $WalkingParticles.position.y)
 	$WalkingParticles.direction.x = $Direction.scalar
-	$AnimatedSprite2D.flip_h = $Direction.scalar == -1
+	$AnimatedSprite2D.flip_h = not $Direction.is_right
 
 func _adjust_bullet_walls() -> void:
 	var camera_size = get_viewport_rect().size / $Camera2D.zoom
@@ -194,12 +192,10 @@ func _input(event: InputEvent) -> void:
 				var item = $Inventory.get_held_item()
 				if item == WEAPON_INDICATOR:
 					selected_weapon.set_firing($Direction)
-					$AnimatedSprite2D.play("fire")
 				else:
 					assert(item is GadgetInfo)
 					_use_gadget(item)
 			if event.is_action_released("fire"):
-				$AnimatedSprite2D.stop()
 				_stop_firing()
 			
 			if event.is_action_pressed("fire_alt") and $AltWeapon.weapon_stats != null:
@@ -357,6 +353,8 @@ func camera() -> PlayerCamera:
 func _on_weapon_fired(weapon_: Weapon) -> void:
 	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon_.weapon_stats.strength
 	$Camera2D.move(strength)
+	if $AnimatedSprite2D.get_animation() == "idle" or $AnimatedSprite2D.get_animation() == "fire":
+		$AnimatedSprite2D.play("fire")
 
 func _stop_firing() -> void:
 	$MainWeapon.set_firing(null)
