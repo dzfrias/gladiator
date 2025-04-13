@@ -12,8 +12,10 @@ func _ready() -> void:
 	tween.tween_property(self, "scale", Vector2.ONE * end_scale, duration)
 	tween.set_ease(Tween.EaseType.EASE_IN)
 	await tween.finished
-	await get_tree().create_timer(hold_duration).timeout
-	if auto_free != null:
-		auto_free.queue_free()
-	else:
-		queue_free()
+	
+	if hold_duration >= 0.0:
+		await get_tree().create_timer(hold_duration).timeout
+		if auto_free != null:
+			auto_free.queue_free()
+		else:
+			queue_free()

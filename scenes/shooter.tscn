@@ -124,6 +124,7 @@ position = Vector2(2, 0)
 scale = Vector2(2.0625, 2.0625)
 sprite_frames = SubResource("SpriteFrames_62hpk")
 animation = &"idle"
+offset = Vector2(-1.08, 0)
 script = ExtResource("5_cynpy")
 shooter = NodePath("..")
 
@@ -141,7 +142,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_oetyt")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(15, -11)
 script = ExtResource("5_rapbo")
 weapon_stats = ExtResource("6_cglso")
 

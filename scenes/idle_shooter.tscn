@@ -89,7 +89,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_oetyt")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(0, -48)
+position = Vector2(18.69, -50.02)
 script = ExtResource("5_undrq")
 weapon_stats = ExtResource("6_irxur")
 

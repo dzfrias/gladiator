@@ -10,6 +10,7 @@ class_name IdleShooter extends CharacterBody2D
 @onready var weapon: Weapon = $Weapon
 var _state: State = State.HIDING
 @onready var _tracking: Node2D = Player.Instance
+@onready var _original_weapon_x = $Weapon.position.x
 var _is_shooting: bool = false
 var _notified: bool = false
 
@@ -52,6 +53,7 @@ func _physics_process(delta: float) -> void:
 				_shoot()
 	
 	move_and_slide()
+	_align_with_direction()
 
 func notify(depth: int) -> void:
 	_notified = true
@@ -66,11 +68,16 @@ func _shoot() -> void:
 	
 	notify(notify_depth)
 	_is_shooting = true
+	
+	$Weapon.activate_prefire_flash()
 	await get_tree().create_timer(prepare_attack_time).timeout
+	$Weapon.deactivate_prefire_flash()
+	
 	_state = State.SHOOTING
 	on_state_changed.emit(_state)
 	while weapon.ammo > 0:
 		await weapon.fire($Direction)
+	
 	_state = State.STANDING
 	on_state_changed.emit(_state)
 	await get_tree().create_timer(idle_time).timeout
@@ -101,6 +108,9 @@ func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
 	get_tree().current_scene.add_child(impact_particles)
 	impact_particles.direction = _direction
 	impact_particles.emitting = true
+
+func _align_with_direction() -> void:
+	$Weapon.position.x = _original_weapon_x * $Direction.scalar
 
 func _on_health_died() -> void:
 	queue_free()
