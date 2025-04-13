@@ -1,4 +1,4 @@
-class_name Shop extends Area2D
+class_name Shop extends Interactable
 
 class ShopItem:
 	var item
@@ -23,7 +23,7 @@ var gadgets: Array[ShopItem] = [
 ]
 
 func _ready() -> void:
-	$Interactable.did_interact.connect(_on_interact)
+	did_interact.connect(_on_interact)
 
 func buy_inventory_item(item: ShopItem) -> bool:
 	if PersistentData.buckles < item.price:

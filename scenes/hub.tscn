@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://bmsyk3ldn6tc3"]
+[gd_scene load_steps=10 format=4 uid="uid://bmsyk3ldn6tc3"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_g6j8t"]
 [ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_tnnyb"]
 [ext_resource type="Script" path="res://scripts/hub.gd" id="1_y8sdt"]
-[ext_resource type="Script" path="res://scripts/interactable.gd" id="3_77ybc"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="3_veakm"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="4_djpkc"]
 [ext_resource type="Script" path="res://scripts/mission_board.gd" id="5_ur55b"]
@@ -37,9 +36,6 @@ script = ExtResource("3_veakm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shop"]
 shape = SubResource("RectangleShape2D_f3k6p")
 
-[node name="Interactable" type="Node" parent="Shop"]
-script = ExtResource("3_77ybc")
-
 [node name="MissionBoard" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 0
@@ -48,8 +44,5 @@ script = ExtResource("5_ur55b")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MissionBoard"]
 position = Vector2(800, -61)
 shape = SubResource("RectangleShape2D_bwyyf")
-
-[node name="Interactable" type="Node" parent="MissionBoard"]
-script = ExtResource("3_77ybc")
 
 [node name="PlayerUI" parent="." instance=ExtResource("7_5xbek")]

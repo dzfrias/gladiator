@@ -214,9 +214,8 @@ func _input(event: InputEvent) -> void:
 			# Interact
 			if event.is_action_pressed("interact"):
 				for area in $InteractArea.get_overlapping_areas():
-					for child in area.get_children():
-						if child is Interactable:
-							child.interact()
+					if area is Interactable:
+						area.interact()
 		
 		State.UNDERGROUND:
 			if event.is_action_released("burrow"):

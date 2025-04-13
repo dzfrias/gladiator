@@ -1,9 +1,9 @@
-class_name MissionBoard extends Area2D
+class_name MissionBoard extends Interactable
 
 var missions: Array[Mission] = []
 
 func _ready() -> void:
-	$Interactable.did_interact.connect(_on_interact)
+	did_interact.connect(_on_interact)
 	var mission := ConquerMission.new()
 	mission.buckles = 20
 	mission.weather = Lightning.new()
