@@ -89,6 +89,8 @@ func fire(direction: Direction):
 		WeaponStats.AimMode.OMNIDIRECTIONAL:
 			angle = get_angle_to(get_global_mouse_position())
 	
+	if projectile is PhysicsBody2D:
+		projectile.add_collision_exception_with(get_parent())
 	projectile.fire(angle)
 	fired.emit()
 	_do_effects(direction)
