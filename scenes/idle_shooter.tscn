@@ -12,8 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dtqibqr63q0r2" path="res://assets/Art/shooter_idle.png" id="12_6sb6m"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter_animations.gd" id="12_npl6x"]
-[ext_resource type="PackedScene" uid="uid://cbrt4ailoxbv5" path="res://scenes/enemy_drops.tscn" id="13_tsbhm"]
-[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/health_spawner.tscn" id="13_nps3s"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(25.92, 66.88)
@@ -126,5 +125,4 @@ wait_time = 0.1
 one_shot = true
 script = ExtResource("12_fy0vl")
 
-[node name="EnemyDrops" parent="." instance=ExtResource("13_tsbhm")]
-[node name="HealthSpawner" parent="." instance=ExtResource("13_nps3s")]
+[node name="DropSpawner" parent="." instance=ExtResource("13_nps3s")]

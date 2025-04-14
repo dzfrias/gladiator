@@ -139,7 +139,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("fallthrough"):
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 	
-	if event.is_action_pressed("toggle_alt") and $AltWeapon.weapon_stats != null:
+	if event.is_action_pressed("toggle_alt") and alt_weapon() != null:
 		_stop_firing()
 		if selected_weapon == $MainWeapon:
 			$MainWeapon.deactivate_effects()
@@ -190,7 +190,7 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_released("fire"):
 				_stop_firing()
 			
-			if event.is_action_pressed("fire_alt") and $AltWeapon.weapon_stats != null:
+			if event.is_action_pressed("fire_alt") and alt_weapon() != null:
 				if selected_weapon == $MainWeapon:
 					$AltWeapon.set_firing($Direction)
 				else:
@@ -332,6 +332,8 @@ func weapon() -> Weapon:
 	return selected_weapon
 
 func alt_weapon() -> Weapon:
+	if $AltWeapon.weapon_stats == null:
+		return null
 	return $AltWeapon
 
 func main_weapon() -> Weapon:

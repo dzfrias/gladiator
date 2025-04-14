@@ -9,7 +9,6 @@ script = ExtResource("1_y4h8b")
 name = "Rifle"
 reload_time = 1.0
 max_ammo = 60
-ammo_collect_amount = 20
 firing_interval = 0.2
 image = ExtResource("1_wc233")
 aim_mode = 0

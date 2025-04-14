@@ -31,10 +31,6 @@ func _ready() -> void:
 	if auto_activate_effects:
 		activate_effects()
 
-func add_ammo(ammo):
-	self.ammo += ammo
-	on_ammo_changed.emit(self.ammo, weapon_stats.max_ammo)
-
 func set_firing(direction: Direction):
 	_fire_direction = direction
 
@@ -130,6 +126,10 @@ func deactivate_prefire_flash() -> void:
 	assert(_prefire_flash != null)
 	_prefire_flash.queue_free()
 	_prefire_flash = null
+
+func add_ammo(amt: int) -> void:
+	ammo = mini(ammo + amt, weapon_stats.max_ammo)
+	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
 
 func _do_effects(direction: Direction) -> void:
 	var muzzle_flash := _muzzle_flash_scene.instantiate() as TweenedScaler

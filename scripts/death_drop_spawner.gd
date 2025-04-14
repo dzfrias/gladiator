@@ -2,7 +2,7 @@ class_name DeathSpawner extends Node2D
 
 @export var health: Health
 @export var spawn_chance: float = 0.2
-@export var death_drop_scene: PackedScene
+@export var drops: Array[PackedScene]
 
 func _ready() -> void:
 	if health == null:
@@ -17,6 +17,6 @@ func _ready() -> void:
 func _on_health_died() -> void:
 	if randf() > spawn_chance:
 		return
-	var drop = death_drop_scene.instantiate()
+	var drop = drops[randi_range(0, drops.size() - 1)].instantiate()
 	drop.global_position = global_position
 	get_tree().current_scene.add_child(drop)
