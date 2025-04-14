@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter_animations.gd" id="12_npl6x"]
 [ext_resource type="PackedScene" uid="uid://cbrt4ailoxbv5" path="res://scenes/enemy_drops.tscn" id="13_tsbhm"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/health_spawner.tscn" id="13_nps3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(25.92, 66.88)
@@ -89,7 +90,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_oetyt")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(0, -48)
+position = Vector2(18.69, -50.02)
 script = ExtResource("5_undrq")
 weapon_stats = ExtResource("6_irxur")
 
@@ -126,3 +127,4 @@ one_shot = true
 script = ExtResource("12_fy0vl")
 
 [node name="EnemyDrops" parent="." instance=ExtResource("13_tsbhm")]
+[node name="HealthSpawner" parent="." instance=ExtResource("13_nps3s")]

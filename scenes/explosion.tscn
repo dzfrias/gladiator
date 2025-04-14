@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://clgxno3rdacuv"]
+[gd_scene load_steps=5 format=3 uid="uid://clgxno3rdacuv"]
 
 [ext_resource type="Script" path="res://scripts/explosion.gd" id="1_oiy3p"]
+[ext_resource type="Script" path="res://scripts/free_on_finish.gd" id="2_m33bg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_as83y"]
 radius = 167.887
@@ -16,7 +17,7 @@ script = ExtResource("1_oiy3p")
 [node name="Radius" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_as83y")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." node_paths=PackedStringArray("to_free")]
 emitting = false
 amount = 40
 lifetime = 0.3
@@ -33,3 +34,5 @@ initial_velocity_max = 600.0
 scale_amount_min = 2.0
 scale_amount_max = 6.0
 color_ramp = SubResource("Gradient_13xp1")
+script = ExtResource("2_m33bg")
+to_free = NodePath("..")

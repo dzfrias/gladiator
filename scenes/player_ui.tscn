@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=13 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
-[ext_resource type="PackedScene" uid="uid://bm0hxwrfnl0cc" path="res://scenes/lightning_indicator.tscn" id="2_5x1lo"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="3_lbnag"]
 [ext_resource type="PackedScene" uid="uid://beu7cb0rnolxb" path="res://scenes/survival_ui.tscn" id="4_k0q64"]
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
@@ -22,7 +21,6 @@ base_font = ExtResource("10_132hn")
 
 [node name="PlayerUI" type="CanvasLayer"]
 script = ExtResource("1_bm8m2")
-lightning_ui = ExtResource("2_5x1lo")
 acid_rain_ui = ExtResource("3_lbnag")
 survival_ui = ExtResource("4_k0q64")
 

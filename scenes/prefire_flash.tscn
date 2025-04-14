@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmhfu4uwmwk6t"]
+
+[ext_resource type="Texture2D" uid="uid://dt5jsmiu5gu57" path="res://assets/Art/white_circle.png" id="1_q4skf"]
+[ext_resource type="Script" path="res://scripts/tweened_scaler.gd" id="2_cpoag"]
+
+[node name="PrefireFlash" type="Sprite2D"]
+z_index = 3
+position = Vector2(1, -1)
+texture = ExtResource("1_q4skf")
+script = ExtResource("2_cpoag")
+hold_duration = -1.0

@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_yimym"]
 [ext_resource type="PackedScene" uid="uid://cbrt4ailoxbv5" path="res://scenes/enemy_drops.tscn" id="14_es23i"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/health_spawner.tscn" id="14_5dk4w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_perck"]
 atlas = ExtResource("3_voear")
@@ -124,6 +125,7 @@ position = Vector2(2, 0)
 scale = Vector2(2.0625, 2.0625)
 sprite_frames = SubResource("SpriteFrames_62hpk")
 animation = &"idle"
+offset = Vector2(-1.08, 0)
 script = ExtResource("5_cynpy")
 shooter = NodePath("..")
 
@@ -141,7 +143,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_oetyt")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(15, -11)
 script = ExtResource("5_rapbo")
 weapon_stats = ExtResource("6_cglso")
 
@@ -185,3 +187,4 @@ one_shot = true
 script = ExtResource("13_yimym")
 
 [node name="EnemyDrops" parent="." instance=ExtResource("14_es23i")]
+[node name="HealthSpawner" parent="." instance=ExtResource("14_5dk4w")]

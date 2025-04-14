@@ -4,6 +4,7 @@ class_name Suispider extends FollowEnemy
 @export var self_damage: float = 2.0
 @export var explode_time: float = 2.0
 @export var distraction_jump_velocity: Vector2 = Vector2(300, -500.0)
+@export var lightning_strike_scene: PackedScene = preload("res://scenes/lightning_strike.tscn")
 
 var _started_timer: bool = false
 
@@ -21,8 +22,9 @@ func _start_lightning_timer() -> void:
 	_started_timer = true
 	while true:
 		await get_tree().create_timer(explode_time).timeout
-		for node in $ExplosionZone.get_overlapping_bodies():
-			var player := node as Player
-			player.damage(damage, Vector2.ZERO)
-		Debug.draw_circle(position, $ExplosionZone/CollisionShape2D.shape.radius)
+		var strike := lightning_strike_scene.instantiate() as Explosion
+		strike.damage = damage
+		strike.scale *= 0.75
+		get_tree().current_scene.add_child(strike)
+		strike.global_position = global_position
 		$Health.take_damage(self_damage, Vector2.ZERO)

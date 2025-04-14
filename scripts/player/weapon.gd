@@ -21,9 +21,11 @@ var can_fire: bool = true
 # NOTE when this field is null, we are not firing
 var _fire_direction: Direction = null
 var _continuous_projectile: Node2D
+var _prefire_flash: Node2D
 var _ammo_time: float
 var _muzzle_flash_scene: PackedScene = preload("res://scenes/muzzle_flash.tscn")
 var _bullet_case_scene: PackedScene = preload("res://scenes/bullet_case.tscn")
+var _prefire_flash_scene: PackedScene = preload("res://scenes/prefire_flash.tscn")
 
 func _ready() -> void:
 	if auto_activate_effects:
@@ -119,14 +121,23 @@ func reload():
 	can_fire = true
 	is_reloading = false
 
+func activate_prefire_flash() -> void:
+	assert(_prefire_flash == null)
+	_prefire_flash = _prefire_flash_scene.instantiate() as Node2D
+	add_child(_prefire_flash)
+
+func deactivate_prefire_flash() -> void:
+	assert(_prefire_flash != null)
+	_prefire_flash.queue_free()
+	_prefire_flash = null
+
 func _do_effects(direction: Direction) -> void:
-	var muzzle_flash := _muzzle_flash_scene.instantiate() as MuzzleFlash
+	var muzzle_flash := _muzzle_flash_scene.instantiate() as TweenedScaler
 	# We don't want the size of the muzzle flash to be linearly related to the strength of the
 	# weapon. Instead, we're using a function with a decreasing rate of change (sqrt).
 	muzzle_flash.end_scale = 3 * sqrt(weapon_stats.strength)
 	muzzle_flash.position += Vector2(5 * direction.scalar, -5)
 	add_child(muzzle_flash)
-	muzzle_flash.activate()
 	
 	var bullet_case := _bullet_case_scene.instantiate() as BulletCase
 	var angle := -2 * PI / 3 if direction.is_right else -PI / 3

@@ -5,6 +5,7 @@ _data = [Vector2(0.0111732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="LandImpactParticles" type="CPUParticles2D"]
+z_index = 2
 emitting = false
 amount = 10
 lifetime = 0.4

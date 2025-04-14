@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cege7k4wy5i31"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_k0ju5"]
+[ext_resource type="Texture2D" uid="uid://dt5jsmiu5gu57" path="res://assets/Art/white_circle.png" id="2_ifgee"]
+[ext_resource type="Script" path="res://scripts/tweened_scaler.gd" id="3_evkqu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eevxl"]
+radius = 14.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifxt7"]
+
+[node name="LightningStrike" type="Area2D"]
+scale = Vector2(16.6, 16.6)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+script = ExtResource("1_k0ju5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eevxl")
+
+[node name="Flash" type="Sprite2D" parent="." node_paths=PackedStringArray("auto_free")]
+material = SubResource("ShaderMaterial_ifxt7")
+position = Vector2(2.3494, -1.26506)
+texture = ExtResource("2_ifgee")
+script = ExtResource("3_evkqu")
+duration = 0.1
+hold_duration = 0.1
+auto_free = NodePath("..")

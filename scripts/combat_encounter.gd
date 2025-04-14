@@ -7,6 +7,8 @@ class_name CombatEncounter extends Module
 @export var spawn_in_delay_mean: float = 0.7
 @export var spawn_in_delay_sd: float = 0.1
 @export var spawn_in_tired_time: float = 1.5
+@export var will_spawn_chest: bool = false
+@export var chest_scene: PackedScene = preload("res://scenes/chest.tscn")
 
 var _started := false
 var _spawn_during_wave: int
@@ -54,6 +56,8 @@ func _process(_delta: float) -> void:
 	if get_tree().get_node_count_in_group(_group_name) == 0 and _spawn_during_wave == 0:
 		_set_barriers_enabled(false)
 		MissionManager.mission.in_combat = false
+		if will_spawn_chest:
+			_spawn_chest()
 		queue_free()
 
 static func _create_boundary(x: float) -> StaticBody2D:
@@ -142,3 +146,11 @@ func _spawn(spawn_point: Node2D, allow_meta: bool = true) -> Node2D:
 	enemy_instance.add_to_group("enemy")
 	get_tree().current_scene.add_child(enemy_instance)
 	return enemy_instance
+
+func _spawn_chest() -> void:
+	assert(will_spawn_chest)
+	var chest := chest_scene.instantiate() as Node2D
+	var spawn_point_index := randi_range(0, $SpawnPoints.get_child_count() - 1)
+	var spawn_point := $SpawnPoints.get_children()[spawn_point_index] as Node2D
+	chest.position = to_global(spawn_point.position)
+	get_tree().current_scene.add_child(chest)

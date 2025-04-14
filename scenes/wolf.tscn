@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_kg58i"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
 [ext_resource type="PackedScene" uid="uid://cbrt4ailoxbv5" path="res://scenes/enemy_drops.tscn" id="9_d1b3d"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/health_spawner.tscn" id="9_fse3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(42, 43)
@@ -188,3 +189,4 @@ one_shot = true
 script = ExtResource("8_kg58i")
 
 [node name="EnemyDrops" parent="." instance=ExtResource("9_d1b3d")]
+[node name="HealthSpawner" parent="." instance=ExtResource("9_fse3b")]
