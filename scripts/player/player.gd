@@ -269,9 +269,14 @@ func _roll() -> void:
 	_can_roll = true
 
 func set_alt_weapon(stats: WeaponStats) -> void:
+	if stats == null:
+		return
 	if $AltWeapon.effects != null:
 		$AltWeapon.deactivate_effects()
 	$AltWeapon.weapon_stats = stats
+	$AltWeapon.activate_effects()
+	if selected_weapon == $AltWeapon:
+		on_weapon_switch.emit()
 
 func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
