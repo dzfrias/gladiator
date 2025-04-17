@@ -272,8 +272,8 @@ func set_alt_weapon(stats: WeaponStats) -> void:
 	if $AltWeapon.effects != null:
 		$AltWeapon.deactivate_effects()
 	$AltWeapon.weapon_stats = stats
-	$AltWeapon.activate_effects()
 	if selected_weapon == $AltWeapon:
+		$AltWeapon.activate_effects()
 		on_weapon_switch.emit()
 
 func _burrow() -> void:
