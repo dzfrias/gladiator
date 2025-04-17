@@ -76,7 +76,7 @@ func _shoot() -> void:
 	_state = State.SHOOTING
 	on_state_changed.emit(_state)
 	while weapon.ammo > 0:
-		await weapon.fire($Direction)
+		await weapon.fire($Direction.angle)
 	
 	_state = State.STANDING
 	on_state_changed.emit(_state)

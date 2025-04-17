@@ -39,7 +39,7 @@ func _attack() -> void:
 	$Direction.scalar = signf(_tracking.position.x - position.x)
 	_align_with_direction()
 	while $Weapon.ammo > 0:
-		await $Weapon.fire($Direction)
+		await $Weapon.fire($Direction.angle)
 	
 	_state = State.TIRED
 	await $Weapon.reload()

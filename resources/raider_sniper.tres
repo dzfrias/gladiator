@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://bee5w5k2hubk7"]
+
+[ext_resource type="Texture2D" uid="uid://bigdw4j541t1n" path="res://assets/Art/laser_sniper.png" id="1_6vqkv"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_ey7nq"]
+[ext_resource type="PackedScene" uid="uid://f7i8sslf8rsu" path="res://scenes/sniper_enemy_projectile.tscn" id="2_3kc1t"]
+
+[resource]
+script = ExtResource("1_ey7nq")
+name = "Raider's Sniper"
+reload_time = 0.0
+max_ammo = -1
+firing_interval = 0.5
+image = ExtResource("1_6vqkv")
+aim_mode = 1
+strength = 0.7
+projectile = ExtResource("2_3kc1t")

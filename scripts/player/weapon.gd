@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if weapon_stats.firing_interval > 0:
-		fire(_fire_direction)
+		fire(_fire_direction.angle)
 	elif _continuous_projectile == null and ammo > 0:
 		_continuous_projectile = weapon_stats.projectile.instantiate()
 		_continuous_projectile.set_direction(_fire_direction)
@@ -75,25 +75,18 @@ func _process(delta: float) -> void:
 			_continuous_projectile.queue_free()
 			_continuous_projectile = null
 
-func fire(direction: Direction):
+func fire(angle: float):
 	if ammo == 0 or !can_fire:
 		return
 	
 	var projectile := weapon_stats.projectile.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	
-	var angle: float
-	match weapon_stats.aim_mode:
-		WeaponStats.AimMode.BIDIRECTIONAL:
-			angle = 0.0 if direction.is_right else PI
-		WeaponStats.AimMode.OMNIDIRECTIONAL:
-			angle = get_angle_to(get_global_mouse_position())
-	
 	if projectile is PhysicsBody2D:
 		projectile.add_collision_exception_with(get_parent())
 	projectile.fire(angle)
 	fired.emit()
-	_do_effects(direction)
+	_do_effects(angle)
 	projectile.global_position = global_position
 	
 	if ammo > 0:
@@ -133,17 +126,18 @@ func add_ammo(amt: int) -> void:
 	ammo = mini(ammo + amt, weapon_stats.max_ammo)
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
 
-func _do_effects(direction: Direction) -> void:
+func _do_effects(angle: float) -> void:
 	var muzzle_flash := _muzzle_flash_scene.instantiate() as TweenedScaler
 	# We don't want the size of the muzzle flash to be linearly related to the strength of the
 	# weapon. Instead, we're using a function with a decreasing rate of change (sqrt).
 	muzzle_flash.end_scale = 3 * sqrt(weapon_stats.strength)
-	muzzle_flash.position += Vector2(5 * direction.scalar, -5)
+	var k := 1 if angle > -PI / 2 and angle < PI / 2 else -1
+	muzzle_flash.position += Vector2(5 * k, -5)
 	add_child(muzzle_flash)
 	
 	var bullet_case := _bullet_case_scene.instantiate() as BulletCase
-	var angle := -2 * PI / 3 if direction.is_right else -PI / 3
-	bullet_case.launch(angle)
+	var bullet_case_angle := -2 * PI / 3 if angle > -PI / 2 and angle < PI / 2 else -PI / 3
+	bullet_case.launch(bullet_case_angle)
 	bullet_case.global_position = global_position
 	# Similar to the muzzle flash scenario, bullet casing size shouldn't be linearly related to
 	# strength.

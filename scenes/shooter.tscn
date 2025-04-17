@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=30 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_yimym"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
+[ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_13p0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_perck"]
 atlas = ExtResource("3_voear")
@@ -186,3 +187,6 @@ one_shot = true
 script = ExtResource("13_yimym")
 
 [node name="DropSpawner" parent="." instance=ExtResource("14_5dk4w")]
+
+[node name="EdgeDetector" type="Node2D" parent="."]
+script = ExtResource("15_13p0r")

@@ -8,11 +8,14 @@ var _particle_impact_threshold = 350
 var _impact_particle_multiplier = 0.025
 var _impact_speed_particle_multiplier = 0.1
 @onready var _step_timer := step_interval
+var _bottom: Vector2
 
 func _ready() -> void:
 	_player = get_parent() as Player
 	_player.on_ground_impact.connect(_on_ground_impact)
 	_player.jumped.connect(_on_jump)
+	var player_rect := _player.hitbox().shape.get_rect()
+	_bottom = Vector2(player_rect.end.x - player_rect.size.x / 2, player_rect.end.y)
 
 func _on_ground_impact(impact_force: float):
 	if impact_force < _particle_impact_threshold:
@@ -35,7 +38,7 @@ func _process(delta: float) -> void:
 func _spawn_impact_particles(amount: int, initial_velocity_delta: float) -> void:
 	var land_impact_particles := land_impact_particles_scene.instantiate() as CPUParticles2D
 	get_tree().current_scene.add_child(land_impact_particles)
-	land_impact_particles.global_position = get_parent().global_position
+	land_impact_particles.global_position = _player.to_global(_bottom)
 	land_impact_particles.amount = amount
 	land_impact_particles.initial_velocity_max += initial_velocity_delta
 	land_impact_particles.emitting = true

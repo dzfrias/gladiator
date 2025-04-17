@@ -6,5 +6,4 @@
 
 [node name="DropSpawner" type="Node2D"]
 script = ExtResource("1_dgdwl")
-spawn_chance = 1.0
 drops = Array[PackedScene]([ExtResource("2_hl0ti"), ExtResource("3_e8vnv")])

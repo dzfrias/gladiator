@@ -16,7 +16,6 @@ var _jump_time := 0.0
 var _jump_buffer := 0.0
 var _wants_burrow := false
 @onready var _current_move_speed = movement_settings.move_speed
-@onready var _original_shield_x = $Shield.position.x
 @onready var _original_item_x = $ItemPosition.position.x
 
 static var Instance
@@ -116,7 +115,6 @@ func _process(delta: float) -> void:
 
 func _align() -> void:
 	$ItemPosition.position = Vector2(_original_item_x * $Direction.scalar, $ItemPosition.position.y)
-	$Shield.position = Vector2(_original_shield_x * $Direction.scalar, $Shield.position.y)
 	$MainWeapon.position = $ItemPosition.position
 	$AltWeapon.position = $ItemPosition.position
 	$AnimatedSprite2D.flip_h = not $Direction.is_right
@@ -349,6 +347,9 @@ func burrow_percentage() -> float:
 
 func camera() -> PlayerCamera:
 	return $Camera2D
+
+func hitbox() -> CollisionShape2D:
+	return $Hitbox
 
 func _on_weapon_fired(weapon_: Weapon) -> void:
 	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon_.weapon_stats.strength

@@ -18,7 +18,7 @@ func _attack() -> void:
 	_state = State.ATTACKING
 	on_state_changed.emit(_state)
 	while $Weapon.ammo > 0:
-		await $Weapon.fire($Direction)
+		await $Weapon.fire($Direction.angle)
 	_state = State.TRACKING
 	on_state_changed.emit(_state)
 	await $Weapon.reload()

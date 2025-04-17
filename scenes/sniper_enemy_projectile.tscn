@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://f7i8sslf8rsu"]
+
+[ext_resource type="Script" path="res://scripts/horizontal_projectile.gd" id="1_hbt7h"]
+
+[sub_resource type="Gradient" id="Gradient_u5ani"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.19, 0.19, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nowkg"]
+gradient = SubResource("Gradient_u5ani")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hg24q"]
+size = Vector2(38, 4)
+
+[node name="SniperEnemyProjectile" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 81
+script = ExtResource("1_hbt7h")
+velocity = Vector2(700, 0)
+damage = 4.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.3113e-06, 0)
+scale = Vector2(0.59375, 0.046875)
+texture = SubResource("GradientTexture2D_nowkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hg24q")

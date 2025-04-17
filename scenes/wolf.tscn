@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=27 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_8oh5i"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_kg58i"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
+[ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_1gcnm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(42, 43)
@@ -188,3 +189,6 @@ one_shot = true
 script = ExtResource("8_kg58i")
 
 [node name="DropSpawner" parent="." instance=ExtResource("9_fse3b")]
+
+[node name="EdgeDetector" type="Node2D" parent="."]
+script = ExtResource("10_1gcnm")

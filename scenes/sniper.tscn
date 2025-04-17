@@ -1,0 +1,80 @@
+[gd_scene load_steps=15 format=3 uid="uid://kuoxip0150vk"]
+
+[ext_resource type="Script" path="res://scripts/enemies/sniper.gd" id="1_27e54"]
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_36e75"]
+[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_rg374"]
+[ext_resource type="Script" path="res://scripts/player/weapon.gd" id="3_dbdna"]
+[ext_resource type="Resource" uid="uid://bee5w5k2hubk7" path="res://resources/raider_sniper.tres" id="4_6f1k5"]
+[ext_resource type="Script" path="res://scripts/direction.gd" id="5_pyflq"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="6_kf48r"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_edfuj"]
+[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_bd3sr"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_uu88c"]
+[ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_ejvbw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yjyt"]
+size = Vector2(24, 62)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kpc1p"]
+radius = 225.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m5xte"]
+radius = 400.0
+
+[node name="Sniper" type="CharacterBody2D"]
+collision_layer = 130
+collision_mask = 33
+script = ExtResource("1_27e54")
+impact_particle_scene = ExtResource("2_rg374")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.179688, 0.484375)
+texture = ExtResource("2_36e75")
+offset = Vector2(-1.08, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.00800037, 1)
+shape = SubResource("RectangleShape2D_3yjyt")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_kpc1p")
+
+[node name="Weapon" type="Node2D" parent="."]
+position = Vector2(15, -11)
+script = ExtResource("3_dbdna")
+weapon_stats = ExtResource("4_6f1k5")
+
+[node name="Direction" type="Node" parent="."]
+script = ExtResource("5_pyflq")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("6_kf48r")
+max_health = 9.0
+
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("7_edfuj")
+
+[node name="NotifyZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
+shape = SubResource("CircleShape2D_m5xte")
+
+[node name="HitFlash" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+script = ExtResource("8_bd3sr")
+
+[node name="DropSpawner" parent="." instance=ExtResource("9_uu88c")]
+
+[node name="EdgeDetector" type="Node2D" parent="."]
+script = ExtResource("10_ejvbw")

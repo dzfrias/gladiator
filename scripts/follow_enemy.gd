@@ -18,8 +18,6 @@ var _state: State
 var _tracking: Node2D
 var _jump_follow_timer := 0.0
 @onready var _original_patrol_speed = patrol_speed
-var _left_ray: RayCast2D
-var _right_ray: RayCast2D
 var _stunned: bool
 
 signal hit_floor
@@ -37,22 +35,6 @@ func _ready() -> void:
 	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
-	
-	_left_ray = _create_ray(true)
-	add_child(_left_ray)
-	_right_ray = _create_ray(false)
-	add_child(_right_ray)
-
-func _create_ray(left: bool) -> RayCast2D:
-	var bounding_box: Rect2 = $CollisionShape2D.shape.get_rect()
-	var ray := RayCast2D.new()
-	ray.collision_mask = Constants.PLATFORM_LAYER | Constants.ENVIRONMENT_LAYER
-	ray.target_position = Vector2(0.0, bounding_box.size.y / 2)
-	ray.position.x = bounding_box.size.x / 2 + 10
-	if left:
-		ray.position.x *= -1
-	ray.position.y += bounding_box.size.y / 2 - 10
-	return ray
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -96,7 +78,7 @@ func _physics_process(delta: float) -> void:
 		State.IDLE:
 			velocity.x = patrol_speed * $Direction.scalar
 			# Check reaching the edge of a platform or the environment
-			if (not _left_ray.is_colliding() and velocity.x < 0) or (not _right_ray.is_colliding() and velocity.x > 0):
+			if (not $EdgeDetector.left.is_colliding() and velocity.x < 0) or (not $EdgeDetector.right.is_colliding() and velocity.x > 0):
 				$Direction.switch()
 		State.TIRED:
 			velocity.x = 0
