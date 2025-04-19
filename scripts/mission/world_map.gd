@@ -29,13 +29,13 @@ var _terrain := [
 	WeightedScene.new("res://scenes/modules/terrain/slope_down.tscn", 0.25),
 ]
 var _encounters := [
-	WeightedScene.new("res://scenes/modules/encounters/basic.tscn", 0.05),
-	WeightedScene.new("res://scenes/modules/encounters/encounter1.tscn", 0.15),
-	WeightedScene.new("res://scenes/modules/encounters/encounter2.tscn", 0.15),
-	WeightedScene.new("res://scenes/modules/encounters/encounter3.tscn", 0.15),
-	WeightedScene.new("res://scenes/modules/encounters/housing_encounter.tscn", 0.175),
-	WeightedScene.new("res://scenes/modules/encounters/outpost_encounter.tscn", 0.15),
-	WeightedScene.new("res://scenes/modules/encounters/campsite_encounter.tscn", 0.175),
+	#WeightedScene.new("res://scenes/modules/encounters/basic.tscn", 0.05),
+	#WeightedScene.new("res://scenes/modules/encounters/encounter1.tscn", 0.15),
+	#WeightedScene.new("res://scenes/modules/encounters/encounter2.tscn", 0.15),
+	#WeightedScene.new("res://scenes/modules/encounters/encounter3.tscn", 0.15),
+	#WeightedScene.new("res://scenes/modules/encounters/housing_encounter.tscn", 0.175),
+	#WeightedScene.new("res://scenes/modules/encounters/outpost_encounter.tscn", 0.15),
+	#WeightedScene.new("res://scenes/modules/encounters/campsite_encounter.tscn", 0.175),
 ]
 var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn")
 var _fill_tiles: Array[FillTile] = []
@@ -66,7 +66,7 @@ func _generate() -> void:
 	while module_origin.x < map_width:
 		var module: WeightedScene
 		if next_encounter == 0:
-			module = weighted_choice(_encounters)
+			module = weighted_choice(_terrain)
 			next_encounter = randi_range(3, 4)
 		else:
 			module = weighted_choice(_terrain)
@@ -97,12 +97,13 @@ func _place_module(origin: Vector2i, instance: Module) -> Vector2i:
 	for tile in instance.tiles().get_used_cells():
 		var source_id = instance.tiles().get_cell_source_id(tile)
 		var atlas_coords = instance.tiles().get_cell_atlas_coords(tile)
+		var alternative_tile = instance.tiles().get_cell_alternative_tile(tile)
 		var coords = origin + tile
-		set_cell(coords, source_id, atlas_coords)
+		set_cell(coords, source_id, atlas_coords, alternative_tile)
 		lowest_y = maxi(coords.y, lowest_y)
 	
 	var width = instance.tiles().get_used_rect().size.x
-	_fill(Vector2i(origin.x, lowest_y + 1), width)
+	# _fill(Vector2i(origin.x, lowest_y + 1), width)
 	
 	add_child(instance)
 	
