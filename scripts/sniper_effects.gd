@@ -13,7 +13,7 @@ func _enter_tree() -> void:
 
 func _process(_delta: float) -> void:
 	if not Player.Instance.is_underground():
-		Player.Instance.velocity *= speed_factor
+		Player.Instance.velocity.x *= speed_factor
 
 func _exit_tree() -> void:
 	var tween = get_tree().create_tween()
