@@ -14,7 +14,6 @@
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="14_ojru7"]
 [ext_resource type="Texture2D" uid="uid://b3yl3oymh43ks" path="res://assets/Art/PlayerJump1.png" id="15_3rly8"]
 [ext_resource type="Texture2D" uid="uid://dwowtfaylsxnu" path="res://assets/Art/PlayerWalk1.png" id="15_5unjr"]
-[ext_resource type="Texture2D" uid="uid://x4pn0woh6rtk" path="res://assets/Art/laser_pistol.png" id="15_ayyhw"]
 [ext_resource type="Script" path="res://scripts/player/player_gun.gd" id="16_ud12g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
@@ -154,6 +153,9 @@ animations = [{
 shader = ExtResource("14_ojru7")
 shader_parameter/color = Color(0, 0, 0, 1)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cseap"]
+load_path = "res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac23e3b.ctex"
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 18
@@ -236,5 +238,5 @@ autoplay = "idle"
 material = SubResource("ShaderMaterial_d3okp")
 position = Vector2(18, -5)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("15_ayyhw")
+texture = SubResource("CompressedTexture2D_cseap")
 script = ExtResource("16_ud12g")

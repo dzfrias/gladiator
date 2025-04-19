@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
 [ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
 [ext_resource type="Texture2D" uid="uid://bwam1j3kd5gx0" path="res://assets/Art/burrow_bar.png" id="7_rtk66"]
-[ext_resource type="Texture2D" uid="uid://x4pn0woh6rtk" path="res://assets/Art/laser_pistol.png" id="7_wk7so"]
 [ext_resource type="Texture2D" uid="uid://m43smj7sx1ie" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
 [ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="10_132hn"]
 
@@ -15,6 +14,9 @@ bg_color = Color(0.215686, 0.215686, 0.215686, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjwni"]
 bg_color = Color(0.264919, 0.60077, 0.618488, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cseap"]
+load_path = "res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac23e3b.ctex"
 
 [sub_resource type="FontVariation" id="FontVariation_b502f"]
 base_font = ExtResource("10_132hn")
@@ -75,7 +77,7 @@ anchor_bottom = 1.0
 offset_top = -71.0
 offset_right = 98.0
 grow_vertical = 0
-texture = ExtResource("7_wk7so")
+texture = SubResource("CompressedTexture2D_cseap")
 stretch_mode = 4
 
 [node name="InfiniteAmmoSymbol" type="TextureRect" parent="WeaponUI"]
