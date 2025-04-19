@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_1gcnm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
-size = Vector2(55, 44.5)
+size = Vector2(60, 51)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct54a"]
 size = Vector2(28, 36)
@@ -124,7 +124,7 @@ impact_particle_prefab = ExtResource("2_8oh5i")
 script = ExtResource("7_3l162")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -2.75)
+position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_ot88w")
 
 [node name="Direction" type="Node" parent="."]

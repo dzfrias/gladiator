@@ -6,7 +6,7 @@ signal jumped
 
 @export var movement_settings: Resource
 @export var bullet_wall_delta: float = 100.0
-@onready var selected_weapon = $MainWeapon
+@onready var selected_weapon: Weapon = $MainWeapon
 
 var _underground_time := 0.0
 var _state := State.CONTROL
@@ -15,10 +15,17 @@ var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
 var _wants_burrow := false
+var _firing: FiringWeapon = FiringWeapon.NONE
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_item_x = $ItemPosition.position.x
 
 static var Instance
+
+enum FiringWeapon {
+	SELECTED,
+	OTHER,
+	NONE,
+}
 
 enum State {
 	CONTROL,
@@ -60,7 +67,7 @@ func _process(delta: float) -> void:
 	
 	# As a last-ditch sanity check, disable the weapon if we're not in the control state
 	if _state != State.CONTROL:
-		_stop_firing()
+		_firing = FiringWeapon.NONE
 	
 	# Handle continuous (horizontal) movement
 	match _state:
@@ -91,8 +98,7 @@ func _process(delta: float) -> void:
 	
 	# Switch direction based on mouse if using omnidirectionally-aiming weapon
 	if selected_weapon.weapon_stats.aim_mode == WeaponStats.AimMode.OMNIDIRECTIONAL:
-		var mouse_angle = selected_weapon.get_angle_to(get_global_mouse_position())
-		var mouse_v := Vector2.RIGHT.rotated(mouse_angle)
+		var mouse_v := Vector2.RIGHT.rotated(get_firing_angle())
 		$Direction.is_right = mouse_v.x > 0
 		Debug.draw_line(
 			selected_weapon.global_position,
@@ -102,6 +108,28 @@ func _process(delta: float) -> void:
 			0.01,
 		)
 	
+	# Fire gun if possible
+	match _firing:
+		FiringWeapon.NONE:
+			if $MainWeapon.is_continuous():
+				$MainWeapon.stop_continuous_fire()
+			if alt_weapon() != null and alt_weapon().is_continuous():
+				$AltWeapon.stop_continuous_fire()
+		FiringWeapon.SELECTED:
+			if selected_weapon.can_fire:
+				if selected_weapon.is_continuous():
+					selected_weapon.continuous_fire($Direction)
+				else:
+					selected_weapon.fire(get_firing_angle())
+		FiringWeapon.OTHER:
+			var other := $AltWeapon
+			if selected_weapon == $AltWeapon:
+				other = $MainWeapon
+			if other.can_fire:
+				if other.is_continuous():
+					other.continuous_fire($Direction)
+				else:
+					other.fire(get_firing_angle())
 	_align()
 	_adjust_bullet_walls()
 	
@@ -138,7 +166,6 @@ func _input(event: InputEvent) -> void:
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 	
 	if event.is_action_pressed("toggle_alt") and alt_weapon() != null:
-		_stop_firing()
 		if selected_weapon == $MainWeapon:
 			$MainWeapon.deactivate_effects()
 			selected_weapon = $AltWeapon
@@ -161,7 +188,7 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("shield"):
 				$Shield.enable()
 				_state = State.SHIELD
-				_stop_firing()
+				_firing = FiringWeapon.NONE
 				_current_move_speed = movement_settings.shield_move_speed
 			
 			# Burrow
@@ -181,21 +208,17 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("fire"):
 				var item = $Inventory.get_held_item()
 				if item == WEAPON_INDICATOR:
-					selected_weapon.set_firing($Direction)
+					_firing = FiringWeapon.SELECTED
 				else:
 					assert(item is GadgetInfo)
 					_use_gadget(item)
 			if event.is_action_released("fire"):
-				_stop_firing()
+				_firing = FiringWeapon.NONE
 			
 			if event.is_action_pressed("fire_alt") and alt_weapon() != null:
-				if selected_weapon == $MainWeapon:
-					$AltWeapon.set_firing($Direction)
-				else:
-					assert(selected_weapon == $AltWeapon)
-					$MainWeapon.set_firing($Direction)
+				_firing = FiringWeapon.OTHER
 			if event.is_action_released("fire_alt"):
-				_stop_firing()
+				_firing = FiringWeapon.NONE
 			
 			# Interact
 			if event.is_action_pressed("interact"):
@@ -245,11 +268,11 @@ func _jump() -> void:
 	_is_jumping = true
 	velocity.y = -movement_settings.jump_speed
 
-func damage(amount: float, direction: Vector2) -> void:
+func damage(amount: float, direction_: Vector2) -> void:
 	if $Health.has_died or collision_layer == Constants.INVINCIBLE_LAYER:
 		return
 	print("Player hit")
-	$Health.take_damage(amount, direction)
+	$Health.take_damage(amount, direction_)
 
 func _roll() -> void:
 	_state = State.ROLL
@@ -317,7 +340,7 @@ func is_holding_weapon() -> bool:
 	return $Inventory.get_held_item() == WEAPON_INDICATOR
 
 func _on_item_switched(_current_item):
-	selected_weapon.set_firing(null)
+	_firing = FiringWeapon.NONE
 
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
@@ -351,15 +374,22 @@ func camera() -> PlayerCamera:
 func hitbox() -> CollisionShape2D:
 	return $Hitbox
 
+func direction() -> Direction:
+	return $Direction
+
+func sprite() -> AnimatedSprite2D:
+	return $AnimatedSprite2D
+
+func get_firing_angle() -> float:
+	if selected_weapon.weapon_stats.aim_mode == WeaponStats.AimMode.OMNIDIRECTIONAL:
+		return selected_weapon.get_angle_to(get_global_mouse_position())
+	return $Direction.angle
+
 func _on_weapon_fired(weapon_: Weapon) -> void:
 	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon_.weapon_stats.strength
 	$Camera2D.move(strength)
 	if $AnimatedSprite2D.get_animation() == "idle" or $AnimatedSprite2D.get_animation() == "fire":
 		$AnimatedSprite2D.play("fire")
-
-func _stop_firing() -> void:
-	$MainWeapon.set_firing(null)
-	$AltWeapon.set_firing(null)
 
 func _flash_invincible() -> void:
 	while collision_layer == Constants.INVINCIBLE_LAYER:

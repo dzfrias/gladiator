@@ -18,8 +18,6 @@ var effects: Node
 var _weapon_stats: WeaponStats
 var is_reloading: bool = false
 var can_fire: bool = true
-# NOTE when this field is null, we are not firing
-var _fire_direction: Direction = null
 var _continuous_projectile: Node2D
 var _prefire_flash: Node2D
 var _ammo_time: float
@@ -30,12 +28,6 @@ var _prefire_flash_scene: PackedScene = preload("res://scenes/prefire_flash.tscn
 func _ready() -> void:
 	if auto_activate_effects:
 		activate_effects()
-
-func set_firing(direction: Direction):
-	_fire_direction = direction
-
-func is_firing() -> bool:
-	return _fire_direction != null
 
 func activate_effects() -> void:
 	assert(effects == null)
@@ -52,30 +44,34 @@ func deactivate_effects() -> void:
 	effects = null
 
 func _process(delta: float) -> void:
-	if not is_firing():
-		if _continuous_projectile != null:
-			_continuous_projectile.queue_free()
-			_continuous_projectile = null
-		return
-	
-	if weapon_stats.firing_interval > 0:
-		fire(_fire_direction.angle)
-	elif _continuous_projectile == null and ammo > 0:
-		_continuous_projectile = weapon_stats.projectile.instantiate()
-		_continuous_projectile.set_direction(_fire_direction)
-		add_child(_continuous_projectile)
-	
 	if _continuous_projectile != null:
-		var prev = int(_ammo_time)
-		_ammo_time -= delta
+		var prev := int(_ammo_time)
+		_ammo_time = maxf(_ammo_time - delta, 0.0)
 		if int(_ammo_time) != prev:
 			ammo -= 1
 			on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
-		if _ammo_time <= 0:
+		if _ammo_time == 0:
 			_continuous_projectile.queue_free()
 			_continuous_projectile = null
 
+func continuous_fire(direction: Direction) -> void:
+	assert(is_continuous())
+	if _continuous_projectile != null or ammo == 0:
+		return
+	
+	_continuous_projectile = weapon_stats.projectile.instantiate()
+	_continuous_projectile.set_direction(direction)
+	add_child(_continuous_projectile)
+
+func stop_continuous_fire() -> void:
+	assert(is_continuous())
+	if _continuous_projectile == null:
+		return
+	_continuous_projectile.queue_free()
+	_continuous_projectile = null
+
 func fire(angle: float):
+	assert(weapon_stats.firing_interval > 0)
 	if ammo == 0 or !can_fire:
 		return
 	
@@ -124,7 +120,11 @@ func deactivate_prefire_flash() -> void:
 
 func add_ammo(amt: int) -> void:
 	ammo = mini(ammo + amt, weapon_stats.max_ammo)
+	_ammo_time = minf(_ammo_time + amt, weapon_stats.max_ammo)
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
+
+func is_continuous() -> bool:
+	return weapon_stats.firing_interval == 0
 
 func _do_effects(angle: float) -> void:
 	var muzzle_flash := _muzzle_flash_scene.instantiate() as TweenedScaler
