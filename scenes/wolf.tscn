@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_1gcnm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
-size = Vector2(42, 43)
+size = Vector2(55, 44.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct54a"]
 size = Vector2(28, 36)
@@ -124,7 +124,7 @@ impact_particle_prefab = ExtResource("2_8oh5i")
 script = ExtResource("7_3l162")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
+position = Vector2(0.5, -2.75)
 shape = SubResource("RectangleShape2D_ot88w")
 
 [node name="Direction" type="Node" parent="."]
@@ -140,7 +140,7 @@ collision_mask = 16
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(40, 1)
+position = Vector2(43, 1)
 shape = SubResource("RectangleShape2D_ct54a")
 disabled = true
 debug_color = Color(0.644145, 0.106926, 0.184851, 0.42)
@@ -169,7 +169,8 @@ target_position = Vector2(0, 40)
 collision_mask = 32
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.6, 1.6)
+position = Vector2(0, -3)
+scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_th1nn")
 animation = &"idle"
 autoplay = "idle"

@@ -192,7 +192,7 @@ script = ExtResource("5_crqak")
 auto_activate_effects = false
 
 [node name="ItemPosition" type="Node2D" parent="."]
-position = Vector2(31.08, -15)
+position = Vector2(23, -9)
 
 [node name="PlatformRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, 20)
