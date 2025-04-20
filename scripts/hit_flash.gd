@@ -10,12 +10,7 @@ func _ready() -> void:
 	if health == null:
 		health = $"../Health"
 	if canvas_item == null:
-		if has_node("../Sprite2D"):
-			canvas_item = $"../Sprite2D"
-		elif has_node("../AnimatedSprite2D"):
-			canvas_item = $"../AnimatedSprite2D"
-		else:
-			assert(false)
+		canvas_item = $"../Sprite"
 	
 	health.damage_taken.connect(_on_damage_taken)
 	_original_material = canvas_item.material

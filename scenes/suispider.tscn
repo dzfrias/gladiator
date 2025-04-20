@@ -39,7 +39,7 @@ stop_dist = 50.0
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_ouvmv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_fkk75")
 

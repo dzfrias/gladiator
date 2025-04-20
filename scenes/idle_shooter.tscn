@@ -113,7 +113,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
 shape = SubResource("CircleShape2D_c2f02")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
+[node name="Sprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
 position = Vector2(1, -35)
 scale = Vector2(2.15625, 2.15625)
 sprite_frames = SubResource("SpriteFrames_8og87")
