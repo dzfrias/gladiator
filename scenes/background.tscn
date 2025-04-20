@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy0ehmv0nnrm8"]
+[gd_scene load_steps=11 format=3 uid="uid://cy0ehmv0nnrm8"]
 
-[ext_resource type="Texture2D" uid="uid://chfx1it34ks1o" path="res://assets/Art/BG Layer 1.png" id="1_1ub2q"]
-[ext_resource type="Texture2D" uid="uid://dul65fiscpp5n" path="res://assets/Art/BG Layer 2.png" id="2_1hxad"]
-[ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="3_kpjbb"]
-[ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="4_qujju"]
-[ext_resource type="Texture2D" uid="uid://bjv1njf4wfo76" path="res://assets/Art/BG Layer 5.png" id="5_q132a"]
-[ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="6_oknll"]
+[ext_resource type="Texture2D" uid="uid://chfx1it34ks1o" path="res://assets/Art/BG Layer 1.png" id="1_lbhbt"]
+[ext_resource type="Texture2D" uid="uid://dul65fiscpp5n" path="res://assets/Art/BG Layer 2.png" id="2_0bmf5"]
+[ext_resource type="Texture2D" uid="uid://cbd4l1j3uer4h" path="res://assets/Art/BG Layer 6.png" id="3_3wvpq"]
+[ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="4_c208q"]
+[ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="5_el7km"]
+[ext_resource type="Texture2D" uid="uid://bjv1njf4wfo76" path="res://assets/Art/BG Layer 5.png" id="6_sflrx"]
+[ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="7_b7qb6"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fusu6"]
 blend_mode = 1
@@ -32,7 +33,7 @@ repeat_size = Vector2(640, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Gradient"]
-texture = ExtResource("1_1ub2q")
+texture = ExtResource("1_lbhbt")
 offset = Vector2(320, 180)
 
 [node name="Dust" type="Parallax2D" parent="."]
@@ -42,7 +43,18 @@ repeat_size = Vector2(640, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Dust"]
-texture = ExtResource("2_1hxad")
+texture = ExtResource("2_0bmf5")
+offset = Vector2(320, 180)
+
+[node name="Clouds" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-2, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds"]
+texture = ExtResource("3_3wvpq")
 offset = Vector2(320, 180)
 
 [node name="Mountains" type="Parallax2D" parent="."]
@@ -52,7 +64,7 @@ repeat_size = Vector2(640, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Mountains"]
-texture = ExtResource("3_kpjbb")
+texture = ExtResource("4_c208q")
 offset = Vector2(320, 180)
 
 [node name="Structures" type="Parallax2D" parent="."]
@@ -62,7 +74,7 @@ repeat_size = Vector2(640, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Structures"]
-texture = ExtResource("4_qujju")
+texture = ExtResource("5_el7km")
 offset = Vector2(320, 180)
 
 [node name="Ships" type="Parallax2D" parent="."]
@@ -72,7 +84,7 @@ repeat_size = Vector2(640, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Ships"]
-texture = ExtResource("5_q132a")
+texture = ExtResource("6_sflrx")
 offset = Vector2(320, 180)
 
 [node name="MovingDust" type="Parallax2D" parent="."]
@@ -80,11 +92,10 @@ repeat_size = Vector2(640, 0)
 repeat_times = 3
 
 [node name="ColorRect" type="ColorRect" parent="MovingDust"]
-material = ExtResource("6_oknll")
+material = ExtResource("7_b7qb6")
 offset_right = 1279.0
 offset_bottom = 734.0
 color = Color(1, 1, 1, 0)
-metadata/_edit_use_anchors_ = true
 
 [node name="Overlay" type="Parallax2D" parent="."]
 repeat_size = Vector2(1280, 0)
