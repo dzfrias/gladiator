@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bcjerk6m5dfga"]
+[gd_scene load_steps=22 format=3 uid="uid://bcjerk6m5dfga"]
 
 [ext_resource type="Script" path="res://scripts/mission/world_map.gd" id="2_3qno5"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="3_af437"]
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="3_mkemn"]
 [ext_resource type="Texture2D" uid="uid://bjv1njf4wfo76" path="res://assets/Art/BG Layer 5.png" id="5_833qh"]
+[ext_resource type="Texture2D" uid="uid://cbd4l1j3uer4h" path="res://assets/Art/BG Layer 6.png" id="5_abq0j"]
 [ext_resource type="Texture2D" uid="uid://chfx1it34ks1o" path="res://assets/Art/BG Layer 1.png" id="6_51o7v"]
 [ext_resource type="Texture2D" uid="uid://dul65fiscpp5n" path="res://assets/Art/BG Layer 2.png" id="7_8ih71"]
 [ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="7_865j3"]
@@ -73,6 +74,17 @@ repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Dust"]
 texture = ExtResource("7_8ih71")
+offset = Vector2(320, 180)
+
+[node name="Clouds" type="Parallax2D" parent="Background"]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-2, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Clouds"]
+texture = ExtResource("5_abq0j")
 offset = Vector2(320, 180)
 
 [node name="Mountains" type="Parallax2D" parent="Background"]
