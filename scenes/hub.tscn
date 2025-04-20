@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_g6j8t"]
 [ext_resource type="Script" path="res://scripts/hub.gd" id="1_y8sdt"]
-[ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="3_o4r3g"]
+[ext_resource type="TileSet" uid="uid://bt4kf3efaalpm" path="res://assets/desert_final.tres" id="3_o4r3g"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="3_veakm"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="4_djpkc"]
 [ext_resource type="Script" path="res://scripts/mission_board.gd" id="5_ur55b"]
