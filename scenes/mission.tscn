@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bcjerk6m5dfga"]
+[gd_scene load_steps=20 format=3 uid="uid://bcjerk6m5dfga"]
 
 [ext_resource type="Script" path="res://scripts/mission/world_map.gd" id="2_3qno5"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="3_af437"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="8_5b6fl"]
 [ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="9_neff4"]
 [ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="11_mqly5"]
+[ext_resource type="Script" path="res://scripts/blink.gd" id="11_yv2ar"]
+[ext_resource type="Shader" path="res://resources/shaders/vhs.gdshader" id="12_4una5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fusu6"]
 blend_mode = 1
@@ -25,6 +27,26 @@ width = 1280
 height = 720
 use_hdr = true
 fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_67i7g"]
+offsets = PackedFloat32Array(0.461039, 0.636364)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_coi1h"]
+gradient = SubResource("Gradient_67i7g")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0ao7"]
+shader = ExtResource("12_4una5")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 0.2
+shader_parameter/warp_amount = 0.1
+shader_parameter/vignette_amount = 0.0
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/grille_amount = 0.0
+shader_parameter/brightness_boost = 1.0
+shader_parameter/chromatic_aberration_amount = 0.002
 
 [node name="Mission" type="Node2D"]
 
@@ -111,5 +133,39 @@ script = ExtResource("3_af437")
 
 [node name="Player" parent="." instance=ExtResource("3_mkemn")]
 position = Vector2(73, -203)
+
+[node name="VHS" type="CanvasLayer" parent="."]
+
+[node name="REC" type="HBoxContainer" parent="VHS"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+script = ExtResource("11_yv2ar")
+interval = 0.8
+
+[node name="Dot" type="TextureRect" parent="VHS/REC"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_coi1h")
+
+[node name="Label" type="Label" parent="VHS/REC"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.12, 0.12, 1)
+theme_override_font_sizes/font_size = 36
+text = "REC"
+
+[node name="ColorRect" type="ColorRect" parent="VHS"]
+material = SubResource("ShaderMaterial_x0ao7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HUD" parent="." instance=ExtResource("7_c628u")]
