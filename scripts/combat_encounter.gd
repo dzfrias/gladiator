@@ -146,6 +146,9 @@ func _spawn(spawn_point: Node2D, allow_meta: bool = true) -> Node2D:
 	enemy_instance.add_to_group(_group_name)
 	enemy_instance.add_to_group("enemy")
 	get_tree().current_scene.add_child(enemy_instance)
+	for child in enemy_instance.get_children():
+		if child is Health:
+			child.damage_taken.connect(_on_enemy_damage_taken)
 	return enemy_instance
 
 func _spawn_chest() -> void:
@@ -155,3 +158,8 @@ func _spawn_chest() -> void:
 	var spawn_point := $SpawnPoints.get_children()[spawn_point_index] as Node2D
 	chest.position = to_global(spawn_point.position)
 	get_tree().current_scene.add_child(chest)
+
+func _on_enemy_damage_taken(_amount: float, _direction: Vector2) -> void:
+	if _started:
+		return
+	_start_wave()
