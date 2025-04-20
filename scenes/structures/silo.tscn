@@ -1,11 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhglqsap5vi4o"]
+[gd_scene load_steps=12 format=3 uid="uid://bhglqsap5vi4o"]
 
-[ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="1_rpntu"]
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_lr4c8"]
 [ext_resource type="Texture2D" uid="uid://doou8ewryr0pi" path="res://assets/Art/silo.png" id="2_47ear"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8fqi"]
-shader = ExtResource("1_rpntu")
-shader_parameter/color = Color(0, 0, 0, 0.941176)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tu36f"]
 size = Vector2(247, 20)
@@ -42,7 +38,7 @@ collision_mask = 32
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
-material = SubResource("ShaderMaterial_g8fqi")
+material = ExtResource("1_lr4c8")
 position = Vector2(2, 0)
 scale = Vector2(3.05556, 3.05556)
 texture = ExtResource("2_47ear")

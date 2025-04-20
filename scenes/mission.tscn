@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bcjerk6m5dfga"]
+[gd_scene load_steps=21 format=3 uid="uid://bcjerk6m5dfga"]
 
 [ext_resource type="Script" path="res://scripts/mission/world_map.gd" id="2_3qno5"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="3_af437"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dul65fiscpp5n" path="res://assets/Art/BG Layer 2.png" id="7_8ih71"]
 [ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="7_865j3"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_c628u"]
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="7_s6s8a"]
 [ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="8_5b6fl"]
 [ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="9_neff4"]
 [ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="11_mqly5"]
@@ -124,6 +125,7 @@ position = Vector2(70.5, 360)
 texture = SubResource("GradientTexture2D_hwxud")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+material = ExtResource("7_s6s8a")
 tile_set = ExtResource("7_865j3")
 script = ExtResource("2_3qno5")
 map_width = 400

@@ -9,3 +9,11 @@ script = ExtResource("2_rcl6b")
 [node name="Tiles" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAP//AAADAAQAAAABAP//AAACAAQAAAACAP//AAACAAQAAAADAP//AAACAAQAAAAEAP//AAACAAQAAAAFAP//AAACAAQAAAAGAP//AAACAAQAAAAHAP//AAACAAQAAAAIAP//AAACAAQAAAAJAP//AAACAAQAAAAKAP//AAACAAQAAAALAP//AAACAAQAAAAMAP//AAACAAQAAAA=")
 tile_set = ExtResource("2_6j4ae")
+
+[node name="Decorations" type="Node" parent="."]
+
+[node name="Decoration1" type="Node2D" parent="Decorations"]
+position = Vector2(150, -33)
+
+[node name="Decoration2" type="Node2D" parent="Decorations"]
+position = Vector2(326, -33)

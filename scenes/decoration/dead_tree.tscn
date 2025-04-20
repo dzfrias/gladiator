@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bufq0nqpmw5wp"]
+
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_mmh1y"]
+[ext_resource type="Texture2D" uid="uid://gnt7dvfg7v6m" path="res://assets/tree_1.png" id="2_rgaff"]
+[ext_resource type="Script" path="res://scripts/random_variant.gd" id="3_51obl"]
+
+[node name="DeadTree" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+z_index = -1
+material = ExtResource("1_mmh1y")
+position = Vector2(-35.7501, -144.625)
+scale = Vector2(3.03906, 3.03906)
+texture = ExtResource("2_rgaff")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 96)
+script = ExtResource("3_51obl")
+restrict = Array[int]([0, 3])

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bopei2cuebpag"]
+
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_6pn7d"]
+[ext_resource type="Texture2D" uid="uid://g73al3ypsves" path="res://assets/grass.png" id="2_6ulr1"]
+[ext_resource type="Script" path="res://scripts/random_variant.gd" id="3_26vud"]
+
+[node name="Grass" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+z_index = -1
+material = ExtResource("1_6pn7d")
+position = Vector2(0, -48)
+scale = Vector2(3.03906, 3.03906)
+texture = ExtResource("2_6ulr1")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+script = ExtResource("3_26vud")
+vertical = true

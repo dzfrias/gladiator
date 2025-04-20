@@ -26,4 +26,4 @@ angle_max = 90.0
 scale_amount_min = 0.0
 scale_amount_max = 6.0
 scale_amount_curve = SubResource("Curve_kiy72")
-color = Color(1, 0.917647, 0.447059, 0.854902)
+color = Color(0, 0, 0, 0.854902)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxegipnfcsynw"]
+
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_tdnw3"]
+[ext_resource type="Texture2D" uid="uid://bwfm3nhxk83ov" path="res://assets/rocks.png" id="2_pkopt"]
+[ext_resource type="Script" path="res://scripts/random_variant.gd" id="3_slhto"]
+
+[node name="Rock" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+z_index = -1
+material = ExtResource("1_tdnw3")
+position = Vector2(0, -17.92)
+scale = Vector2(1.85937, 1.85937)
+texture = ExtResource("2_pkopt")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+script = ExtResource("3_slhto")
