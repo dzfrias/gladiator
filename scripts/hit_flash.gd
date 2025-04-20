@@ -7,10 +7,11 @@ var _original_material: Material
 var _white_material: Material = preload("res://resources/materials/white_material.tres")
 
 func _ready() -> void:
-	if health == null:
-		health = $"../Health"
-	if canvas_item == null:
-		canvas_item = $"../Sprite"
+	for child in get_parent().get_children():
+		if health == null and child is Health:
+			health = child
+		if canvas_item == null and (child is Sprite2D or child is AnimatedSprite2D):
+			canvas_item = child
 	
 	health.damage_taken.connect(_on_damage_taken)
 	_original_material = canvas_item.material
