@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=32 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
@@ -11,10 +11,25 @@
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_iylj5"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_yimym"]
-[ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_13p0r"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="15_kelxt"]
-[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="16_gandy"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="16_gandy"]
+[ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="16_nyw88"]
+[ext_resource type="Texture2D" uid="uid://beognjwthnlei" path="res://assets/Art/laser_rifle.png" id="17_seejf"]
+[ext_resource type="Script" path="res://scripts/gun_overlay.gd" id="18_yb7vo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
+size = Vector2(24, 62)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
+radius = 225.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrpis"]
+size = Vector2(109, 36.91)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c0ujg"]
+radius = 400.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iy74q"]
 atlas = ExtResource("4_8m2vp")
@@ -78,17 +93,9 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
-size = Vector2(24, 62)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
-radius = 225.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrpis"]
-size = Vector2(109, 36.91)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_c0ujg"]
-radius = 400.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1bsv"]
+shader = ExtResource("16_nyw88")
+shader_parameter/color = null
 
 [node name="Shooter" type="CharacterBody2D"]
 position = Vector2(0, -34)
@@ -102,15 +109,6 @@ jump_follow_cooldown = 1.0
 
 [node name="Backlight" parent="." instance=ExtResource("16_gandy")]
 energy = 16.0
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
-position = Vector2(2, 0)
-scale = Vector2(2.0625, 2.0625)
-sprite_frames = SubResource("SpriteFrames_62hpk")
-animation = &"idle"
-offset = Vector2(-1.08, 0)
-script = ExtResource("5_cynpy")
-shooter = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.00800037, 1)
@@ -176,3 +174,18 @@ script = ExtResource("15_13p0r")
 
 [node name="HitParticles" type="Node2D" parent="."]
 script = ExtResource("15_kelxt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
+position = Vector2(2, 0)
+scale = Vector2(2.0625, 2.0625)
+sprite_frames = SubResource("SpriteFrames_62hpk")
+animation = &"idle"
+offset = Vector2(-1.08, 0)
+script = ExtResource("5_cynpy")
+shooter = NodePath("..")
+
+[node name="GunOverlay" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q1bsv")
+position = Vector2(9, -4)
+texture = ExtResource("17_seejf")
+script = ExtResource("18_yb7vo")

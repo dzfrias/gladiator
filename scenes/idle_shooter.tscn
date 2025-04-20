@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6n4ygstauqcx"]
+[gd_scene load_steps=25 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="3_fhmks"]
@@ -11,8 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://wvfn7po6klir" path="res://assets/Art/enemy_crouch.png" id="11_y4cef"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter_animations.gd" id="12_npl6x"]
-[ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="14_nikfl"]
+[ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="14_o635c"]
+[ext_resource type="Texture2D" uid="uid://beognjwthnlei" path="res://assets/Art/laser_rifle.png" id="15_yksj8"]
+[ext_resource type="Script" path="res://scripts/idle_shooter_gun_overlay.gd" id="16_vj5b8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(25.92, 66.88)
@@ -52,6 +55,10 @@ animations = [{
 "name": &"stand",
 "speed": 5.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tyvks"]
+shader = ExtResource("14_o635c")
+shader_parameter/color = null
 
 [node name="IdleShooter" type="CharacterBody2D"]
 collision_layer = 130
@@ -105,7 +112,7 @@ shape = SubResource("CircleShape2D_c2f02")
 position = Vector2(1, -35)
 scale = Vector2(2.15625, 2.15625)
 sprite_frames = SubResource("SpriteFrames_8og87")
-animation = &"stand"
+animation = &"hide"
 script = ExtResource("12_npl6x")
 shooter = NodePath("..")
 
@@ -118,3 +125,10 @@ script = ExtResource("12_fy0vl")
 
 [node name="HitParticles" type="Node2D" parent="."]
 script = ExtResource("14_nikfl")
+
+[node name="GunOverlay" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tyvks")
+position = Vector2(16.25, -41.39)
+texture = ExtResource("15_yksj8")
+script = ExtResource("16_vj5b8")
+hiding_pos = Vector2(5, -29)
