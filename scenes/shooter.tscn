@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=31 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_13p0r"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="15_kelxt"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="16_gandy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_perck"]
 atlas = ExtResource("3_voear")
@@ -118,6 +119,10 @@ speed = 50.0
 jump_height = -400.0
 stop_dist = 400.0
 jump_follow_cooldown = 1.0
+
+[node name="Backlight" parent="." instance=ExtResource("16_gandy")]
+color = Color(1, 0.35, 0.35, 1)
+energy = 16.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
 position = Vector2(2, 0)

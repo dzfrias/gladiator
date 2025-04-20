@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://crrscutvdwg36"]
+
+[sub_resource type="Gradient" id="Gradient_4s0qj"]
+offsets = PackedFloat32Array(0, 0.753247)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7yt3r"]
+gradient = SubResource("Gradient_4s0qj")
+fill = 1
+fill_from = Vector2(0.511468, 0.46789)
+fill_to = Vector2(0.754587, 0.146789)
+
+[node name="Backlight" type="PointLight2D"]
+scale = Vector2(1.5625, 1.5625)
+energy = 12.0
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_7yt3r")
+texture_scale = 2.0

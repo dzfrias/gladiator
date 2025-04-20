@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=4 uid="uid://dxsm5ohhnw4v4"]
+
+[ext_resource type="Script" path="res://scripts/combat_encounter.gd" id="1_l0pcr"]
+[ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="2_x03y8"]
+[ext_resource type="PackedScene" uid="uid://bhglqsap5vi4o" path="res://scenes/structures/silo.tscn" id="3_6ued7"]
+
+[node name="SiloEncounter" type="Node2D"]
+script = ExtResource("1_l0pcr")
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Spawn1" type="Node2D" parent="SpawnPoints"]
+position = Vector2(211.91, -158)
+
+[node name="Spawn2" type="Node2D" parent="SpawnPoints"]
+position = Vector2(753.84, -64.59)
+
+[node name="Spawn3" type="Node2D" parent="SpawnPoints"]
+position = Vector2(791.06, -262.66)
+
+[node name="Spawn4" type="Node2D" parent="SpawnPoints"]
+position = Vector2(438, -74.36)
+
+[node name="Tiles" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAP//AAAEAAMAAAABAP//AAAEAAMAAAACAP//AAAEAAMAAAADAP//AAAEAAMAAAAEAP//AAAEAAMAAAAFAP//AAAEAAMAAAAGAP//AAAEAAMAAAAHAP//AAAEAAMAAAAIAP//AAAEAAMAAAAJAP//AAAEAAMAAAAKAP//AAAEAAMAAAALAP//AAAEAAMAAAAMAP//AAAEAAMAAAANAP//AAAEAAMAAAAOAP//AAAEAAMAAAAPAP//AAAEAAMAAAAQAP//AAAEAAMAAAARAP//AAAEAAMAAAASAP//AAAEAAMAAAATAP//AAAEAAMAAAAUAP//AAAEAAMAAAAVAP//AAAEAAMAAAAWAP//AAAEAAMAAAAXAP//AAAEAAMAAAAYAP//AAAEAAMAAAAZAP//AAAEAAMAAAAaAP//AAAEAAMAAAAbAP//AAAEAAMAAAAcAP//AAAEAAMAAAAdAP//AAAEAAMAAAA=")
+tile_set = ExtResource("2_x03y8")
+
+[node name="Silo" parent="." instance=ExtResource("3_6ued7")]
+position = Vector2(405, -468)

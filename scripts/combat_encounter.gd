@@ -19,6 +19,7 @@ var _enemies := [
 	WorldMap.WeightedScene.new("res://scenes/shooter.tscn", 0.25),
 	WorldMap.WeightedScene.new("res://scenes/suispider.tscn", 0.25),
 ]
+var _done := false
 var _idle_shooter: PackedScene = preload("res://scenes/idle_shooter.tscn")
 @onready var _group_name = "enemies %s" % get_instance_id()
 
@@ -49,7 +50,7 @@ func _ready() -> void:
 	_spawn_enemies.call_deferred()
 
 func _process(_delta: float) -> void:
-	if not _started:
+	if not _started or _done:
 		return
 	
 	# Check if all enemies have been killed and there are no more enemies left to spawn
@@ -58,7 +59,7 @@ func _process(_delta: float) -> void:
 		MissionManager.mission.in_combat = false
 		if will_spawn_chest:
 			_spawn_chest()
-		queue_free()
+		_done = true
 
 static func _create_boundary(x: float) -> StaticBody2D:
 	var boundary := StaticBody2D.new()
@@ -72,7 +73,7 @@ static func _create_boundary(x: float) -> StaticBody2D:
 	return boundary
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is not Player or _started:
+	if body is not Player or _started or _done:
 		return
 	_start_wave.call_deferred()
 

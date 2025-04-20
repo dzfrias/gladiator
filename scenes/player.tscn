@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=39 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="3_x3oej"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="4_oevlo"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="4_trosa"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
@@ -15,16 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://b3yl3oymh43ks" path="res://assets/Art/PlayerJump1.png" id="15_3rly8"]
 [ext_resource type="Texture2D" uid="uid://dwowtfaylsxnu" path="res://assets/Art/PlayerWalk1.png" id="15_5unjr"]
 [ext_resource type="Script" path="res://scripts/player/player_gun.gd" id="16_ud12g"]
-
-[sub_resource type="Gradient" id="Gradient_4s0qj"]
-offsets = PackedFloat32Array(0, 0.753247)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7yt3r"]
-gradient = SubResource("Gradient_4s0qj")
-fill = 1
-fill_from = Vector2(0.511468, 0.46789)
-fill_to = Vector2(0.754587, 0.146789)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(40, 62)
@@ -177,12 +168,7 @@ collision_mask = 1057
 script = ExtResource("1_5wdcp")
 movement_settings = ExtResource("2_an6wh")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(1.5625, 1.5625)
-energy = 12.0
-range_item_cull_mask = 2
-texture = SubResource("GradientTexture2D_7yt3r")
-texture_scale = 2.0
+[node name="Backlight" parent="." instance=ExtResource("3_x3oej")]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.62)

@@ -29,7 +29,7 @@ var _terrain := [
 	WeightedScene.new("res://scenes/modules/terrain/slope_down.tscn", 0.25),
 ]
 var _encounters := [
-	#WeightedScene.new("res://scenes/modules/encounters/basic.tscn", 0.05),
+	WeightedScene.new("res://scenes/modules/encounters/silo_encounter.tscn", 1.0),
 	#WeightedScene.new("res://scenes/modules/encounters/encounter1.tscn", 0.15),
 	#WeightedScene.new("res://scenes/modules/encounters/encounter2.tscn", 0.15),
 	#WeightedScene.new("res://scenes/modules/encounters/encounter3.tscn", 0.15),
@@ -66,7 +66,7 @@ func _generate() -> void:
 	while module_origin.x < map_width:
 		var module: WeightedScene
 		if next_encounter == 0:
-			module = weighted_choice(_terrain)
+			module = weighted_choice(_encounters)
 			next_encounter = randi_range(3, 4)
 		else:
 			module = weighted_choice(_terrain)
