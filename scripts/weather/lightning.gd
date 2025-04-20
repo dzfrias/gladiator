@@ -18,8 +18,9 @@ func _begin_striking() -> void:
 		await _strike()
 
 func _strike() -> void:
-	var strike_time := (warning_amount / 2) * warning_interval_time
-	var pos: Vector2 = Player.Instance.global_position + Player.Instance.velocity * strike_time
+	var strike_time := int(warning_amount / 2) * warning_interval_time
+	var pos: Vector2 = Player.Instance.global_position
+	pos.x += Player.Instance.velocity.x * strike_time
 	for _i in range(warning_amount):
 		Debug.draw_line(
 			pos + Vector2.UP * 1000.0,
