@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ce7037eaiyihc"]
+
+[ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="1_pd3a4"]
+
+[resource]
+shader = ExtResource("1_pd3a4")
+shader_parameter/color = Color(0, 0, 0, 0.941176)
