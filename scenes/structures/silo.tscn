@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhglqsap5vi4o"]
+[gd_scene load_steps=13 format=3 uid="uid://bhglqsap5vi4o"]
 
 [ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_lr4c8"]
 [ext_resource type="Texture2D" uid="uid://doou8ewryr0pi" path="res://assets/Art/silo.png" id="2_47ear"]
@@ -7,7 +7,7 @@
 size = Vector2(247, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lq3ub"]
-size = Vector2(337, 20)
+size = Vector2(304, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxfml"]
 size = Vector2(342, 20)
@@ -30,6 +30,9 @@ size = Vector2(96, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1busu"]
 size = Vector2(210.5, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54off"]
+size = Vector2(45.6052, 20)
+
 [node name="Silo" type="StaticBody2D"]
 z_index = -1
 position = Vector2(405, -437.63)
@@ -49,7 +52,7 @@ shape = SubResource("RectangleShape2D_tu36f")
 one_way_collision = true
 
 [node name="CollisionShape2D10" type="CollisionShape2D" parent="."]
-position = Vector2(61.5, 372.63)
+position = Vector2(78, 372.63)
 shape = SubResource("RectangleShape2D_lq3ub")
 one_way_collision = true
 
@@ -91,4 +94,10 @@ one_way_collision = true
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
 position = Vector2(378.75, -39.37)
 shape = SubResource("RectangleShape2D_1busu")
+one_way_collision = true
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="."]
+position = Vector2(-90, 369.63)
+rotation = 0.17142
+shape = SubResource("RectangleShape2D_54off")
 one_way_collision = true
