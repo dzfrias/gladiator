@@ -97,6 +97,8 @@ fire_alt={
 
 [layer_names]
 
+2d_render/layer_1="Default"
+2d_render/layer_2="Illuminated"
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Entities"
 2d_physics/layer_3="Invincible"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpoytbmytn7c6"]
+
+[ext_resource type="Script" path="res://scripts/killable.gd" id="1_11lqo"]
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_ygac3"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="3_7u0b4"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="4_kpjfq"]
+[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="5_1q3tu"]
+[ext_resource type="Script" path="res://scripts/hit_particles.gd" id="6_gmqwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3ci8"]
+size = Vector2(54, 263.595)
+
+[node name="Wall" type="StaticBody2D"]
+position = Vector2(800, -129.19)
+script = ExtResource("1_11lqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4375, 2.07812)
+texture = ExtResource("2_ygac3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.0125)
+shape = SubResource("RectangleShape2D_s3ci8")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_7u0b4")
+max_health = 30.0
+
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("4_kpjfq")
+
+[node name="HitFlash" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+script = ExtResource("5_1q3tu")
+
+[node name="HitParticles" type="Node2D" parent="."]
+script = ExtResource("6_gmqwh")

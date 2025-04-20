@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=4 uid="uid://d1xnu3ygtm8qs"]
+
+[ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_i3pcd"]
+[ext_resource type="PackedScene" uid="uid://cy0ehmv0nnrm8" path="res://scenes/background.tscn" id="1_od3kf"]
+[ext_resource type="TileSet" uid="uid://dpcafcjqg7xko" path="res://assets/desert.tres" id="1_xh8nt"]
+[ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="2_og5eq"]
+[ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="5_5v347"]
+[ext_resource type="PackedScene" uid="uid://dpoytbmytn7c6" path="res://scenes/wall.tscn" id="6_j8hyw"]
+[ext_resource type="PackedScene" uid="uid://bhglqsap5vi4o" path="res://scenes/structures/silo.tscn" id="8_04us3"]
+[ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="8_c3jeb"]
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource("1_od3kf")]
+
+[node name="Player" parent="." instance=ExtResource("1_i3pcd")]
+position = Vector2(36, -40.33)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+light_mask = 0
+tile_map_data = PackedByteArray("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")
+tile_set = ExtResource("1_xh8nt")
+
+[node name="TileMapHit" type="Node" parent="TileMapLayer"]
+script = ExtResource("2_og5eq")
+
+[node name="PlayerUI" parent="." instance=ExtResource("5_5v347")]
+
+[node name="TutorialText1" type="Label" parent="."]
+offset_left = 394.0
+offset_top = -255.0
+offset_right = 676.0
+offset_bottom = -206.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "Use A/D to move"
+
+[node name="TutorialText2" type="Label" parent="."]
+offset_left = 1434.0
+offset_top = -255.0
+offset_right = 1716.0
+offset_bottom = -206.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "Shoot with left click"
+
+[node name="TutorialText3" type="Label" parent="."]
+offset_left = 2242.0
+offset_top = -255.0
+offset_right = 2572.0
+offset_bottom = -206.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "Hold S to move underground"
+
+[node name="TutorialText4" type="Label" parent="."]
+offset_left = 2242.0
+offset_top = -255.0
+offset_right = 2572.0
+offset_bottom = -206.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "Hold S to move underground"
+
+[node name="TutorialText5" type="Label" parent="."]
+offset_left = 4180.0
+offset_top = -280.0
+offset_right = 4281.0
+offset_bottom = -231.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "Fight!"
+
+[node name="Wall" parent="." instance=ExtResource("6_j8hyw")]
+position = Vector2(1914, -129.19)
+
+[node name="Wolf" parent="." instance=ExtResource("8_c3jeb")]
+position = Vector2(4041, -27)
+
+[node name="Wolf2" parent="." instance=ExtResource("8_c3jeb")]
+position = Vector2(4247, -29)
+
+[node name="Silo" parent="." instance=ExtResource("8_04us3")]
+position = Vector2(4147, -430.63)

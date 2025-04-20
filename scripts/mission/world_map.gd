@@ -103,14 +103,14 @@ func _place_module(origin: Vector2i, instance: Module) -> Vector2i:
 		lowest_y = maxi(coords.y, lowest_y)
 	
 	var width = instance.tiles().get_used_rect().size.x
-	# _fill(Vector2i(origin.x, lowest_y + 1), width)
+	_fill(Vector2i(origin.x, lowest_y + 1), width)
 	
 	add_child(instance)
 	
 	return Vector2i(width, instance.delta_y)
 
 func _fill(origin: Vector2i, width: int) -> void:
-	const Y_HEIGHT = 1000
+	const Y_HEIGHT = 20
 	for i in range(width):
 		for j in range(Y_HEIGHT):
 			var fill_tile = weighted_choice(_fill_tiles)

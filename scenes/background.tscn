@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy0ehmv0nnrm8"]
+
+[ext_resource type="Texture2D" uid="uid://chfx1it34ks1o" path="res://assets/Art/BG Layer 1.png" id="1_1ub2q"]
+[ext_resource type="Texture2D" uid="uid://dul65fiscpp5n" path="res://assets/Art/BG Layer 2.png" id="2_1hxad"]
+[ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="3_kpjbb"]
+[ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="4_qujju"]
+[ext_resource type="Texture2D" uid="uid://bjv1njf4wfo76" path="res://assets/Art/BG Layer 5.png" id="5_q132a"]
+[ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="6_oknll"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fusu6"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_71yht"]
+offsets = PackedFloat32Array(0, 0.298701, 0.454545, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.501747, 0.218623, 0.0933353, 0.860588, 0.59, 0.3245, 0.1475, 0.796078, 0.81, 0.596565, 0.5589, 0.101961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hwxud"]
+gradient = SubResource("Gradient_71yht")
+width = 1280
+height = 720
+use_hdr = true
+fill_from = Vector2(1, 1)
+
+[node name="Background" type="Node2D"]
+z_index = -6
+position = Vector2(0, -699)
+
+[node name="Gradient" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.1, 1)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Gradient"]
+texture = ExtResource("1_1ub2q")
+offset = Vector2(320, 180)
+
+[node name="Dust" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.2, 1)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Dust"]
+texture = ExtResource("2_1hxad")
+offset = Vector2(320, 180)
+
+[node name="Mountains" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.5, 1)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountains"]
+texture = ExtResource("3_kpjbb")
+offset = Vector2(320, 180)
+
+[node name="Structures" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.6, 1)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Structures"]
+texture = ExtResource("4_qujju")
+offset = Vector2(320, 180)
+
+[node name="Ships" type="Parallax2D" parent="."]
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.8, 1)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Ships"]
+texture = ExtResource("5_q132a")
+offset = Vector2(320, 180)
+
+[node name="MovingDust" type="Parallax2D" parent="."]
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="ColorRect" type="ColorRect" parent="MovingDust"]
+material = ExtResource("6_oknll")
+offset_right = 1279.0
+offset_bottom = 734.0
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="Overlay" type="Parallax2D" parent="."]
+repeat_size = Vector2(1280, 0)
+repeat_times = 3
+
+[node name="ColorRect" type="Sprite2D" parent="Overlay"]
+material = SubResource("CanvasItemMaterial_fusu6")
+position = Vector2(70.5, 360)
+texture = SubResource("GradientTexture2D_hwxud")

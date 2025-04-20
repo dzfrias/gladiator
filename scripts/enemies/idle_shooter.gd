@@ -24,7 +24,6 @@ enum State {
 
 func _ready() -> void:
 	$Health.died.connect(_on_health_died)
-	$Health.damage_taken.connect(_on_health_damage_taken)
 	$Direction.is_right = initially_is_right
 	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
 
@@ -101,13 +100,6 @@ func _tracking_is_behind() -> bool:
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
 		notify(notify_depth)
-
-func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
-	var impact_particles = impact_particle_prefab.instantiate()
-	impact_particles.global_position = global_position
-	get_tree().current_scene.add_child(impact_particles)
-	impact_particles.direction = _direction
-	impact_particles.emitting = true
 
 func _align_with_direction() -> void:
 	$Weapon.position.x = _original_weapon_x * $Direction.scalar

@@ -19,6 +19,7 @@ func _ready() -> void:
 	
 	health.damage_taken.connect(_on_damage_taken)
 	_original_material = canvas_item.material
+	one_shot = true
 
 func _on_damage_taken(_amt: float, _direction: Vector2) -> void:
 	if not is_stopped():

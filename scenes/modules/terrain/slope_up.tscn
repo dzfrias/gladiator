@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=4 uid="uid://67rbpfkuruqb"]
 
-[ext_resource type="TileSet" uid="uid://cx2cxjp44rw4u" path="res://assets/desert_final.tres" id="2_6w65x"]
+[ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="2_6w65x"]
 [ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_s1l7c"]
 
 [node name="SlopeUp" type="Node2D"]

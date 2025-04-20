@@ -1,7 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
-[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_8oh5i"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]
@@ -10,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_1gcnm"]
+[ext_resource type="Script" path="res://scripts/hit_particles.gd" id="10_pfo6r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(60, 51)
@@ -118,7 +118,6 @@ attack_windup_time = 0.3
 speed = 175.0
 jump_height = -450.0
 stop_dist = 115.0
-impact_particle_prefab = ExtResource("2_8oh5i")
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("7_3l162")
@@ -193,3 +192,6 @@ script = ExtResource("8_kg58i")
 
 [node name="EdgeDetector" type="Node2D" parent="."]
 script = ExtResource("10_1gcnm")
+
+[node name="HitParticles" type="Node2D" parent="."]
+script = ExtResource("10_pfo6r")

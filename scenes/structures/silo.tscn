@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhglqsap5vi4o"]
+
+[ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="1_rpntu"]
+[ext_resource type="Texture2D" uid="uid://doou8ewryr0pi" path="res://assets/Art/silo.png" id="2_47ear"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8fqi"]
+shader = ExtResource("1_rpntu")
+shader_parameter/color = Color(0, 0, 0, 0.941176)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tu36f"]
+size = Vector2(577, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxfml"]
+size = Vector2(342, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ff4jc"]
+size = Vector2(297, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cb15"]
+size = Vector2(196.5, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdc3h"]
+size = Vector2(167, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b4r8g"]
+size = Vector2(218.5, 10)
+
+[node name="Silo" type="StaticBody2D"]
+z_index = -1
+position = Vector2(405, -437.63)
+collision_layer = 32
+collision_mask = 32
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+material = SubResource("ShaderMaterial_g8fqi")
+position = Vector2(2, 0)
+scale = Vector2(3.05556, 3.05556)
+texture = ExtResource("2_47ear")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-64.5, 369.63)
+shape = SubResource("RectangleShape2D_tu36f")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-201, 256.63)
+shape = SubResource("RectangleShape2D_uxfml")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-186.5, 153.13)
+shape = SubResource("RectangleShape2D_ff4jc")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(383.75, 259.13)
+shape = SubResource("RectangleShape2D_0cb15")
+one_way_collision = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(379.5, 113.13)
+shape = SubResource("RectangleShape2D_bdc3h")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(385, 367.63)
+shape = SubResource("RectangleShape2D_b4r8g")
+one_way_collision = true

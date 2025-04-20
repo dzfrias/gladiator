@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://c1e275yyju6wo"]
 
 [ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_t1itt"]
-[ext_resource type="TileSet" uid="uid://cx2cxjp44rw4u" path="res://assets/desert_final.tres" id="2_xrojy"]
+[ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="2_xrojy"]
 
 [node name="SlopeDown" type="Node2D"]
 script = ExtResource("2_t1itt")

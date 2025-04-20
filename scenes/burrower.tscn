@@ -1,7 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://dx2tj61huaph8"]
 
 [ext_resource type="Script" path="res://scripts/enemies/burrower.gd" id="1_kpvsw"]
-[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_d6ydq"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="3_qmne3"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="4_bvmyx"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="5_mvtlq"]
@@ -12,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="10_87iif"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="11_drqk2"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="12_lfob1"]
+[ext_resource type="Script" path="res://scripts/hit_particles.gd" id="12_o6o6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ot88w"]
 size = Vector2(42, 86)
@@ -32,7 +32,6 @@ script = ExtResource("1_kpvsw")
 speed = 125.0
 jump_height = -250.0
 stop_dist = 80.0
-impact_particle_prefab = ExtResource("2_d6ydq")
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("3_qmne3")
@@ -98,3 +97,6 @@ script = ExtResource("10_87iif")
 
 [node name="EdgeDetector" type="Node2D" parent="."]
 script = ExtResource("12_lfob1")
+
+[node name="HitParticles" type="Node2D" parent="."]
+script = ExtResource("12_o6o6g")

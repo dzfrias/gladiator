@@ -4,7 +4,6 @@ class_name FollowEnemy extends CharacterBody2D
 @export var jump_height: float = -800
 @export var stop_dist: float = 0.0
 @export var jump_follow_cooldown: float = 0.0
-@export var impact_particle_prefab: PackedScene
 @export var patrol_speed = 50
 @export var notify_depth = 2
 @export_range(0.5, 8, 0.1) var min_move_time := 1.5
@@ -154,13 +153,7 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
 		notify(notify_depth)
 
-func _on_health_damage_taken(_amount: float, direction: Vector2) -> void:
-	var impact_particles = impact_particle_prefab.instantiate()
-	impact_particles.global_position = global_position
-	get_tree().current_scene.add_child(impact_particles)
-	impact_particles.direction = direction
-	impact_particles.emitting = true
-	
+func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
 	if _tracking == null:
 		notify(notify_depth)
 	

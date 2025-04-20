@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6n4ygstauqcx"]
+[gd_scene load_steps=22 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="3_fhmks"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter_animations.gd" id="12_npl6x"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
+[ext_resource type="Script" path="res://scripts/hit_particles.gd" id="14_nikfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
 size = Vector2(25.92, 66.88)
@@ -126,3 +127,6 @@ one_shot = true
 script = ExtResource("12_fy0vl")
 
 [node name="DropSpawner" parent="." instance=ExtResource("13_nps3s")]
+
+[node name="HitParticles" type="Node2D" parent="."]
+script = ExtResource("14_nikfl")

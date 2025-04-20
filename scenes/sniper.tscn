@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/sniper.gd" id="1_27e54"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_36e75"]
-[ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="2_rg374"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="3_dbdna"]
 [ext_resource type="Resource" uid="uid://bee5w5k2hubk7" path="res://resources/raider_sniper.tres" id="4_6f1k5"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_pyflq"]
@@ -11,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_bd3sr"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_uu88c"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_ejvbw"]
+[ext_resource type="Script" path="res://scripts/hit_particles.gd" id="12_7swb3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yjyt"]
 size = Vector2(24, 62)
@@ -25,7 +25,6 @@ radius = 400.0
 collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_27e54")
-impact_particle_scene = ExtResource("2_rg374")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.179688, 0.484375)
@@ -78,3 +77,6 @@ script = ExtResource("8_bd3sr")
 
 [node name="EdgeDetector" type="Node2D" parent="."]
 script = ExtResource("10_ejvbw")
+
+[node name="HitParticles" type="Node2D" parent="."]
+script = ExtResource("12_7swb3")

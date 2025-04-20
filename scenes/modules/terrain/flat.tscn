@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=4 uid="uid://dsc0xvj7rejpq"]
 
-[ext_resource type="TileSet" uid="uid://cx2cxjp44rw4u" path="res://assets/desert_final.tres" id="2_6j4ae"]
+[ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="2_6j4ae"]
 [ext_resource type="Script" path="res://scripts/mission/module.gd" id="2_rcl6b"]
 
 [node name="Flat" type="Node2D"]

@@ -10,7 +10,6 @@ class_name Sniper extends CharacterBody2D
 @export_range(0.5, 8, 0.1) var min_idle_time := 2
 @export_range(0.5, 8, 0.1) var max_idle_time := 3
 @export_range(0.5, 8, 0.1) var initial_patrol_wait_max := 4
-@export var impact_particle_scene: PackedScene
 
 var _state: State = State.TIRED
 @onready var _original_weapon_x: float = $Weapon.position.x
@@ -91,13 +90,7 @@ func notify(depth: int = 0) -> void:
 func _align_with_direction() -> void:
 	$Weapon.position.x = _original_weapon_x * $Direction.scalar
 
-func _on_health_damage_taken(_amount: float, direction: Vector2) -> void:
-	var impact_particles = impact_particle_scene.instantiate()
-	get_tree().current_scene.add_child(impact_particles)
-	impact_particles.global_position = global_position
-	impact_particles.direction = direction
-	impact_particles.emitting = true
-	
+func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
 	notify(notify_depth)
 
 func _on_health_died() -> void:

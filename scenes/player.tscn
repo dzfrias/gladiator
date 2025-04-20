@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=40 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
@@ -16,6 +16,16 @@
 [ext_resource type="Texture2D" uid="uid://dwowtfaylsxnu" path="res://assets/Art/PlayerWalk1.png" id="15_5unjr"]
 [ext_resource type="Script" path="res://scripts/player/player_gun.gd" id="16_ud12g"]
 
+[sub_resource type="Gradient" id="Gradient_4s0qj"]
+offsets = PackedFloat32Array(0, 0.753247)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7yt3r"]
+gradient = SubResource("Gradient_4s0qj")
+fill = 1
+fill_from = Vector2(0.511468, 0.46789)
+fill_to = Vector2(0.754587, 0.146789)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(40, 62)
 
@@ -27,6 +37,10 @@ metadata/_preview_in_3d_space_ = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ndjlv"]
 radius = 57.42
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y5bcy"]
+shader = ExtResource("14_ojru7")
+shader_parameter/color = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jaric"]
 atlas = ExtResource("14_kscrq")
@@ -163,6 +177,13 @@ collision_mask = 1057
 script = ExtResource("1_5wdcp")
 movement_settings = ExtResource("2_an6wh")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1.5625, 1.5625)
+energy = 12.0
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_7yt3r")
+texture_scale = 2.0
+
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.62)
 shape = SubResource("RectangleShape2D_m5kfl")
@@ -229,9 +250,10 @@ monitorable = false
 shape = SubResource("CircleShape2D_ndjlv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_y5bcy")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_a5fr2")
-animation = &"walk"
+animation = &"fire"
 autoplay = "idle"
 
 [node name="PlayerGun" type="Sprite2D" parent="."]
