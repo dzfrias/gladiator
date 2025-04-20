@@ -18,9 +18,6 @@ func _on_state_changed(state):
 	if state == FollowEnemy.State.TRACKING:
 		play("walk")
 		is_tracking = true
-	elif state == FollowEnemy.State.ATTACKING:
-		play("shoot")
-		is_tracking = false
 	else:
 		play("idle")
 		is_tracking = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6n4ygstauqcx"]
+[gd_scene load_steps=21 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="3_fhmks"]
@@ -7,9 +7,8 @@
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_irxur"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="6_ofpms"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_1qrsf"]
-[ext_resource type="Texture2D" uid="uid://pg03u11dtteq" path="res://assets/Art/shooter_attacking_spritesheet.png" id="10_ewx11"]
-[ext_resource type="Texture2D" uid="uid://bd81i4uhmmb8n" path="res://assets/Art/enemy_crouch.png" id="11_y4cef"]
-[ext_resource type="Texture2D" uid="uid://dtqibqr63q0r2" path="res://assets/Art/shooter_idle.png" id="12_6sb6m"]
+[ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="9_b7qkr"]
+[ext_resource type="Texture2D" uid="uid://wvfn7po6klir" path="res://assets/Art/enemy_crouch.png" id="11_y4cef"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter_animations.gd" id="12_npl6x"]
 [ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
@@ -27,19 +26,19 @@ radius = 360.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_c2f02"]
 radius = 400.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pnkod"]
-atlas = ExtResource("10_ewx11")
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0p16"]
+atlas = ExtResource("11_y4cef")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3jemg"]
-atlas = ExtResource("10_ewx11")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxmdr"]
+atlas = ExtResource("9_b7qkr")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8og87"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_y4cef")
+"texture": SubResource("AtlasTexture_i0p16")
 }],
 "loop": true,
 "name": &"hide",
@@ -47,18 +46,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pnkod")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3jemg")
-}],
-"loop": true,
-"name": &"shoot",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_6sb6m")
+"texture": SubResource("AtlasTexture_pxmdr")
 }],
 "loop": true,
 "name": &"stand",
@@ -117,7 +105,7 @@ shape = SubResource("CircleShape2D_c2f02")
 position = Vector2(1, -35)
 scale = Vector2(2.15625, 2.15625)
 sprite_frames = SubResource("SpriteFrames_8og87")
-animation = &"hide"
+animation = &"stand"
 script = ExtResource("12_npl6x")
 shooter = NodePath("..")
 

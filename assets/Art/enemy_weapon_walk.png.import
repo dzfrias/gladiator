@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pg03u11dtteq"
-path="res://.godot/imported/shooter_attacking_spritesheet.png-dfed9ca3f63844089f66cb555bb9395a.ctex"
+uid="uid://c40sdmrmlhtnb"
+path="res://.godot/imported/enemy_weapon_walk.png-b807f6d541ba4e214585e88ade681aa7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Art/shooter_attacking_spritesheet.png"
-dest_files=["res://.godot/imported/shooter_attacking_spritesheet.png-dfed9ca3f63844089f66cb555bb9395a.ctex"]
+source_file="res://assets/Art/enemy_weapon_walk.png"
+dest_files=["res://.godot/imported/enemy_weapon_walk.png-b807f6d541ba4e214585e88ade681aa7.ctex"]
 
 [params]
 

@@ -11,7 +11,5 @@ func _process(_delta: float) -> void:
 func _on_state_changed(state):
 	if state == IdleShooter.State.HIDING:
 		play("hide")
-	elif state == IdleShooter.State.SHOOTING:
-		play("shoot")
 	elif IdleShooter.State.STANDING:
 		play("stand")
