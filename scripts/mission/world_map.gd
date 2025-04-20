@@ -22,6 +22,8 @@ class FillTile:
 @export var y_max: int = 10
 @export var starting_chest_spawn_chance: float = 0.2
 @export var chest_spawn_chance_increment: float = 0.2
+@export var encounter_dist_min: int = 50
+@export var encounter_dist_max: int = 80
 
 var _terrain := [
 	WeightedScene.new("res://scenes/modules/terrain/flat.tscn", 0.5),
@@ -61,16 +63,15 @@ func _generate() -> void:
 	var module_origin := Vector2i(0, 0)
 	module_origin += _place_module(module_origin, _start_module.instantiate())
 
-	var next_encounter := randi_range(3, 4)
+	var encounter_dist := randi_range(encounter_dist_min, encounter_dist_max)
 	var chest_spawn_chance := starting_chest_spawn_chance
 	while module_origin.x < map_width:
 		var module: WeightedScene
-		if next_encounter == 0:
+		if encounter_dist == 0:
 			module = weighted_choice(_encounters)
-			next_encounter = randi_range(3, 4)
+			encounter_dist = randi_range(encounter_dist_min, encounter_dist_max)
 		else:
 			module = weighted_choice(_terrain)
-			next_encounter -= 1
 		
 		var instance := module.scene.instantiate() as Module
 		
@@ -84,6 +85,9 @@ func _generate() -> void:
 		
 		if module_origin.y + instance.delta_y < -y_max or module_origin.y + instance.delta_y > 0:
 			continue
+		
+		if instance is not CombatEncounter:
+			encounter_dist = maxi(encounter_dist - instance.tiles().get_used_rect().size.x, 0)
 		
 		var delta := _place_module(module_origin, instance)
 		module_origin += delta
