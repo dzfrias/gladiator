@@ -69,7 +69,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
 shape = SubResource("CircleShape2D_xrhg1")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.296875, 0.640625)
 texture = ExtResource("6_t3u6u")
 
