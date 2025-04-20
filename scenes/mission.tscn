@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bcjerk6m5dfga"]
+[gd_scene load_steps=24 format=3 uid="uid://bcjerk6m5dfga"]
 
 [ext_resource type="Script" path="res://scripts/mission/world_map.gd" id="2_3qno5"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="3_af437"]
@@ -15,6 +15,7 @@
 [ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="11_mqly5"]
 [ext_resource type="Script" path="res://scripts/blink.gd" id="11_yv2ar"]
 [ext_resource type="Shader" path="res://resources/shaders/vhs.gdshader" id="12_4una5"]
+[ext_resource type="Shader" path="res://resources/shaders/vignette.gdshader" id="15_hsurh"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fusu6"]
 blend_mode = 1
@@ -49,6 +50,12 @@ shader_parameter/vignette_intensity = 0.0
 shader_parameter/grille_amount = 0.0
 shader_parameter/brightness_boost = 1.0
 shader_parameter/chromatic_aberration_amount = 0.002
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jeg4y"]
+shader = ExtResource("15_hsurh")
+shader_parameter/alpha = 0.54
+shader_parameter/inner_radius = 0.53
+shader_parameter/outer_radius = 1.46
 
 [node name="Mission" type="Node2D"]
 
@@ -176,6 +183,14 @@ text = "REC"
 
 [node name="ColorRect" type="ColorRect" parent="VHS"]
 material = SubResource("ShaderMaterial_x0ao7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vignette" type="ColorRect" parent="VHS"]
+material = SubResource("ShaderMaterial_jeg4y")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
