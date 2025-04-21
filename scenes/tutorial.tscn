@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://d1xnu3ygtm8qs"]
+[gd_scene load_steps=12 format=4 uid="uid://d1xnu3ygtm8qs"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_i3pcd"]
 [ext_resource type="PackedScene" uid="uid://cy0ehmv0nnrm8" path="res://scenes/background.tscn" id="1_od3kf"]
@@ -7,7 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="5_5v347"]
 [ext_resource type="PackedScene" uid="uid://dpoytbmytn7c6" path="res://scenes/wall.tscn" id="6_j8hyw"]
 [ext_resource type="PackedScene" uid="uid://bhglqsap5vi4o" path="res://scenes/structures/silo.tscn" id="8_04us3"]
+[ext_resource type="PackedScene" uid="uid://bag0ows8h4ibm" path="res://scenes/vhs.tscn" id="8_5q5mq"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="8_c3jeb"]
+[ext_resource type="Theme" uid="uid://bqlm22ts8dxfd" path="res://resources/main_theme.tres" id="8_eqom3"]
+[ext_resource type="Script" path="res://scripts/ui/floating.gd" id="9_50ia2"]
 
 [node name="Tutorial" type="Node2D"]
 
@@ -24,53 +27,6 @@ tile_set = ExtResource("1_xh8nt")
 [node name="TileMapHit" type="Node" parent="TileMapLayer"]
 script = ExtResource("2_og5eq")
 
-[node name="PlayerUI" parent="." instance=ExtResource("5_5v347")]
-
-[node name="TutorialText1" type="Label" parent="."]
-offset_left = 394.0
-offset_top = -255.0
-offset_right = 676.0
-offset_bottom = -206.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
-text = "Use A/D to move"
-
-[node name="TutorialText2" type="Label" parent="."]
-offset_left = 1434.0
-offset_top = -255.0
-offset_right = 1716.0
-offset_bottom = -206.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
-text = "Shoot with left click"
-
-[node name="TutorialText3" type="Label" parent="."]
-offset_left = 2242.0
-offset_top = -255.0
-offset_right = 2572.0
-offset_bottom = -206.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
-text = "Hold S to move underground"
-
-[node name="TutorialText4" type="Label" parent="."]
-offset_left = 2242.0
-offset_top = -255.0
-offset_right = 2572.0
-offset_bottom = -206.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
-text = "Hold S to move underground"
-
-[node name="TutorialText5" type="Label" parent="."]
-offset_left = 4180.0
-offset_top = -280.0
-offset_right = 4281.0
-offset_bottom = -231.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
-text = "Fight!"
-
 [node name="Wall" parent="." instance=ExtResource("6_j8hyw")]
 position = Vector2(1914, -129.19)
 
@@ -82,3 +38,80 @@ position = Vector2(4247, -29)
 
 [node name="Silo" parent="." instance=ExtResource("8_04us3")]
 position = Vector2(4147, -430.63)
+
+[node name="TutorialText" type="Node" parent="."]
+
+[node name="TutorialText1" type="Label" parent="TutorialText"]
+offset_left = 273.0
+offset_top = -255.0
+offset_right = 662.0
+offset_bottom = -206.0
+scale = Vector2(1.00114, 1)
+theme = ExtResource("8_eqom3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 35
+text = "Use A/D to move"
+script = ExtResource("9_50ia2")
+speed = 3.0
+
+[node name="TutorialText2" type="Label" parent="TutorialText"]
+offset_left = 1341.0
+offset_top = -255.0
+offset_right = 1850.0
+offset_bottom = -206.0
+theme = ExtResource("8_eqom3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 35
+text = "Shoot with left click"
+script = ExtResource("9_50ia2")
+speed = 3.0
+
+[node name="TutorialText3" type="Label" parent="TutorialText"]
+offset_left = 2242.0
+offset_top = -255.0
+offset_right = 2729.0
+offset_bottom = -206.0
+theme = ExtResource("8_eqom3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 35
+text = "Hold S to move underground"
+script = ExtResource("9_50ia2")
+speed = 3.0
+
+[node name="TutorialText4" type="Label" parent="TutorialText"]
+offset_left = 2242.0
+offset_top = -255.0
+offset_right = 2729.0
+offset_bottom = -206.0
+theme = ExtResource("8_eqom3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 35
+text = "Hold S to move underground"
+script = ExtResource("9_50ia2")
+speed = 3.0
+
+[node name="TutorialText5" type="Label" parent="TutorialText"]
+offset_left = 4180.0
+offset_top = -280.0
+offset_right = 4281.0
+offset_bottom = -231.0
+theme = ExtResource("8_eqom3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 35
+text = "Fight!"
+script = ExtResource("9_50ia2")
+speed = 3.0
+
+[node name="VHS" parent="." instance=ExtResource("8_5q5mq")]
+
+[node name="PlayerUI" parent="." instance=ExtResource("5_5v347")]

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bqlm22ts8dxfd"]
+
+[ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="1_st5xe"]
+
+[resource]
+default_font = ExtResource("1_st5xe")

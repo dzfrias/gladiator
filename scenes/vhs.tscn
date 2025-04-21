@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://bag0ows8h4ibm"]
+
+[ext_resource type="Script" path="res://scripts/blink.gd" id="1_uxlne"]
+[ext_resource type="Shader" path="res://resources/shaders/vhs.gdshader" id="2_3aji6"]
+[ext_resource type="Shader" path="res://resources/shaders/vignette.gdshader" id="3_d4flm"]
+
+[sub_resource type="Gradient" id="Gradient_67i7g"]
+offsets = PackedFloat32Array(0.461039, 0.636364)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_coi1h"]
+gradient = SubResource("Gradient_67i7g")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0ao7"]
+shader = ExtResource("2_3aji6")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 0.2
+shader_parameter/warp_amount = 0.1
+shader_parameter/vignette_amount = 0.0
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/grille_amount = 0.0
+shader_parameter/brightness_boost = 1.0
+shader_parameter/chromatic_aberration_amount = 0.002
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jeg4y"]
+shader = ExtResource("3_d4flm")
+shader_parameter/alpha = 0.54
+shader_parameter/inner_radius = 0.53
+shader_parameter/outer_radius = 1.46
+
+[node name="VHS" type="CanvasLayer"]
+
+[node name="REC" type="HBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+script = ExtResource("1_uxlne")
+interval = 0.8
+
+[node name="Dot" type="TextureRect" parent="REC"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_coi1h")
+
+[node name="Label" type="Label" parent="REC"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.12, 0.12, 1)
+theme_override_font_sizes/font_size = 36
+text = "REC"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_x0ao7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jeg4y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
