@@ -81,6 +81,9 @@ func _shoot() -> void:
 	await $Weapon.fire(angle)
 	_state = State.MOVING
 
+func direction() -> Direction:
+	return $Direction
+
 func notify(depth: int = 0) -> void:
 	if depth == 0:
 		return

@@ -1,15 +1,14 @@
-[gd_scene load_steps=32 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=23 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
-[ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="4_8m2vp"]
 [ext_resource type="Script" path="res://scripts/enemies/shooter_animations.gd" id="5_cynpy"]
-[ext_resource type="Texture2D" uid="uid://c40sdmrmlhtnb" path="res://assets/Art/enemy_weapon_walk.png" id="5_pyelf"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_rapbo"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_x6nd1"]
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_cglso"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_iylj5"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
+[ext_resource type="SpriteFrames" uid="uid://dmm0dvb5sx8oo" path="res://resources/sprite_frames/shooter.tres" id="13_h6ii1"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_yimym"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_13p0r"]
@@ -30,68 +29,6 @@ size = Vector2(109, 36.91)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c0ujg"]
 radius = 400.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iy74q"]
-atlas = ExtResource("4_8m2vp")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ndum2"]
-atlas = ExtResource("5_pyelf")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yom08"]
-atlas = ExtResource("5_pyelf")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c80j8"]
-atlas = ExtResource("5_pyelf")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fdv5w"]
-atlas = ExtResource("5_pyelf")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f8s02"]
-atlas = ExtResource("5_pyelf")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ypsx"]
-atlas = ExtResource("5_pyelf")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_62hpk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iy74q")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ndum2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yom08")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c80j8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fdv5w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f8s02")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3ypsx")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 4.0
-}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1bsv"]
 shader = ExtResource("16_nyw88")
@@ -175,14 +112,13 @@ script = ExtResource("15_13p0r")
 [node name="HitParticles" type="Node2D" parent="."]
 script = ExtResource("15_kelxt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("shooter")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(2, 0)
 scale = Vector2(2.0625, 2.0625)
-sprite_frames = SubResource("SpriteFrames_62hpk")
+sprite_frames = ExtResource("13_h6ii1")
 animation = &"idle"
 offset = Vector2(-1.08, 0)
 script = ExtResource("5_cynpy")
-shooter = NodePath("..")
 
 [node name="GunOverlay" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_q1bsv")
