@@ -17,3 +17,4 @@ region_enabled = true
 region_rect = Rect2(0, 0, 64, 96)
 script = ExtResource("3_51obl")
 restrict = Array[int]([0, 3])
+y_offset_max = 120.0

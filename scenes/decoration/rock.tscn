@@ -10,9 +10,10 @@
 light_mask = 2
 z_index = -1
 material = ExtResource("1_tdnw3")
-position = Vector2(0, -17.92)
+position = Vector2(0, -23)
 scale = Vector2(1.85937, 1.85937)
 texture = ExtResource("2_pkopt")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("3_slhto")
+scale_factor_max = 3.0
