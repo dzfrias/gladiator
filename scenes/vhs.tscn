@@ -16,7 +16,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x0ao7"]
 shader = ExtResource("2_3aji6")
 shader_parameter/resolution = Vector2(320, 180)
-shader_parameter/scan_line_amount = 0.2
+shader_parameter/scan_line_amount = 0.1
 shader_parameter/warp_amount = 0.1
 shader_parameter/vignette_amount = 0.0
 shader_parameter/vignette_intensity = 0.0
