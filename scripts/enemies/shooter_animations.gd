@@ -1,23 +1,13 @@
 extends AnimatedSprite2D
 
-@export var shooter: Shooter
-var is_tracking = true
+var _shooter: Shooter
 
 func _ready() -> void:
-	shooter.on_state_changed.connect(_on_state_changed)
+	_shooter = get_parent() as Shooter
 
 func _process(_delta: float) -> void:
-	flip_h = get_node("../Direction").is_right
-	if is_tracking:
-		if abs(shooter.velocity.x) > 0:
-			play("walk")
-		else:
-			play("idle")
-
-func _on_state_changed(state):
-	if state == FollowEnemy.State.TRACKING:
+	flip_h = _shooter.direction().is_right
+	if abs(_shooter.velocity.x) > 0 and _shooter.is_on_floor():
 		play("walk")
-		is_tracking = true
 	else:
 		play("idle")
-		is_tracking = false

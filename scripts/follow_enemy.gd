@@ -144,6 +144,9 @@ func _patrol() -> void:
 	
 	patrol_speed = _original_patrol_speed
 
+func direction() -> Direction:
+	return $Direction
+
 func _attack() -> void:
 	pass
 
