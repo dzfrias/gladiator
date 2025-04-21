@@ -84,6 +84,16 @@ func _shoot() -> void:
 func direction() -> Direction:
 	return $Direction
 
+func spawn_in(duration: float) -> void:
+	var previous_layer := collision_layer
+	collision_layer = Constants.INVINCIBLE_LAYER
+	var previous_state := _state
+	_state = State.TIRED
+	await get_tree().create_timer(duration).timeout
+	assert(_state == State.TIRED)
+	_state = previous_state
+	collision_layer = previous_layer
+
 func notify(depth: int = 0) -> void:
 	if depth == 0:
 		return

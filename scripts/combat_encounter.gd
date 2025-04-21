@@ -15,10 +15,12 @@ var _spawn_during_wave: int
 var _left_body: StaticBody2D
 var _right_body: StaticBody2D
 var _enemies := [
-	WorldMap.WeightedScene.new("res://scenes/wolf.tscn", 0.5),
-	WorldMap.WeightedScene.new("res://scenes/shooter.tscn", 0.25),
-	WorldMap.WeightedScene.new("res://scenes/suispider.tscn", 0.25),
+	WorldMap.WeightedScene.new("res://scenes/wolf.tscn", 0.25),
+	WorldMap.WeightedScene.new("res://scenes/shooter.tscn", 0.4),
+	WorldMap.WeightedScene.new("res://scenes/suispider.tscn", 0.15),
+	WorldMap.WeightedScene.new("res://scenes/sniper.tscn", 0.2)
 ]
+var _last_spawned: PackedScene
 var _done := false
 var _idle_shooter: PackedScene = preload("res://scenes/idle_shooter.tscn")
 @onready var _group_name = "enemies %s" % get_instance_id()
@@ -110,7 +112,7 @@ func _spawn_in() -> void:
 				available = spawn_points.duplicate()
 				available.shuffle()
 				spawn_point = available.pop_back()
-			var enemy := _spawn(spawn_point as Node2D, false)
+			var enemy := _spawn(spawn_point as Node2D)
 			# Automatically track player after being spawned
 			enemy.notify()
 			enemy.spawn_in(spawn_in_tired_time)
@@ -127,19 +129,8 @@ func _spawn_enemies() -> void:
 		var spawn_point := child as Node2D
 		_spawn(spawn_point)
 
-func _spawn(spawn_point: Node2D, allow_meta: bool = true) -> Node2D:
-	var enemy_scene: PackedScene
-	if allow_meta:
-		match spawn_point.get_meta("spawnpoint_type", "any"):
-			"idle_ranged":
-				enemy_scene = _idle_shooter
-			"any":
-				enemy_scene = WorldMap.weighted_choice(_enemies).scene
-			var type:
-				printerr("invalid spawnpoint type: %s" % type)
-				return
-	else:
-		enemy_scene = WorldMap.weighted_choice(_enemies).scene
+func _spawn(spawn_point: Node2D) -> Node2D:
+	var enemy_scene: PackedScene = _choose_enemy()
 	
 	var enemy_instance := enemy_scene.instantiate() as Node2D
 	enemy_instance.position = to_global(spawn_point.position)
@@ -164,3 +155,10 @@ func _on_enemy_damage_taken(_amount: float, _direction: Vector2) -> void:
 	if _started:
 		return
 	_start_wave()
+
+func _choose_enemy() -> PackedScene:
+	var scene: PackedScene = WorldMap.weighted_choice(_enemies).scene
+	while scene == _last_spawned:
+		scene = WorldMap.weighted_choice(_enemies).scene
+	_last_spawned = scene
+	return scene
