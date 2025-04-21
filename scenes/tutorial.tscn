@@ -39,7 +39,10 @@ position = Vector2(4247, -29)
 [node name="Silo" parent="." instance=ExtResource("8_04us3")]
 position = Vector2(4147, -430.63)
 
-[node name="TutorialText" type="Node" parent="."]
+[node name="TutorialText" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("8_eqom3")
 
 [node name="TutorialText1" type="Label" parent="TutorialText"]
 offset_left = 273.0
@@ -47,7 +50,6 @@ offset_top = -255.0
 offset_right = 662.0
 offset_bottom = -206.0
 scale = Vector2(1.00114, 1)
-theme = ExtResource("8_eqom3")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
@@ -61,7 +63,6 @@ offset_left = 1341.0
 offset_top = -255.0
 offset_right = 1850.0
 offset_bottom = -206.0
-theme = ExtResource("8_eqom3")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
@@ -75,7 +76,6 @@ offset_left = 2242.0
 offset_top = -255.0
 offset_right = 2729.0
 offset_bottom = -206.0
-theme = ExtResource("8_eqom3")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
@@ -89,7 +89,6 @@ offset_left = 2242.0
 offset_top = -255.0
 offset_right = 2729.0
 offset_bottom = -206.0
-theme = ExtResource("8_eqom3")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
@@ -103,7 +102,6 @@ offset_left = 4180.0
 offset_top = -280.0
 offset_right = 4281.0
 offset_bottom = -231.0
-theme = ExtResource("8_eqom3")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
