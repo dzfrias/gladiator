@@ -113,7 +113,7 @@ func _spawn_in() -> void:
 			var enemy := _spawn(spawn_point as Node2D, false)
 			# Automatically track player after being spawned
 			enemy.notify()
-			enemy.make_tired(spawn_in_tired_time)
+			enemy.spawn_in(spawn_in_tired_time)
 			await get_tree().create_timer(randfn(spawn_in_delay_mean, spawn_in_delay_sd)).timeout
 		
 		await get_tree().create_timer(spawn_in_cooldown).timeout
@@ -149,6 +149,7 @@ func _spawn(spawn_point: Node2D, allow_meta: bool = true) -> Node2D:
 	for child in enemy_instance.get_children():
 		if child is Health:
 			child.damage_taken.connect(_on_enemy_damage_taken)
+	
 	return enemy_instance
 
 func _spawn_chest() -> void:

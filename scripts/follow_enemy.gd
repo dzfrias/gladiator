@@ -27,6 +27,7 @@ enum State {
 	TRACKING,
 	ATTACKING,
 	TIRED,
+	SPAWNING,
 }
 
 func _ready() -> void:
@@ -79,7 +80,7 @@ func _physics_process(delta: float) -> void:
 			# Check reaching the edge of a platform or the environment
 			if (not $EdgeDetector.left.is_colliding() and velocity.x < 0) or (not $EdgeDetector.right.is_colliding() and velocity.x > 0):
 				$Direction.switch()
-		State.TIRED:
+		State.TIRED, State.SPAWNING:
 			velocity.x = 0
 		State.ATTACKING:
 			pass
@@ -108,14 +109,17 @@ func notify(depth: int = 0) -> void:
 		for body in $NotifyZone.get_overlapping_bodies():
 			body.notify(depth - 1)
 
-func make_tired(duration: float) -> void:
+func spawn_in(duration: float) -> void:
+	var previous_layer := collision_layer
+	collision_layer = Constants.INVINCIBLE_LAYER
 	var previous_state := _state
-	_state = State.TIRED
+	_state = State.SPAWNING
 	on_state_changed.emit(_state)
 	await get_tree().create_timer(duration).timeout
-	assert(_state == State.TIRED)
+	assert(_state == State.SPAWNING)
 	_state = previous_state
 	on_state_changed.emit(_state)
+	collision_layer = previous_layer
 
 func _patrol() -> void:
 	_state = State.IDLE
