@@ -45,6 +45,7 @@ anchors_preset = 0
 theme = ExtResource("8_eqom3")
 
 [node name="TutorialText1" type="Label" parent="TutorialText"]
+layout_mode = 0
 offset_left = 273.0
 offset_top = -255.0
 offset_right = 662.0
@@ -59,6 +60,7 @@ script = ExtResource("9_50ia2")
 speed = 3.0
 
 [node name="TutorialText2" type="Label" parent="TutorialText"]
+layout_mode = 0
 offset_left = 1341.0
 offset_top = -255.0
 offset_right = 1850.0
@@ -72,6 +74,7 @@ script = ExtResource("9_50ia2")
 speed = 3.0
 
 [node name="TutorialText3" type="Label" parent="TutorialText"]
+layout_mode = 0
 offset_left = 2242.0
 offset_top = -255.0
 offset_right = 2729.0
@@ -85,6 +88,7 @@ script = ExtResource("9_50ia2")
 speed = 3.0
 
 [node name="TutorialText4" type="Label" parent="TutorialText"]
+layout_mode = 0
 offset_left = 2242.0
 offset_top = -255.0
 offset_right = 2729.0
@@ -98,6 +102,7 @@ script = ExtResource("9_50ia2")
 speed = 3.0
 
 [node name="TutorialText5" type="Label" parent="TutorialText"]
+layout_mode = 0
 offset_left = 4180.0
 offset_top = -280.0
 offset_right = 4281.0
