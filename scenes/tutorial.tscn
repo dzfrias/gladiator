@@ -73,26 +73,12 @@ text = "Shoot with left click"
 script = ExtResource("9_50ia2")
 speed = 3.0
 
-[node name="TutorialText3" type="Label" parent="TutorialText"]
-layout_mode = 0
-offset_left = 2242.0
-offset_top = -255.0
-offset_right = 2729.0
-offset_bottom = -206.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 35
-text = "Hold S to move underground"
-script = ExtResource("9_50ia2")
-speed = 3.0
-
 [node name="TutorialText4" type="Label" parent="TutorialText"]
 layout_mode = 0
-offset_left = 2242.0
-offset_top = -255.0
-offset_right = 2729.0
-offset_bottom = -206.0
+offset_left = 2277.0
+offset_top = -268.0
+offset_right = 2942.0
+offset_bottom = -219.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
