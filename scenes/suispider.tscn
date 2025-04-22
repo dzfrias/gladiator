@@ -189,7 +189,7 @@ shape = SubResource("RectangleShape2D_ouvmv")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_l060f")
 animation = &"idle"
-frame_progress = 0.880136
+frame_progress = 0.249575
 script = ExtResource("3_32ufq")
 walk_cuttoff_point = 75.0
 
