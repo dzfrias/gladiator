@@ -38,6 +38,7 @@ warning_flashes = 6
 prepare_attack_time = 0.8
 
 [node name="Backlight" parent="." instance=ExtResource("2_3qerc")]
+energy = 16.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
