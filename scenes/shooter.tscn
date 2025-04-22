@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_13p0r"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="15_kelxt"]
-[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="16_gandy"]
+[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="16_gandy"]
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="16_nyw88"]
 [ext_resource type="Texture2D" uid="uid://beognjwthnlei" path="res://assets/Art/laser_rifle.png" id="17_seejf"]
 [ext_resource type="Script" path="res://scripts/gun_overlay.gd" id="18_yb7vo"]

@@ -1,13 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=28 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]
+[ext_resource type="Material" path="res://resources/materials/dark.tres" id="6_wltle"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_3l162"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_kg58i"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
-[ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_1gcnm"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="10_pfo6r"]
 
@@ -168,6 +169,7 @@ target_position = Vector2(0, 40)
 collision_mask = 32
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("6_wltle")
 position = Vector2(0, -3)
 scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_th1nn")

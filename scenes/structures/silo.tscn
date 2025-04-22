@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bhglqsap5vi4o"]
 
-[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_lr4c8"]
+[ext_resource type="Material" path="res://resources/materials/dark.tres" id="1_lr4c8"]
 [ext_resource type="Texture2D" uid="uid://doou8ewryr0pi" path="res://assets/Art/silo.png" id="2_47ear"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tu36f"]
