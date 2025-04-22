@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://kuoxip0150vk"]
+[gd_scene load_steps=21 format=3 uid="uid://kuoxip0150vk"]
 
 [ext_resource type="Script" path="res://scripts/enemies/sniper.gd" id="1_27e54"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="2_3qerc"]
 [ext_resource type="SpriteFrames" uid="uid://dmm0dvb5sx8oo" path="res://resources/sprite_frames/shooter.tres" id="2_8l8rg"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="3_dbdna"]
 [ext_resource type="Resource" uid="uid://bee5w5k2hubk7" path="res://resources/raider_sniper.tres" id="4_6f1k5"]
@@ -35,6 +36,8 @@ collision_mask = 33
 script = ExtResource("1_27e54")
 warning_flashes = 6
 prepare_attack_time = 0.8
+
+[node name="Backlight" parent="." instance=ExtResource("2_3qerc")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
