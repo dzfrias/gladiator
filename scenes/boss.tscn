@@ -1,0 +1,134 @@
+[gd_scene load_steps=17 format=3 uid="uid://bnp1a2nk0y65j"]
+
+[ext_resource type="Script" path="res://scripts/enemies/boss.gd" id="1_py3tt"]
+[ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="2_vdfdy"]
+[ext_resource type="Script" path="res://scripts/direction.gd" id="9_yn21n"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="10_aptoh"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="11_igbjl"]
+[ext_resource type="Script" path="res://scripts/platform_detection.gd" id="12_ek7wc"]
+[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_xyk85"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_g7l1r"]
+[ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_idlfn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ighdq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vdfdy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8kds"]
+size = Vector2(24.008, 131)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oetyt"]
+radius = 225.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrpis"]
+size = Vector2(109, 36.91)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c0ujg"]
+radius = 400.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbto2"]
+size = Vector2(57, 66)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nukas"]
+size = Vector2(42, 123)
+
+[node name="Boss" type="CharacterBody2D"]
+position = Vector2(0, -34)
+collision_layer = 130
+collision_mask = 33
+script = ExtResource("1_py3tt")
+speed = 100.0
+jump_height = -400.0
+stop_dist = 50.0
+jump_follow_cooldown = 0.2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -34)
+scale = Vector2(4.16336, 4.16336)
+sprite_frames = SubResource("SpriteFrames_ighdq")
+offset = Vector2(-1.08, 0)
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.00400018, -33.5)
+shape = SubResource("RectangleShape2D_d8kds")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_oetyt")
+
+[node name="Direction" type="Node" parent="."]
+script = ExtResource("9_yn21n")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("10_aptoh")
+max_health = 50.0
+
+[node name="HealthBarCreator" type="Node" parent="."]
+script = ExtResource("11_igbjl")
+
+[node name="PlatformDetection" type="Area2D" parent="."]
+position = Vector2(-0.008, -71.09)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("12_ek7wc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetection"]
+position = Vector2(0, -8.455)
+shape = SubResource("RectangleShape2D_qrpis")
+
+[node name="RayCast2D" type="RayCast2D" parent="PlatformDetection"]
+position = Vector2(0.00800037, 92)
+target_position = Vector2(0, 30)
+collision_mask = 32
+
+[node name="NotifyZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
+shape = SubResource("CircleShape2D_c0ujg")
+
+[node name="HitFlash" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+script = ExtResource("13_xyk85")
+
+[node name="DropSpawner" parent="." instance=ExtResource("14_g7l1r")]
+
+[node name="EdgeDetector" type="Node2D" parent="."]
+script = ExtResource("15_idlfn")
+
+[node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(46, 0)
+shape = SubResource("RectangleShape2D_pbto2")
+disabled = true
+debug_color = Color(0.644145, 0.106926, 0.184851, 0.42)
+
+[node name="ChargeBox" type="Area2D" parent="."]
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChargeBox"]
+position = Vector2(-3, -28.5)
+shape = SubResource("RectangleShape2D_nukas")
+disabled = true
