@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://csqqcnv8iucaq"]
+[gd_scene load_steps=32 format=3 uid="uid://csqqcnv8iucaq"]
 
 [ext_resource type="Script" path="res://scripts/enemies/suispider.gd" id="1_5l4np"]
 [ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="2_7hxbm"]
@@ -14,15 +14,11 @@
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="10_rqn3d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouvmv"]
-size = Vector2(55, 61)
+size = Vector2(42, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8pow"]
 atlas = ExtResource("2_fd11g")
 region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3nybj"]
-atlas = ExtResource("2_fd11g")
-region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uv2q"]
 atlas = ExtResource("2_fd11g")
@@ -77,9 +73,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i8pow")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3nybj")
 }],
 "loop": true,
 "name": &"idle",
@@ -134,7 +127,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -144,9 +137,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_w4rog")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bb8fw")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_j8e7v")
 }, {
 "duration": 1.0,
@@ -154,7 +144,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 7.0
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7u64g"]
@@ -182,14 +172,13 @@ stop_dist = 50.0
 energy = 16.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
+position = Vector2(2, -2)
 shape = SubResource("RectangleShape2D_ouvmv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_l060f")
-animation = &"idle"
-frame_progress = 0.249575
+animation = &"run"
 script = ExtResource("3_32ufq")
 walk_cuttoff_point = 75.0
 
