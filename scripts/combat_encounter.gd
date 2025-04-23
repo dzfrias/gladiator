@@ -89,6 +89,7 @@ func _start_wave() -> void:
 func _spawn_in() -> void:
 	assert(_started)
 	var spawn_points := $SpawnPoints.get_children()
+	var last_spawn_point: Node2D
 	while _spawn_during_wave > 0:
 		var enemies_left := get_tree().get_node_count_in_group(_group_name)
 		var alive_ratio := float(enemies_left) / float(spawn_points.size())
@@ -104,14 +105,11 @@ func _spawn_in() -> void:
 		_spawn_during_wave -= to_spawn
 		assert(_spawn_during_wave >= 0)
 		
-		# Keeps track of available spawn points to prevent re-use
-		var available: Array[Node] = []
 		for _i in range(to_spawn):
-			var spawn_point = available.pop_back()
-			if spawn_point == null:
-				available = spawn_points.duplicate()
-				available.shuffle()
-				spawn_point = available.pop_back()
+			var spawn_point: Node2D
+			while spawn_point == null or spawn_point == last_spawn_point:
+				spawn_point = spawn_points[randi_range(0, spawn_points.size() - 1)]
+			last_spawn_point = spawn_point
 			var enemy := _spawn(spawn_point as Node2D)
 			# Automatically track player after being spawned
 			enemy.notify()
