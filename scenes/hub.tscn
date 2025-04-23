@@ -17,6 +17,7 @@ size = Vector2(159, 98)
 [node name="Hub" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_y8sdt")
+metadata/_edit_group_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_g6j8t")]
 position = Vector2(36, -41)

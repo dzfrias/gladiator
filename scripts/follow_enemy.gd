@@ -16,6 +16,7 @@ class_name FollowEnemy extends CharacterBody2D
 var _state: State
 var _tracking: Node2D
 var _jump_follow_timer := 0.0
+@onready var _current_stop_dist = stop_dist
 @onready var _original_patrol_speed = patrol_speed
 var _stunned: bool
 
@@ -43,25 +44,16 @@ func _physics_process(delta: float) -> void:
 	match _state:
 		State.TRACKING:
 			assert(_tracking != null)
+			
+			# Direction setting
 			var dist := _tracking.position.x - position.x
 			var direction := signf(dist)
 			$Direction.scalar = direction
 			
-			var is_player_above = Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y
-			if is_player_above and _platform_detection.is_detecting_platform() and is_on_floor():
-				_jump_follow_timer += delta
-				if _jump_follow_timer >= jump_follow_cooldown:
-					velocity.y = jump_height
-					_jump_follow_timer = 0.0
-			
+			# Platform Handling
 			var is_player_below = (!Player.Instance.is_on_platform() or Player.Instance.get_platform_height() > _platform_detection.get_platform_height()) and Player.Instance.is_on_floor()
-			if is_player_below and _platform_detection.is_on_platform():
-				_jump_follow_timer += delta
-				if _jump_follow_timer >= jump_follow_cooldown:
-					set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
-					_jump_follow_timer = 0.0
-			else:
-				set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+			var is_player_above = Player.Instance.is_on_platform() and Player.Instance.get_platform_height() < global_position.y
+			handle_platform_jumping(is_player_above, is_player_below, delta)
 			
 			if not is_player_above and not is_player_below:
 				_jump_follow_timer = 0.0
@@ -72,7 +64,7 @@ func _physics_process(delta: float) -> void:
 				elif velocity.y != 0.0:
 					velocity.x = direction * speed
 				else:
-					_process_stopped(delta)
+					velocity.x = 0.0
 			else:
 				velocity.x = direction * speed
 		State.IDLE:
@@ -144,14 +136,25 @@ func _patrol() -> void:
 	
 	patrol_speed = _original_patrol_speed
 
+func handle_platform_jumping(is_player_above, is_player_below, delta):
+	if is_player_above and _platform_detection.is_detecting_platform() and is_on_floor():
+		_jump_follow_timer += delta
+		if _jump_follow_timer >= jump_follow_cooldown:
+			velocity.y = jump_height
+			_jump_follow_timer = 0.0
+	if is_player_below and _platform_detection.is_on_platform():
+		_jump_follow_timer += delta
+		if _jump_follow_timer >= jump_follow_cooldown:
+			set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
+			_jump_follow_timer = 0.0
+	else:
+		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
+
 func direction() -> Direction:
 	return $Direction
 
 func _attack() -> void:
 	pass
-
-func _process_stopped(_delta: float) -> void:
-	velocity.x = 0.0
 
 func _can_attack() -> bool:
 	return true

@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://wvfn7po6klir" path="res://assets/Art/enemy_crouch.png" id="11_y4cef"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter_animations.gd" id="12_npl6x"]
-[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
+[ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="14_nikfl"]
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="14_o635c"]
 [ext_resource type="Texture2D" uid="uid://beognjwthnlei" path="res://assets/Art/laser_rifle.png" id="15_yksj8"]
