@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 				elif velocity.y != 0.0:
 					velocity.x = direction * speed
 				else:
-					velocity.x = 0.0
+					_process_stopped(delta)
 			else:
 				velocity.x = direction * speed
 		State.IDLE:
@@ -155,6 +155,9 @@ func direction() -> Direction:
 
 func _attack() -> void:
 	pass
+
+func _process_stopped(_delta: float) -> void:
+	velocity.x = 0.0
 
 func _can_attack() -> bool:
 	return true
