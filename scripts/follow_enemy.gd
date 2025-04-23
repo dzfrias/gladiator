@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 			if not is_player_above and not is_player_below:
 				_jump_follow_timer = 0.0
 			
-			if abs(dist) <= stop_dist and !is_player_above:
+			if abs(dist) <= _current_stop_dist and !is_player_above:
 				if is_on_floor() and _can_attack() and velocity.y == 0.0:
 					_attack()
 				elif velocity.y != 0.0:

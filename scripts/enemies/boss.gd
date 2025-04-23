@@ -1,23 +1,30 @@
 class_name Boss extends FollowEnemy
 
+@export_category("Melee Attack")
+@export var _melee_distance = 100
 @export var attack_windup_time: float
 @export var attack_time: float
 @export var attack_tired_time: float
 @export var attack_damage: float
 
+@export_category("Charge Attack")
+@export var _charge_distance = 500
 @export var _max_charge_time: float = 2.5
-@export var _charge_speed: float = 200
+@export var _charge_speed: float = 300
 @export var _wall_detection: Area2D
 var _is_charging = false
 
+@export_category("Slam Attack")
 @export var _slam_move_speed = 3
 @export var _slam_attack_time = 4
+@export var _slam_distance = 300
 
-var _attack_state = AttackState.MELEE
+var _attack_state = AttackState.NONE
 
 @onready var _original_attack_x = $AttackBox/CollisionShape2D.position.x
 
 enum AttackState {
+	NONE,
 	MELEE,
 	GROUND_SLAM,
 	CHARGE
@@ -36,6 +43,19 @@ func _physics_process(delta: float) -> void:
 		State.ATTACKING:
 			if _attack_state == AttackState.GROUND_SLAM:
 				$AttackBox.global_position.x += $Direction.scalar * _slam_move_speed
+		State.TRACKING:
+			if _attack_state == AttackState.NONE or _attack_state == AttackState.MELEE:
+				print(Player.Instance.global_position.x - global_position.x)
+				var dist = abs(Player.Instance.global_position.x - global_position.x)
+				if dist < _slam_distance:
+					_attack_state = AttackState.MELEE
+					_current_stop_dist = _melee_distance
+				elif dist < _charge_distance:
+					_attack_state = AttackState.GROUND_SLAM
+					_current_stop_dist = _slam_distance
+				else:
+					_attack_state = AttackState.CHARGE
+					_current_stop_dist = _charge_distance
 
 func _align_with_direction() -> void:
 	var direction = $Direction.scalar
@@ -54,7 +74,7 @@ func melee_attack():
 	await get_tree().create_timer(attack_tired_time).timeout
 	assert(_state == State.TIRED)
 	_state = State.TRACKING
-
+	
 func charge_attack():
 	velocity.x = $Direction.scalar * _charge_speed
 	_state = State.ATTACKING
@@ -65,8 +85,9 @@ func charge_attack():
 	_is_charging = false
 	_state = State.TIRED
 	await get_tree().create_timer(attack_tired_time).timeout
+	assert(_state == State.TIRED)
 	_state = State.TRACKING
-
+	
 func slam_attack():
 	_state = State.TIRED
 	await get_tree().create_timer(attack_windup_time).timeout
@@ -88,15 +109,17 @@ func _can_attack() -> bool:
 	return true
 
 func _attack() -> void:
-	var _rand_int = randi_range(0, AttackState.size() - 1)
-	_attack_state = AttackState.values()[_rand_int]
 	match _attack_state:
 		AttackState.MELEE:
-			melee_attack()
+			print("Melee")
+			await melee_attack()
 		AttackState.CHARGE:
-			charge_attack()
+			print("Charge")
+			await charge_attack()
 		AttackState.GROUND_SLAM:
-			slam_attack()
+			print("Slam")
+			await slam_attack()
+	_attack_state = AttackState.NONE
 
 func _on_attack_box_body_entered(body: Node2D) -> void:
 	if body is not Player:
