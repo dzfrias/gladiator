@@ -24,12 +24,8 @@ class FillTile:
 @export var chest_spawn_chance_increment: float = 0.2
 @export var encounter_dist_min: int = 50
 @export var encounter_dist_max: int = 80
+@export_dir var terrain_path: String = "res://scenes/modules/terrain/"
 
-var _terrain := [
-	WeightedScene.new("res://scenes/modules/terrain/flat.tscn", 0.5),
-	WeightedScene.new("res://scenes/modules/terrain/slope_up.tscn", 0.25),
-	WeightedScene.new("res://scenes/modules/terrain/slope_down.tscn", 0.25),
-]
 var _encounters := [
 	WeightedScene.new("res://scenes/modules/encounters/silo_encounter.tscn", 1.0),
 	#WeightedScene.new("res://scenes/modules/encounters/encounter1.tscn", 0.15),
@@ -43,6 +39,7 @@ var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn
 var _fill_tiles: Array[FillTile] = []
 var _fill_source_id: int
 var _tile_size: Vector2
+var _terrain: Array[PackedScene]
 
 func _ready() -> void:
 	assert(scale.x == scale.y)
@@ -57,6 +54,8 @@ func _ready() -> void:
 		if fill_probability > 0.0:
 			_fill_tiles.append(FillTile.new(tile_coords, fill_probability))
 	
+	_terrain = scenes_in_dir(terrain_path)
+	
 	_generate.call_deferred()
 
 func _generate() -> void:
@@ -66,14 +65,14 @@ func _generate() -> void:
 	var encounter_dist := randi_range(encounter_dist_min, encounter_dist_max)
 	var chest_spawn_chance := starting_chest_spawn_chance
 	while module_origin.x < map_width:
-		var module: WeightedScene
+		var module: PackedScene
 		if encounter_dist == 0:
-			module = weighted_choice(_encounters)
+			module = weighted_choice(_encounters).scene
 			encounter_dist = randi_range(encounter_dist_min, encounter_dist_max)
 		else:
-			module = weighted_choice(_terrain)
+			module = _terrain[randi_range(0, _terrain.size() - 1)]
 		
-		var instance := module.scene.instantiate() as Module
+		var instance := module.instantiate() as Module
 		
 		if instance is CombatEncounter:
 			if randf() <= chest_spawn_chance:
@@ -137,3 +136,22 @@ static func weighted_choice(array: Array) -> Variant:
 	# Should be unreachable
 	assert(false)
 	return null
+
+static func scenes_in_dir(path: String):
+	var scenes: Array[PackedScene] = []
+	
+	var dir := DirAccess.open(path)
+	if not dir:
+		printerr("An error occurred when trying to access %s" % path)
+		return
+	
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name.get_extension() == "tscn":
+			var full_path = path.path_join(file_name)
+			scenes.append(load(full_path))
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	
+	return scenes
