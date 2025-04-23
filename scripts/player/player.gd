@@ -15,6 +15,7 @@ var _is_jumping := false
 var _jump_time := 0.0
 var _jump_buffer := 0.0
 var _wants_burrow := false
+var _is_invincible := false
 var _firing: FiringWeapon = FiringWeapon.NONE
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_item_x = $ItemPosition.position.x
@@ -318,7 +319,8 @@ func _unburrow() -> void:
 	_state = State.CONTROL
 	_current_move_speed = movement_settings.move_speed
 	$AnimatedSprite2D.visible = true
-	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
+	if not _is_invincible:
+		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 
 func _on_health_died() -> void:
 	print("The player has died")
@@ -326,15 +328,21 @@ func _on_health_died() -> void:
 func _on_health_damage_taken(_amount: int, _direction: Vector2) -> void:
 	AudioManager.play_sound(self, load("res://assets/SoundEffects/hit.wav"))
 	collision_layer = Constants.INVINCIBLE_LAYER
+	_is_invincible = false
 	_freeze_time()
 	_flash_invincible()
 	await get_tree().create_timer(movement_settings.invincible_time).timeout
 	collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
+	_is_invincible = false
 
 func _freeze_time():
 	get_tree().paused = true
 	await get_tree().create_timer(0.2).timeout
 	get_tree().paused = false
+	# Fixes bug where player could fire indefinitely if they released "fire" or "fire_alt" during
+	# time freeze.
+	if not Input.is_action_pressed("fire") and not Input.is_action_pressed("fire_alt"):
+		_firing = FiringWeapon.NONE
 
 func is_holding_weapon() -> bool:
 	return $Inventory.get_held_item() == WEAPON_INDICATOR
