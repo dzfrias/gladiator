@@ -1,6 +1,8 @@
 class_name CombatEncounter extends Module
 
 @export var boundary_tolerance: float = 400.0
+@export var initial_spawn_min: int = 2
+@export var initial_spawn_max: int = 4
 @export var spawn_during_wave_min: int = 4
 @export var spawn_during_wave_max: int = 7
 @export var spawn_in_cooldown: float = 3.5
@@ -12,6 +14,7 @@ class_name CombatEncounter extends Module
 
 var _started := false
 var _spawn_during_wave: int
+var _initial_spawn_amt: int
 var _left_body: StaticBody2D
 var _right_body: StaticBody2D
 var _enemies := [
@@ -89,15 +92,15 @@ func _start_wave() -> void:
 func _spawn_in() -> void:
 	assert(_started)
 	var spawn_points := $SpawnPoints.get_children()
-	var last_spawn_point: Node2D
+	var last_spawn_point: Node2D = null
 	while _spawn_during_wave > 0:
 		var enemies_left := get_tree().get_node_count_in_group(_group_name)
-		var alive_ratio := float(enemies_left) / float(spawn_points.size())
+		var alive_ratio := float(enemies_left) / float(_initial_spawn_amt)
 		
 		var to_spawn := 0
 		if alive_ratio < 0.2:
 			to_spawn = 3
-		elif alive_ratio < 0.7:
+		elif alive_ratio < 0.5:
 			to_spawn = 2
 		elif alive_ratio < 1.0:
 			to_spawn = 1
@@ -106,7 +109,7 @@ func _spawn_in() -> void:
 		assert(_spawn_during_wave >= 0)
 		
 		for _i in range(to_spawn):
-			var spawn_point: Node2D
+			var spawn_point: Node2D = null
 			while spawn_point == null or spawn_point == last_spawn_point:
 				spawn_point = spawn_points[randi_range(0, spawn_points.size() - 1)]
 			last_spawn_point = spawn_point
@@ -123,8 +126,11 @@ func _set_barriers_enabled(enabled: bool) -> void:
 	_right_body.get_child(0).disabled = !enabled
 
 func _spawn_enemies() -> void:
-	for child in $SpawnPoints.get_children():
-		var spawn_point := child as Node2D
+	var spawn_points := $SpawnPoints.get_children()
+	spawn_points.shuffle()
+	_initial_spawn_amt = randi_range(initial_spawn_min, initial_spawn_max)
+	for i in range(_initial_spawn_amt):
+		var spawn_point := spawn_points[i] as Node2D
 		_spawn(spawn_point)
 
 func _spawn(spawn_point: Node2D) -> Node2D:
