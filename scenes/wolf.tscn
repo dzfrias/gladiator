@@ -122,6 +122,7 @@ jump_height = -450.0
 stop_dist = 115.0
 
 [node name="Backlight" parent="." instance=ExtResource("2_8cqwt")]
+energy = 16.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("7_3l162")
