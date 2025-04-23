@@ -64,12 +64,16 @@ func _move() -> void:
 
 func _shoot() -> void:
 	_state = State.ATTACKING
+	var angle := get_angle_to(Player.Instance.global_position)
+	var player_pos = Player.Instance.global_position
+	var weapon_pos = $Weapon.global_position
+	
 	$Direction.scalar = signf(Player.Instance.global_position.x - global_position.x)
 	$Weapon.activate_prefire_flash()
 	for _i in range(warning_flashes):
 		Debug.draw_line(
-			$Weapon.global_position,
-			Player.Instance.global_position,
+			weapon_pos,
+			player_pos,
 			5.0,
 			Color.RED,
 			0.05,
@@ -77,7 +81,6 @@ func _shoot() -> void:
 		await get_tree().create_timer(prepare_attack_time / warning_flashes).timeout
 	$Weapon.deactivate_prefire_flash()
 	
-	var angle := get_angle_to(Player.Instance.global_position)
 	await $Weapon.fire(angle)
 	_state = State.MOVING
 

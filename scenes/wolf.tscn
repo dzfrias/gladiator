@@ -1,11 +1,11 @@
 [gd_scene load_steps=29 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
-[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="2_8cqwt"]
+[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="2_8cqwt"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]
-[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="6_wltle"]
+[ext_resource type="Material" path="res://resources/materials/dark.tres" id="6_wltle"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_3l162"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_kg58i"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
