@@ -1,14 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=29 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="2_8cqwt"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]
-[ext_resource type="Material" path="res://resources/materials/dark.tres" id="6_wltle"]
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="6_wltle"]
 [ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_3l162"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_kg58i"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
-[ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
+[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_1gcnm"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="10_pfo6r"]
 
@@ -119,6 +120,8 @@ attack_windup_time = 0.3
 speed = 175.0
 jump_height = -450.0
 stop_dist = 115.0
+
+[node name="Backlight" parent="." instance=ExtResource("2_8cqwt")]
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("7_3l162")
