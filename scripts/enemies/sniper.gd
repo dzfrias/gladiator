@@ -66,14 +66,15 @@ func _shoot() -> void:
 	_state = State.ATTACKING
 	var angle := get_angle_to(Player.Instance.global_position)
 	var player_pos = Player.Instance.global_position
-	var weapon_pos = $Weapon.global_position
 	
 	$Direction.scalar = signf(Player.Instance.global_position.x - global_position.x)
 	$Weapon.activate_prefire_flash()
 	for _i in range(warning_flashes):
+		var slope = player_pos - $Weapon.global_position
+		var draw_pos = player_pos + slope * 100
 		Debug.draw_line(
-			weapon_pos,
-			player_pos,
+			$Weapon.global_position,
+			draw_pos,
 			5.0,
 			Color.RED,
 			0.05,
