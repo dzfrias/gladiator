@@ -8,10 +8,6 @@ func _ready() -> void:
 	if MissionManager.mission == null:
 		return
 	
-	# Weather UI
-	if MissionManager.mission.weather is AcidRain:
-		add_child(acid_rain_ui.instantiate())
-	
 	# Mission UI
 	if MissionManager.mission is SurvivalMission:
 		add_child(survival_ui.instantiate())

@@ -36,7 +36,7 @@ size = Vector2(45.6052, 20)
 [node name="Silo" type="StaticBody2D"]
 z_index = -1
 position = Vector2(405, -437.63)
-collision_layer = 32
+collision_layer = 40
 collision_mask = 32
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

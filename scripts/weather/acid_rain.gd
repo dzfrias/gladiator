@@ -39,6 +39,8 @@ func _cycle():
 		var timer = get_tree().create_timer(wait_time)
 		timer_changed.emit(timer)
 		await timer.timeout
+		if not MissionManager.mission.in_combat:
+			continue
 		enabled = true
 		var on_time = randfn(cycle_on_mean_time, cycle_on_sd)
 		timer = get_tree().create_timer(on_time)
