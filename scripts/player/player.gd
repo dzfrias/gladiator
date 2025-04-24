@@ -208,7 +208,7 @@ func _input(event: InputEvent) -> void:
 			# Fire
 			if event.is_action_pressed("fire"):
 				var item = $Inventory.get_held_item()
-				if item == WEAPON_INDICATOR:
+				if typeof(item) == TYPE_STRING and item == WEAPON_INDICATOR:
 					_firing = FiringWeapon.SELECTED
 				else:
 					assert(item is GadgetInfo)
