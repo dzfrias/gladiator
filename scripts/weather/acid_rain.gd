@@ -2,10 +2,12 @@ class_name AcidRain extends RayCast2D
 
 @export var time_between_damage: float = 1
 @export var damage: float = 2
+@export var warning_time: float = 3.0
 @export var cycle_off_mean_time := 10.0
 @export var cycle_off_sd := 2.5
 @export var cycle_on_mean_time := 9.0
 @export var cycle_on_sd := 1.5
+@export var rain_effects: PackedScene = preload("res://scenes/rain_effects.tscn")
 
 var _can_damage := true
 
@@ -41,8 +43,15 @@ func _cycle():
 		await timer.timeout
 		if not MissionManager.mission.in_combat:
 			continue
+		var effects = rain_effects.instantiate() as RainEffects
+		var final_count = effects.rain_count
+		effects.rain_count = 10
+		get_tree().current_scene.add_child(effects)
+		await get_tree().create_timer(warning_time).timeout
+		effects.rain_count = final_count
 		enabled = true
 		var on_time = randfn(cycle_on_mean_time, cycle_on_sd)
 		timer = get_tree().create_timer(on_time)
 		timer_changed.emit(timer)
 		await timer.timeout
+		effects.queue_free()
