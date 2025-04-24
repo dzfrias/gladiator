@@ -4,6 +4,7 @@ extends Node
 @export var step_interval: float = 0.2
 
 var _player: Player
+var _player_underground_particles: CPUParticles2D
 var _particle_impact_threshold = 350
 var _impact_particle_multiplier = 0.025
 var _impact_speed_particle_multiplier = 0.1
@@ -16,6 +17,7 @@ func _ready() -> void:
 	_player.jumped.connect(_on_jump)
 	var player_rect := _player.hitbox().shape.get_rect()
 	_bottom = Vector2(player_rect.end.x - player_rect.size.x / 2, player_rect.end.y)
+	_player_underground_particles = _player.find_child("UndergroundParticles")
 
 func _on_ground_impact(impact_force: float):
 	if impact_force < _particle_impact_threshold:
@@ -34,6 +36,8 @@ func _process(delta: float) -> void:
 	if _step_timer <= 0:
 		_step_timer = step_interval
 		_spawn_impact_particles(10, 8.0)
+	
+	_player_underground_particles.emitting = _player.is_underground()
 
 func _spawn_impact_particles(amount: int, initial_velocity_delta: float) -> void:
 	var land_impact_particles := land_impact_particles_scene.instantiate() as CPUParticles2D
