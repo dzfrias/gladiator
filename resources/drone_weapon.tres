@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://dyrdd6yxu86ck"]
+
+[ext_resource type="Texture2D" uid="uid://beognjwthnlei" path="res://assets/Art/laser_rifle.png" id="1_vii6x"]
+[ext_resource type="PackedScene" uid="uid://bxa1add1qk2ue" path="res://scenes/drone_projectile.tscn" id="2_mve6e"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="3_ssxx8"]
+
+[resource]
+script = ExtResource("3_ssxx8")
+name = "DroneTurret"
+reload_time = 1.0
+max_ammo = 60
+firing_interval = 0.2
+image = ExtResource("1_vii6x")
+aim_mode = 0
+strength = 0.5
+projectile = ExtResource("2_mve6e")

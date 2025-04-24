@@ -20,6 +20,7 @@ var weapons: Array[ShopItem] = [
 var gadgets: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/gadgets/grenade.tres"), 10),
 	ShopItem.new(preload("res://resources/gadgets/health_potion.tres"), 10),
+	ShopItem.new(preload("res://resources/gadgets/drone.tres"), 10),
 ]
 
 func _ready() -> void:

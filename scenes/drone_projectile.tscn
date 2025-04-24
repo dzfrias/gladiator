@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxa1add1qk2ue"]
+
+[ext_resource type="Script" path="res://scripts/horizontal_projectile.gd" id="1_vfn0x"]
+[ext_resource type="Texture2D" uid="uid://blbtwr24by4rg" path="res://resources/white_gradient.tres" id="2_qy2r0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_il7q4"]
+size = Vector2(25, 12)
+
+[node name="DroneProjectile" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 323
+script = ExtResource("1_vfn0x")
+velocity = Vector2(1000, 0)
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_il7q4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.472, 0.072)
+texture = ExtResource("2_qy2r0")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GadgetInfo" load_steps=4 format=3 uid="uid://epucydlf13k7"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_v8qdh"]
+[ext_resource type="Script" path="res://scripts/resources/gadget_info.gd" id="2_pg5pw"]
+[ext_resource type="PackedScene" uid="uid://dfdkpds5orwfj" path="res://scenes/gadgets/drone.tscn" id="2_vuiqm"]
+
+[resource]
+script = ExtResource("2_pg5pw")
+name = "Drone"
+image = ExtResource("1_v8qdh")
+scene = ExtResource("2_vuiqm")

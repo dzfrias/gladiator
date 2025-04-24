@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfdkpds5orwfj"]
+
+[ext_resource type="Script" path="res://scripts/gadgets/drone.gd" id="1_a758j"]
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_leut5"]
+[ext_resource type="Script" path="res://scripts/player/weapon.gd" id="3_whhu6"]
+[ext_resource type="Resource" uid="uid://dyrdd6yxu86ck" path="res://resources/drone_weapon.tres" id="4_epv4l"]
+[ext_resource type="Script" path="res://scripts/direction.gd" id="5_07lfm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oixfr"]
+radius = 462.027
+
+[node name="Drone" type="Node2D"]
+script = ExtResource("1_a758j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.25, 0.078125)
+texture = ExtResource("2_leut5")
+
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource("3_whhu6")
+weapon_stats = ExtResource("4_epv4l")
+
+[node name="Direction" type="Node" parent="."]
+script = ExtResource("5_07lfm")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_oixfr")
