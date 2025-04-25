@@ -189,6 +189,7 @@ anchor_bottom = 1.0
 offset_top = -69.0
 offset_right = 69.0
 grow_vertical = 0
+expand_mode = 1
 stretch_mode = 5
 
 [node name="AmmoText" type="RichTextLabel" parent="GadgetUI"]
