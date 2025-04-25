@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
+signal alt_weapon_set(weapon_stats)
 signal jumped
 
 @export var movement_settings: Resource
@@ -299,6 +300,7 @@ func set_alt_weapon(stats: WeaponStats) -> void:
 	if selected_weapon == $AltWeapon:
 		$AltWeapon.activate_effects()
 		on_weapon_switch.emit()
+	alt_weapon_set.emit(stats)
 
 func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)

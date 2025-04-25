@@ -54,47 +54,79 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_rjwni")
 show_percentage = false
 script = ExtResource("6_6nq0s")
 
-[node name="WeaponUI" type="Control" parent="." node_paths=PackedStringArray("weapon_image", "infinite_ammo_image", "ammo_text")]
+[node name="WeaponUI" type="Control" parent="." node_paths=PackedStringArray("weapon_image", "alt_weapon_image", "infinite_ammo_image", "ammo_text")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 9.55
-offset_top = -187.54
-offset_right = 49.55
-offset_bottom = -147.54
+offset_left = 3.0
+offset_top = -203.0
+offset_right = 43.0
+offset_bottom = -163.0
 grow_vertical = 0
 script = ExtResource("5_74ny8")
-weapon_image = NodePath("WeaponImage")
+weapon_image = NodePath("ColorRect/WeaponImage")
+alt_weapon_image = NodePath("ColorRect2/WeaponImage2")
 infinite_ammo_image = NodePath("InfiniteAmmoSymbol")
 ammo_text = NodePath("AmmoText")
 
-[node name="WeaponImage" type="TextureRect" parent="WeaponUI"]
+[node name="ColorRect2" type="ColorRect" parent="WeaponUI"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = -7.0
+offset_right = 80.0
+offset_bottom = 62.0
+color = Color(0.129559, 0.129558, 0.129558, 0.615686)
+
+[node name="WeaponImage2" type="TextureRect" parent="WeaponUI/ColorRect2"]
+modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -71.0
-offset_right = 98.0
+offset_left = -13.0
+offset_top = -57.0
+offset_right = 85.0
+offset_bottom = 14.0
+grow_vertical = 0
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="WeaponUI"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = -39.0
+offset_right = 114.0
+offset_bottom = 30.0
+color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="WeaponImage" type="TextureRect" parent="WeaponUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -63.0
+offset_right = 82.0
+offset_bottom = 8.0
 grow_vertical = 0
 texture = SubResource("CompressedTexture2D_cseap")
 stretch_mode = 4
 
 [node name="InfiniteAmmoSymbol" type="TextureRect" parent="WeaponUI"]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 26.0
-offset_right = 78.0
-offset_bottom = 48.0
+offset_left = 93.0
+offset_top = 18.0
+offset_right = 139.0
+offset_bottom = 40.0
 texture = ExtResource("9_1ehpv")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="AmmoText" type="RichTextLabel" parent="WeaponUI"]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 24.0
-offset_right = 81.0
-offset_bottom = 48.0
+offset_left = 99.0
+offset_top = 21.0
+offset_right = 144.0
+offset_bottom = 45.0
 theme_override_fonts/normal_font = SubResource("FontVariation_b502f")
 text = "000"
