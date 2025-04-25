@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
 signal alt_weapon_set(weapon_stats)
+signal gadget_set(gadget_info)
 signal jumped
 
 @export var movement_settings: Resource
@@ -18,6 +19,7 @@ var _jump_buffer := 0.0
 var _wants_burrow := false
 var _is_invincible := false
 var _firing: FiringWeapon = FiringWeapon.NONE
+var _gadget: GadgetInfo
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_item_x = $ItemPosition.position.x
 
@@ -41,12 +43,10 @@ const WEAPON_INDICATOR = "!!WEAPON!!"
 func _ready() -> void:
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
-	$Inventory.on_item_switched.connect(_on_item_switched)
 	if Instance != null:
 		Instance.free()
 		Instance = null
 	Instance = self
-	$Inventory.add_item(WEAPON_INDICATOR)
 	$MainWeapon.fired.connect(_on_weapon_fired.bind($MainWeapon))
 	$AltWeapon.fired.connect(_on_weapon_fired.bind($AltWeapon))
 
@@ -157,10 +157,6 @@ func _adjust_bullet_walls() -> void:
 	$BulletWall/BulletWallRight.global_position.x = right + bullet_wall_delta
 
 func _input(event: InputEvent) -> void:
-	if event.as_text().is_valid_int():
-		var index := event.as_text().to_int() - 1
-		if index < $Inventory.items.size() and index >= 0:
-			$Inventory.set_held_item(index)
 	
 	if event.is_action_pressed("fallthrough"):
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
@@ -208,12 +204,11 @@ func _input(event: InputEvent) -> void:
 			
 			# Fire
 			if event.is_action_pressed("fire"):
-				var item = $Inventory.get_held_item()
-				if typeof(item) == TYPE_STRING and item == WEAPON_INDICATOR:
-					_firing = FiringWeapon.SELECTED
-				else:
-					assert(item is GadgetInfo)
-					_use_gadget(item)
+				_firing = FiringWeapon.SELECTED
+			
+			if event.is_action_pressed("use_gadget"):
+				_use_gadget()
+			
 			if event.is_action_released("fire"):
 				_firing = FiringWeapon.NONE
 			
@@ -302,6 +297,10 @@ func set_alt_weapon(stats: WeaponStats) -> void:
 		on_weapon_switch.emit()
 	alt_weapon_set.emit(stats)
 
+func set_gadget(gadget: GadgetInfo) -> void:
+	_gadget = gadget
+	gadget_set.emit(gadget)
+
 func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
 	_state = State.UNDERGROUND
@@ -346,12 +345,6 @@ func _freeze_time():
 	if not Input.is_action_pressed("fire") and not Input.is_action_pressed("fire_alt"):
 		_firing = FiringWeapon.NONE
 
-func is_holding_weapon() -> bool:
-	return $Inventory.get_held_item() == WEAPON_INDICATOR
-
-func _on_item_switched(_current_item):
-	_firing = FiringWeapon.NONE
-
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
 
@@ -360,9 +353,6 @@ func is_underground():
 
 func get_platform_height():
 	return $PlatformRaycast.get_collision_point().y
-
-func inventory() -> Inventory:
-	return $Inventory
 
 func weapon() -> Weapon:
 	return selected_weapon
@@ -374,6 +364,9 @@ func alt_weapon() -> Weapon:
 
 func main_weapon() -> Weapon:
 	return $MainWeapon
+
+func gadget() -> GadgetInfo:
+	return _gadget
 
 func burrow_percentage() -> float:
 	return _underground_time / movement_settings.max_burrow_time
@@ -411,8 +404,8 @@ func _flash_invincible() -> void:
 func get_health() -> Health:
 	return $Health;
 
-func _use_gadget(info: GadgetInfo):
-	var gadget = info.scene.instantiate()
+func _use_gadget():
+	var gadget = _gadget.scene.instantiate()
 	gadget.init($Direction)
 	gadget.global_position = $ItemPosition.global_position
 	get_tree().current_scene.add_child(gadget)

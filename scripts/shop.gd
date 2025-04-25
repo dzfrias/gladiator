@@ -26,13 +26,14 @@ var gadgets: Array[ShopItem] = [
 func _ready() -> void:
 	did_interact.connect(_on_interact)
 
-func buy_inventory_item(item: ShopItem) -> bool:
-	if PersistentData.buckles < item.price:
+func buy_gadget(gadget: ShopItem) -> bool:
+	if PersistentData.buckles < gadget.price:
 		return false
 	
-	PersistentData.buckles -= item.price
-	item.bought = true
-	Player.Instance.inventory().add_item(item.item)
+	PersistentData.buckles -= gadget.price
+	gadget.bought = true
+	PersistentData.gadget = gadget.item
+	Player.Instance.set_gadget(gadget.item)
 	return true
 
 func buy_alt_weapon(weapon: ShopItem) -> bool:

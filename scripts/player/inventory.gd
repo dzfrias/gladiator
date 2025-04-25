@@ -1,12 +1,14 @@
 class_name Inventory extends Node
 
 signal on_item_switched(current_item)
+signal item_added(item)
 
 var _current_item: Variant
 var items: Array = []
 
 func add_item(item):
 	items.append(item)
+	item_added.emit(item)
 	if items.size() == 1:
 		_current_item = item
 		on_item_switched.emit(_current_item)

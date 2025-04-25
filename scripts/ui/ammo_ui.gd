@@ -8,32 +8,13 @@ extends Control
 @export var ammo_text: RichTextLabel
 
 func _ready() -> void:
-	var item = Player.Instance.inventory().get_held_item()
 	Player.Instance.alt_weapon_set.connect(_alt_weapon_set)
-	if item == Player.WEAPON_INDICATOR:
-		if weapon.weapon_stats.max_ammo == -1:
-			show_infinite_ammo_image()
-		else:
-			show_ammo_text()
-		weapon.on_ammo_changed.connect(_on_ammo_changed)
+	if weapon.weapon_stats.max_ammo == -1:
+		show_infinite_ammo_image()
 	else:
-		hide()
-	Player.Instance.inventory().on_item_switched.connect(_on_item_switched)
+		show_ammo_text()
+	weapon.on_ammo_changed.connect(_on_ammo_changed)
 	Player.Instance.on_weapon_switch.connect(_on_weapon_switched)
-
-func _on_item_switched(current_item):
-	if typeof(current_item) == TYPE_STRING and current_item == Player.WEAPON_INDICATOR:
-		show()
-		if weapon:
-			weapon.on_ammo_changed.disconnect(_on_ammo_changed)
-		if weapon.weapon_stats.max_ammo == -1:
-			show_infinite_ammo_image()
-		else:
-			show_ammo_text()
-		weapon.on_ammo_changed.connect(_on_ammo_changed)
-	else:
-		weapon.on_ammo_changed.disconnect(_on_ammo_changed)
-		hide()
 
 func _on_weapon_switched():
 	weapon.on_ammo_changed.disconnect(_on_ammo_changed)

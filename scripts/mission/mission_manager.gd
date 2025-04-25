@@ -16,14 +16,10 @@ func _goto_home() -> void:
 	HubManager.go_to_hub()
 
 func _goto_mission() -> void:
-	var items = []
-	for item in Player.Instance.inventory().items:
-		items.append(item)
 	var new_scene := _load_scene(_mission_scene)
 	new_scene.add_child(mission)
 	var player := new_scene.find_child("Player") as Player
-	for item in items:
-		player.inventory().add_item(item)
+	player.set_gadget(PersistentData.gadget)
 	player.set_alt_weapon(PersistentData.alternate)
 	mission.mission_finished.connect(return_home)
 

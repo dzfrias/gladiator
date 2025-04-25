@@ -41,7 +41,7 @@ func _open_details_screen(kind: ScreenKind) -> void:
 			_show_item_details(_shop.gadgets)
 
 func _on_inventory_item_buy(btn: Button, item: Shop.ShopItem) -> void:
-	_shop.buy_inventory_item(item)
+	_shop.buy_gadget(item)
 	if item.bought:
 		btn.disabled = true
 

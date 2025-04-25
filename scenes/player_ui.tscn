@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=15 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="3_lbnag"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/ui/player_health_bar.gd" id="5_avo0v"]
 [ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
 [ext_resource type="Texture2D" uid="uid://m43smj7sx1ie" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
+[ext_resource type="Script" path="res://scripts/ui/gadget_ui.gd" id="9_d74rq"]
 [ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="10_132hn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0e2u"]
@@ -89,10 +90,10 @@ layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = -203.0
-offset_right = 43.0
-offset_bottom = -163.0
+offset_left = 23.0
+offset_top = -147.0
+offset_right = 63.0
+offset_bottom = -107.0
 grow_vertical = 0
 script = ExtResource("5_74ny8")
 weapon_image = NodePath("ColorRect/WeaponImage")
@@ -103,9 +104,9 @@ ammo_text = NodePath("AmmoText")
 [node name="ColorRect2" type="ColorRect" parent="WeaponUI"]
 layout_mode = 0
 offset_left = 11.0
-offset_top = -7.0
+offset_top = -39.0
 offset_right = 80.0
-offset_bottom = 62.0
+offset_bottom = 30.0
 color = Color(0.129559, 0.129558, 0.129558, 0.615686)
 
 [node name="WeaponImage2" type="TextureRect" parent="WeaponUI/ColorRect2"]
@@ -158,5 +159,48 @@ offset_left = 99.0
 offset_top = 21.0
 offset_right = 144.0
 offset_bottom = 45.0
+theme_override_fonts/normal_font = SubResource("FontVariation_b502f")
+text = "000"
+
+[node name="GadgetUI" type="Control" parent="." node_paths=PackedStringArray("gadget_image")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 165.0
+offset_top = -179.0
+offset_right = 205.0
+offset_bottom = -139.0
+grow_vertical = 0
+script = ExtResource("9_d74rq")
+gadget_image = NodePath("ColorRect2/GadgetImage")
+
+[node name="ColorRect2" type="ColorRect" parent="GadgetUI"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = -7.0
+offset_right = 80.0
+offset_bottom = 62.0
+color = Color(0.129559, 0.129558, 0.129558, 0.615686)
+
+[node name="GadgetImage" type="TextureRect" parent="GadgetUI/ColorRect2"]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -57.0
+offset_right = 85.0
+offset_bottom = 14.0
+grow_vertical = 0
+stretch_mode = 4
+
+[node name="AmmoText" type="RichTextLabel" parent="GadgetUI"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 52.0
+offset_right = 112.0
+offset_bottom = 76.0
 theme_override_fonts/normal_font = SubResource("FontVariation_b502f")
 text = "000"
