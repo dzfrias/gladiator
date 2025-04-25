@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsxa5tdwnnjp"]
+
+[ext_resource type="Script" path="res://scripts/flood_effects.gd" id="1_fv067"]
+[ext_resource type="Shader" path="res://resources/shaders/water.gdshader" id="1_rvgsl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1wxp3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uus4o"]
+noise = SubResource("FastNoiseLite_1wxp3")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0h138"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x0m8l"]
+noise = SubResource("FastNoiseLite_0h138")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_picgf"]
+shader = ExtResource("1_rvgsl")
+shader_parameter/waterColor = Color(0.116, 0.270667, 0.58, 1)
+shader_parameter/colorCorection = 0.35
+shader_parameter/waterNoise = SubResource("NoiseTexture2D_x0m8l")
+shader_parameter/waterDistortionNoise = SubResource("NoiseTexture2D_uus4o")
+shader_parameter/distortionForce = 0.1
+shader_parameter/WDBrightness = 0.1
+shader_parameter/WDFreq = 0.4
+shader_parameter/WDSize = 1.05
+shader_parameter/WDSpeed = 2.0
+shader_parameter/tiling = Vector2(1, 1)
+shader_parameter/offSetSpeed = Vector2(0.1, 0.1)
+shader_parameter/backGroundDirX = 0.01
+shader_parameter/backGroundDirY = 0.01
+
+[node name="FloodEffects" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_fv067")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_picgf")
+offset_right = 1280.0
+color = Color(1, 1, 1, 0)

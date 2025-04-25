@@ -22,6 +22,8 @@ func set_to_mission(mission: Mission):
 		weather_name = "Lightning"
 	elif mission.weather is AcidRain:
 		weather_name = "Acid Rain"
+	elif mission.weather is Flood:
+		weather_name = "Flood"
 	else:
 		weather_name = "None"
 	

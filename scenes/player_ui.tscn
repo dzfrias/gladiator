@@ -26,6 +26,7 @@ load_path = "res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac2
 base_font = ExtResource("10_132hn")
 
 [node name="PlayerUI" type="CanvasLayer"]
+layer = 3
 script = ExtResource("1_bm8m2")
 acid_rain_ui = ExtResource("3_lbnag")
 survival_ui = ExtResource("4_k0q64")
