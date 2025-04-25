@@ -3,6 +3,9 @@ class_name HorizontalProjectile extends StaticBody2D
 @export var velocity: Vector2
 @export var damage: float = 15.0
 
+func _ready() -> void:
+	add_to_group("projectile")
+
 func fire(angle: float):
 	velocity = velocity.rotated(angle)
 	rotation = angle
