@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://caffxsl6i1c2k"]
+[gd_scene load_steps=5 format=3 uid="uid://caffxsl6i1c2k"]
 
 [ext_resource type="Script" path="res://scripts/rain_effects.gd" id="1_i8ekb"]
 [ext_resource type="Shader" path="res://resources/shaders/rain.gdshader" id="1_wyoag"]
+[ext_resource type="Script" path="res://scripts/droplet_scanner.gd" id="3_ad3u3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wja0y"]
 shader = ExtResource("1_wyoag")
@@ -12,10 +13,17 @@ shader_parameter/blur = 0.0055
 shader_parameter/colour = Color(0.805, 1, 0.35, 1)
 shader_parameter/size = Vector2(0.025, 0.2)
 
-[node name="Rain" type="CanvasLayer"]
+[node name="Rain" type="Node"]
 script = ExtResource("1_i8ekb")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Rain" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Rain"]
 material = SubResource("ShaderMaterial_wja0y")
 offset_right = 1460.0
 offset_bottom = 898.0
+
+[node name="DropletScanner" type="RayCast2D" parent="."]
+target_position = Vector2(0, 10000)
+collision_mask = 41
+script = ExtResource("3_ad3u3")
