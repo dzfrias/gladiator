@@ -6,7 +6,8 @@
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
 [ext_resource type="Script" path="res://scripts/ui/player_health_bar.gd" id="5_avo0v"]
 [ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
-[ext_resource type="Texture2D" uid="uid://m43smj7sx1ie" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
+[ext_resource type="Texture2D" uid="uid://c002sx67q5ot" path="res://assets/Art/laser_shotgun.png" id="7_nepx0"]
+[ext_resource type="Texture2D" uid="uid://cs7vmpbb6g2wh" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
 [ext_resource type="Script" path="res://scripts/ui/gadget_ui.gd" id="9_d74rq"]
 [ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="10_132hn"]
 
@@ -18,9 +19,6 @@ bg_color = Color(0, 0.753359, 0.728835, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjwni"]
 bg_color = Color(0.348506, 0.766647, 0, 1)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cseap"]
-load_path = "res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac23e3b.ctex"
 
 [sub_resource type="FontVariation" id="FontVariation_b502f"]
 base_font = ExtResource("10_132hn")
@@ -116,12 +114,11 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -13.0
-offset_top = -57.0
-offset_right = 85.0
-offset_bottom = 14.0
+offset_left = 2.0
+offset_top = -69.0
+offset_right = 67.0
 grow_vertical = 0
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="ColorRect" type="ColorRect" parent="WeaponUI"]
 layout_mode = 0
@@ -136,13 +133,12 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = -63.0
-offset_right = 82.0
-offset_bottom = 8.0
+offset_left = 2.0
+offset_top = -69.0
+offset_right = 67.0
 grow_vertical = 0
-texture = SubResource("CompressedTexture2D_cseap")
-stretch_mode = 4
+texture = ExtResource("7_nepx0")
+stretch_mode = 5
 
 [node name="InfiniteAmmoSymbol" type="TextureRect" parent="WeaponUI"]
 layout_mode = 0
@@ -190,12 +186,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = -13.0
-offset_top = -57.0
-offset_right = 85.0
-offset_bottom = 14.0
+offset_top = -69.0
+offset_right = 69.0
 grow_vertical = 0
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="AmmoText" type="RichTextLabel" parent="GadgetUI"]
 layout_mode = 0
