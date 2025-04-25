@@ -6,7 +6,7 @@
 _data = [Vector2(0.0111732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Droplet" type="CPUParticles2D"]
+[node name="Droplet" type="CPUParticles2D" node_paths=PackedStringArray("to_free")]
 z_index = 2
 emitting = false
 amount = 10
@@ -30,3 +30,4 @@ scale_amount_max = 6.0
 scale_amount_curve = SubResource("Curve_kiy72")
 color = Color(0.803922, 1, 0.34902, 1)
 script = ExtResource("1_57qgy")
+to_free = NodePath(".")
