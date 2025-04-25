@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_undrq"]
 [ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_irxur"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="6_ofpms"]
-[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="9_1qrsf"]
+[ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="9_1qrsf"]
 [ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="9_b7qkr"]
 [ext_resource type="Texture2D" uid="uid://wvfn7po6klir" path="res://assets/Art/enemy_crouch.png" id="11_y4cef"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]

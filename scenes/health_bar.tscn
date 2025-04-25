@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6ow4rteapjg"]
 
-[ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="1_5e86q"]
+[ext_resource type="Script" path="res://scripts/ui/follow_health_bar.gd" id="1_5e86q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1jq8"]
 bg_color = Color(0.215902, 0.215902, 0.215902, 1)
@@ -8,7 +8,7 @@ bg_color = Color(0.215902, 0.215902, 0.215902, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5mr4"]
 bg_color = Color(0.310203, 0.822627, 0.514826, 1)
 
-[node name="HealthBar" type="ProgressBar"]
+[node name="FollowHealthBar" type="ProgressBar"]
 z_index = 1
 offset_right = 33.0
 offset_bottom = 8.0

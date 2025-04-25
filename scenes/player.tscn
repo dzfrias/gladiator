@@ -1,11 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=38 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
-[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="3_x3oej"]
-[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="4_oevlo"]
+[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="3_x3oej"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="4_trosa"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
@@ -184,9 +183,6 @@ noise = SubResource("FastNoiseLite_cmuqo")
 
 [node name="Direction" type="Node" parent="."]
 script = ExtResource("3_70gf3")
-
-[node name="HealthBarCreator" type="Node" parent="."]
-script = ExtResource("4_oevlo")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_s7yvn")

@@ -1,19 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=14 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="3_lbnag"]
 [ext_resource type="PackedScene" uid="uid://beu7cb0rnolxb" path="res://scenes/survival_ui.tscn" id="4_k0q64"]
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
+[ext_resource type="Script" path="res://scripts/ui/player_health_bar.gd" id="5_avo0v"]
 [ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
-[ext_resource type="Texture2D" uid="uid://bwam1j3kd5gx0" path="res://assets/Art/burrow_bar.png" id="7_rtk66"]
 [ext_resource type="Texture2D" uid="uid://m43smj7sx1ie" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
 [ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="10_132hn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0e2u"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptq68"]
+bg_color = Color(0, 0.753359, 0.728835, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjwni"]
-bg_color = Color(0.264919, 0.60077, 0.618488, 1)
+bg_color = Color(0.348506, 0.766647, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cseap"]
 load_path = "res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac23e3b.ctex"
@@ -35,7 +38,6 @@ offset_top = -131.0
 offset_right = 308.0
 offset_bottom = -29.0
 grow_vertical = 0
-texture = ExtResource("7_rtk66")
 stretch_mode = 4
 
 [node name="BurrowBar" type="ProgressBar" parent="TextureRect"]
@@ -44,15 +46,43 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = -72.0
-offset_right = 281.0
-offset_bottom = -32.0
+offset_left = 59.0
+offset_top = -66.0
+offset_right = 239.0
+offset_bottom = -50.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_n0e2u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ptq68")
+show_percentage = false
+script = ExtResource("6_6nq0s")
+
+[node name="HealthBar" type="TextureRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -131.0
+offset_right = 308.0
+offset_bottom = -29.0
+grow_vertical = 0
+stretch_mode = 4
+
+[node name="Health" type="ProgressBar" parent="HealthBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = -48.0
+offset_right = 239.0
+offset_bottom = -8.0
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_n0e2u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rjwni")
+value = 100.0
 show_percentage = false
-script = ExtResource("6_6nq0s")
+script = ExtResource("5_avo0v")
 
 [node name="WeaponUI" type="Control" parent="." node_paths=PackedStringArray("weapon_image", "alt_weapon_image", "infinite_ammo_image", "ammo_text")]
 layout_mode = 3

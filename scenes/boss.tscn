@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="2_vdfdy"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="9_yn21n"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="10_aptoh"]
-[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="11_igbjl"]
+[ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="11_igbjl"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="12_ek7wc"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_xyk85"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_g7l1r"]

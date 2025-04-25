@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]
 [ext_resource type="Material" path="res://resources/materials/dark.tres" id="6_wltle"]
-[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="7_3l162"]
+[ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="7_3l162"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_kg58i"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
