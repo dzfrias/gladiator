@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b284uyc86arpc"]
+[gd_scene load_steps=3 format=3 uid="uid://b284uyc86arpc"]
+
+[ext_resource type="Script" path="res://scripts/free_on_finish.gd" id="1_57qgy"]
 
 [sub_resource type="Curve" id="Curve_kiy72"]
 _data = [Vector2(0.0111732, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -27,3 +29,4 @@ scale_amount_min = 0.0
 scale_amount_max = 6.0
 scale_amount_curve = SubResource("Curve_kiy72")
 color = Color(0.803922, 1, 0.34902, 1)
+script = ExtResource("1_57qgy")
