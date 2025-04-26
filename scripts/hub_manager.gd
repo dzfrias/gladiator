@@ -22,15 +22,12 @@ func enter_mission(mission: Mission) -> void:
 	world.queue_free()
 
 func go_to_hub() -> void:
-	var items = []
-	for item in Player.Instance.inventory().items:
-		items.append(item)
 	
 	world = _world_scene.instantiate()
 	var new_player := world.find_child("Player") as Player
-	for item in items:
-		new_player.inventory().add_item(item)
+
 	new_player.set_alt_weapon(PersistentData.alternate)
+	new_player.gadget().set_gadget(PersistentData.gadget)
 	
 	get_tree().current_scene.free()
 	_setup_world.call_deferred()
