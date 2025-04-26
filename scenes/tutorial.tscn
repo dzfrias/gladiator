@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://d1xnu3ygtm8qs"]
+[gd_scene load_steps=19 format=4 uid="uid://d1xnu3ygtm8qs"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_i3pcd"]
 [ext_resource type="PackedScene" uid="uid://cy0ehmv0nnrm8" path="res://scenes/background.tscn" id="1_od3kf"]
@@ -14,13 +14,17 @@
 [ext_resource type="Script" path="res://scripts/ui/floating.gd" id="9_50ia2"]
 [ext_resource type="PackedScene" uid="uid://csqqcnv8iucaq" path="res://scenes/suispider.tscn" id="12_xxaix"]
 [ext_resource type="Script" path="res://scripts/spider_valley.gd" id="13_ucrvn"]
+[ext_resource type="Texture2D" uid="uid://gnt7dvfg7v6m" path="res://assets/tree_1.png" id="15_f5ssc"]
+[ext_resource type="Texture2D" uid="uid://bwfm3nhxk83ov" path="res://assets/rocks.png" id="16_amf2l"]
+[ext_resource type="Texture2D" uid="uid://g73al3ypsves" path="res://assets/grass.png" id="17_v1luq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ey5c"]
-size = Vector2(495, 276)
+size = Vector2(234.25, 589)
 
 [node name="Tutorial" type="Node2D"]
 
 [node name="Background" parent="." instance=ExtResource("1_od3kf")]
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_i3pcd")]
 position = Vector2(36, -40.33)
@@ -45,6 +49,142 @@ position = Vector2(4247, -159.37)
 
 [node name="Silo" parent="." instance=ExtResource("8_04us3")]
 position = Vector2(4147, -561)
+
+[node name="Decorations" type="Node" parent="."]
+
+[node name="Tree" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(79, -259.5)
+scale = Vector2(5.8125, 5.8125)
+texture = ExtResource("15_f5ssc")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 96)
+
+[node name="Tree2" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(6939, -227)
+scale = Vector2(5.8125, 5.8125)
+texture = ExtResource("15_f5ssc")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 96)
+
+[node name="Tree3" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(3173, -352)
+scale = Vector2(4.72266, 4.72266)
+texture = ExtResource("15_f5ssc")
+region_enabled = true
+region_rect = Rect2(192, 0, 64, 96)
+
+[node name="Rock" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(580, -51)
+scale = Vector2(3.4375, 3.4375)
+texture = ExtResource("16_amf2l")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(96, 0, 32, 32)
+
+[node name="Rock2" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(1525, -179)
+scale = Vector2(3.4375, 3.4375)
+texture = ExtResource("16_amf2l")
+region_enabled = true
+region_rect = Rect2(192, 0, 32, 32)
+
+[node name="Rock5" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(2687, 8)
+scale = Vector2(2.0625, 2.0625)
+texture = ExtResource("16_amf2l")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Rock3" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(1596, -147)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("16_amf2l")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(192, 0, 32, 32)
+
+[node name="Rock4" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(1638, -148)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("16_amf2l")
+region_enabled = true
+region_rect = Rect2(288, 0, 32, 32)
+
+[node name="Grass" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(503, -33)
+scale = Vector2(2.03125, 2.03125)
+texture = ExtResource("17_v1luq")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Grass4" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(2606, -53)
+scale = Vector2(4.60937, 4.60937)
+texture = ExtResource("17_v1luq")
+region_enabled = true
+region_rect = Rect2(0, 128, 32, 32)
+
+[node name="Grass2" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(476, -26)
+scale = Vector2(2.03125, 2.03125)
+texture = ExtResource("17_v1luq")
+region_enabled = true
+region_rect = Rect2(0, 34, 32, 32)
+
+[node name="Grass6" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(3359, -196)
+scale = Vector2(5.39063, 5.39063)
+texture = ExtResource("17_v1luq")
+region_enabled = true
+region_rect = Rect2(0, 34, 32, 32)
+
+[node name="Grass3" type="Sprite2D" parent="Decorations"]
+light_mask = 2
+z_index = -1
+material = ExtResource("3_bdu60")
+position = Vector2(664, -28)
+scale = Vector2(2.03125, 2.03125)
+texture = ExtResource("17_v1luq")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 34, 32, 32)
 
 [node name="TutorialText" type="Control" parent="."]
 layout_mode = 3
@@ -82,9 +222,9 @@ speed = 3.0
 
 [node name="TutorialText4" type="Label" parent="TutorialText"]
 layout_mode = 0
-offset_left = 2509.0
+offset_left = 2452.0
 offset_top = -268.0
-offset_right = 2975.0
+offset_right = 2918.0
 offset_bottom = -219.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
@@ -117,6 +257,7 @@ script = ExtResource("13_ucrvn")
 enemy_to_spawn = ExtResource("12_xxaix")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpiderValley"]
+position = Vector2(0, -156.5)
 shape = SubResource("RectangleShape2D_4ey5c")
 
 [node name="Text" type="Label" parent="SpiderValley"]

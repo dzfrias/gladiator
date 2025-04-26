@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var text_wait_time: float = 1.0
+@export var wait_time: float = 1.5
 @export var enemy_to_spawn: PackedScene
 
 func _ready() -> void:
@@ -14,6 +15,8 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 
 func _start() -> void:
 	monitoring = false
+	Player.Instance.camera().add_trauma(0.7)
+	await get_tree().create_timer(wait_time).timeout
 	_make_text_appear()
 	for _i in range(50):
 		var spawn_point = $Spawn1 if randf() <= 0.5 else $Spawn2
