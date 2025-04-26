@@ -19,7 +19,7 @@ func _goto_mission() -> void:
 	var new_scene := _load_scene(_mission_scene)
 	new_scene.add_child(mission)
 	var player := new_scene.find_child("Player") as Player
-	player.set_gadget(PersistentData.gadget)
+	player.gadget().set_gadget(PersistentData.gadget)
 	player.set_alt_weapon(PersistentData.alternate)
 	mission.mission_finished.connect(return_home)
 

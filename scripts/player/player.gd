@@ -3,7 +3,6 @@ class_name Player extends CharacterBody2D
 signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
 signal alt_weapon_set(weapon_stats)
-signal gadget_set(gadget_info)
 signal jumped
 
 @export var movement_settings: Resource
@@ -19,7 +18,6 @@ var _jump_buffer := 0.0
 var _wants_burrow := false
 var _is_invincible := false
 var _firing: FiringWeapon = FiringWeapon.NONE
-var _gadget: GadgetInfo
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_item_x = $ItemPosition.position.x
 
@@ -207,7 +205,7 @@ func _input(event: InputEvent) -> void:
 				_firing = FiringWeapon.SELECTED
 			
 			if event.is_action_pressed("use_gadget"):
-				_use_gadget()
+				$Gadget.use()
 			
 			if event.is_action_released("fire"):
 				_firing = FiringWeapon.NONE
@@ -297,9 +295,8 @@ func set_alt_weapon(stats: WeaponStats) -> void:
 		on_weapon_switch.emit()
 	alt_weapon_set.emit(stats)
 
-func set_gadget(gadget: GadgetInfo) -> void:
-	_gadget = gadget
-	gadget_set.emit(gadget)
+func gadget() -> Node2D:
+	return $Gadget
 
 func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
@@ -365,9 +362,6 @@ func alt_weapon() -> Weapon:
 func main_weapon() -> Weapon:
 	return $MainWeapon
 
-func gadget() -> GadgetInfo:
-	return _gadget
-
 func burrow_percentage() -> float:
 	return _underground_time / movement_settings.max_burrow_time
 
@@ -403,9 +397,3 @@ func _flash_invincible() -> void:
 	
 func get_health() -> Health:
 	return $Health;
-
-func _use_gadget():
-	var gadget = _gadget.scene.instantiate()
-	gadget.init($Direction)
-	gadget.global_position = $ItemPosition.global_position
-	get_tree().current_scene.add_child(gadget)

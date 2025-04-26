@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
 [ext_resource type="SpriteFrames" uid="uid://dmm0dvb5sx8oo" path="res://resources/sprite_frames/shooter.tres" id="13_h6ii1"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_yimym"]
-[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
+[ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_13p0r"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="15_kelxt"]
 [ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="16_gandy"]

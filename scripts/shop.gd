@@ -33,7 +33,7 @@ func buy_gadget(gadget: ShopItem) -> bool:
 	PersistentData.buckles -= gadget.price
 	gadget.bought = true
 	PersistentData.gadget = gadget.item
-	Player.Instance.set_gadget(gadget.item)
+	Player.Instance.gadget().set_gadget(gadget.item)
 	return true
 
 func buy_alt_weapon(weapon: ShopItem) -> bool:

@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="6_qtcdd"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="7_850ks"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_nadlc"]
-[ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_cwldn"]
+[ext_resource type="PackedScene" path="res://scenes/drop_spawner.tscn" id="9_cwldn"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_lsoth"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="10_rqn3d"]
 

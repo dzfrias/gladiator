@@ -159,7 +159,7 @@ offset_bottom = 45.0
 theme_override_fonts/normal_font = SubResource("FontVariation_b502f")
 text = "000"
 
-[node name="GadgetUI" type="Control" parent="." node_paths=PackedStringArray("gadget_image")]
+[node name="GadgetUI" type="Control" parent="." node_paths=PackedStringArray("gadget_image", "uses_num")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -171,6 +171,7 @@ offset_bottom = -139.0
 grow_vertical = 0
 script = ExtResource("9_d74rq")
 gadget_image = NodePath("ColorRect2/GadgetImage")
+uses_num = NodePath("AmmoText")
 
 [node name="ColorRect2" type="ColorRect" parent="GadgetUI"]
 layout_mode = 0
