@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfdkpds5orwfj"]
+[gd_scene load_steps=7 format=3 uid="uid://cvq2tq6618mt2"]
 
 [ext_resource type="Script" path="res://scripts/gadgets/drone.gd" id="1_a758j"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_leut5"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="3_whhu6"]
-[ext_resource type="Resource" uid="uid://dyrdd6yxu86ck" path="res://resources/drone_weapon.tres" id="4_epv4l"]
+[ext_resource type="Resource" uid="uid://b6e87hnx2nidd" path="res://resources/drone_weapon.tres" id="4_epv4l"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_07lfm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oixfr"]
