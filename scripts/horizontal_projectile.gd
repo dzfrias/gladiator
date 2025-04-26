@@ -20,5 +20,5 @@ func _process(delta: float) -> void:
 			if child is Health:
 				child.take_damage(damage, velocity.normalized())
 			elif child is HitTarget:
-				child.hit(global_position, velocity.normalized())
+				child.hit(global_position, velocity.normalized(), collision.get_normal())
 	queue_free()
