@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/killable.gd" id="1_11lqo"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_ygac3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_7u0b4"]
-[ext_resource type="Script" path="res://scripts/ui/health_bar_creator.gd" id="4_kpjfq"]
+[ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="4_w7kxn"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="5_1q3tu"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="6_gmqwh"]
 
@@ -27,7 +27,7 @@ script = ExtResource("3_7u0b4")
 max_health = 30.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
-script = ExtResource("4_kpjfq")
+script = ExtResource("4_w7kxn")
 
 [node name="HitFlash" type="Timer" parent="."]
 wait_time = 0.1
