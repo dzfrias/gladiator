@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ovsmdmhj2sbv"]
+[gd_scene load_steps=6 format=3 uid="uid://blq7rc8uqonsl"]
 
 [ext_resource type="Texture2D" uid="uid://dt5jsmiu5gu57" path="res://assets/Art/white_circle.png" id="1_ae1js"]
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="1_gh0la"]
