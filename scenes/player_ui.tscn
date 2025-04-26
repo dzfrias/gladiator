@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
 [ext_resource type="Script" path="res://scripts/ui/player_health_bar.gd" id="5_avo0v"]
 [ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
-[ext_resource type="Texture2D" uid="uid://c002sx67q5ot" path="res://assets/Art/laser_shotgun.png" id="7_nepx0"]
+[ext_resource type="Texture2D" uid="uid://ch6yul654vai2" path="res://assets/Art/laser_pistol.png" id="7_cbvig"]
 [ext_resource type="Texture2D" uid="uid://cs7vmpbb6g2wh" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
 [ext_resource type="Script" path="res://scripts/ui/gadget_ui.gd" id="9_d74rq"]
 [ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="10_132hn"]
@@ -137,7 +137,7 @@ offset_left = 2.0
 offset_top = -69.0
 offset_right = 67.0
 grow_vertical = 0
-texture = ExtResource("7_nepx0")
+texture = ExtResource("7_cbvig")
 stretch_mode = 5
 
 [node name="InfiniteAmmoSymbol" type="TextureRect" parent="WeaponUI"]
