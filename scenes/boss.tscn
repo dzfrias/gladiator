@@ -34,7 +34,7 @@ size = Vector2(109, 36.91)
 radius = 400.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbto2"]
-size = Vector2(57, 66)
+size = Vector2(87.5, 66)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nukas"]
 size = Vector2(42, 123)
@@ -44,7 +44,14 @@ position = Vector2(0, -34)
 collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_py3tt")
-speed = 100.0
+attack_windup_time = 0.5
+attack_time = 1.0
+attack_tired_time = 0.5
+attack_damage = 4.0
+_max_charge_time = 2.25
+_slam_move_speed = 4
+_slam_attack_time = 3
+speed = 150.0
 jump_height = -400.0
 stop_dist = 50.0
 jump_follow_cooldown = 0.2
@@ -74,7 +81,7 @@ script = ExtResource("9_yn21n")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("10_aptoh")
-max_health = 50.0
+max_health = 200.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("11_igbjl")
@@ -119,7 +126,7 @@ collision_mask = 16
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(46, 0)
+position = Vector2(61.25, 0)
 shape = SubResource("RectangleShape2D_pbto2")
 disabled = true
 debug_color = Color(0.644145, 0.106926, 0.184851, 0.42)

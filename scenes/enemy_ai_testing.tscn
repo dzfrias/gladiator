@@ -18,8 +18,4 @@ position = Vector2(263, -4)
 
 [node name="Boss" parent="." instance=ExtResource("4_mev4t")]
 position = Vector2(-680, -40)
-attack_windup_time = 1.0
-attack_time = 1.0
-attack_tired_time = 1.0
-attack_damage = 3.0
 stop_dist = 100.0

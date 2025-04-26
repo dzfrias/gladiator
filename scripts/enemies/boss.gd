@@ -20,6 +20,11 @@ var _is_charging = false
 @export var _slam_distance = 300
 
 var _attack_state = AttackState.NONE
+var attacks = [
+	Attack.new(AttackState.MELEE, 0.7),
+	Attack.new(AttackState.GROUND_SLAM, 0.2),
+	Attack.new(AttackState.CHARGE, 0.1)
+]
 
 @onready var _original_attack_x = $AttackBox/CollisionShape2D.position.x
 
@@ -29,6 +34,15 @@ enum AttackState {
 	GROUND_SLAM,
 	CHARGE
 }
+
+class Attack:
+	var state
+	var chance
+	
+	func _init(state, chance) -> void:
+		self.state = state
+		self.chance = chance
+		assert(chance >= 0 and chance <= 1)
 
 func _ready() -> void:
 	super()
@@ -44,18 +58,24 @@ func _physics_process(delta: float) -> void:
 			if _attack_state == AttackState.GROUND_SLAM:
 				$AttackBox.global_position.x += $Direction.scalar * _slam_move_speed
 		State.TRACKING:
-			if _attack_state == AttackState.NONE or _attack_state == AttackState.MELEE:
-				print(Player.Instance.global_position.x - global_position.x)
-				var dist = abs(Player.Instance.global_position.x - global_position.x)
-				if dist < _slam_distance:
-					_attack_state = AttackState.MELEE
+			if _attack_state == AttackState.NONE:
+				choose_random_attack()
+					
+				if _attack_state == AttackState.MELEE:
 					_current_stop_dist = _melee_distance
-				elif dist < _charge_distance:
-					_attack_state = AttackState.GROUND_SLAM
+				elif _attack_state == AttackState.GROUND_SLAM:
 					_current_stop_dist = _slam_distance
 				else:
-					_attack_state = AttackState.CHARGE
 					_current_stop_dist = _charge_distance
+
+func choose_random_attack():
+	var random_num = randf_range(0, 1)
+	var total = 0
+	for attack in attacks:
+		if random_num > total and random_num <= total + attack.chance:
+			_attack_state = attack.state
+			break
+		total += attack.chance
 
 func _align_with_direction() -> void:
 	var direction = $Direction.scalar
