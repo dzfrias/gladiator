@@ -6,6 +6,8 @@ class_name Grenade extends RigidBody2D
 @export var damage: float = 3
 @export var throw_force: float = 12000
 @export var launch_angle: float = 0.0
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+var time_alive = 0
 
 func init(direction: Direction) -> void:
 	var angle := 0.0 if direction.is_right else PI
@@ -29,6 +31,10 @@ func _ready() -> void:
 	else:
 		await get_tree().create_timer(explosion_time).timeout
 		_explode()
+
+func _process(delta: float) -> void:
+	time_alive += delta
+	animated_sprite_2d.speed_scale = time_alive
 
 func _explode():
 	var explosion := explosion_scene.instantiate() as Explosion

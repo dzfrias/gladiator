@@ -1,9 +1,16 @@
-[gd_resource type="Resource" script_class="GadgetInfo" load_steps=3 format=3 uid="uid://csu62y5mt8j1i"]
+[gd_resource type="Resource" script_class="GadgetInfo" load_steps=5 format=3 uid="uid://csu62y5mt8j1i"]
 
 [ext_resource type="PackedScene" uid="uid://ctjiaujlkr8mh" path="res://scenes/gadgets/grenade.tscn" id="1_7gul0"]
+[ext_resource type="Texture2D" uid="uid://linbpv3qv3od" path="res://assets/Art/laser_grenade.png" id="1_xlln7"]
 [ext_resource type="Script" path="res://scripts/resources/gadget_info.gd" id="2_bsjue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kqdu"]
+atlas = ExtResource("1_xlln7")
+region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("2_bsjue")
 name = "Grenade"
+image = SubResource("AtlasTexture_7kqdu")
 scene = ExtResource("1_7gul0")
+max_uses = 3

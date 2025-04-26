@@ -11,7 +11,7 @@ func use():
 		return
 	
 	var gadget = gadget_info.scene.instantiate()
-	gadget.init($Direction)
+	gadget.init(get_node("../Direction"))
 	gadget.global_position = get_node("../ItemPosition").global_position
 	get_tree().current_scene.add_child(gadget)
 	uses_remaining -= 1
