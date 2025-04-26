@@ -31,6 +31,9 @@ animations = [{
 collision_layer = 0
 collision_mask = 33
 script = ExtResource("1_2whni")
+damage = 8.0
+throw_force = 20000.0
+launch_angle = 0.524
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fgiec")
