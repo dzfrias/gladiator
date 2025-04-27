@@ -3,10 +3,12 @@ class_name AOEDamage extends Area2D
 @export var dps: float = 2
 
 var _direction: Direction
-@onready var _original_x := position.x
+var _original_hitbox_x: float
 
 func set_direction(direction: Direction) -> void:
 	_direction = direction
+	_original_hitbox_x = $CollisionShape2D.position.x
+	_align()
 
 func _process(delta: float) -> void:
 	for body in get_overlapping_bodies():
@@ -16,4 +18,4 @@ func _process(delta: float) -> void:
 	_align()
 
 func _align() -> void:
-	position.x = _original_x * _direction.scalar
+	$CollisionShape2D.position.x = _original_hitbox_x * _direction.scalar

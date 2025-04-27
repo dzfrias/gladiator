@@ -1,17 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://day1echqxjxhs"]
+[gd_scene load_steps=4 format=3 uid="uid://day1echqxjxhs"]
 
-[ext_resource type="Script" path="res://scripts/aoe_damage.gd" id="1_ugqui"]
+[ext_resource type="Script" path="res://scripts/flamethrower_aoe.gd" id="1_lfhki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pu0sc"]
-size = Vector2(227.5, 92.75)
+size = Vector2(220, 92.75)
+
+[sub_resource type="Gradient" id="Gradient_a8igh"]
+colors = PackedColorArray(0.8, 0.192, 0.192, 1, 0.88, 0.63844, 0.3432, 1)
 
 [node name="FlamethrowerProjectile" type="Area2D"]
-position = Vector2(110, 0)
 collision_layer = 0
 collision_mask = 128
 monitorable = false
-script = ExtResource("1_ugqui")
+script = ExtResource("1_lfhki")
 dps = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(110, 0)
 shape = SubResource("RectangleShape2D_pu0sc")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 80
+lifetime = 0.4
+local_coords = true
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 600.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_a8igh")
