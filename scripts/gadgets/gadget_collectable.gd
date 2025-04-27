@@ -1,19 +1,22 @@
-extends StaticBody2D
+class_name GadgetCollectable extends Area2D
 
 func _ready() -> void:
+	body_entered.connect(_on_body_entered)
 	var player := Player.Instance as Player
-	if player.gadget().gadget_info != null:
-		$Sprite2D.texture = player.gadget().gadget_info.image
+	var gadget := player.gadget()
+	gadget.gadget_set.connect(_change_sprite)
+	if gadget.gadget_info != null:
+		_change_sprite(gadget.gadget_info)
 
-func _process(_delta: float) -> void:
-	var collision := move_and_collide(Vector2.ZERO)
-	if collision == null or collision.get_collider() is not Player:
+func _change_sprite(gadget: GadgetInfo) -> void:
+	$TextureRect.texture = gadget.image
+
+func _on_body_entered(body: PhysicsBody2D) -> void:
+	if body is not Player:
 		return
 	
 	queue_free()
-	var player := collision.get_collider() as Player
-	if player.gadget().gadget_info == null:
-		return
-	if player.gadget().uses_remaining == player.gadget().gadget_info.max_uses:
+	var player := body as Player
+	if player.gadget().gadget_info == null or player.gadget().uses_remaining == player.gadget().gadget_info.max_uses:
 		return
 	player.gadget().add_use()

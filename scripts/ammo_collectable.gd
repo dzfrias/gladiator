@@ -1,14 +1,16 @@
-class_name AmmoCollectable extends StaticBody2D
+class_name AmmoCollectable extends Area2D
 
 @export var max_ammo_divisor: float = 4.0
 
-func _process(_delta: float) -> void:
-	var collision := move_and_collide(Vector2.ZERO)
-	if collision == null or collision.get_collider() is not Player:
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body: PhysicsBody2D) -> void:
+	if body is not Player:
 		return
 	
 	queue_free()
-	var player := collision.get_collider() as Player
+	var player := body as Player
 	if player.alt_weapon() == null:
 		return
 	var alt_max := player.alt_weapon().weapon_stats.max_ammo
