@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgpnlpg8obpo4"]
+[gd_scene load_steps=7 format=3 uid="uid://dgpnlpg8obpo4"]
 
 [ext_resource type="Script" path="res://scripts/gadgets/gadget_collectable.gd" id="1_j7dc5"]
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="2_eefbl"]
 [ext_resource type="Texture2D" uid="uid://blbtwr24by4rg" path="res://resources/white_gradient.tres" id="3_0j2hu"]
+[ext_resource type="Script" path="res://scripts/ui/floating.gd" id="4_sxxuy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wllw2"]
 shader = ExtResource("2_eefbl")
@@ -24,6 +25,9 @@ offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("3_0j2hu")
 expand_mode = 2
+script = ExtResource("4_sxxuy")
+speed = 3.0
+amplitude_factor = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5cx5b")

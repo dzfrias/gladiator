@@ -26,6 +26,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03ghe"]
+radius = 11.0
 
 [node name="Grenade" type="RigidBody2D"]
 collision_layer = 0
@@ -36,6 +37,7 @@ throw_force = 20000.0
 launch_angle = 0.524
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_fgiec")
 autoplay = "default"
 

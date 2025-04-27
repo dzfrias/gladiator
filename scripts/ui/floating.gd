@@ -1,13 +1,12 @@
 extends Control
 
 @export var speed: float = 1.0
-@export var amplitude_factor: float = 0.2
+@export var amplitude_factor: float = 5.0
 
-var _time: float
-
-func _ready() -> void:
-	_time = randf_range(0, PI)
+@onready var _time := randf_range(0, PI)
+@onready var _original_y := position.y
 
 func _process(delta: float) -> void:
-	position.y += sin(_time * speed) * amplitude_factor
+	position.y = _original_y + sin(_time * speed) * amplitude_factor
+	# Prevent time from getting too large
 	_time = fmod(_time + delta, TAU)
