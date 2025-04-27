@@ -1,4 +1,4 @@
-extends Node2D
+class_name Gadget extends Node2D
 
 signal gadget_set(gadget_info)
 signal uses_changed(uses_remaining)

@@ -295,7 +295,7 @@ func set_alt_weapon(stats: WeaponStats) -> void:
 		on_weapon_switch.emit()
 	alt_weapon_set.emit(stats)
 
-func gadget() -> Node2D:
+func gadget() -> Gadget:
 	return $Gadget
 
 func _burrow() -> void:

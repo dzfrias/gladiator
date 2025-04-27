@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3t7hrjunshvg"]
+[gd_scene load_steps=6 format=3 uid="uid://c8lcgld0ypdsj"]
 
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="1_5ijvl"]
 [ext_resource type="Script" path="res://scripts/ammo_collectable.gd" id="1_dwcl6"]

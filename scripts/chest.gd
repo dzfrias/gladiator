@@ -2,23 +2,10 @@ class_name Chest extends StaticBody2D
 
 @export var health_drop_amount: float = 8.0
 @export var max_y_velocity: float = 800.0
-@export var drop_amount: int = 2
 
-class ChestDrop:
-	var scene: PackedScene
-	var chance: float
-	
-	func _init(scene, chance) -> void:
-		assert(chance >= 0 and chance <= 1)
-		
-		self.scene = load(scene)
-		self.chance = chance
-
-var drops := [
-	ChestDrop.new("res://scenes/health_drop.tscn", 0.3),
-	ChestDrop.new("res://scenes/ammo_collectable.tscn", 0.3),
-	ChestDrop.new("res://scenes/gadget_collectable.tscn", 0.4)
-]
+var _health_drop: PackedScene = preload("res://scenes/health_drop.tscn")
+var _ammo_drop: PackedScene = preload("res://scenes/ammo_collectable.tscn")
+var _gadget_drop: PackedScene = preload("res://scenes/gadget_collectable.tscn")
 
 @onready var _original_material: Material = $Sprite2D.material
 var _white_material: Material = preload("res://resources/materials/white_material.tres")
@@ -42,30 +29,30 @@ func _collect() -> void:
 	_did_collect = true
 	await _flash()
 	
-	for i in range(drop_amount):
-		var drop = _choose_random_drop()
-		
-		if drop.scene is HealthDrop:
-			drop.heal_amount = health_drop_amount
-		
-		var drop_instance = drop.scene.instantiate()
-		drop_instance.global_position = global_position
-		get_tree().current_scene.add_child(drop_instance)
+	var drop := _choose_drop()
+	get_tree().current_scene.add_child(drop)
+	drop.global_position = global_position
+	
 	# TODO: change this when we actually have a model
 	$Sprite2D.flip_v = true
 	$GodRays.queue_free()
 
-func _choose_random_drop() -> ChestDrop:
-	var random_num = randf_range(0, 1)
-	var total_chance = 0
-	var final_drop: ChestDrop
-	for drop in drops:
-		if random_num > total_chance and random_num <= total_chance + drop.chance:
-			final_drop = drop
-		total_chance += drop.chance
-	assert(total_chance == 1)
-	return final_drop
-
+func _choose_drop() -> Node2D:
+	var drops: Array[PackedScene] = []
+	if Player.Instance.gadget().gadget_info != null:
+		drops.append(_gadget_drop)
+	if Player.Instance.alt_weapon() != null:
+		drops.append(_ammo_drop)
+	drops.append(_health_drop)
+	
+	var drop_scene := drops[randi_range(0, drops.size() - 1)]
+	var drop := drop_scene.instantiate()
+	
+	if drop is HealthDrop:
+		drop.heal_amount = health_drop_amount
+	
+	return drop
+	
 func _flash() -> void:
 	$Sprite2D.material = _white_material
 	await get_tree().create_timer(0.3).timeout
