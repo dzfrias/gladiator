@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_s3ci8")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_7u0b4")
-max_health = 30.0
+max_health = 15.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("4_w7kxn")

@@ -30,3 +30,4 @@ func _make_text_appear() -> void:
 	await get_tree().create_timer(text_wait_time).timeout
 	$Text.visible = true
 	$Text2.visible = true
+	$Text3.visible = true
