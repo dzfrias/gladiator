@@ -52,14 +52,13 @@ func load_data() -> void:
 			continue
 		
 		_buckles = json.data["buckles"]
-		if json.data.has("alternate"):
-			var alt = json.data["alternate"]
-			_alternate = WeaponStats.deserialize(alt) if alt != null else null
-		if json.data.has("gadget"):
-			var gadget = json.data["gadget"]
-			gadget = GadgetInfo.deserialize(gadget) if gadget != null else null
+		var alt = json.data["alternate"]
+		_alternate = WeaponStats.deserialize(alt) if alt != null else null
+		var gadget = json.data["gadget"]
+		gadget = GadgetInfo.deserialize(gadget) if gadget != null else null
 
 func reset() -> void:
 	_buckles = 100
 	_alternate = null
+	_gadget = null
 	save()
