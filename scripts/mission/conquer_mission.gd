@@ -15,5 +15,5 @@ func _on_node_added(node: Node):
 
 func _on_enemy_death() -> void:
 	enemies_remaining -= 1
-	if enemies_remaining <= 0:
+	if enemies_remaining <= 0 and not in_combat:
 		mission_finished.emit()
