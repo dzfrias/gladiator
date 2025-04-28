@@ -60,11 +60,14 @@ func load_data() -> void:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 		
+		if not json.data.has_all(["buckles", "alternate", "gadget", "passives"]):
+			print("Not enough JSON information, missing some keys... resetting")
+			reset()
+			return
+		
 		_buckles = json.data["buckles"]
-		var alt = json.data["alternate"]
-		_alternate = WeaponStats.deserialize(alt) if alt != null else null
-		var gadget = json.data["gadget"]
-		_gadget = GadgetInfo.deserialize(gadget) if gadget != null else null
+		_alternate = WeaponStats.deserialize(json.data["alternate"]) if json.data["alternate"] != null else null
+		_gadget = GadgetInfo.deserialize(json.data["gadget"]) if json.data["gadget"] != null else null
 		_passives = json.data["passives"].map(func(passive_dict): return Passive.deserialize(passive_dict))
 
 func reset() -> void:
