@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://b1gf77by3tabf"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_50ueb"]
+[ext_resource type="Script" path="res://scripts/resources/passive.gd" id="1_jnqad"]
+[ext_resource type="PackedScene" uid="uid://ccw7lxooia1n7" path="res://scenes/passives/speed_increase.tscn" id="2_rr5hn"]
+
+[resource]
+script = ExtResource("1_jnqad")
+name = "Speed"
+image = ExtResource("1_50ueb")
+scene = ExtResource("2_rr5hn")

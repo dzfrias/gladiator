@@ -21,6 +21,8 @@ func _goto_mission() -> void:
 	var player := new_scene.find_child("Player") as Player
 	player.gadget().set_gadget(PersistentData.gadget)
 	player.set_alt_weapon(PersistentData.alternate)
+	for passive in PersistentData.get_passives():
+		player.add_passive(passive)
 	mission.mission_finished.connect(return_home)
 
 func _load_scene(scene: PackedScene) -> Node:

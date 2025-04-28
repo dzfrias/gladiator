@@ -194,6 +194,8 @@ script = ExtResource("11_40if5")
 [node name="Particles" type="Node" parent="."]
 script = ExtResource("8_7w5qy")
 
+[node name="Passives" type="Node" parent="."]
+
 [node name="MainWeapon" type="Node2D" parent="."]
 position = Vector2(17.17, -8)
 script = ExtResource("5_crqak")

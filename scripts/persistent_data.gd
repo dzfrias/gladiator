@@ -19,6 +19,7 @@ var gadget: GadgetInfo:
 
 signal buckles_changed
 
+var _passives: Array = []
 var _buckles: int
 var _alternate: WeaponStats
 var _gadget: GadgetInfo
@@ -30,12 +31,20 @@ func _ready() -> void:
 	
 	load_data()
 
+func add_passive(passive: Passive) -> void:
+	_passives.append(passive)
+	save()
+
+func get_passives() -> Array:
+	return _passives
+
 func save() -> void:
 	var file := FileAccess.open("user://savegame.json", FileAccess.WRITE)
 	var data := {
 		"buckles": buckles,
 		"alternate": alternate.serialize() if alternate != null else null,
-		"gadget": gadget.serialize() if gadget != null else null
+		"gadget": gadget.serialize() if gadget != null else null,
+		"passives": _passives.map(func(passive): return passive.serialize()),
 	}
 	file.store_line(JSON.stringify(data))
 
@@ -55,10 +64,12 @@ func load_data() -> void:
 		var alt = json.data["alternate"]
 		_alternate = WeaponStats.deserialize(alt) if alt != null else null
 		var gadget = json.data["gadget"]
-		gadget = GadgetInfo.deserialize(gadget) if gadget != null else null
+		_gadget = GadgetInfo.deserialize(gadget) if gadget != null else null
+		_passives = json.data["passives"].map(func(passive_dict): return Passive.deserialize(passive_dict))
 
 func reset() -> void:
 	_buckles = 100
 	_alternate = null
 	_gadget = null
+	_passives = []
 	save()

@@ -22,29 +22,43 @@ var gadgets: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/gadgets/health_potion.tres"), 10),
 	ShopItem.new(preload("res://resources/gadgets/drone.tres"), 10),
 ]
+var passives: Array[ShopItem] = [
+	ShopItem.new(preload("res://resources/passives/speed.tres"), 10)
+]
 
 func _ready() -> void:
 	did_interact.connect(_on_interact)
 
 func buy_gadget(gadget: ShopItem) -> bool:
-	if PersistentData.buckles < gadget.price:
+	if not _buy_item(gadget):
 		return false
 	
-	PersistentData.buckles -= gadget.price
-	gadget.bought = true
 	PersistentData.gadget = gadget.item
 	Player.Instance.gadget().set_gadget(gadget.item)
 	return true
 
 func buy_alt_weapon(weapon: ShopItem) -> bool:
-	if PersistentData.buckles < weapon.price:
+	if not _buy_item(weapon):
 		return false
 	
-	PersistentData.buckles -= weapon.price
-	weapon.bought = true
 	PersistentData.alternate = weapon.item
 	Player.Instance.set_alt_weapon(weapon.item)
+	return true
+
+func buy_passive(passive: ShopItem) -> bool:
+	if not _buy_item(passive):
+		return false
 	
+	PersistentData.add_passive(passive.item)
+	Player.Instance.add_passive(passive.item)
+	return true
+
+func _buy_item(item: ShopItem) -> bool:
+	if PersistentData.buckles < item.price:
+		return false
+	
+	PersistentData.buckles -= item.price
+	item.bought = true
 	return true
 
 func _on_interact() -> void:

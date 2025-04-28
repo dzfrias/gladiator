@@ -5,9 +5,10 @@ signal on_weapon_switch
 signal alt_weapon_set(weapon_stats)
 signal jumped
 
-@export var movement_settings: Resource
+@export var movement_settings: PlayerMovementSettings
 @export var bullet_wall_delta: float = 100.0
 @onready var selected_weapon: Weapon = $MainWeapon
+var passives: Array[Passive] = []
 
 var _underground_time := 0.0
 var _state := State.CONTROL
@@ -21,7 +22,7 @@ var _firing: FiringWeapon = FiringWeapon.NONE
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_item_x = $ItemPosition.position.x
 
-static var Instance
+static var Instance: Player
 
 enum FiringWeapon {
 	SELECTED,
@@ -39,6 +40,7 @@ enum State {
 const WEAPON_INDICATOR = "!!WEAPON!!"
 
 func _ready() -> void:
+	movement_settings.changed.connect(_on_movement_changed)
 	$Health.died.connect(_on_health_died)
 	$Health.damage_taken.connect(_on_health_damage_taken)
 	if Instance != null:
@@ -382,6 +384,11 @@ func get_firing_angle() -> float:
 		return selected_weapon.get_angle_to(get_global_mouse_position())
 	return $Direction.angle
 
+func add_passive(passive: Passive) -> void:
+	passives.append(passive)
+	var instance := passive.scene.instantiate()
+	$Passives.add_child(instance)
+
 func _on_weapon_fired(weapon_: Weapon) -> void:
 	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon_.weapon_stats.strength
 	$Camera2D.move(strength)
@@ -394,6 +401,12 @@ func _flash_invincible() -> void:
 		await get_tree().create_timer(0.05).timeout
 		$AnimatedSprite2D.visible = true
 		await get_tree().create_timer(0.05).timeout
-	
+
+func _on_movement_changed() -> void:
+	if is_underground():
+		_current_move_speed = movement_settings.burrow_move_speed
+	else:
+		_current_move_speed = movement_settings.move_speed
+
 func get_health() -> Health:
 	return $Health;

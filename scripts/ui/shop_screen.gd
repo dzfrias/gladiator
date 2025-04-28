@@ -7,7 +7,7 @@ var _shop_item_scene := preload("res://scenes/shop_item.tscn")
 func _ready() -> void:
 	$Return.pressed.connect(_on_quit_pressed)
 	$Selection/Weapons.pressed.connect(_open_details_screen.bind(ScreenKind.WEAPONS))
-	$Selection/Armor.pressed.connect(_open_details_screen.bind(ScreenKind.ARMOR))
+	$Selection/Passives.pressed.connect(_open_details_screen.bind(ScreenKind.PASSIVES))
 	$Selection/Gadgets.pressed.connect(_open_details_screen.bind(ScreenKind.GADGETS))
 	$ItemsContainer/BackButton.pressed.connect(_on_back_button_pressed)
 	_shop = HubManager.world.shop
@@ -16,7 +16,7 @@ func _ready() -> void:
 
 enum ScreenKind {
 	WEAPONS,
-	ARMOR,
+	PASSIVES,
 	GADGETS,
 }
 
@@ -37,6 +37,8 @@ func _open_details_screen(kind: ScreenKind) -> void:
 	match kind:
 		ScreenKind.WEAPONS:
 			_show_item_details(_shop.weapons)
+		ScreenKind.PASSIVES:
+			_show_item_details(_shop.passives)
 		ScreenKind.GADGETS:
 			_show_item_details(_shop.gadgets)
 
@@ -47,6 +49,11 @@ func _on_inventory_item_buy(btn: Button, item: Shop.ShopItem) -> void:
 
 func _on_alt_weapon_buy(btn: Button, item: Shop.ShopItem) -> void:
 	_shop.buy_alt_weapon(item)
+	if item.bought:
+		btn.disabled = true
+
+func _on_passive_buy(btn: Button, item: Shop.ShopItem) -> void:
+	_shop.buy_passive(item)
 	if item.bought:
 		btn.disabled = true
 
@@ -62,6 +69,8 @@ func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 				btn.pressed.connect(_on_alt_weapon_buy.bind(btn, shop_item))
 			ScreenKind.GADGETS:
 				btn.pressed.connect(_on_inventory_item_buy.bind(btn, shop_item))
+			ScreenKind.PASSIVES:
+				btn.pressed.connect(_on_passive_buy.bind(btn, shop_item))
 		$ItemsContainer/Items.add_child(item)
 
 func _update_buckles_label() -> void:

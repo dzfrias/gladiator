@@ -34,10 +34,10 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Weapons"
 
-[node name="Armor" type="Button" parent="Selection"]
+[node name="Passives" type="Button" parent="Selection"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "Armor"
+text = "Passives"
 
 [node name="Gadgets" type="Button" parent="Selection"]
 custom_minimum_size = Vector2(200, 0)
