@@ -4,6 +4,7 @@ signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
 signal alt_weapon_set(weapon_stats)
 signal jumped
+signal went_underground
 
 @export var movement_settings: PlayerMovementSettings
 @export var bullet_wall_delta: float = 100.0
@@ -313,6 +314,7 @@ func _burrow() -> void:
 		velocity.x = movement_settings.burrow_speed_boost * k
 	$AnimatedSprite2D.visible = false
 	collision_layer = Constants.INVINCIBLE_LAYER
+	went_underground.emit()
 
 func _unburrow() -> void:
 	assert(_state == State.UNDERGROUND)

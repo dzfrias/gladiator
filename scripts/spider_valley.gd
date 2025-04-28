@@ -3,6 +3,7 @@ extends Area2D
 @export var text_wait_time: float = 1.0
 @export var wait_time: float = 1.5
 @export var enemy_to_spawn: PackedScene
+@export var text_timescale: float = 0.4
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -11,6 +12,7 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 	if body is not Player:
 		return
 	
+	body.went_underground.connect(_on_went_underground)
 	_start.call_deferred()
 
 func _start() -> void:
@@ -31,3 +33,10 @@ func _make_text_appear() -> void:
 	$Text.visible = true
 	$Text2.visible = true
 	$Text3.visible = true
+	Engine.set_time_scale(text_timescale)
+
+func _on_went_underground() -> void:
+	if not $Text.visible:
+		return
+	
+	Engine.set_time_scale(1.0)
