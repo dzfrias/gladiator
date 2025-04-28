@@ -9,7 +9,7 @@ func serialize() -> Dictionary:
 	return {
 		"name": name,
 		"image": image.resource_path,
-		"scene": scene,
+		"scene": scene.resource_path,
 		"max_uses": max_uses
 	}
 
