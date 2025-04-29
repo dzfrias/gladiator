@@ -4,7 +4,11 @@ signal damage_taken(amount: float, direction: Vector2)
 signal health_gained(amount: float)
 signal died
 
-@export var max_health: float = 20
+@export var max_health: float = 20:
+	set(new_max):
+		if health > new_max:
+			health = new_max
+		max_health = new_max
 var health: float:
 	get: return _health
 var has_died: bool:

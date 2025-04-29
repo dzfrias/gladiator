@@ -25,6 +25,7 @@ var gadgets: Array[ShopItem] = [
 var passives: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/passives/speed.tres"), 10),
 	ShopItem.new(preload("res://resources/passives/double_jump.tres"), 10),
+	ShopItem.new(preload("res://resources/passives/extra_health.tres"), 10),
 ]
 
 func _ready() -> void:
