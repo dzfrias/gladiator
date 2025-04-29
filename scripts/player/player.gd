@@ -59,7 +59,8 @@ func _process(delta: float) -> void:
 		if _jump_time >= movement_settings.jump_hold_time:
 			_is_jumping = false
 	elif not is_on_floor():
-		velocity.y += get_gravity().y * movement_settings.gravity_scale * delta
+		var factor := movement_settings.gravity_scale if not is_in_fallthrough() else movement_settings.fast_fall_gravity_scale
+		velocity.y += get_gravity().y * factor * delta
 	
 	# This gives the player a small window to press the jump button before they hit the ground
 	if _jump_buffer > 0:
@@ -395,6 +396,9 @@ func add_passive(passive: Passive) -> void:
 	passives.append(passive)
 	var instance := passive.scene.instantiate()
 	$Passives.add_child(instance)
+
+func is_in_fallthrough() -> bool:
+	return not get_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1)
 
 func _on_weapon_fired(weapon_: Weapon) -> void:
 	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon_.weapon_stats.strength

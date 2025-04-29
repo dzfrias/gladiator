@@ -16,6 +16,7 @@ class_name PlayerMovementSettings extends Resource
 @export var jump_hold_time: float = 0.2
 @export var jump_buffer_time: float = 0.2
 @export var gravity_scale: float = 2.0
+@export var fast_fall_gravity_scale: float = 2.0
 @export var roll_speed: float = 600
 @export var roll_time: float = 0.2
 @export var roll_cooldown_time: float = 0.2

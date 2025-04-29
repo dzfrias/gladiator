@@ -16,6 +16,7 @@ jump_accel = 200.0
 jump_hold_time = 0.2
 jump_buffer_time = 0.2
 gravity_scale = 2.5
+fast_fall_gravity_scale = 2.5
 roll_speed = 600.0
 roll_time = 0.2
 roll_cooldown_time = 0.2

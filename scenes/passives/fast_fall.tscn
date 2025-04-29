@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yb63jjn0k2k1"]
+
+[ext_resource type="Script" path="res://scripts/passives/fast_fall.gd" id="1_8wsfo"]
+
+[node name="FastFall" type="Node"]
+script = ExtResource("1_8wsfo")
