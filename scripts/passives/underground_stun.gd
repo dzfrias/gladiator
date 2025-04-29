@@ -9,6 +9,7 @@ func _ready() -> void:
 func _on_exited_underground() -> void:
 	if Player.Instance.velocity.y == 0:
 		return
+	$Particles.emitting = true
 	for body in get_overlapping_bodies():
 		if body is Enemy:
 			body.set_stunned(stun_duration)
