@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b6n4ygstauqcx"]
+[gd_scene load_steps=24 format=3 uid="uid://b6n4ygstauqcx"]
 
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter.gd" id="1_gcame"]
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="3_fhmks"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="9_1qrsf"]
 [ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="9_b7qkr"]
 [ext_resource type="Texture2D" uid="uid://wvfn7po6klir" path="res://assets/Art/enemy_crouch.png" id="11_y4cef"]
-[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="12_fy0vl"]
 [ext_resource type="Script" path="res://scripts/enemies/idle_shooter_animations.gd" id="12_npl6x"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="13_nps3s"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="14_nikfl"]
@@ -115,11 +114,6 @@ sprite_frames = SubResource("SpriteFrames_8og87")
 animation = &"hide"
 script = ExtResource("12_npl6x")
 shooter = NodePath("..")
-
-[node name="HitFlash" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-script = ExtResource("12_fy0vl")
 
 [node name="DropSpawner" parent="." instance=ExtResource("13_nps3s")]
 

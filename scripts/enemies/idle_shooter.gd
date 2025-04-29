@@ -1,10 +1,9 @@
-class_name IdleShooter extends CharacterBody2D
+class_name IdleShooter extends Enemy
 
 @export var prepare_attack_time := 0.25
 @export var idle_time: float = 1
 @export var impact_particle_prefab: PackedScene
 @export var y_attack_cutoff = 50
-@export var notify_depth = 2
 @export var initially_is_right: bool = false
 
 @onready var weapon: Weapon = $Weapon
@@ -23,9 +22,8 @@ enum State {
 }
 
 func _ready() -> void:
-	$Health.died.connect(_on_health_died)
+	super()
 	$Direction.is_right = initially_is_right
-	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -51,16 +49,12 @@ func _physics_process(delta: float) -> void:
 			if not _is_shooting and weapon.ammo > 0:
 				_shoot()
 	
-	move_and_slide()
+	move()
 	_align_with_direction()
 
-func notify(depth: int) -> void:
+func notify(depth: int = 0) -> void:
 	_notified = true
-	if depth > 0:
-		for body in $NotifyZone.get_overlapping_bodies():
-			if body == self:
-				continue
-			body.notify(depth - 1)
+	super()
 
 func _shoot() -> void:
 	assert(not _is_shooting)
@@ -97,12 +91,5 @@ func _hide():
 func _tracking_is_behind() -> bool:
 	return $Direction.is_right != initially_is_right
 
-func _on_detection_zone_body_entered(body: Node2D) -> void:
-	if body is Player:
-		notify(notify_depth)
-
 func _align_with_direction() -> void:
 	$Weapon.position.x = _original_weapon_x * $Direction.scalar
-
-func _on_health_died() -> void:
-	queue_free()
