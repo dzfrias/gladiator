@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://2q8slveuksdl"]
+
+[ext_resource type="Script" path="res://scripts/passives/double_jump.gd" id="1_11ghh"]
+
+[node name="DoubleJump" type="Node"]
+script = ExtResource("1_11ghh")

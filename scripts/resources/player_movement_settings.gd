@@ -10,6 +10,7 @@ class_name PlayerMovementSettings extends Resource
 @export var crouch_move_speed: float = 75
 @export var shield_move_speed: float = 100
 @export var direction_change_factor: float = 3
+@export var njumps: int = 1
 @export var jump_speed: float = 300
 @export var jump_accel: float = 400
 @export var jump_hold_time: float = 0.2

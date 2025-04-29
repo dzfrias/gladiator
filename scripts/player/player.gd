@@ -20,6 +20,7 @@ var _jump_buffer := 0.0
 var _wants_burrow := false
 var _is_invincible := false
 var _firing: FiringWeapon = FiringWeapon.NONE
+@onready var _jumps_left := movement_settings.njumps
 @onready var _current_move_speed = movement_settings.move_speed
 @onready var _original_item_x = $ItemPosition.position.x
 
@@ -142,6 +143,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 	if is_on_floor() and prev_y > 0:
+		_jumps_left = movement_settings.njumps
 		on_ground_impact.emit(prev_y)
 
 func _align() -> void:
@@ -158,7 +160,6 @@ func _adjust_bullet_walls() -> void:
 	$BulletWall/BulletWallRight.global_position.x = right + bullet_wall_delta
 
 func _input(event: InputEvent) -> void:
-	
 	if event.is_action_pressed("fallthrough"):
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
 	if event.is_action_released("fallthrough"):
@@ -179,7 +180,10 @@ func _input(event: InputEvent) -> void:
 		State.CONTROL:
 			# Jump
 			if event.is_action_pressed("jump"):
-				_jump_buffer = movement_settings.jump_buffer_time
+				if not is_on_floor() and _jumps_left > 0 and _jumps_left != movement_settings.njumps:
+					_jump()
+				else:
+					_jump_buffer = movement_settings.jump_buffer_time
 			if event.is_action_released("jump"):
 				_is_jumping = false
 			
@@ -264,6 +268,7 @@ func _jump() -> void:
 	$AnimatedSprite2D.play("jump")
 	jumped.emit()
 	_is_jumping = true
+	_jumps_left -= 1
 	velocity.y = -movement_settings.jump_speed
 
 func damage(amount: float, direction_: Vector2) -> void:
