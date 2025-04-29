@@ -5,6 +5,7 @@ signal on_weapon_switch
 signal alt_weapon_set(weapon_stats)
 signal jumped
 signal went_underground
+signal exited_underground
 
 @export var movement_settings: PlayerMovementSettings
 @export var bullet_wall_delta: float = 100.0
@@ -67,6 +68,9 @@ func _process(delta: float) -> void:
 		_jump_buffer = max(0, _jump_buffer - delta)
 		if _state == State.CONTROL and is_on_floor():
 			_jump()
+		if is_underground():
+			_jump()
+			_unburrow()
 	if not _is_jumping:
 		_jump_time = 0.0
 	
@@ -233,7 +237,6 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_released("burrow"):
 				_unburrow()
 			if event.is_action_pressed("jump"):
-				_unburrow()
 				_jump_buffer = movement_settings.jump_buffer_time
 		
 		State.SHIELD:
@@ -329,6 +332,7 @@ func _unburrow() -> void:
 	$AnimatedSprite2D.visible = true
 	if not _is_invincible:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
+	exited_underground.emit()
 
 func _on_health_died() -> void:
 	print("The player has died")

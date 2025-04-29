@@ -28,6 +28,7 @@ var passives: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/passives/extra_health.tres"), 10),
 	ShopItem.new(preload("res://resources/passives/fast_fall.tres"), 10),
 	ShopItem.new(preload("res://resources/passives/burrow_boost.tres"), 10),
+	ShopItem.new(preload("res://resources/passives/underground_stun.tres"), 10),
 ]
 
 func _ready() -> void:
