@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckq61do554vog"]
+
+[ext_resource type="Script" path="res://scripts/passives/explosive_rounds.gd" id="1_bqlum"]
+[ext_resource type="PackedScene" uid="uid://dqb1t0wmklvi2" path="res://scenes/projectile_explosion.tscn" id="2_npnsr"]
+
+[node name="ExplosiveRounds" type="Node"]
+script = ExtResource("1_bqlum")
+explosion_scene = ExtResource("2_npnsr")

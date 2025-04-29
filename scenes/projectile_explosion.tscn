@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqb1t0wmklvi2"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_lpafb"]
+[ext_resource type="Script" path="res://scripts/free_on_finish.gd" id="2_s2a02"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_as83y"]
+radius = 100.0
+
+[sub_resource type="Gradient" id="Gradient_13xp1"]
+colors = PackedColorArray(1, 0.337255, 0.14902, 0.866667, 0.949611, 0.013259, 1.92523e-06, 1)
+
+[node name="ProjectileExplosion" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_lpafb")
+damage = 3.0
+camera_trauma = 0.6
+
+[node name="Radius" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_as83y")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." node_paths=PackedStringArray("to_free")]
+emitting = false
+amount = 40
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.15
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 40)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_13xp1")
+script = ExtResource("2_s2a02")
+to_free = NodePath("..")

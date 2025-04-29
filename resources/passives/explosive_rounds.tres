@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://b2liphec1l4ea"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_1pnbh"]
+[ext_resource type="PackedScene" uid="uid://ckq61do554vog" path="res://scenes/passives/explosive_rounds.tscn" id="2_lk4fa"]
+[ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_oaql0"]
+
+[resource]
+script = ExtResource("3_oaql0")
+name = "Explosive Rounds"
+image = ExtResource("1_1pnbh")
+scene = ExtResource("2_lk4fa")

@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 	flip_h = not _direction.is_right
 	visible = _sprite.visible
 
-func _on_weapon_fired() -> void:
+func _on_weapon_fired(_projectile: Node2D) -> void:
 	rotation = shoot_rotation * -_direction.scalar
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "rotation", 0.0, shoot_recovery_speed)

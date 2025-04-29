@@ -373,6 +373,9 @@ func alt_weapon() -> Weapon:
 		return null
 	return $AltWeapon
 
+func alt_weapon_node() -> Weapon:
+	return $AltWeapon
+
 func main_weapon() -> Weapon:
 	return $MainWeapon
 
@@ -404,7 +407,7 @@ func add_passive(passive: Passive) -> void:
 func is_in_fallthrough() -> bool:
 	return not get_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1)
 
-func _on_weapon_fired(weapon_: Weapon) -> void:
+func _on_weapon_fired(_projectile: Node2D, weapon_: Weapon) -> void:
 	var strength: Vector2 = Vector2(12.0 * -$Direction.scalar, -4.0) * weapon_.weapon_stats.strength
 	$Camera2D.move(strength)
 	if $AnimatedSprite2D.get_animation() == "idle" or $AnimatedSprite2D.get_animation() == "fire":
