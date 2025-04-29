@@ -1,8 +1,7 @@
-class_name Sniper extends CharacterBody2D
+class_name Sniper extends Enemy
 
 @export var move_speed: float = 50.0
 @export var attack_distance: float = 1000.0
-@export var notify_depth: int = 2
 @export var warning_flashes: int = 10
 @export_range(0.5, 8, 0.1) var prepare_attack_time: float = 1.5
 @export_range(0.5, 8, 0.1) var min_move_time := 1.5
@@ -21,9 +20,8 @@ enum State {
 }
 
 func _ready() -> void:
+	super()
 	_move()
-	$Health.died.connect(_on_health_died)
-	$Health.damage_taken.connect(_on_health_damage_taken)
 
 func _process(delta: float) -> void:
 	if not is_on_floor():
@@ -40,7 +38,7 @@ func _process(delta: float) -> void:
 		State.ATTACKING:
 			velocity.x = 0.0
 	
-	move_and_slide()
+	move()
 	_align_with_direction()
 
 func _move() -> void:
@@ -88,27 +86,5 @@ func _shoot() -> void:
 func direction() -> Direction:
 	return $Direction
 
-func spawn_in(duration: float) -> void:
-	var previous_layer := collision_layer
-	collision_layer = Constants.INVINCIBLE_LAYER
-	var previous_state := _state
-	_state = State.TIRED
-	await get_tree().create_timer(duration).timeout
-	assert(_state == State.TIRED)
-	_state = previous_state
-	collision_layer = previous_layer
-
-func notify(depth: int = 0) -> void:
-	if depth == 0:
-		return
-	for body in $NotifyZone.get_overlapping_bodies():
-		body.notify(depth - 1)
-
 func _align_with_direction() -> void:
 	$Weapon.position.x = _original_weapon_x * $Direction.scalar
-
-func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
-	notify(notify_depth)
-
-func _on_health_died() -> void:
-	queue_free()

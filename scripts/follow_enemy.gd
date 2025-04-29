@@ -1,11 +1,10 @@
-class_name FollowEnemy extends CharacterBody2D
+class_name FollowEnemy extends Enemy
 
 @export var speed: float = 300.0
 @export var jump_height: float = -800
 @export var stop_dist: float = 0.0
 @export var jump_follow_cooldown: float = 0.0
 @export var patrol_speed = 50
-@export var notify_depth = 2
 @export_range(0.5, 8, 0.1) var min_move_time := 1.5
 @export_range(0.5, 8, 0.1) var max_move_time := 2.5
 @export_range(0.5, 8, 0.1) var min_idle_time := 2
@@ -18,9 +17,7 @@ var _tracking: Node2D
 var _jump_follow_timer := 0.0
 @onready var _current_stop_dist = stop_dist
 @onready var _original_patrol_speed = patrol_speed
-var _stunned: bool
 
-signal hit_floor
 signal on_state_changed(state)
 
 enum State {
@@ -32,10 +29,8 @@ enum State {
 }
 
 func _ready() -> void:
+	super()
 	_patrol()
-	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
-	$Health.died.connect(_on_health_died)
-	$Health.damage_taken.connect(_on_health_damage_taken)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -47,8 +42,7 @@ func _physics_process(delta: float) -> void:
 			
 			# Direction setting
 			var dist := _tracking.position.x - position.x
-			var direction := signf(dist)
-			$Direction.scalar = direction
+			$Direction.scalar = signf(dist)
 			
 			# Platform Handling
 			var is_player_below = (!Player.Instance.is_on_platform() or Player.Instance.get_platform_height() > _platform_detection.get_platform_height()) and Player.Instance.is_on_floor()
@@ -62,11 +56,11 @@ func _physics_process(delta: float) -> void:
 				if is_on_floor() and _can_attack() and velocity.y == 0.0:
 					_attack()
 				elif velocity.y != 0.0:
-					velocity.x = direction * speed
+					velocity.x = $Direction.scalar * speed
 				else:
 					_process_stopped(delta)
 			else:
-				velocity.x = direction * speed
+				velocity.x = $Direction.scalar * speed
 		State.IDLE:
 			velocity.x = patrol_speed * $Direction.scalar
 			# Check reaching the edge of a platform or the environment
@@ -77,41 +71,16 @@ func _physics_process(delta: float) -> void:
 		State.ATTACKING:
 			pass
 	
-	var prev_velocity := velocity
-	if _stunned:
-		velocity = Vector2.ZERO
-	
-	var was_on_floor := is_on_floor()
-	move_and_slide()
-	if not was_on_floor and is_on_floor():
-		hit_floor.emit()
-	
-	if _stunned:
-		# Restore old velocity
-		velocity = prev_velocity
+	move()
 
 func notify(depth: int = 0) -> void:
-	if _tracking != null:
+	if depth == 0 or _tracking != null:
 		return
+	super()
 	_tracking = Player.Instance
 	if _state == State.IDLE:
 		_state = State.TRACKING
 		on_state_changed.emit(_state)
-	if depth > 0:
-		for body in $NotifyZone.get_overlapping_bodies():
-			body.notify(depth - 1)
-
-func spawn_in(duration: float) -> void:
-	var previous_layer := collision_layer
-	collision_layer = Constants.INVINCIBLE_LAYER
-	var previous_state := _state
-	_state = State.SPAWNING
-	on_state_changed.emit(_state)
-	await get_tree().create_timer(duration).timeout
-	assert(_state == State.SPAWNING)
-	_state = previous_state
-	on_state_changed.emit(_state)
-	collision_layer = previous_layer
 
 func _patrol() -> void:
 	_state = State.IDLE
@@ -161,18 +130,3 @@ func _process_stopped(_delta: float) -> void:
 
 func _can_attack() -> bool:
 	return true
-
-func _on_detection_zone_body_entered(body: Node2D) -> void:
-	if body is Player:
-		notify(notify_depth)
-
-func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
-	if _tracking == null:
-		notify(notify_depth)
-	
-	_stunned = true
-	await get_tree().create_timer(0.1).timeout
-	_stunned = false
-
-func _on_health_died() -> void:
-	queue_free()
