@@ -33,7 +33,7 @@ func _ready() -> void:
 	_patrol()
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
+	if not is_on_floor() and not stunned:
 		velocity += get_gravity() * delta
 	
 	match _state:
@@ -74,13 +74,11 @@ func _physics_process(delta: float) -> void:
 	move()
 
 func notify(depth: int = 0) -> void:
-	if depth == 0 or _tracking != null:
-		return
-	super()
 	_tracking = Player.Instance
 	if _state == State.IDLE:
 		_state = State.TRACKING
 		on_state_changed.emit(_state)
+	super()
 
 func _patrol() -> void:
 	_state = State.IDLE

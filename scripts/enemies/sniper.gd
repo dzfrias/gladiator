@@ -24,7 +24,7 @@ func _ready() -> void:
 	_move()
 
 func _process(delta: float) -> void:
-	if not is_on_floor():
+	if not is_on_floor() and not stunned:
 		velocity.y += get_gravity().y * delta
 	
 	match _state:

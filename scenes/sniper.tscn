@@ -1,14 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://kuoxip0150vk"]
+[gd_scene load_steps=20 format=3 uid="uid://kuoxip0150vk"]
 
 [ext_resource type="Script" path="res://scripts/enemies/sniper.gd" id="1_27e54"]
-[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="2_3qerc"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="2_3qerc"]
 [ext_resource type="SpriteFrames" uid="uid://dmm0dvb5sx8oo" path="res://resources/sprite_frames/shooter.tres" id="2_8l8rg"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="3_dbdna"]
 [ext_resource type="Resource" uid="uid://bee5w5k2hubk7" path="res://resources/raider_sniper.tres" id="4_6f1k5"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_pyflq"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="6_kf48r"]
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="7_edfuj"]
-[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="8_bd3sr"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_uu88c"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_ejvbw"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="12_7swb3"]
@@ -83,11 +82,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
 shape = SubResource("CircleShape2D_m5xte")
-
-[node name="HitFlash" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-script = ExtResource("8_bd3sr")
 
 [node name="DropSpawner" parent="." instance=ExtResource("9_uu88c")]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=22 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
@@ -9,11 +9,10 @@
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="9_iylj5"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
 [ext_resource type="SpriteFrames" uid="uid://dmm0dvb5sx8oo" path="res://resources/sprite_frames/shooter.tres" id="13_h6ii1"]
-[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_yimym"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_5dk4w"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_13p0r"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="15_kelxt"]
-[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="16_gandy"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="16_gandy"]
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="16_nyw88"]
 [ext_resource type="Texture2D" uid="uid://beognjwthnlei" path="res://assets/Art/laser_rifle.png" id="17_seejf"]
 [ext_resource type="Script" path="res://scripts/gun_overlay.gd" id="18_yb7vo"]
@@ -98,11 +97,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
 shape = SubResource("CircleShape2D_c0ujg")
-
-[node name="HitFlash" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-script = ExtResource("13_yimym")
 
 [node name="DropSpawner" parent="." instance=ExtResource("14_5dk4w")]
 

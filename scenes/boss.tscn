@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnp1a2nk0y65j"]
+[gd_scene load_steps=16 format=3 uid="uid://bnp1a2nk0y65j"]
 
 [ext_resource type="Script" path="res://scripts/enemies/boss.gd" id="1_py3tt"]
 [ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="2_vdfdy"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/health.gd" id="10_aptoh"]
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="11_igbjl"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="12_ek7wc"]
-[ext_resource type="Script" path="res://scripts/hit_flash.gd" id="13_xyk85"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="14_g7l1r"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="15_idlfn"]
 
@@ -109,11 +108,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NotifyZone"]
 shape = SubResource("CircleShape2D_c0ujg")
-
-[node name="HitFlash" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-script = ExtResource("13_xyk85")
 
 [node name="DropSpawner" parent="." instance=ExtResource("14_g7l1r")]
 
