@@ -12,6 +12,7 @@ class_name Wolf extends FollowEnemy
 func _ready() -> void:
 	super()
 	$AttackBox.body_entered.connect(_on_attack_box_body_entered)
+	got_stunned.connect(_on_got_stunned)
 
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -46,3 +47,6 @@ func _align_with_direction() -> void:
 func _on_health_damage_taken(amount: float, direction: Vector2):
 	super(amount, direction)
 	AudioManager.play_sound(self, load("res://assets/SoundEffects/harm animal.wav"))
+
+func _on_got_stunned() -> void:
+	$AttackBox/CollisionShape2D.disabled = true

@@ -8,6 +8,7 @@ var _sprites: Array[CanvasItem]
 var _white_material = preload("res://resources/materials/white_material.tres")
 
 signal hit_floor
+signal got_stunned
 
 func _ready() -> void:
 	$DetectionZone.body_entered.connect(_on_detection_zone_body_entered)
@@ -54,6 +55,7 @@ func set_stunned(duration: float) -> void:
 		original_materials.append(sprite.material)
 		sprite.material = _white_material
 	stunned = true
+	got_stunned.emit()
 	await get_tree().create_timer(duration).timeout
 	stunned = false
 	for i in range(_sprites.size()):
