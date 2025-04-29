@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfx2l0o418mmo"]
+
+[ext_resource type="Script" path="res://scripts/passives/burrow_boost.gd" id="1_0v377"]
+
+[node name="BurrowBoost" type="Node"]
+script = ExtResource("1_0v377")

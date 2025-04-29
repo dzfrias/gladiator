@@ -317,7 +317,7 @@ func _burrow() -> void:
 	# or right.
 	if left != right:
 		var k := 1.0 if right else -1.0
-		velocity.x = movement_settings.burrow_speed_boost * k
+		velocity.x = maxf(absf(velocity.x), movement_settings.burrow_speed_boost) * k
 	$AnimatedSprite2D.visible = false
 	collision_layer = Constants.INVINCIBLE_LAYER
 	went_underground.emit()
