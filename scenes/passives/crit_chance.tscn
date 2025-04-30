@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1qd873ee01e1"]
+
+[ext_resource type="Script" path="res://scripts/passives/crit_chance.gd" id="1_gnlsb"]
+
+[node name="CritChance" type="Node"]
+script = ExtResource("1_gnlsb")

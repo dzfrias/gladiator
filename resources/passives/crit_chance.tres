@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://do1r6bxr2pxpq"]
+
+[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_us6ml"]
+[ext_resource type="PackedScene" uid="uid://d1qd873ee01e1" path="res://scenes/passives/crit_chance.tscn" id="2_nrffa"]
+[ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_yqxpk"]
+
+[resource]
+script = ExtResource("3_yqxpk")
+name = "Crit Chance"
+image = ExtResource("1_us6ml")
+scene = ExtResource("2_nrffa")
