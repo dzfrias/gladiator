@@ -109,7 +109,8 @@ func reload():
 	is_reloading = false
 
 func activate_prefire_flash() -> void:
-	assert(_prefire_flash == null)
+	if _prefire_flash != null:
+		_prefire_flash.queue_free()
 	_prefire_flash = _prefire_flash_scene.instantiate() as Node2D
 	add_child(_prefire_flash)
 
