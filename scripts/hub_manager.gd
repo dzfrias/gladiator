@@ -29,7 +29,7 @@ func go_to_hub() -> void:
 	new_player.set_alt_weapon(PersistentData.alternate)
 	new_player.gadget().set_gadget(PersistentData.gadget)
 	
-	get_tree().current_scene.free()
+	get_tree().current_scene.queue_free()
 	_setup_world.call_deferred()
 
 func return_to_world() -> void:
