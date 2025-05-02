@@ -1,29 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctjiaujlkr8mh"]
+[gd_scene load_steps=4 format=3 uid="uid://ctjiaujlkr8mh"]
 
 [ext_resource type="Script" path="res://scripts/gadgets/grenade.gd" id="1_2whni"]
-[ext_resource type="Texture2D" uid="uid://linbpv3qv3od" path="res://assets/Art/laser_grenade.png" id="2_7dtac"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_87rqi"]
-atlas = ExtResource("2_7dtac")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jbnr5"]
-atlas = ExtResource("2_7dtac")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fgiec"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_87rqi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jbnr5")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://c2eyalbw70e2r" path="res://resources/sprite_frames/grenade.tres" id="2_74gcy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03ghe"]
 radius = 11.0
@@ -38,7 +16,7 @@ launch_angle = 0.524
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
-sprite_frames = SubResource("SpriteFrames_fgiec")
+sprite_frames = ExtResource("2_74gcy")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
