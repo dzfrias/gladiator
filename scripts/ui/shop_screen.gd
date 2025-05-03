@@ -13,12 +13,31 @@ func _ready() -> void:
 	_shop = HubManager.world.shop
 	PersistentData.buckles_changed.connect(_update_buckles_label)
 	_update_buckles_label()
+	
+	var buttons = get_all_buttons(self)
+	for button in buttons:
+		button.mouse_entered.connect(on_button_hovered)
+		button.pressed.connect(on_button_pressed)
 
 enum ScreenKind {
 	WEAPONS,
 	PASSIVES,
 	GADGETS,
 }
+
+func get_all_buttons(node):
+	var buttons = []
+	for child in node.get_children():
+		if child is Button:
+			buttons.append(child)
+		buttons += get_all_buttons(child)
+	return buttons
+
+func on_button_hovered():
+	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/ui_select_1.wav"), -15)
+
+func on_button_pressed():
+	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/ui_select_2.wav"), -15)
 
 func _on_quit_pressed() -> void:
 	HubManager.return_to_world()
@@ -64,6 +83,8 @@ func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 		item.find_child("Label").text = shop_item.item.name
 		item.find_child("PriceLabel").text = str(shop_item.price)
 		var btn = item.find_child("BuyButton")
+		btn.mouse_entered.connect(on_button_hovered)
+		btn.pressed.connect(on_button_pressed)
 		match _screen:
 			ScreenKind.WEAPONS:
 				btn.pressed.connect(_on_alt_weapon_buy.bind(btn, shop_item))
