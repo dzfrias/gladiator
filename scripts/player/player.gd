@@ -87,6 +87,8 @@ func _process(delta: float) -> void:
 			if is_on_floor() and not _is_jumping:
 				if abs(velocity.x) > 0:
 					$AnimatedSprite2D.play("walk")
+					if !$WalkingAudioPlayer.playing:
+						$WalkingAudioPlayer.play()
 				elif $AnimatedSprite2D.get_animation() != "fire":
 					$AnimatedSprite2D.play("idle")
 			

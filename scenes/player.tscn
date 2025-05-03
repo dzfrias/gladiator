@@ -1,10 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=43 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
-[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="3_x3oej"]
+[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="3_x3oej"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="4_trosa"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://dwowtfaylsxnu" path="res://assets/Art/PlayerWalk1.png" id="15_5unjr"]
 [ext_resource type="Script" path="res://scripts/gadgets/gadget.gd" id="16_rlhru"]
 [ext_resource type="Script" path="res://scripts/player/player_gun.gd" id="16_ud12g"]
+[ext_resource type="AudioStream" uid="uid://dlq8esunh5ld3" path="res://assets/SoundEffects/sand_walk_1.wav" id="17_l3x6c"]
+[ext_resource type="AudioStream" uid="uid://chshlit0ssnat" path="res://assets/SoundEffects/sand_walk_2.wav" id="18_oxdlp"]
+[ext_resource type="AudioStream" uid="uid://gmlq1vjc7dth" path="res://assets/SoundEffects/sand_walk_3.wav" id="19_wdwu6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(40, 62)
@@ -161,6 +164,12 @@ shader_parameter/color = Color(0, 0, 0, 1)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cseap"]
 load_path = "res://.godot/imported/laser_pistol.png-b240b0099f4e4d74817d127f2ac23e3b.ctex"
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0bial"]
+streams_count = 3
+stream_0/stream = ExtResource("17_l3x6c")
+stream_1/stream = ExtResource("18_oxdlp")
+stream_2/stream = ExtResource("19_wdwu6")
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 18
@@ -267,3 +276,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Gadget" type="Node2D" parent="."]
 script = ExtResource("16_rlhru")
+
+[node name="WalkingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_0bial")
+volume_db = -15.0
