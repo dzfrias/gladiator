@@ -2,7 +2,6 @@ class_name Boss extends FollowEnemy
 
 @export_category("Melee Attack")
 @export var _melee_distance = 100
-@export var attack_windup_time: float
 @export var attack_time: float
 @export var attack_tired_time: float
 @export var attack_damage: float
@@ -15,18 +14,20 @@ class_name Boss extends FollowEnemy
 var _is_charging = false
 
 @export_category("Slam Attack")
-@export var _slam_move_speed = 3
-@export var _slam_attack_time = 4
+@export var _slam_particles: PackedScene
 @export var _slam_distance = 300
+@export var _slam_ripple_amount = 5
+@export var _slam_ripple_distance = 200
+@export var _time_between_ripples = 0.76
 
 var _attack_state = AttackState.NONE
 var attacks = [
-	Attack.new(AttackState.MELEE, 0.7),
-	Attack.new(AttackState.GROUND_SLAM, 0.2),
-	Attack.new(AttackState.CHARGE, 0.1)
+	Attack.new(AttackState.MELEE, .4),
+	Attack.new(AttackState.GROUND_SLAM, .4),
+	Attack.new(AttackState.CHARGE, .2)
 ]
 
-@onready var _original_attack_x = $AttackBox/CollisionShape2D.position.x
+@onready var _original_attack_x = $AttackBox.position.x
 
 enum AttackState {
 	NONE,
@@ -51,13 +52,11 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	super(delta)
-	_align_with_direction()
 	
 	match _state:
-		State.ATTACKING:
-			if _attack_state == AttackState.GROUND_SLAM:
-				$AttackBox.global_position.x += $Direction.scalar * _slam_move_speed
 		State.TRACKING:
+			_align_with_direction()
+			$AnimatedSprite2D.play("walk")
 			if _attack_state == AttackState.NONE:
 				choose_random_attack()
 					
@@ -79,12 +78,13 @@ func choose_random_attack():
 
 func _align_with_direction() -> void:
 	var direction = $Direction.scalar
-	$AnimatedSprite2D.flip_h = direction != 1
-	$AttackBox/CollisionShape2D.position.x = _original_attack_x * direction
+	$AnimatedSprite2D.flip_h = direction == 1
+	$AttackBox.position.x = _original_attack_x * direction
 
 func melee_attack():
 	_state = State.TIRED
-	await get_tree().create_timer(attack_windup_time).timeout
+	$AnimatedSprite2D.play("melee")
+	await await_attack_frame(3)
 	_state = State.ATTACKING
 	$AttackBox/CollisionShape2D.disabled = false
 	await get_tree().create_timer(attack_time).timeout
@@ -96,6 +96,7 @@ func melee_attack():
 	_state = State.TRACKING
 	
 func charge_attack():
+	$AnimatedSprite2D.play("run")
 	velocity.x = $Direction.scalar * _charge_speed
 	_state = State.ATTACKING
 	_is_charging = true
@@ -110,11 +111,15 @@ func charge_attack():
 	
 func slam_attack():
 	_state = State.TIRED
-	await get_tree().create_timer(attack_windup_time).timeout
+	$AnimatedSprite2D.play("jump")
 	var _original_attack_box_pos = $AttackBox.global_position
+	await await_attack_frame(8)
 	_state = State.ATTACKING
 	$AttackBox/CollisionShape2D.disabled = false
-	await get_tree().create_timer(_slam_attack_time).timeout
+	for i in range(_slam_ripple_amount):
+		spawn_slam_particles()
+		await get_tree().create_timer(_time_between_ripples).timeout
+		$AttackBox.global_position.x += _slam_ripple_distance * $Direction.scalar
 	assert(_state == State.ATTACKING)
 	_state = State.TIRED
 	$AttackBox/CollisionShape2D.disabled = true
@@ -123,6 +128,20 @@ func slam_attack():
 	assert(_state == State.TIRED)
 	_state = State.TRACKING
 
+func await_attack_frame(frame):
+	while true:
+		if $AnimatedSprite2D.frame == frame:
+			break
+		await get_tree().create_timer(.1).timeout
+
+func spawn_slam_particles():
+	var slam_particles = _slam_particles.instantiate() as CPUParticles2D
+	get_tree().current_scene.add_child(slam_particles)
+	slam_particles.global_position = $AttackBox/ParticlePosition.global_position
+	slam_particles.emitting = true
+	await get_tree().create_timer(slam_particles.lifetime).timeout
+	slam_particles.queue_free()
+	
 func _can_attack() -> bool:
 	if _is_charging:
 		return false
@@ -139,6 +158,7 @@ func _attack() -> void:
 		AttackState.GROUND_SLAM:
 			print("Slam")
 			await slam_attack()
+	$AnimatedSprite2D.play("idle")
 	_attack_state = AttackState.NONE
 
 func _on_attack_box_body_entered(body: Node2D) -> void:

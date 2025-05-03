@@ -18,4 +18,5 @@ position = Vector2(263, -4)
 
 [node name="Boss" parent="." instance=ExtResource("4_mev4t")]
 position = Vector2(-680, -40)
+_slam_ripple_distance = 125
 stop_dist = 100.0
