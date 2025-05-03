@@ -39,6 +39,9 @@ func on_button_hovered():
 func on_button_pressed():
 	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/ui_select_2.wav"), -15)
 
+func on_shop_button_pressed():
+	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/buy_sound.wav"), -15)
+
 func _on_quit_pressed() -> void:
 	HubManager.return_to_world()
 
@@ -84,7 +87,7 @@ func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 		item.find_child("PriceLabel").text = str(shop_item.price)
 		var btn = item.find_child("BuyButton")
 		btn.mouse_entered.connect(on_button_hovered)
-		btn.pressed.connect(on_button_pressed)
+		btn.pressed.connect(on_shop_button_pressed)
 		match _screen:
 			ScreenKind.WEAPONS:
 				btn.pressed.connect(_on_alt_weapon_buy.bind(btn, shop_item))
