@@ -5,6 +5,7 @@ var world: Hub
 var _shop_scene = preload("res://scenes/shop_screen.tscn")
 var _mission_scene = preload("res://scenes/mission_board_screen.tscn")
 var _world_scene = preload("res://scenes/hub.tscn")
+var _effects_scene = preload("res://scenes/load_effects.tscn")
 
 func _ready() -> void:
 	world = _world_scene.instantiate()
@@ -22,12 +23,15 @@ func enter_mission(mission: Mission) -> void:
 	world.queue_free()
 
 func go_to_hub() -> void:
-	
 	world = _world_scene.instantiate()
 	var new_player := world.find_child("Player") as Player
 
 	new_player.set_alt_weapon(PersistentData.alternate)
 	new_player.gadget().set_gadget(PersistentData.gadget)
+	
+	var effects := _effects_scene.instantiate() as LoadEffects
+	get_tree().current_scene.add_child(effects)
+	await effects.load_in()
 	
 	get_tree().current_scene.queue_free()
 	_setup_world.call_deferred()
@@ -39,6 +43,10 @@ func return_to_world() -> void:
 func _setup_world() -> void:
 	get_tree().root.add_child(world)
 	get_tree().current_scene = world
+	var effects := _effects_scene.instantiate() as LoadEffects
+	get_tree().current_scene.add_child(effects)
+	await effects.load_out()
+	effects.queue_free()
 
 func _load(to: Node) -> void:
 	if get_tree().current_scene != world:
