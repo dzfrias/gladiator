@@ -70,6 +70,7 @@ func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 		item.find_child("PriceLabel").text = str(shop_item.price)
 		var btn = item.find_child("BuyButton")
 		btn.pressed.connect(_on_shop_button_pressed)
+		btn.disabled = shop_item.bought
 		match _screen:
 			ScreenKind.WEAPONS:
 				btn.pressed.connect(_on_alt_weapon_buy.bind(btn, shop_item))
