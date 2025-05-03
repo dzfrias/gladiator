@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://ctrrmv8h2j8yt"]
+[gd_scene load_steps=20 format=3 uid="uid://ctrrmv8h2j8yt"]
 
 [ext_resource type="Texture2D" uid="uid://chfx1it34ks1o" path="res://assets/Art/BG Layer 1.png" id="1_78f06"]
 [ext_resource type="Theme" uid="uid://bqlm22ts8dxfd" path="res://resources/main_theme.tres" id="1_qg8bq"]
 [ext_resource type="Texture2D" uid="uid://dul65fiscpp5n" path="res://assets/Art/BG Layer 2.png" id="2_sbt1m"]
+[ext_resource type="Script" path="res://scripts/ui/menu.gd" id="2_tg3n8"]
 [ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="3_8vo8i"]
 [ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="4_dp3n6"]
 [ext_resource type="Texture2D" uid="uid://bjv1njf4wfo76" path="res://assets/Art/BG Layer 5.png" id="5_bbo2o"]
@@ -42,7 +43,7 @@ shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.51
 shader_parameter/outer_radius = 1.53
 
-[node name="Control" type="Control"]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,6 +51,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qg8bq")
+script = ExtResource("2_tg3n8")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 1

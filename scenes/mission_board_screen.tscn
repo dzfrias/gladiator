@@ -3,7 +3,13 @@
 [ext_resource type="Script" path="res://scripts/ui/mission_board_screen.gd" id="1_70ync"]
 [ext_resource type="Shortcut" uid="uid://66u22astbge4" path="res://resources/quit_shortcut.tres" id="2_fw7en"]
 
-[node name="MissionBoardScreen" type="CanvasLayer"]
+[node name="MissionBoardScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_70ync")
 
 [node name="Return" type="Button" parent="."]
@@ -22,6 +28,7 @@ offset_bottom = 144.11
 text = "Buckles: 0"
 
 [node name="Missions" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
