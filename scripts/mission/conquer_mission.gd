@@ -1,6 +1,7 @@
 class_name ConquerMission extends Mission
 
 var enemies_remaining: int
+var _done: bool
 
 func _ready() -> void:
 	super()
@@ -15,5 +16,11 @@ func _on_node_added(node: Node):
 
 func _on_enemy_death() -> void:
 	enemies_remaining -= 1
-	if enemies_remaining <= 0 and not in_combat:
+
+func _process(delta: float) -> void:
+	if _done:
+		return
+	
+	if enemies_remaining == 0 and not in_combat:
 		mission_finished.emit()
+		_done = true
