@@ -88,6 +88,7 @@ func fire(angle: float):
 	if ammo > 0:
 		ammo -= 1
 	on_ammo_changed.emit(ammo, weapon_stats.max_ammo)
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/laser_shoot.wav"))
 	if ammo == 0 and auto_reload:
 		reload()
 		return
