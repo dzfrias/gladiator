@@ -17,6 +17,7 @@ func _ready() -> void:
 			if child is Health:
 				child.take_damage(damage, Vector2.ZERO)
 	
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/lightning_strike.wav"))
 	Player.Instance.camera().add_trauma(camera_trauma)
 	
 	if auto_free:
