@@ -100,6 +100,8 @@ func _process(delta: float) -> void:
 			_apply_horizontal_input(delta)
 		State.UNDERGROUND:
 			_underground_time += delta * movement_settings.burrow_increment_factor
+			if !$DiggingAudioPlayer.playing:
+				$DiggingAudioPlayer.play()
 			_apply_horizontal_input(delta)
 			if _underground_time >= movement_settings.max_burrow_time:
 				_unburrow()
@@ -332,6 +334,7 @@ func _unburrow() -> void:
 	_state = State.CONTROL
 	_current_move_speed = movement_settings.move_speed
 	$AnimatedSprite2D.visible = true
+	$DiggingAudioPlayer.stop()
 	if not _is_invincible:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER
 	exited_underground.emit()

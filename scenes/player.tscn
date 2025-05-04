@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=44 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dlq8esunh5ld3" path="res://assets/SoundEffects/sand_walk_1.wav" id="17_l3x6c"]
 [ext_resource type="AudioStream" uid="uid://chshlit0ssnat" path="res://assets/SoundEffects/sand_walk_2.wav" id="18_oxdlp"]
 [ext_resource type="AudioStream" uid="uid://gmlq1vjc7dth" path="res://assets/SoundEffects/sand_walk_3.wav" id="19_wdwu6"]
+[ext_resource type="AudioStream" uid="uid://cyhe7g7l4v5un" path="res://assets/SoundEffects/dig.wav" id="20_hiijb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5kfl"]
 size = Vector2(40, 62)
@@ -280,3 +281,7 @@ script = ExtResource("16_rlhru")
 [node name="WalkingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_0bial")
 volume_db = -15.0
+
+[node name="DiggingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_hiijb")
+volume_db = -10.0
