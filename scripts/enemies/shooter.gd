@@ -32,4 +32,4 @@ func _align_with_direction() -> void:
 
 func _on_health_damage_taken(amount: float, direction: Vector2):
 	super(amount, direction)
-	AudioManager.play_sound(self, load("res://assets/SoundEffects/lil hit idk.wav"))
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/hit.wav"))

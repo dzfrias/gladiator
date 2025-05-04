@@ -79,3 +79,7 @@ func _set_burrowing(burrowing: bool) -> void:
 func _align_with_direction() -> void:
 	$Sprite2D.flip_h = $Direction.is_right
 	$Weapon.position.x = _original_weapon_x * $Direction.scalar
+
+func _on_health_damage_taken(_amount: float, _direction: Vector2):
+	super(_amount, _direction)
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/hit.wav"))

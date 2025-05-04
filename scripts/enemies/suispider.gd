@@ -51,3 +51,7 @@ func _warn() -> void:
 			0.05,
 		)
 		await get_tree().create_timer(warning_interval_time).timeout
+
+func _on_health_damage_taken(_amount: float, _direction: Vector2):
+	super(_amount, _direction)
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/hit.wav"))
