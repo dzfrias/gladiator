@@ -33,6 +33,7 @@ func _cycle():
 		if not MissionManager.mission.in_combat:
 			continue
 		var effects = flood_effects.instantiate()
+		AudioManager.play_sound(Player.Instance, load("res://assets/SoundEffects/flood_in.wav"))
 		get_tree().current_scene.add_child(effects)
 		PhysicsServer2D.area_set_param(world_space, PhysicsServer2D.AREA_PARAM_GRAVITY, gravity_strength)
 		is_active = true
@@ -41,5 +42,6 @@ func _cycle():
 		await timer.timeout
 		PhysicsServer2D.area_set_param(world_space, PhysicsServer2D.AREA_PARAM_GRAVITY, original_gravity)
 		is_active = false
+		AudioManager.play_sound(Player.Instance, load("res://assets/SoundEffects/flood_out.wav"))
 		await effects.unflood()
 		effects.queue_free()

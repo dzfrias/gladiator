@@ -1,6 +1,6 @@
 class_name FloodEffects extends CanvasLayer
 
-@export var transition_time: float = 0.7
+@export var transition_time: float = 1.5
 
 @onready var screen_height = DisplayServer.screen_get_size().y
 
