@@ -14,9 +14,10 @@ var in_combat: bool:
 			exited_combat.emit()
 
 var _in_combat: bool = false
+var _effects_scene = preload("res://scenes/load_effects.tscn")
+var _death_ui = preload("res://scenes/died.tscn")
 
-@warning_ignore("unused_signal")
-signal mission_finished
+signal mission_finished(success: bool)
 signal entered_combat
 signal exited_combat
 
@@ -27,3 +28,13 @@ func _ready() -> void:
 func _setup() -> void:
 	if weather:
 		get_tree().current_scene.add_child(weather)
+	
+	Player.Instance.get_health().died.connect(_on_player_died)
+
+func _on_player_died() -> void:
+	var effects := _effects_scene.instantiate() as LoadEffects
+	get_tree().current_scene.add_child(effects)
+	await effects.load_in()
+	var ui = _death_ui.instantiate()
+	get_tree().current_scene.add_child(ui)
+	ui.find_child("ReturnButton").pressed.connect(func(): mission_finished.emit(false))

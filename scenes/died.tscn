@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3x3lka4uja4h"]
+
+[ext_resource type="Theme" uid="uid://bqlm22ts8dxfd" path="res://resources/main_theme.tres" id="1_6ifoc"]
+
+[node name="Died" type="CanvasLayer"]
+layer = 9
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6ifoc")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = -62.0
+offset_right = 194.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 90
+text = "You Died"
+
+[node name="ReturnButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -141.0
+offset_right = 181.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 55
+text = "Restart"
