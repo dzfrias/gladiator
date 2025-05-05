@@ -8,11 +8,14 @@ func enter_mission(m: Mission) -> void:
 	mission = m
 	_goto_mission.call_deferred()
 
-func return_home() -> void:
-	_goto_home.call_deferred()
+func return_home(success: bool) -> void:
+	_goto_home.call_deferred(success)
 
-func _goto_home() -> void:
-	PersistentData.buckles += mission.buckles
+func _goto_home(success: bool) -> void:
+	if not success:
+		PersistentData.reset()
+	else:
+		PersistentData.buckles += mission.buckles
 	HubManager.go_to_hub()
 
 func _goto_mission() -> void:

@@ -38,6 +38,8 @@ func _physics_process(delta: float) -> void:
 	
 	match _state:
 		State.TRACKING:
+			if _tracking == null:
+				return
 			assert(_tracking != null)
 			
 			# Direction setting

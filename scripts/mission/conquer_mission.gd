@@ -22,5 +22,5 @@ func _process(delta: float) -> void:
 		return
 	
 	if enemies_remaining == 0 and not in_combat:
-		mission_finished.emit()
+		mission_finished.emit(true)
 		_done = true
