@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://db1b15kksapnh"]
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://0mv0jypx0h73"]
 
-[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_e5at2"]
-[ext_resource type="PackedScene" uid="uid://dfx2l0o418mmo" path="res://scenes/passives/burrow_boost.tscn" id="2_5s1ma"]
+[ext_resource type="Texture2D" uid="uid://bxf2aa8gxb3eq" path="res://assets/Art/burrow_boost.png" id="1_00cgn"]
+[ext_resource type="PackedScene" path="res://scenes/passives/burrow_boost.tscn" id="2_5s1ma"]
 [ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_gixxp"]
 
 [resource]
 script = ExtResource("3_gixxp")
 name = "Burrow Boost"
-image = ExtResource("1_e5at2")
+image = ExtResource("1_00cgn")
 scene = ExtResource("2_5s1ma")

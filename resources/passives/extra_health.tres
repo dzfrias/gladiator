@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://b1s1cgl8weewt"]
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://bh2b8tflt3368"]
 
-[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_npjsr"]
-[ext_resource type="PackedScene" uid="uid://fet6t662yowt" path="res://scenes/passives/extra_health.tscn" id="2_xc13g"]
+[ext_resource type="Texture2D" uid="uid://wnsxnuswhi4g" path="res://assets/Art/health_increase.png" id="1_aciu1"]
+[ext_resource type="PackedScene" path="res://scenes/passives/extra_health.tscn" id="2_xc13g"]
 [ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_jsxyl"]
 
 [resource]
 script = ExtResource("3_jsxyl")
 name = "Extra Health"
-image = ExtResource("1_npjsr")
+image = ExtResource("1_aciu1")
 scene = ExtResource("2_xc13g")
