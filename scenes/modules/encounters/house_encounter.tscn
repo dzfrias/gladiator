@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=4 uid="uid://dkmw65i6ud1gx"]
+
+[ext_resource type="Script" path="res://scripts/combat_encounter.gd" id="1_8saos"]
+[ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="2_8mpps"]
+[ext_resource type="PackedScene" uid="uid://dy0ejcvjgpr5x" path="res://scenes/structures/house.tscn" id="3_q0mt7"]
+
+[node name="TireFortEncounter" type="Node2D"]
+script = ExtResource("1_8saos")
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Spawn1" type="Node2D" parent="SpawnPoints"]
+position = Vector2(266, -320)
+
+[node name="Spawn2" type="Node2D" parent="SpawnPoints"]
+position = Vector2(724, -78)
+
+[node name="Spawn3" type="Node2D" parent="SpawnPoints"]
+position = Vector2(383, -81)
+
+[node name="Spawn4" type="Node2D" parent="SpawnPoints"]
+position = Vector2(750, -309)
+
+[node name="Tiles" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAP//AAAEAAMAAAABAP//AAAEAAMAAAACAP//AAAEAAMAAAADAP//AAAEAAMAAAAEAP//AAAEAAMAAAAFAP//AAAEAAMAAAAGAP//AAAEAAMAAAAHAP//AAAEAAMAAAAIAP//AAAEAAMAAAAJAP//AAAEAAMAAAAKAP//AAAEAAMAAAALAP//AAAEAAMAAAAMAP//AAAEAAMAAAANAP//AAAEAAMAAAAOAP//AAAEAAMAAAAPAP//AAAEAAMAAAAQAP//AAAEAAMAAAARAP//AAAEAAMAAAASAP//AAAEAAMAAAATAP//AAAEAAMAAAAUAP//AAAEAAMAAAAVAP//AAAEAAMAAAAWAP//AAAEAAMAAAAXAP//AAAEAAMAAAAYAP//AAAEAAMAAAAZAP//AAAEAAMAAAAaAP//AAAEAAMAAAAbAP//AAAEAAMAAAAcAP//AAAEAAMAAAAdAP//AAAEAAMAAAAeAP//AAAEAAMAAAAfAP//AAAEAAMAAAAgAP//AAAEAAMAAAAhAP//AAAEAAMAAAAiAP//AAAEAAMAAAAjAP//AAAEAAMAAAAkAP//AAAEAAMAAAAlAP//AAAEAAMAAAAmAP//AAAEAAMAAAAnAP//AAAEAAMAAAA=")
+tile_set = ExtResource("2_8mpps")
+
+[node name="House" parent="." instance=ExtResource("3_q0mt7")]
+position = Vector2(460, -339)
+scale = Vector2(0.7, 0.7)
+metadata/_edit_lock_ = true
