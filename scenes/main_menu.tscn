@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ctrrmv8h2j8yt"]
+[gd_scene load_steps=22 format=3 uid="uid://ctrrmv8h2j8yt"]
 
 [ext_resource type="Texture2D" uid="uid://chfx1it34ks1o" path="res://assets/Art/BG Layer 1.png" id="1_78f06"]
 [ext_resource type="Theme" uid="uid://bqlm22ts8dxfd" path="res://resources/main_theme.tres" id="1_qg8bq"]
@@ -12,6 +12,8 @@
 [ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="8_8nkth"]
 [ext_resource type="Script" path="res://scripts/ui/floating.gd" id="10_ifgf5"]
 [ext_resource type="Script" path="res://scripts/ui/enter_game.gd" id="11_0vffp"]
+[ext_resource type="Material" uid="uid://c7jvn3c8byscw" path="res://resources/materials/white_material.tres" id="12_wgto2"]
+[ext_resource type="Texture2D" uid="uid://nyqm6j0qm3x4" path="res://assets/Art/oasis.png" id="13_lfm3j"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rjtun"]
 blend_mode = 1
@@ -151,23 +153,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OasisLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -106.5
-offset_top = -186.0
-offset_right = 106.5
-offset_bottom = -132.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 120
-text = "Oasis"
-script = ExtResource("10_ifgf5")
-
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -184,3 +169,18 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 50
 text = "Play"
 script = ExtResource("11_0vffp")
+
+[node name="OasisLabel" type="TextureRect" parent="."]
+material = ExtResource("12_wgto2")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -272.0
+offset_top = 103.0
+offset_right = 264.0
+offset_bottom = 372.0
+grow_horizontal = 2
+texture = ExtResource("13_lfm3j")
+expand_mode = 1
+script = ExtResource("10_ifgf5")
