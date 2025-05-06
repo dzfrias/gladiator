@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://t8m6qnvpbiym"]
+
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_lqrdg"]
+[ext_resource type="Texture2D" uid="uid://bo5xfrd5ibhn0" path="res://assets/Art/Tire fort platform.png" id="2_j4ypb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ff4jc"]
+size = Vector2(596.5, 15.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdc3h"]
+size = Vector2(460.531, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1busu"]
+size = Vector2(368.25, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6glq"]
+size = Vector2(160, 20)
+
+[node name="Silo" type="StaticBody2D"]
+z_index = -1
+position = Vector2(405, -437.63)
+collision_layer = 40
+collision_mask = 32
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+material = ExtResource("1_lqrdg")
+position = Vector2(249, -18.37)
+scale = Vector2(3.05556, 3.05556)
+texture = ExtResource("2_j4ypb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(261, -5.37)
+rotation = 0.0628319
+shape = SubResource("RectangleShape2D_ff4jc")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(785.764, 110.616)
+rotation = 0.261799
+shape = SubResource("RectangleShape2D_bdc3h")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-217.125, 110.63)
+shape = SubResource("RectangleShape2D_1busu")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-101, 200.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(624, 200.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
+position = Vector2(624, 264.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="."]
+position = Vector2(624, 324.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="."]
+position = Vector2(624, 386.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(-100, 266.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-100, 328.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(-100, 390.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true

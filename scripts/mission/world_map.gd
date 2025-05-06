@@ -27,8 +27,9 @@ class FillTile:
 @export_dir var terrain_path: String = "res://scenes/modules/terrain/"
 
 var _encounters := [
-	WeightedScene.new("res://scenes/modules/encounters/silo_encounter.tscn", 1.0),
-	#WeightedScene.new("res://scenes/modules/encounters/encounter1.tscn", 0.15),
+	WeightedScene.new("res://scenes/modules/encounters/silo_encounter.tscn", 0.0),
+	WeightedScene.new("res://scenes/modules/encounters/tire_fort_encounter.tscn", 0.0),
+	WeightedScene.new("res://scenes/modules/encounters/containers_encounter.tscn", 1.0),
 	#WeightedScene.new("res://scenes/modules/encounters/encounter2.tscn", 0.15),
 	#WeightedScene.new("res://scenes/modules/encounters/encounter3.tscn", 0.15),
 	#WeightedScene.new("res://scenes/modules/encounters/housing_encounter.tscn", 0.175),
