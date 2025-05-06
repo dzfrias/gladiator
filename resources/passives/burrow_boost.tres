@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://0mv0jypx0h73"]
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://db1b15kksapnh"]
 
 [ext_resource type="Texture2D" uid="uid://bxf2aa8gxb3eq" path="res://assets/Art/burrow_boost.png" id="1_00cgn"]
-[ext_resource type="PackedScene" path="res://scenes/passives/burrow_boost.tscn" id="2_5s1ma"]
+[ext_resource type="PackedScene" uid="uid://dfx2l0o418mmo" path="res://scenes/passives/burrow_boost.tscn" id="2_5s1ma"]
 [ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_gixxp"]
 
 [resource]

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://ei8ct1t1pn6x"]
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://cvqeai2ijgxs5"]
 
 [ext_resource type="Texture2D" uid="uid://da38be3m7urlt" path="res://assets/Art/burrow_enemy_stun_passive.png" id="1_exx7d"]
-[ext_resource type="PackedScene" path="res://scenes/passives/underground_stun.tscn" id="2_oybsr"]
+[ext_resource type="PackedScene" uid="uid://q4cm6v7jcw38" path="res://scenes/passives/underground_stun.tscn" id="2_oybsr"]
 [ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_8nhmr"]
 
 [resource]

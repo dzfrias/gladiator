@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://bqqujccjx7phe"]
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://bqsqmhrfedr0i"]
 
 [ext_resource type="Texture2D" uid="uid://i2puxdp3wktw" path="res://assets/Art/double_jump_passive.png" id="1_1jixf"]
-[ext_resource type="PackedScene" path="res://scenes/passives/double_jump.tscn" id="2_ix573"]
+[ext_resource type="PackedScene" uid="uid://2q8slveuksdl" path="res://scenes/passives/double_jump.tscn" id="2_ix573"]
 [ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_bibao"]
 
 [resource]

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://dk46xr1usnpfj"]
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://bjywowehlfboh"]
 
 [ext_resource type="Texture2D" uid="uid://mum5wrbijgn5" path="res://assets/Art/fast_fall_passive.png" id="1_4ocme"]
-[ext_resource type="PackedScene" path="res://scenes/passives/fast_fall.tscn" id="2_wdwhh"]
+[ext_resource type="PackedScene" uid="uid://yb63jjn0k2k1" path="res://scenes/passives/fast_fall.tscn" id="2_wdwhh"]
 [ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_hgn56"]
 
 [resource]

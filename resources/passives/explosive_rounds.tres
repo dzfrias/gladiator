@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://bcffmv4und5t3"]
+[gd_resource type="Resource" script_class="Passive" load_steps=4 format=3 uid="uid://b2liphec1l4ea"]
 
 [ext_resource type="Texture2D" uid="uid://b1yukht0gi27n" path="res://assets/Art/explosive_ammo_passive.png" id="1_pqw8e"]
-[ext_resource type="PackedScene" path="res://scenes/passives/explosive_rounds.tscn" id="2_lk4fa"]
+[ext_resource type="PackedScene" uid="uid://ckq61do554vog" path="res://scenes/passives/explosive_rounds.tscn" id="2_lk4fa"]
 [ext_resource type="Script" path="res://scripts/resources/passive.gd" id="3_oaql0"]
 
 [resource]
