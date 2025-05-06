@@ -10,8 +10,11 @@ func _ready() -> void:
 	mission_board = $MissionBoard
 	if reset_save:
 		PersistentData.reset()
-	AudioManager.play_sound(self, load("res://assets/Music/hub_music.wav"))
+	_play_sound.call_deferred()
 	$Player.set_alt_weapon(PersistentData.alternate)
 	$Player.gadget().set_gadget(PersistentData.gadget)
 	for passive in PersistentData.get_passives():
 		$Player.add_passive(passive)
+
+func _play_sound():
+	AudioManager.play_ui_sound(get_tree().root, load("res://assets/Music/hub_music.wav"))

@@ -21,6 +21,7 @@ PersistentData="*res://scripts/persistent_data.gd"
 Debug="*res://scripts/util/Debug.gd"
 MissionManager="*res://scripts/mission/mission_manager.gd"
 HubManager="*res://scripts/hub_manager.gd"
+AudioManager="*res://scripts/audio_manager.gd"
 
 [display]
 
