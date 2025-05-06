@@ -1,25 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpoytbmytn7c6"]
+[gd_scene load_steps=9 format=3 uid="uid://dpoytbmytn7c6"]
 
 [ext_resource type="Script" path="res://scripts/killable.gd" id="1_11lqo"]
-[ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="2_ygac3"]
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="2_nb8sf"]
+[ext_resource type="Texture2D" uid="uid://cg25gri3o7v0u" path="res://assets/Art/barricade.png" id="2_sc2ut"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_7u0b4"]
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="4_w7kxn"]
 [ext_resource type="Script" path="res://scripts/hit_flash.gd" id="5_1q3tu"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="6_gmqwh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3ci8"]
-size = Vector2(54, 263.595)
+size = Vector2(42, 263.595)
 
 [node name="Wall" type="StaticBody2D"]
-position = Vector2(800, -129.19)
 script = ExtResource("1_11lqo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.4375, 2.07812)
-texture = ExtResource("2_ygac3")
+light_mask = 2
+material = ExtResource("2_nb8sf")
+position = Vector2(-357, -83.81)
+scale = Vector2(1.80278, 1.80278)
+texture = ExtResource("2_sc2ut")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.0125)
+position = Vector2(4, -3.0125)
 shape = SubResource("RectangleShape2D_s3ci8")
 
 [node name="Health" type="Node" parent="."]

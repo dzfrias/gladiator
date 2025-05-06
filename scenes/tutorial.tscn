@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://d1xnu3ygtm8qs"]
+[gd_scene load_steps=20 format=4 uid="uid://d1xnu3ygtm8qs"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_i3pcd"]
 [ext_resource type="PackedScene" uid="uid://cy0ehmv0nnrm8" path="res://scenes/background.tscn" id="1_od3kf"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://gnt7dvfg7v6m" path="res://assets/tree_1.png" id="15_f5ssc"]
 [ext_resource type="Texture2D" uid="uid://bwfm3nhxk83ov" path="res://assets/rocks.png" id="16_amf2l"]
 [ext_resource type="Texture2D" uid="uid://g73al3ypsves" path="res://assets/grass.png" id="17_v1luq"]
+[ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="18_q73k1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ey5c"]
 size = Vector2(234.25, 589)
@@ -44,8 +45,8 @@ position = Vector2(1914, -258)
 [node name="Wolf" parent="." instance=ExtResource("8_c3jeb")]
 position = Vector2(4041, -157.37)
 
-[node name="Wolf2" parent="." instance=ExtResource("8_c3jeb")]
-position = Vector2(4247, -159.37)
+[node name="Shooter" parent="." instance=ExtResource("18_q73k1")]
+position = Vector2(4210, -163)
 
 [node name="Silo" parent="." instance=ExtResource("8_04us3")]
 position = Vector2(4147, -561)
