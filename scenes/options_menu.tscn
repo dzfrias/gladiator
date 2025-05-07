@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxoqkl0fs3coq"]
+
+[ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="1_6gvoo"]
+[ext_resource type="Theme" path="res://resources/main_theme.tres" id="2_n45n8"]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+layer = 9
+script = ExtResource("1_6gvoo")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_n45n8")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -316.0
+offset_right = 210.0
+offset_bottom = -192.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 90
+text = "Options"
+
+[node name="BackButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -135.0
+offset_right = 181.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 55
+text = "Back"

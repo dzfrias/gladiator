@@ -38,3 +38,6 @@ func _on_player_died() -> void:
 	var ui = _death_ui.instantiate()
 	get_tree().current_scene.add_child(ui)
 	ui.find_child("ReturnButton").pressed.connect(func(): mission_finished.emit(false))
+
+func _defeat():
+	mission_finished.emit(false)
