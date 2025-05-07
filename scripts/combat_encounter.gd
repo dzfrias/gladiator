@@ -18,10 +18,11 @@ var _initial_spawn_amt: int
 var _left_body: StaticBody2D
 var _right_body: StaticBody2D
 var _enemies := [
-	WorldMap.WeightedScene.new("res://scenes/wolf.tscn", 0.25),
-	WorldMap.WeightedScene.new("res://scenes/shooter.tscn", 0.4),
+	WorldMap.WeightedScene.new("res://scenes/wolf.tscn", 0.2),
+	WorldMap.WeightedScene.new("res://scenes/shooter.tscn", 0.35),
 	WorldMap.WeightedScene.new("res://scenes/suispider.tscn", 0.15),
-	WorldMap.WeightedScene.new("res://scenes/sniper.tscn", 0.2)
+	WorldMap.WeightedScene.new("res://scenes/sniper.tscn", 0.15),
+	WorldMap.WeightedScene.new("res://scenes/burrower.tscn", 0.15),
 ]
 var _last_spawned: PackedScene
 var _done := false
