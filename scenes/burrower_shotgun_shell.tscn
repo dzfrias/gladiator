@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkx2sltytve67"]
+
+[ext_resource type="Script" path="res://scripts/shotgun_shell.gd" id="1_ladw0"]
+[ext_resource type="PackedScene" uid="uid://b3w17d3kakhc" path="res://scenes/burrower_shotgun_projectile.tscn" id="2_t02ip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7v1h"]
+
+[node name="BurrowerShotgunShell" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ladw0")
+child_projectile = ExtResource("2_t02ip")
+angle_sd = 0.049
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x7v1h")

@@ -17,6 +17,12 @@ var _stop_idle_is_running: bool
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
+	$UndergroundParticles.emitting = _underground
+	if _underground:
+		$AnimatedSprite2D.play("underground")
+	elif not _state == State.TIRED:
+		$AnimatedSprite2D.play("walk" if velocity.x != 0 else "idle")
+	
 	_align_with_direction()
 	if _state != State.TRACKING:
 		return
@@ -67,17 +73,21 @@ func _do_stop_idle(direction: float) -> void:
 	_stop_idle_is_running = false
 
 func _set_burrowing(burrowing: bool) -> void:
-	_underground = burrowing
-	$Sprite2D.visible = not burrowing
 	if burrowing:
+		_state = State.TIRED
+		$AnimatedSprite2D.play("burrow")
+		await $AnimatedSprite2D.animation_finished
+		_state = State.TRACKING
 		speed = burrow_speed
 		collision_layer = Constants.INVINCIBLE_LAYER
 	else:
+		$AnimatedSprite2D.play("idle")
 		speed = _original_speed
 		collision_layer = _original_layer
+	_underground = burrowing
 
 func _align_with_direction() -> void:
-	$Sprite2D.flip_h = $Direction.is_right
+	$AnimatedSprite2D.flip_h = not $Direction.is_right
 	$Weapon.position.x = _original_weapon_x * $Direction.scalar
 
 func _on_health_damage_taken(_amount: float, _direction: Vector2):

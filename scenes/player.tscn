@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=45 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
@@ -14,6 +14,7 @@
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="14_ojru7"]
 [ext_resource type="Texture2D" uid="uid://b3yl3oymh43ks" path="res://assets/Art/PlayerJump1.png" id="15_3rly8"]
 [ext_resource type="Texture2D" uid="uid://dwowtfaylsxnu" path="res://assets/Art/PlayerWalk1.png" id="15_5unjr"]
+[ext_resource type="PackedScene" uid="uid://d37g531von16b" path="res://scenes/particles/underground_particles.tscn" id="16_rc816"]
 [ext_resource type="Script" path="res://scripts/gadgets/gadget.gd" id="16_rlhru"]
 [ext_resource type="Script" path="res://scripts/player/player_gun.gd" id="16_ud12g"]
 [ext_resource type="AudioStream" uid="uid://dlq8esunh5ld3" path="res://assets/SoundEffects/sand_walk_1.wav" id="17_l3x6c"]
@@ -259,21 +260,7 @@ texture = SubResource("CompressedTexture2D_cseap")
 script = ExtResource("16_ud12g")
 run_frames = Array[int]([2, 6])
 
-[node name="UndergroundParticles" type="CPUParticles2D" parent="."]
-z_index = -1
-position = Vector2(0, 37.4)
-emitting = false
-amount = 30
-emission_shape = 1
-emission_sphere_radius = 39.78
-direction = Vector2(0, -1)
-spread = 40.0
-gravity = Vector2(0, 1500)
-initial_velocity_min = 100.0
-initial_velocity_max = 300.0
-scale_amount_min = 3.0
-scale_amount_max = 5.0
-color = Color(0, 0, 0, 1)
+[node name="UndergroundParticles" parent="." instance=ExtResource("16_rc816")]
 
 [node name="Gadget" type="Node2D" parent="."]
 script = ExtResource("16_rlhru")

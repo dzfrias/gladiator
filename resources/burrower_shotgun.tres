@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://i5hbuwgpus4y"]
 
-[ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="1_0k25i"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_fl2n7"]
+[ext_resource type="PackedScene" uid="uid://bkx2sltytve67" path="res://scenes/burrower_shotgun_shell.tscn" id="1_vax6w"]
 
 [resource]
 script = ExtResource("1_fl2n7")
@@ -11,4 +11,4 @@ max_ammo = 1
 firing_interval = 0.5
 aim_mode = 0
 strength = 0.5
-projectile = ExtResource("1_0k25i")
+projectile = ExtResource("1_vax6w")

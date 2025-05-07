@@ -50,6 +50,16 @@ position = Vector2(-101, 200.63)
 shape = SubResource("RectangleShape2D_w6glq")
 one_way_collision = true
 
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="."]
+position = Vector2(-101, 139.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="."]
+position = Vector2(623, 139.63)
+shape = SubResource("RectangleShape2D_w6glq")
+one_way_collision = true
+
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
 position = Vector2(624, 200.63)
 shape = SubResource("RectangleShape2D_w6glq")
