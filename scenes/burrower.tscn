@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://dx2tj61huaph8"]
+[gd_scene load_steps=35 format=3 uid="uid://dx2tj61huaph8"]
 
 [ext_resource type="Script" path="res://scripts/enemies/burrower.gd" id="1_kpvsw"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="2_fpxim"]
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="3_qmne3"]
 [ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="3_s4kr6"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="4_bvmyx"]
@@ -170,6 +171,9 @@ script = ExtResource("1_kpvsw")
 speed = 125.0
 jump_height = -250.0
 stop_dist = 80.0
+
+[node name="Backlight" parent="." instance=ExtResource("2_fpxim")]
+energy = 16.0
 
 [node name="HealthBarCreator" type="Node" parent="."]
 script = ExtResource("3_qmne3")
