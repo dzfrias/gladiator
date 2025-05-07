@@ -274,6 +274,7 @@ func _apply_horizontal_input(delta: float) -> void:
 func _jump() -> void:
 	$AnimatedSprite2D.stop()
 	$AnimatedSprite2D.play("jump")
+	AudioManager.play_sound(self, load("res://assets/SoundEffects/jump.wav"), -10)
 	jumped.emit()
 	_is_jumping = true
 	_jumps_left -= 1
