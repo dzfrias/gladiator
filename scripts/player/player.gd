@@ -170,7 +170,7 @@ func _adjust_bullet_walls() -> void:
 	$BulletWall/BulletWallLeft.global_position.x = left - bullet_wall_delta
 	$BulletWall/BulletWallRight.global_position.x = right + bullet_wall_delta
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("fallthrough"):
 		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, false)
 	if event.is_action_released("fallthrough"):
