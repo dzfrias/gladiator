@@ -9,20 +9,23 @@ class ShopItem:
 		item = item_
 		price = price_
 
-var weapons: Array[ShopItem] = [
-	ShopItem.new(preload("res://resources/pistol.tres"), 10),
+var weapons: Array[ShopItem] = []
+var gadgets: Array[ShopItem] = []
+var passives: Array[ShopItem] = []
+
+var _all_weapons: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/rifle.tres"), 20),
 	ShopItem.new(preload("res://resources/shotgun.tres"), 30),
 	ShopItem.new(preload("res://resources/sniper.tres"), 30),
 	ShopItem.new(preload("res://resources/grenade_launcher.tres"), 50),
 	ShopItem.new(preload("res://resources/flamethrower.tres"), 50),
 ]
-var gadgets: Array[ShopItem] = [
+var _all_gadgets: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/gadgets/grenade.tres"), 10),
 	ShopItem.new(preload("res://resources/gadgets/health_potion.tres"), 10),
 	ShopItem.new(preload("res://resources/gadgets/drone.tres"), 10),
 ]
-var passives: Array[ShopItem] = [
+var _all_passives: Array[ShopItem] = [
 	ShopItem.new(preload("res://resources/passives/speed.tres"), 10),
 	ShopItem.new(preload("res://resources/passives/double_jump.tres"), 10),
 	ShopItem.new(preload("res://resources/passives/extra_health.tres"), 10),
@@ -34,6 +37,10 @@ var passives: Array[ShopItem] = [
 ]
 
 func _ready() -> void:
+	weapons = _pick_many(_all_weapons, 2)
+	gadgets = _pick_many(_all_gadgets, 1)
+	passives = _pick_many(_all_passives, 3)
+	
 	did_interact.connect(_on_interact)
 
 func buy_gadget(gadget: ShopItem) -> bool:
@@ -70,3 +77,8 @@ func _buy_item(item: ShopItem) -> bool:
 
 func _on_interact() -> void:
 	HubManager.open_shop_screen()
+
+func _pick_many(original: Array[ShopItem], amt: int) -> Array[ShopItem]:
+	var copy := original.duplicate()
+	copy.shuffle()
+	return copy.slice(0, amt)

@@ -22,9 +22,6 @@ enum ScreenKind {
 	GADGETS,
 }
 
-func _on_shop_button_pressed():
-	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/buy_sound.wav"), -15)
-
 func _on_quit_pressed() -> void:
 	HubManager.return_to_world()
 
@@ -50,16 +47,19 @@ func _open_details_screen(kind: ScreenKind) -> void:
 func _on_inventory_item_buy(btn: Button, item: Shop.ShopItem) -> void:
 	_shop.buy_gadget(item)
 	if item.bought:
+		_play_buy_sound()
 		btn.disabled = true
 
 func _on_alt_weapon_buy(btn: Button, item: Shop.ShopItem) -> void:
 	_shop.buy_alt_weapon(item)
 	if item.bought:
+		_play_buy_sound()
 		btn.disabled = true
 
 func _on_passive_buy(btn: Button, item: Shop.ShopItem) -> void:
 	_shop.buy_passive(item)
 	if item.bought:
+		_play_buy_sound()
 		btn.disabled = true
 
 func _show_item_details(items: Array[Shop.ShopItem]) -> void:
@@ -69,7 +69,6 @@ func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 		item.find_child("Label").text = shop_item.item.name
 		item.find_child("PriceLabel").text = str(shop_item.price)
 		var btn = item.find_child("BuyButton")
-		btn.pressed.connect(_on_shop_button_pressed)
 		btn.disabled = shop_item.bought
 		match _screen:
 			ScreenKind.WEAPONS:
@@ -82,3 +81,6 @@ func _show_item_details(items: Array[Shop.ShopItem]) -> void:
 
 func _update_buckles_label() -> void:
 	$BucklesLabel.text = "Buckles: " + str(PersistentData.buckles)
+
+func _play_buy_sound() -> void:
+	AudioManager.play_ui_sound(get_tree().current_scene, preload("res://assets/SoundEffects/buy_sound.wav"), -15)
