@@ -17,7 +17,7 @@
 material = ExtResource("7_s6s8a")
 tile_set = ExtResource("7_865j3")
 script = ExtResource("2_3qno5")
-map_width = 100
+map_width = 400
 
 [node name="TileMapHit" type="Node" parent="TileMapLayer"]
 script = ExtResource("3_af437")
