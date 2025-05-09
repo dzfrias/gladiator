@@ -79,7 +79,7 @@ func load_data() -> void:
 		_level = json.data["level"]
 
 func reset() -> void:
-	_buckles = 100
+	_buckles = 10
 	_alternate = null
 	_gadget = null
 	_passives = []
