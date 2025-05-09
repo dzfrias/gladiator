@@ -21,6 +21,11 @@ var level: int:
 	set(level):
 		_level = level
 		save()
+var done_tutorial: bool:
+	get: return _done_tutorial
+	set(new):
+		_done_tutorial = new
+		save()
 
 signal buckles_changed
 
@@ -29,6 +34,7 @@ var _buckles: int
 var _alternate: WeaponStats
 var _gadget: GadgetInfo
 var _level: int
+var _done_tutorial: bool
 
 func _ready() -> void:
 	if not FileAccess.file_exists("user://savegame.json"):
@@ -52,6 +58,7 @@ func save() -> void:
 		"gadget": gadget.serialize() if gadget != null else null,
 		"passives": _passives.map(func(passive): return passive.serialize()),
 		"level": level,
+		"done_tutorial": done_tutorial
 	}
 	file.store_line(JSON.stringify(data))
 
@@ -67,7 +74,7 @@ func load_data() -> void:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 			continue
 		
-		if not json.data.has_all(["buckles", "alternate", "gadget", "passives", "level"]):
+		if not json.data.has_all(["buckles", "alternate", "gadget", "passives", "level", "done_tutorial"]):
 			print("Not enough JSON information, missing some keys... resetting")
 			reset()
 			return
@@ -77,6 +84,7 @@ func load_data() -> void:
 		_gadget = GadgetInfo.deserialize(json.data["gadget"]) if json.data["gadget"] != null else null
 		_passives = json.data["passives"].map(func(passive_dict): return Passive.deserialize(passive_dict))
 		_level = json.data["level"]
+		_done_tutorial = json.data["done_tutorial"]
 
 func reset() -> void:
 	_buckles = 10
@@ -84,4 +92,5 @@ func reset() -> void:
 	_gadget = null
 	_passives = []
 	_level = 0
+	_done_tutorial = false
 	save()

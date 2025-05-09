@@ -12,6 +12,7 @@ var in_combat: bool:
 			entered_combat.emit()
 		if old != new and not new:
 			exited_combat.emit()
+var scene: PackedScene = load("res://scenes/mission.tscn")
 
 var _in_combat: bool = false
 var _effects_scene = preload("res://scenes/load_effects.tscn")
@@ -22,7 +23,7 @@ signal entered_combat
 signal exited_combat
 
 func _ready() -> void:
-	assert(buckles > 0)
+	assert(buckles >= 0)
 	_setup.call_deferred()
 
 func _setup() -> void:

@@ -2,8 +2,6 @@ extends Node
 
 var mission: Mission
 
-var _mission_scene = preload("res://scenes/mission.tscn")
-
 func enter_mission(m: Mission) -> void:
 	mission = m
 	_goto_mission.call_deferred()
@@ -20,7 +18,7 @@ func _goto_home(success: bool) -> void:
 	HubManager.go_to_hub()
 
 func _goto_mission() -> void:
-	var new_scene := _load_scene(_mission_scene)
+	var new_scene := _load_scene(mission.scene)
 	new_scene.add_child(mission)
 	var player := new_scene.find_child("Player") as Player
 	player.gadget().set_gadget(PersistentData.gadget)

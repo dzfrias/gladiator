@@ -14,6 +14,8 @@ func set_to_mission(mission: Mission):
 		mission_name = "Conquer"
 	elif mission is SurvivalMission:
 		mission_name = "Survive"
+	elif mission is TutorialMission:
+		mission_name = "Tutorial"
 	else:
 		assert(false)
 	

@@ -4,6 +4,13 @@ var missions: Array[Mission] = []
 
 func _ready() -> void:
 	did_interact.connect(_on_interact)
+	
+	if not PersistentData.done_tutorial:
+		var mission := TutorialMission.new()
+		mission.buckles = 0
+		missions.append(mission)
+		return
+	
 	var mission := ConquerMission.new()
 	var mission2 := ConquerMission.new()
 	var mission3 := ConquerMission.new()

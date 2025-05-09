@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://d1xnu3ygtm8qs"]
+[gd_scene load_steps=21 format=4 uid="uid://d1xnu3ygtm8qs"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_i3pcd"]
 [ext_resource type="PackedScene" path="res://scenes/background.tscn" id="1_od3kf"]
@@ -21,6 +21,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ey5c"]
 size = Vector2(234.25, 589)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0wf1"]
+size = Vector2(1031.5, 386.5)
 
 [node name="Tutorial" type="Node2D"]
 
@@ -312,6 +315,15 @@ position = Vector2(-942, -376)
 
 [node name="Spawn2" type="Node2D" parent="SpiderValley"]
 position = Vector2(895, -349)
+
+[node name="EndArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndArea"]
+position = Vector2(7901, -602)
+shape = SubResource("RectangleShape2D_n0wf1")
 
 [node name="VHS" parent="." instance=ExtResource("8_5q5mq")]
 
