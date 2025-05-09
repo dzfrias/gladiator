@@ -1,0 +1,206 @@
+[gd_scene load_steps=20 format=3 uid="uid://faty2metrvwh"]
+
+[ext_resource type="Theme" uid="uid://bqlm22ts8dxfd" path="res://resources/main_theme.tres" id="1_irvl7"]
+[ext_resource type="Script" path="res://scripts/ui/win_screen.gd" id="2_hcj5x"]
+[ext_resource type="Texture2D" uid="uid://chfx1it34ks1o" path="res://assets/Art/BG Layer 1.png" id="3_eo0uy"]
+[ext_resource type="Texture2D" uid="uid://dul65fiscpp5n" path="res://assets/Art/BG Layer 2.png" id="4_qhaxu"]
+[ext_resource type="Texture2D" uid="uid://dxynkoo2ifdqj" path="res://assets/Art/BG Layer 3.png" id="5_an671"]
+[ext_resource type="Material" uid="uid://ck7voiwb6svy4" path="res://resources/materials/dust.tres" id="6_c8c37"]
+[ext_resource type="Texture2D" uid="uid://c77t0ndbqlfdr" path="res://assets/Art/BG Layer 4.png" id="7_bv7gj"]
+[ext_resource type="Texture2D" uid="uid://bjv1njf4wfo76" path="res://assets/Art/BG Layer 5.png" id="8_qeemu"]
+[ext_resource type="Texture2D" uid="uid://cbd4l1j3uer4h" path="res://assets/Art/BG Layer 6.png" id="9_gurv7"]
+[ext_resource type="Shader" path="res://resources/shaders/vignette.gdshader" id="10_j5pxk"]
+[ext_resource type="Script" path="res://scripts/ui/floating.gd" id="11_6sabg"]
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="11_i32jd"]
+[ext_resource type="Texture2D" uid="uid://doou8ewryr0pi" path="res://assets/Art/silo.png" id="12_ppwh7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_swags"]
+
+[sub_resource type="Gradient" id="Gradient_gteer"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 0.411765)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b72m3"]
+gradient = SubResource("Gradient_gteer")
+width = 128
+height = 128
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iymsd"]
+shader = ExtResource("10_j5pxk")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.51
+shader_parameter/outer_radius = 1.53
+
+[sub_resource type="LabelSettings" id="LabelSettings_b1e6d"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_g8jdh"]
+line_spacing = 40.0
+font_size = 30
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_irvl7")
+script = ExtResource("2_hcj5x")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_eo0uy")
+
+[node name="TextureRect2" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_qhaxu")
+
+[node name="TextureRect3" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_an671")
+
+[node name="Dust" type="ColorRect" parent="Background"]
+material = ExtResource("6_c8c37")
+layout_mode = 0
+offset_right = 1279.0
+offset_bottom = 734.0
+color = Color(1, 1, 1, 0)
+
+[node name="TextureRect4" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bv7gj")
+
+[node name="TextureRect5" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_qeemu")
+
+[node name="TextureRect6" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_gurv7")
+
+[node name="TextureRect8" type="TextureRect" parent="Background"]
+material = SubResource("CanvasItemMaterial_swags")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_b72m3")
+
+[node name="TextureRect9" type="ColorRect" parent="Background"]
+material = SubResource("ShaderMaterial_iymsd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect7" type="TextureRect" parent="Background"]
+material = ExtResource("11_i32jd")
+layout_mode = 0
+offset_left = -1177.0
+offset_top = -922.0
+offset_right = 2221.0
+offset_bottom = 989.0
+texture = ExtResource("12_ppwh7")
+
+[node name="Win Screen" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -373.0
+offset_top = 107.0
+offset_right = 373.0
+offset_bottom = 179.0
+grow_horizontal = 2
+text = "Stardom Achieved"
+label_settings = SubResource("LabelSettings_b1e6d")
+script = ExtResource("11_6sabg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -7.5
+offset_right = 20.0
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Programming: Diego, Tanner
+Art: Savannah, RE, Tanner
+Music: RE, Carlo
+Media: Daphne"
+label_settings = SubResource("LabelSettings_g8jdh")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.0
+offset_top = -160.0
+offset_right = 163.0
+offset_bottom = -111.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+
+[node name="Fade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

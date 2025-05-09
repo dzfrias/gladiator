@@ -16,6 +16,7 @@ func _goto_home(success: bool) -> void:
 		PersistentData.reset()
 	else:
 		PersistentData.buckles += mission.buckles
+		PersistentData.level += 1
 	HubManager.go_to_hub()
 
 func _goto_mission() -> void:

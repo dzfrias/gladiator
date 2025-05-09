@@ -18,11 +18,11 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rjtun"]
 blend_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_j2dvo"]
+[sub_resource type="Gradient" id="Gradient_mmykn"]
 colors = PackedColorArray(0, 0, 0, 1, 0.54, 0.54, 0.54, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_uysqm"]
-gradient = SubResource("Gradient_j2dvo")
+gradient = SubResource("Gradient_mmykn")
 width = 128
 height = 128
 fill_from = Vector2(0.584862, 0.438073)
@@ -30,12 +30,12 @@ fill_to = Vector2(0.869266, 0.0389908)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vvk01"]
 
-[sub_resource type="Gradient" id="Gradient_gteer"]
+[sub_resource type="Gradient" id="Gradient_k35xr"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0, 0, 0, 0.278431)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_30ltq"]
-gradient = SubResource("Gradient_gteer")
+gradient = SubResource("Gradient_k35xr")
 width = 128
 height = 128
 

@@ -76,7 +76,7 @@ theme_override_fonts/font = ExtResource("2_58xu0")
 [node name="Resolutions" type="OptionButton" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_58xu0")
-selected = 1
+selected = 0
 item_count = 4
 popup/item_0/text = "1280x720"
 popup/item_0/id = 1

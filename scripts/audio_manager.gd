@@ -24,6 +24,7 @@ func play_ui_sound(scene, stream: AudioStreamWAV, volume_db = 0):
 
 func play_music(stream: AudioStreamWAV, volume_db = 0) -> void:
 	if music != null:
+		music.stop()
 		music.free()
 	music = AudioStreamPlayer.new()
 	music.bus = "Music"
