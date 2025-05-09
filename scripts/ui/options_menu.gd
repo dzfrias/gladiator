@@ -6,6 +6,7 @@ signal options_menu_closed
 @onready var music_volume_slider: HSlider = $VBoxContainer/MusicSlider
 
 func _ready():
+	super()
 	$VBoxContainer/BackButton.pressed.connect(_on_back_btn_pressed)
 	master_volume_slider.value = AudioServer.get_bus_volume_db(Constants.MASTER_BUS_INDEX)
 	master_volume_slider.value_changed.connect(_on_master_volume_changed)

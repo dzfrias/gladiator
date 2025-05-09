@@ -4,8 +4,13 @@
 [ext_resource type="Script" path="res://scripts/ui/pause_screen.gd" id="1_gg3mg"]
 [ext_resource type="PackedScene" uid="uid://bxoqkl0fs3coq" path="res://scenes/options_menu.tscn" id="2_6k2nu"]
 
-[node name="PauseScreen" type="CanvasLayer" node_paths=PackedStringArray("options_menu")]
-layer = 9
+[node name="PauseScreen" type="Control" node_paths=PackedStringArray("options_menu")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_gg3mg")
 options_menu = NodePath("OptionsCanvas")
 
@@ -17,7 +22,7 @@ offset_top = 67.0
 offset_bottom = 67.0
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
