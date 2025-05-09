@@ -26,6 +26,7 @@ func play_music(stream: AudioStreamWAV, volume_db = 0) -> void:
 	if music != null:
 		music.free()
 	music = AudioStreamPlayer.new()
+	music.bus = "Music"
 	get_tree().root.add_child(music)
 	music.stream = stream
 	music.play()

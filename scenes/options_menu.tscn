@@ -1,49 +1,94 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxoqkl0fs3coq"]
 
 [ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="1_6gvoo"]
-[ext_resource type="Theme" path="res://resources/main_theme.tres" id="2_n45n8"]
+[ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2_58xu0"]
 
-[node name="OptionsMenu" type="CanvasLayer"]
-layer = 9
-script = ExtResource("1_6gvoo")
-
-[node name="Control" type="Control" parent="."]
+[node name="OptionsMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_n45n8")
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -210.0
-offset_top = -316.0
-offset_right = 210.0
-offset_bottom = -192.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6gvoo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -340.0
+offset_right = 183.0
+offset_bottom = 348.0
+grow_horizontal = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_58xu0")
 theme_override_font_sizes/font_size = 90
 text = "Options"
 
-[node name="BackButton" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -181.0
-offset_top = -135.0
-offset_right = 181.0
-offset_bottom = -51.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="MasterVolumeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_58xu0")
+theme_override_font_sizes/font_size = 50
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="VBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+min_value = -20.0
+max_value = 20.0
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_58xu0")
+theme_override_font_sizes/font_size = 50
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+min_value = -20.0
+max_value = 20.0
+
+[node name="FullscreenToggleContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="FullscreenLabel" type="Label" parent="VBoxContainer/FullscreenToggleContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_58xu0")
+theme_override_font_sizes/font_size = 50
+text = "Fullscreen"
+
+[node name="FullscreenToggle" type="CheckButton" parent="VBoxContainer/FullscreenToggleContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_58xu0")
+
+[node name="Resolutions" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_58xu0")
+selected = 1
+item_count = 4
+popup/item_0/text = "1280x720"
+popup/item_0/id = 1
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 1
+popup/item_2/text = "2560x1440"
+popup/item_2/id = 3
+popup/item_3/text = "2560x1600"
+popup/item_3/id = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_58xu0")
 theme_override_font_sizes/font_size = 55
 text = "Back"

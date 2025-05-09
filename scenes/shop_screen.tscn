@@ -13,6 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_ksj6c")
 
 [node name="Return" type="Button" parent="."]
+layout_mode = 0
 offset_left = 47.0
 offset_top = 45.0
 offset_right = 219.0
@@ -93,6 +94,7 @@ grow_vertical = 2
 text = "Done"
 
 [node name="BucklesLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 46.88
 offset_top = 121.11
 offset_right = 123.88

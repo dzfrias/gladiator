@@ -17,4 +17,4 @@ func _ready() -> void:
 		$Player.add_passive(passive)
 
 func _play_sound():
-	AudioManager.play_ui_sound(get_tree().root, load("res://assets/Music/hub_music.wav"), -20)
+	AudioManager.play_music(load("res://assets/Music/hub_music.wav"), -20)

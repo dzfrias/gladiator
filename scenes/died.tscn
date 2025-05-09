@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3x3lka4uja4h"]
 
-[ext_resource type="Theme" uid="uid://bqlm22ts8dxfd" path="res://resources/main_theme.tres" id="1_6ifoc"]
+[ext_resource type="Theme" path="res://resources/main_theme.tres" id="1_6ifoc"]
 
 [node name="Died" type="CanvasLayer"]
 layer = 9
