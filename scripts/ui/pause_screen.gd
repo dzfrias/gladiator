@@ -4,6 +4,7 @@ extends Menu
 
 func _ready() -> void:
 	super()
+	
 	self.visible = false
 	$Control/ResumeButton.pressed.connect(_on_resume_btn_pressed)
 	$Control/OptionsButton.pressed.connect(_on_options_btn_pressed)

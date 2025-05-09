@@ -23,6 +23,6 @@ func _on_button_pressed() -> void:
 	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/ui_select_2.wav"), -15)
 
 func _on_node_added(node: Node) -> void:
-	if node is Button:
+	if node is Button and is_ancestor_of(node):
 		node.mouse_entered.connect(_on_button_hovered)
 		node.pressed.connect(_on_button_pressed)
