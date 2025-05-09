@@ -321,6 +321,8 @@ func _burrow() -> void:
 	assert(_state != State.UNDERGROUND)
 	_state = State.UNDERGROUND
 	_current_move_speed = movement_settings.burrow_speed
+	$PlayerGun.visible = false
+	$AnimatedSprite2D.play("burrow")
 	var right := Input.is_action_pressed("right")
 	var left := Input.is_action_pressed("left")
 	# Equivalent to logical exclusive-or; do not give a spped boost if they're not pressing left
@@ -328,7 +330,6 @@ func _burrow() -> void:
 	if left != right:
 		var k := 1.0 if right else -1.0
 		velocity.x = maxf(absf(velocity.x), movement_settings.burrow_speed_boost) * k
-	$AnimatedSprite2D.visible = false
 	collision_layer = Constants.INVINCIBLE_LAYER
 	went_underground.emit()
 
@@ -337,6 +338,7 @@ func _unburrow() -> void:
 	_state = State.CONTROL
 	_current_move_speed = movement_settings.move_speed
 	$AnimatedSprite2D.visible = true
+	$PlayerGun.visible = true
 	$DiggingAudioPlayer.stop()
 	if not _is_invincible:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER

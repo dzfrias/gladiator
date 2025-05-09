@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=49 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
 [ext_resource type="Script" path="res://scripts/player/player_particles.gd" id="8_7w5qy"]
 [ext_resource type="Script" path="res://scripts/player/inventory.gd" id="11_40if5"]
+[ext_resource type="Texture2D" uid="uid://f65k6etimxpe" path="res://assets/Art/mound.png" id="12_suerc"]
 [ext_resource type="Texture2D" uid="uid://du6qc0vrqayb0" path="res://assets/Art/Player_Shoot.png" id="14_kscrq"]
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="14_ojru7"]
 [ext_resource type="Texture2D" uid="uid://b3yl3oymh43ks" path="res://assets/Art/PlayerJump1.png" id="15_3rly8"]
@@ -37,6 +38,18 @@ radius = 57.42
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y5bcy"]
 shader = ExtResource("14_ojru7")
 shader_parameter/color = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psg4c"]
+atlas = ExtResource("12_suerc")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfpp5"]
+atlas = ExtResource("12_suerc")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a5es"]
+atlas = ExtResource("12_suerc")
+region = Rect2(72, 0, 36, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jaric"]
 atlas = ExtResource("14_kscrq")
@@ -96,6 +109,20 @@ region = Rect2(175, 0, 25, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a5fr2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psg4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfpp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a5es")
+}],
+"loop": true,
+"name": &"burrow",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jaric")
@@ -247,9 +274,10 @@ shape = SubResource("CircleShape2D_ndjlv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_y5bcy")
+position = Vector2(-1, -1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_a5fr2")
-animation = &"fire"
+animation = &"burrow"
 autoplay = "idle"
 
 [node name="PlayerGun" type="Sprite2D" parent="."]
