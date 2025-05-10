@@ -88,11 +88,11 @@ func _process(delta: float) -> void:
 			_apply_horizontal_input(delta)
 			
 			if is_on_floor() and not _is_jumping:
-				if abs(velocity.x) > 0:
+				if abs(velocity.x) > 0 and !($AnimatedSprite2D.is_playing() && $AnimatedSprite2D.get_animation() == "exit_burrow"):
 					$AnimatedSprite2D.play("walk")
 					if !$WalkingAudioPlayer.playing:
 						$WalkingAudioPlayer.play()
-				elif $AnimatedSprite2D.get_animation() != "fire":
+				elif $AnimatedSprite2D.get_animation() != "fire" and $AnimatedSprite2D.get_animation() != "exit_burrow":
 					$AnimatedSprite2D.play("idle")
 			
 			if _wants_burrow and is_on_floor():
@@ -103,6 +103,8 @@ func _process(delta: float) -> void:
 			_apply_horizontal_input(delta)
 		State.UNDERGROUND:
 			_underground_time += delta * movement_settings.burrow_increment_factor
+			if !$AnimatedSprite2D.is_playing():
+				$AnimatedSprite2D.play("burrow")
 			if !$DiggingAudioPlayer.playing:
 				$DiggingAudioPlayer.play()
 			_apply_horizontal_input(delta)
@@ -323,7 +325,7 @@ func _burrow() -> void:
 	_state = State.UNDERGROUND
 	_current_move_speed = movement_settings.burrow_speed
 	$PlayerGun.visible = false
-	$AnimatedSprite2D.play("burrow")
+	$AnimatedSprite2D.play("enter_burrow")
 	var right := Input.is_action_pressed("right")
 	var left := Input.is_action_pressed("left")
 	# Equivalent to logical exclusive-or; do not give a spped boost if they're not pressing left
@@ -340,6 +342,7 @@ func _unburrow() -> void:
 	_current_move_speed = movement_settings.move_speed
 	$AnimatedSprite2D.visible = true
 	$PlayerGun.visible = true
+	$AnimatedSprite2D.play("exit_burrow")
 	$DiggingAudioPlayer.stop()
 	if not _is_invincible:
 		collision_layer = Constants.PLAYER_LAYER | Constants.ENTITY_LAYER

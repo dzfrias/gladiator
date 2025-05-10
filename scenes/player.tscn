@@ -1,21 +1,21 @@
-[gd_scene load_steps=49 format=3 uid="uid://dv7ihnextsw4v"]
+[gd_scene load_steps=56 format=3 uid="uid://dv7ihnextsw4v"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5wdcp"]
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
-[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="3_x3oej"]
+[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="3_x3oej"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="4_trosa"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
 [ext_resource type="Script" path="res://scripts/player/player_particles.gd" id="8_7w5qy"]
 [ext_resource type="Script" path="res://scripts/player/inventory.gd" id="11_40if5"]
-[ext_resource type="Texture2D" uid="uid://f65k6etimxpe" path="res://assets/Art/mound.png" id="12_suerc"]
+[ext_resource type="Texture2D" uid="uid://wy1aoq6c8fcr" path="res://assets/Art/char_dig_clean.png" id="12_vwry6"]
 [ext_resource type="Texture2D" uid="uid://du6qc0vrqayb0" path="res://assets/Art/Player_Shoot.png" id="14_kscrq"]
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="14_ojru7"]
 [ext_resource type="Texture2D" uid="uid://b3yl3oymh43ks" path="res://assets/Art/PlayerJump1.png" id="15_3rly8"]
 [ext_resource type="Texture2D" uid="uid://dwowtfaylsxnu" path="res://assets/Art/PlayerWalk1.png" id="15_5unjr"]
-[ext_resource type="PackedScene" uid="uid://d37g531von16b" path="res://scenes/particles/underground_particles.tscn" id="16_rc816"]
+[ext_resource type="PackedScene" path="res://scenes/particles/underground_particles.tscn" id="16_rc816"]
 [ext_resource type="Script" path="res://scripts/gadgets/gadget.gd" id="16_rlhru"]
 [ext_resource type="Script" path="res://scripts/player/player_gun.gd" id="16_ud12g"]
 [ext_resource type="AudioStream" uid="uid://dlq8esunh5ld3" path="res://assets/SoundEffects/sand_walk_1.wav" id="17_l3x6c"]
@@ -39,17 +39,45 @@ radius = 57.42
 shader = ExtResource("14_ojru7")
 shader_parameter/color = null
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_psg4c"]
-atlas = ExtResource("12_suerc")
-region = Rect2(0, 0, 36, 36)
+[sub_resource type="AtlasTexture" id="AtlasTexture_76igu"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(336, 28, 32, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dfpp5"]
-atlas = ExtResource("12_suerc")
-region = Rect2(36, 0, 36, 36)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt6iq"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(400, 28, 32, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0a5es"]
-atlas = ExtResource("12_suerc")
-region = Rect2(72, 0, 36, 36)
+[sub_resource type="AtlasTexture" id="AtlasTexture_71spk"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(16, 28, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7rg4"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(80, 28, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kudua"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(144, 28, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffj6h"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(208, 28, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al44l"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(272, 28, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44ji5"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(464, 28, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfohq"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(528, 28, 32, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ew26"]
+atlas = ExtResource("12_vwry6")
+region = Rect2(592, 28, 32, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jaric"]
 atlas = ExtResource("14_kscrq")
@@ -111,17 +139,48 @@ region = Rect2(175, 0, 25, 34)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_psg4c")
+"texture": SubResource("AtlasTexture_76igu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dfpp5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0a5es")
+"texture": SubResource("AtlasTexture_pt6iq")
 }],
 "loop": true,
 "name": &"burrow",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71spk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7rg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kudua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffj6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_al44l")
+}],
+"loop": false,
+"name": &"enter_burrow",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44ji5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfohq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ew26")
+}],
+"loop": false,
+"name": &"exit_burrow",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -277,7 +336,7 @@ material = SubResource("ShaderMaterial_y5bcy")
 position = Vector2(-1, -1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_a5fr2")
-animation = &"burrow"
+animation = &"enter_burrow"
 autoplay = "idle"
 
 [node name="PlayerGun" type="Sprite2D" parent="."]
