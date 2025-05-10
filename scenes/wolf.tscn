@@ -1,13 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://bydm8vffd6nwt"]
+[gd_scene load_steps=33 format=3 uid="uid://bydm8vffd6nwt"]
 
 [ext_resource type="Script" path="res://scripts/enemies/wolf.gd" id="1_4octj"]
-[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="2_8cqwt"]
+[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="2_8cqwt"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="2_d7ips"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_cmatn"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="6_lg3qk"]
-[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="6_wltle"]
+[ext_resource type="Material" path="res://resources/materials/dark.tres" id="6_wltle"]
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="7_3l162"]
 [ext_resource type="Texture2D" uid="uid://biniqtkgjpujn" path="res://assets/Wolf idle.png" id="8_ssrod"]
+[ext_resource type="Texture2D" uid="uid://pcjsvlmiuvpa" path="res://assets/Art/wolf_run.png" id="9_6kovl"]
 [ext_resource type="PackedScene" uid="uid://76ks82idblh5" path="res://scenes/drop_spawner.tscn" id="9_fse3b"]
 [ext_resource type="Script" path="res://scripts/edge_detector.gd" id="10_1gcnm"]
 [ext_resource type="Script" path="res://scripts/hit_particles.gd" id="10_pfo6r"]
@@ -60,9 +61,25 @@ region = Rect2(224, 0, 32, 25)
 atlas = ExtResource("8_ssrod")
 region = Rect2(256, 0, 32, 25)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w5c7y"]
-atlas = ExtResource("8_ssrod")
-region = Rect2(0, 0, 32, 25)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7npju"]
+atlas = ExtResource("9_6kovl")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpbme"]
+atlas = ExtResource("9_6kovl")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ura0w"]
+atlas = ExtResource("9_6kovl")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb7js"]
+atlas = ExtResource("9_6kovl")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_om3qj"]
+atlas = ExtResource("9_6kovl")
+region = Rect2(256, 0, 64, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_th1nn"]
 animations = [{
@@ -100,11 +117,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w5c7y")
+"texture": SubResource("AtlasTexture_7npju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpbme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ura0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb7js")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_om3qj")
 }],
 "loop": true,
 "name": &"move",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrhg1"]
@@ -176,8 +205,10 @@ material = ExtResource("6_wltle")
 position = Vector2(0, -3)
 scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_th1nn")
-animation = &"idle"
+animation = &"move"
 autoplay = "idle"
+frame = 2
+frame_progress = 0.122298
 
 [node name="NotifyZone" type="Area2D" parent="."]
 visible = false
