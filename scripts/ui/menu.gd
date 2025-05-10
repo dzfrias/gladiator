@@ -18,11 +18,11 @@ func get_all_buttons(node: Node) -> Array[Button]:
 	return buttons
 
 func _on_button_hovered(button: Button) -> void:
-	button.position.y -= 10
+	button.position.y -= 5
 	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/ui_select_1.wav"), -15)
 
 func _on_button_unhovered(button: Button) -> void:
-	button.position.y += 10
+	button.position.y += 5
 
 func _on_button_pressed() -> void:
 	AudioManager.play_ui_sound(get_tree().current_scene, load("res://assets/SoundEffects/ui_select_2.wav"), -15)
