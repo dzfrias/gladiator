@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var text_wait_time: float = 1.0
-@export var wait_time: float = 1.5
+@export var wait_time: float = 1
 @export var enemy_to_spawn: PackedScene
 @export var text_timescale: float = 0.4
 
@@ -20,8 +20,8 @@ func _start() -> void:
 	Player.Instance.camera().add_trauma(0.7)
 	await get_tree().create_timer(wait_time).timeout
 	_make_text_appear()
-	for _i in range(50):
-		var spawn_point = $Spawn1 if randf() <= 0.5 else $Spawn2
+	for _i in range(25):
+		var spawn_point = $Spawn1
 		var enemy := enemy_to_spawn.instantiate() as Node2D
 		get_tree().current_scene.add_child(enemy)
 		enemy.notify(0)
