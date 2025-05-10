@@ -17,6 +17,7 @@ offset_right = 610.0
 offset_bottom = 44.0
 
 [node name="MissionLabel" type="Label" parent="Description"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "Conquer"
 label_settings = SubResource("LabelSettings_ephas")
@@ -26,11 +27,13 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="BucklesLabel" type="Label" parent="Description"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "50"
 label_settings = SubResource("LabelSettings_ephas")
 
 [node name="WeatherLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 29.0
 offset_top = 38.0
@@ -39,6 +42,7 @@ offset_bottom = 61.0
 text = "Acid Rain"
 
 [node name="DifficultyLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 29.0
 offset_top = 62.0
