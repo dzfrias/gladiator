@@ -102,12 +102,12 @@ offset_right = 63.0
 offset_bottom = -107.0
 grow_vertical = 0
 script = ExtResource("5_74ny8")
-weapon_image = NodePath("WeaponImage")
-alt_weapon_image = NodePath("WeaponImage2")
+weapon_image = NodePath("ItemSlot/WeaponImage")
+alt_weapon_image = NodePath("ItemSlot2/WeaponImage")
 infinite_ammo_image = NodePath("InfiniteAmmoSymbol")
 ammo_text = NodePath("AmmoText")
 
-[node name="WeaponImage2" type="TextureRect" parent="WeaponUI"]
+[node name="ItemSlot2" type="TextureRect" parent="WeaponUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -120,7 +120,17 @@ grow_vertical = 0
 texture = ExtResource("13_lo4n5")
 stretch_mode = 5
 
-[node name="WeaponImage3" type="TextureRect" parent="WeaponUI"]
+[node name="WeaponImage" type="TextureRect" parent="WeaponUI/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -69.0
+offset_right = 65.0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="ItemSlot" type="TextureRect" parent="WeaponUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -133,15 +143,14 @@ grow_vertical = 0
 texture = ExtResource("13_lo4n5")
 stretch_mode = 5
 
-[node name="WeaponImage" type="TextureRect" parent="WeaponUI"]
+[node name="WeaponImage" type="TextureRect" parent="WeaponUI/ItemSlot"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 47.0
-offset_top = -79.0
-offset_right = 112.0
-offset_bottom = -10.0
+offset_left = 3.0
+offset_top = -69.0
+offset_right = 68.0
 grow_vertical = 0
 texture = ExtResource("7_cbvig")
 stretch_mode = 5
@@ -176,7 +185,7 @@ offset_right = 205.0
 offset_bottom = -139.0
 grow_vertical = 0
 script = ExtResource("9_d74rq")
-gadget_image = NodePath("GadgetImage")
+gadget_image = NodePath("ItemSlot/GadgetImage")
 uses_num = NodePath("AmmoText")
 
 [node name="ColorRect2" type="ColorRect" parent="GadgetUI"]
@@ -188,7 +197,7 @@ offset_right = 80.0
 offset_bottom = 62.0
 color = Color(0.129559, 0.129558, 0.129558, 0.615686)
 
-[node name="GadgetImage" type="TextureRect" parent="GadgetUI"]
+[node name="ItemSlot" type="TextureRect" parent="GadgetUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -199,6 +208,17 @@ offset_right = 80.0
 offset_bottom = 21.0
 grow_vertical = 0
 texture = ExtResource("13_lo4n5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GadgetImage" type="TextureRect" parent="GadgetUI/ItemSlot"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -69.0
+offset_right = 69.0
+grow_vertical = 0
 expand_mode = 1
 stretch_mode = 5
 
