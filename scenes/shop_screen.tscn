@@ -121,6 +121,10 @@ offset_bottom = 161.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Done"
+icon = ExtResource("4_wvefg")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="BucklesLabel" type="Label" parent="."]
 layout_mode = 0
