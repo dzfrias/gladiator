@@ -63,6 +63,7 @@ func _generate() -> void:
 
 	var encounter_dist := randi_range(encounter_dist_min, encounter_dist_max)
 	var chest_spawn_chance := starting_chest_spawn_chance
+	var last_encounter: CombatEncounter = null
 	while module_origin.x < map_width:
 		var module: PackedScene
 		if encounter_dist == 0:
@@ -80,6 +81,7 @@ func _generate() -> void:
 			else:
 				instance.will_spawn_chest = false
 				chest_spawn_chance = minf(chest_spawn_chance + chest_spawn_chance_increment, 1.0)
+			last_encounter = instance
 		
 		if module_origin.y + instance.delta_y < -y_max or module_origin.y + instance.delta_y > 0:
 			continue
@@ -89,6 +91,9 @@ func _generate() -> void:
 		
 		var delta := _place_module(module_origin, instance)
 		module_origin += delta
+	
+	if PersistentData.level == 6:
+		last_encounter.spawn_boss()
 	
 	module_origin += _place_module(module_origin, _end_module.instantiate())
 
