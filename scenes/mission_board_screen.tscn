@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxtcamkd24d0b"]
+[gd_scene load_steps=5 format=3 uid="uid://cxtcamkd24d0b"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_board_screen.gd" id="1_70ync"]
+[ext_resource type="Theme" path="res://resources/main_theme.tres" id="1_cr384"]
 [ext_resource type="Shortcut" uid="uid://66u22astbge4" path="res://resources/quit_shortcut.tres" id="2_fw7en"]
+[ext_resource type="Texture2D" uid="uid://ohyw2ytowdcb" path="res://assets/Art/Mission Board UI.png" id="4_cndfg"]
 
 [node name="MissionBoardScreen" type="Control"]
 layout_mode = 3
@@ -10,7 +12,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_cr384")
 script = ExtResource("1_70ync")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_cndfg")
 
 [node name="Return" type="Button" parent="."]
 layout_mode = 0
@@ -37,8 +49,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -203.0
-offset_top = -113.0
+offset_top = -67.0
 offset_right = 203.0
-offset_bottom = 113.0
+offset_bottom = 159.0
 grow_horizontal = 2
 grow_vertical = 2
