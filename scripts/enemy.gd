@@ -50,6 +50,8 @@ func health() -> Health:
 	return $Health
 
 func set_stunned(duration: float) -> void:
+	if stunned:
+		return
 	var original_materials: Array[Material] = []
 	for sprite in _sprites:
 		original_materials.append(sprite.material)
