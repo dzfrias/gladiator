@@ -17,9 +17,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	_align_with_direction()
-	match _state:
-		State.TRACKING:
-			$AnimatedSprite2D.play("move")
+
+	if velocity.x == 0:
+		$AnimatedSprite2D.play("idle")
+	else:
+		$AnimatedSprite2D.play("move")
 
 func _attack() -> void:
 	_state = State.TIRED
