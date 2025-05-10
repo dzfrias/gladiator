@@ -30,6 +30,7 @@ shader = ExtResource("10_j5pxk")
 shader_parameter/alpha = 1.0
 shader_parameter/inner_radius = 0.51
 shader_parameter/outer_radius = 1.53
+shader_parameter/color = Color(0, 0, 0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b1e6d"]
 font_size = 60
