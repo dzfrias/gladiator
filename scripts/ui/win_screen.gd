@@ -4,6 +4,7 @@ extends Menu
 
 func _ready() -> void:
 	super()
+	AudioManager.call_deferred("play_music", load("res://assets/Music/ending_music.wav"))
 	$RestartButton.pressed.connect(_on_restart_button_pressed)
 	var tween := get_tree().create_tween()
 	tween.tween_property($Fade, "color:a", 0.0, fade_duration)
