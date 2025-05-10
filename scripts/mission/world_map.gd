@@ -34,6 +34,7 @@ var _encounters := [
 	WeightedScene.new("res://scenes/modules/encounters/house_encounter.tscn", 0.2),
 ]
 var _start_module: PackedScene = preload("res://scenes/modules/terrain/flat.tscn")
+var _end_module: PackedScene = preload("res://scenes/modules/terrain/end.tscn")
 var _fill_tiles: Array[FillTile] = []
 var _fill_source_id: int
 var _tile_size: Vector2
@@ -52,7 +53,7 @@ func _ready() -> void:
 		if fill_probability > 0.0:
 			_fill_tiles.append(FillTile.new(tile_coords, fill_probability))
 	
-	_terrain = scenes_in_dir(terrain_path)
+	_terrain = scenes_in_dir(terrain_path, ["end.tscn"])
 	
 	_generate.call_deferred()
 
@@ -88,6 +89,8 @@ func _generate() -> void:
 		
 		var delta := _place_module(module_origin, instance)
 		module_origin += delta
+	
+	module_origin += _place_module(module_origin, _end_module.instantiate())
 
 func _place_module(origin: Vector2i, instance: Module) -> Vector2i:
 	var scene_origin := to_global(map_to_local(origin)) - _tile_size / 2
@@ -135,7 +138,7 @@ static func weighted_choice(array: Array) -> Variant:
 	assert(false)
 	return null
 
-static func scenes_in_dir(path: String):
+static func scenes_in_dir(path: String, exclude: Array[String]):
 	var scenes: Array[PackedScene] = []
 	
 	var dir := DirAccess.open(path)
@@ -146,7 +149,7 @@ static func scenes_in_dir(path: String):
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
-		if file_name.get_extension() == "tscn":
+		if file_name.get_extension() == "tscn" and not exclude.has(file_name):
 			var full_path = path.path_join(file_name)
 			scenes.append(load(full_path))
 		file_name = dir.get_next()
