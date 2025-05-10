@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://b04m2jwx1r01b"]
+[gd_scene load_steps=5 format=3 uid="uid://b04m2jwx1r01b"]
 
+[ext_resource type="Theme" path="res://resources/main_theme.tres" id="1_qylof"]
 [ext_resource type="Texture2D" uid="uid://dccns2r7l5dx3" path="res://assets/icon.svg" id="1_vmwyk"]
+[ext_resource type="Texture2D" uid="uid://dakn81q2jcc06" path="res://assets/Art/Button.png" id="3_h8bou"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ephas"]
 font_size = 22
 
 [node name="Item" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 71.1)
+theme = ExtResource("1_qylof")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 2
@@ -36,3 +39,7 @@ label_settings = SubResource("LabelSettings_ephas")
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Buy"
+icon = ExtResource("3_h8bou")
+flat = true
+icon_alignment = 1
+expand_icon = true
