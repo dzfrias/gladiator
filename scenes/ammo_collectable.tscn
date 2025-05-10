@@ -1,12 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8lcgld0ypdsj"]
+[gd_scene load_steps=4 format=3 uid="uid://c8lcgld0ypdsj"]
 
-[ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="1_5ijvl"]
 [ext_resource type="Script" path="res://scripts/ammo_collectable.gd" id="1_dwcl6"]
-[ext_resource type="Texture2D" uid="uid://blbtwr24by4rg" path="res://resources/white_gradient.tres" id="3_lu6bm"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hf0e7"]
-shader = ExtResource("1_5ijvl")
-shader_parameter/color = Color(1, 1, 1, 1)
+[ext_resource type="Texture2D" uid="uid://bq8i3ewvtikqm" path="res://assets/Art/laser_pickup.png" id="2_ufxec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5cx5b"]
 size = Vector2(10, 20)
@@ -17,10 +12,9 @@ collision_mask = 20
 script = ExtResource("1_dwcl6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_hf0e7")
-position = Vector2(9.53674e-07, 9.53674e-07)
-scale = Vector2(0.15625, 0.3125)
-texture = ExtResource("3_lu6bm")
+position = Vector2(2.98023e-07, -3.57628e-07)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_ufxec")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5cx5b")
