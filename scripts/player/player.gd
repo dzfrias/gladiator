@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 signal on_ground_impact(impact_force: float)
 signal on_weapon_switch
 signal alt_weapon_set(weapon_stats)
+signal passive_added(passive: Passive)
 signal jumped
 signal went_underground
 signal exited_underground
@@ -413,6 +414,7 @@ func add_passive(passive: Passive) -> void:
 	passives.append(passive)
 	var instance := passive.scene.instantiate()
 	$Passives.add_child(instance)
+	passive_added.emit(passive)
 
 func is_in_fallthrough() -> bool:
 	return not get_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=17 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="3_lbnag"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/ui/gadget_ui.gd" id="9_d74rq"]
 [ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="10_132hn"]
 [ext_resource type="PackedScene" uid="uid://7rm76yft7pay" path="res://scenes/pause_screen.tscn" id="11_0dn3d"]
+[ext_resource type="Script" path="res://scripts/ui/passive_ui.gd" id="12_fd3pk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0e2u"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -204,3 +205,16 @@ theme_override_fonts/normal_font = SubResource("FontVariation_b502f")
 text = "000"
 
 [node name="PauseScreen" parent="." instance=ExtResource("11_0dn3d")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 903.0
+offset_bottom = 73.0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="PassiveUI" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("12_fd3pk")
