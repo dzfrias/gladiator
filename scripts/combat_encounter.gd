@@ -12,17 +12,22 @@ class_name CombatEncounter extends Module
 @export var will_spawn_chest: bool = false
 @export var chest_scene: PackedScene = preload("res://scenes/chest.tscn")
 
+class EnemyScene:
+	var scene: PackedScene
+	var weight: int
+	
+	func _init(scene: String, weight: int) -> void:
+		self.scene = load(scene)
+		self.weight = weight
+
 var _started := false
 var _spawn_during_wave: int
 var _initial_spawn_amt: int
 var _left_body: StaticBody2D
 var _right_body: StaticBody2D
 var _enemies := [
-	WorldMap.WeightedScene.new("res://scenes/wolf.tscn", 0.2),
-	WorldMap.WeightedScene.new("res://scenes/shooter.tscn", 0.35),
-	WorldMap.WeightedScene.new("res://scenes/suispider.tscn", 0.15),
-	WorldMap.WeightedScene.new("res://scenes/sniper.tscn", 0.15),
-	WorldMap.WeightedScene.new("res://scenes/burrower.tscn", 0.15),
+	EnemyScene.new("res://scenes/wolf.tscn", 2),
+	EnemyScene.new("res://scenes/shooter.tscn", 3),
 ]
 var _last_spawned: PackedScene
 var _done := false
@@ -31,6 +36,13 @@ var _idle_shooter: PackedScene = preload("res://scenes/idle_shooter.tscn")
 
 func _ready() -> void:
 	super()
+	
+	if PersistentData.level > 0:
+		_enemies.append(EnemyScene.new("res://scenes/sniper.tscn", 1))
+	if PersistentData.level > 2:
+		_enemies.append(EnemyScene.new("res://scenes/suispider.tscn", 1))
+	if PersistentData.level > 3:
+		_enemies.append(EnemyScene.new("res://scenes/burrower.tscn", 1))
 	
 	# Create a "start area" trigger that will start the wave when the player enters
 	var start_area := Area2D.new()
@@ -162,8 +174,10 @@ func _on_enemy_damage_taken(_amount: float, _direction: Vector2) -> void:
 	_start_wave()
 
 func _choose_enemy() -> PackedScene:
-	var scene: PackedScene = WorldMap.weighted_choice(_enemies).scene
-	while scene == _last_spawned:
-		scene = WorldMap.weighted_choice(_enemies).scene
+	var scene: PackedScene = null
+	var sum = _enemies.reduce(func(accum, x): return x.weight + accum, 0)
+	while scene == null or scene == _last_spawned:
+		var normalized = _enemies.map(func(x): return WorldMap.WeightedScene.new(x.scene.resource_path, float(x.weight) / float(sum)))
+		scene = WorldMap.weighted_choice(normalized).scene
 	_last_spawned = scene
 	return scene
