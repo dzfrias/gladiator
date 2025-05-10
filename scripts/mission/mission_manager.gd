@@ -24,13 +24,13 @@ func _goto_mission() -> void:
 	player.gadget().set_gadget(PersistentData.gadget)
 	var random_num = randi_range(0, 3)
 	if random_num == 0:
-		AudioManager.play_music(load("res://assets/Music/sea pickle.wav"))
+		AudioManager.play_music(load("res://assets/Music/sea pickle.wav"), -20)
 	elif random_num == 1:
-		AudioManager.play_music(load("res://assets/Music/March_yawn.wav"))
+		AudioManager.play_music(load("res://assets/Music/March_yawn.wav"), -20)
 	elif random_num == 2:
-		AudioManager.play_music(load("res://assets/Music/level_music.wav"))
+		AudioManager.play_music(load("res://assets/Music/level_music.wav"), -20)
 	elif random_num == 3:
-		AudioManager.play_music(load("res://assets/Music/shine_remix.wav"))
+		AudioManager.play_music(load("res://assets/Music/shine_remix.wav"), -20)
 	player.set_alt_weapon(PersistentData.alternate)
 	for passive in PersistentData.get_passives():
 		player.add_passive(passive)
