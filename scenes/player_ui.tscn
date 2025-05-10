@@ -1,11 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=19 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="3_lbnag"]
 [ext_resource type="PackedScene" uid="uid://beu7cb0rnolxb" path="res://scenes/survival_ui.tscn" id="4_k0q64"]
+[ext_resource type="Texture2D" uid="uid://b0s6dfgm73g8l" path="res://assets/Art/burrow_bar.png" id="4_tvfoo"]
 [ext_resource type="Script" path="res://scripts/ui/ammo_ui.gd" id="5_74ny8"]
 [ext_resource type="Script" path="res://scripts/ui/player_health_bar.gd" id="5_avo0v"]
 [ext_resource type="Script" path="res://scripts/ui/burrow_bar.gd" id="6_6nq0s"]
+[ext_resource type="Texture2D" uid="uid://dapetvgxutts2" path="res://assets/Art/health_bar.png" id="6_twhsx"]
 [ext_resource type="Texture2D" uid="uid://ch6yul654vai2" path="res://assets/Art/laser_pistol.png" id="7_cbvig"]
 [ext_resource type="Texture2D" uid="uid://cs7vmpbb6g2wh" path="res://assets/Art/pixel_infinity_sign.png" id="9_1ehpv"]
 [ext_resource type="Script" path="res://scripts/ui/gadget_ui.gd" id="9_d74rq"]
@@ -17,10 +19,10 @@
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptq68"]
-bg_color = Color(0, 0.753359, 0.728835, 1)
+bg_color = Color(0.438421, 0.301203, 0.218421, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjwni"]
-bg_color = Color(0.348506, 0.766647, 0, 1)
+bg_color = Color(0.847059, 0, 0, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_b502f"]
 base_font = ExtResource("10_132hn")
@@ -31,27 +33,28 @@ script = ExtResource("1_bm8m2")
 acid_rain_ui = ExtResource("3_lbnag")
 survival_ui = ExtResource("4_k0q64")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BurrowBar" type="TextureRect" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -131.0
-offset_right = 308.0
-offset_bottom = -29.0
+offset_left = 157.0
+offset_top = -107.0
+offset_right = 309.0
+offset_bottom = -55.0
 grow_vertical = 0
+texture = ExtResource("4_tvfoo")
 stretch_mode = 4
 
-[node name="BurrowBar" type="ProgressBar" parent="TextureRect"]
+[node name="BurrowBar" type="ProgressBar" parent="BurrowBar"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 59.0
-offset_top = -66.0
-offset_right = 239.0
-offset_bottom = -50.0
+offset_left = 24.0
+offset_top = -43.0
+offset_right = 147.0
+offset_bottom = -23.0
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_n0e2u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ptq68")
@@ -63,10 +66,11 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 9.0
-offset_top = -131.0
+offset_top = -76.0
 offset_right = 308.0
-offset_bottom = -29.0
+offset_bottom = 26.0
 grow_vertical = 0
+texture = ExtResource("6_twhsx")
 stretch_mode = 4
 
 [node name="Health" type="ProgressBar" parent="HealthBar"]
@@ -75,10 +79,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = -48.0
-offset_right = 239.0
-offset_bottom = -8.0
+offset_left = 65.0
+offset_top = -85.0
+offset_right = 290.0
+offset_bottom = -45.0
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_n0e2u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rjwni")
@@ -205,6 +209,10 @@ theme_override_fonts/normal_font = SubResource("FontVariation_b502f")
 text = "000"
 
 [node name="PauseScreen" parent="." instance=ExtResource("11_0dn3d")]
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 903.0

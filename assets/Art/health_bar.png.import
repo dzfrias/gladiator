@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0s6dfgm73g8l"
-path="res://.godot/imported/burrow_bar.png-0a98be7ca6a0b2c37d8bd0f3d282e5cb.ctex"
+uid="uid://dapetvgxutts2"
+path="res://.godot/imported/health_bar.png-06281afe2dc0eb602f02275eeadebb6c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Art/burrow_bar.png"
-dest_files=["res://.godot/imported/burrow_bar.png-0a98be7ca6a0b2c37d8bd0f3d282e5cb.ctex"]
+source_file="res://assets/Art/health_bar.png"
+dest_files=["res://.godot/imported/health_bar.png-06281afe2dc0eb602f02275eeadebb6c.ctex"]
 
 [params]
 
