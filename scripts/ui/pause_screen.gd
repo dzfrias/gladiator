@@ -36,6 +36,7 @@ func _on_options_btn_pressed():
 
 func _on_return_btn_pressed():
 	if MissionManager.mission != null:
+		Engine.time_scale = 1
 		MissionManager.mission._defeat()
 
 func _on_main_menu_btn_pressed():
