@@ -56,6 +56,11 @@ func _cycle() -> void:
 		effects.queue_free()
 		_bubble_spawn_cooldown = bubble_spawn_interval
 
+func _exit_tree() -> void:
+	var world_space := get_viewport().find_world_2d().space
+	var original_gravity = PhysicsServer2D.area_get_param(world_space, PhysicsServer2D.AREA_PARAM_GRAVITY)
+	PhysicsServer2D.area_set_param(world_space, PhysicsServer2D.AREA_PARAM_GRAVITY, original_gravity)
+
 func _spawn_bubble() -> void:
 	var bubble = bubble_scene.instantiate()
 	bubble.position.x = randf_range(Player.Instance.global_position.x - 500.0, Player.Instance.global_position.x + 500)
