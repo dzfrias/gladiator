@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bq8i3ewvtikqm" path="res://assets/Art/laser_pickup.png" id="2_ufxec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5cx5b"]
-size = Vector2(10, 20)
+size = Vector2(20, 41)
 
 [node name="AmmoCollectable" type="Area2D"]
 collision_layer = 0
@@ -12,9 +12,9 @@ collision_mask = 20
 script = ExtResource("1_dwcl6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.98023e-07, -3.57628e-07)
-scale = Vector2(1.25, 1.25)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_ufxec")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_5cx5b")
