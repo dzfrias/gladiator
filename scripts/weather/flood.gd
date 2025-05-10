@@ -14,7 +14,6 @@ var is_active: bool
 var _bubble_spawn_cooldown: float
 
 func _ready() -> void:
-	_spawn_bubble()
 	_bubble_spawn_cooldown = bubble_spawn_interval
 	_cycle()
 
