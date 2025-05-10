@@ -366,6 +366,8 @@ func _freeze_time():
 	# time freeze.
 	if not Input.is_action_pressed("fire") and not Input.is_action_pressed("fire_alt"):
 		_firing = FiringWeapon.NONE
+	if not Input.is_action_pressed("fallthrough"):
+		set_collision_mask_value(Math.ilog2(Constants.PLATFORM_LAYER) + 1, true)
 
 func is_on_platform():
 	return $PlatformRaycast.is_colliding()
