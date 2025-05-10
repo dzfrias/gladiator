@@ -17,7 +17,7 @@ var _bubble_spawn_cooldown: float
 func _ready() -> void:
 	_bubble_spawn_cooldown = bubble_spawn_interval
 	var world_space := get_viewport().find_world_2d().space
-	var original_gravity = PhysicsServer2D.area_get_param(world_space, PhysicsServer2D.AREA_PARAM_GRAVITY)
+	original_gravity = PhysicsServer2D.area_get_param(world_space, PhysicsServer2D.AREA_PARAM_GRAVITY)
 	_cycle()
 
 func _process(delta: float) -> void:
