@@ -49,9 +49,5 @@ func _align_with_direction() -> void:
 	$AnimatedSprite2D.flip_h = direction != 1
 	$AttackBox/CollisionShape2D.position.x = _original_attack_x * direction
 
-func _on_health_damage_taken(amount: float, direction: Vector2):
-	super(amount, direction)
-	AudioManager.play_sound(self, load("res://assets/SoundEffects/harm animal.wav"))
-
 func _on_got_stunned() -> void:
 	$AttackBox/CollisionShape2D.disabled = true

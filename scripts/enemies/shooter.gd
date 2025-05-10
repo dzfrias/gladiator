@@ -36,7 +36,3 @@ func _can_attack() -> bool:
 
 func _align_with_direction() -> void:
 	$Weapon.position.x = _original_weapon_x * $Direction.scalar
-
-func _on_health_damage_taken(amount: float, direction: Vector2):
-	super(amount, direction)
-	AudioManager.play_sound(self, load("res://assets/SoundEffects/hit.wav"))

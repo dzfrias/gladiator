@@ -1,11 +1,13 @@
 class_name Enemy extends CharacterBody2D
 
 @export var notify_depth = 2
+@export var hit_sound_interval: float = 0.5
 
 var stunned: bool
 
 var _sprites: Array[CanvasItem]
 var _white_material = preload("res://resources/materials/white_material.tres")
+var _can_play_sound: bool = true
 
 signal hit_floor
 signal got_stunned
@@ -70,6 +72,14 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 func _on_health_damage_taken(_amount: float, _direction: Vector2) -> void:
 	notify(notify_depth)
 	set_stunned(0.1)
+	if _can_play_sound:
+		AudioManager.play_sound(self, preload("res://assets/SoundEffects/hit.wav"))
+		_start_sound_timer()
 
 func _on_health_died() -> void:
 	queue_free()
+
+func _start_sound_timer() -> void:
+	_can_play_sound = false
+	await get_tree().create_timer(hit_sound_interval).timeout
+	_can_play_sound = true
