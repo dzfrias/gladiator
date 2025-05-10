@@ -19,7 +19,7 @@ func _ready() -> void:
 	for passive in PersistentData.get_passives():
 		$Player.add_passive(passive)
 	
-	if PersistentData.level == 5:
+	if PersistentData.level == 6:
 		_win.call_deferred()
 
 func _win() -> void:
