@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="18_q73k1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ey5c"]
-size = Vector2(604.125, 589)
+size = Vector2(787.125, 589)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n0wf1"]
 size = Vector2(1031.5, 386.5)
@@ -263,7 +263,7 @@ script = ExtResource("13_ucrvn")
 enemy_to_spawn = ExtResource("12_xxaix")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpiderValley"]
-position = Vector2(-184.938, -156.5)
+position = Vector2(-276.438, -156.5)
 shape = SubResource("RectangleShape2D_4ey5c")
 
 [node name="Text" type="Label" parent="SpiderValley"]
