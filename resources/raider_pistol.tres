@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://cm6ckunk22kfc"]
+
+[ext_resource type="Texture2D" uid="uid://ch6yul654vai2" path="res://assets/Art/laser_pistol.png" id="1_h2j6e"]
+[ext_resource type="PackedScene" uid="uid://b1ft1sjche2hl" path="res://scenes/shooter_projectile.tscn" id="2_cagrd"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="3_dv4b8"]
+
+[resource]
+script = ExtResource("3_dv4b8")
+name = "Raider's Gun"
+reload_time = 2.5
+max_ammo = 3
+firing_interval = 0.35
+image = ExtResource("1_h2j6e")
+aim_mode = 0
+strength = 0.2
+projectile = ExtResource("2_cagrd")

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ch01mb13w86qc" path="res://scenes/particles/impact_particles.tscn" id="3_fhmks"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="5_f8rp7"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_undrq"]
-[ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_irxur"]
+[ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/raider_pistol.tres" id="6_irxur"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="6_ofpms"]
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="9_1qrsf"]
 [ext_resource type="Texture2D" uid="uid://dxcl8gmq4we5e" path="res://assets/Art/enemy_idle.png" id="9_b7qkr"]

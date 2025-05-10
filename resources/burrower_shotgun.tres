@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="WeaponStats" load_steps=3 format=3 uid="uid://i5hbuwgpus4y"]
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://i5hbuwgpus4y"]
 
+[ext_resource type="Texture2D" uid="uid://c002sx67q5ot" path="res://assets/Art/laser_shotgun.png" id="1_a72re"]
 [ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="1_fl2n7"]
-[ext_resource type="PackedScene" uid="uid://bkx2sltytve67" path="res://scenes/burrower_shotgun_shell.tscn" id="1_vax6w"]
+[ext_resource type="PackedScene" path="res://scenes/burrower_shotgun_shell.tscn" id="1_vax6w"]
 
 [resource]
 script = ExtResource("1_fl2n7")
@@ -9,6 +10,7 @@ name = "Burrower's Shotgun"
 reload_time = 2.0
 max_ammo = 1
 firing_interval = 0.5
+image = ExtResource("1_a72re")
 aim_mode = 0
 strength = 0.5
 projectile = ExtResource("1_vax6w")

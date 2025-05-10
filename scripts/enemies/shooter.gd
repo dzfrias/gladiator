@@ -2,8 +2,15 @@ class_name Shooter extends FollowEnemy
 
 @export var y_attack_cutoff := 50
 @export var attack_windup_time := 0.75
+@export var weapon_stats: Array[WeaponStats]
 
 @onready var _original_weapon_x = $Weapon.position.x
+
+func _ready() -> void:
+	super()
+	var random_num = randi_range(0, weapon_stats.size() - 1)
+	$Weapon.weapon_stats = weapon_stats[random_num]
+	$GunOverlay.update_texture()
 
 func _physics_process(delta: float) -> void:
 	super(delta)

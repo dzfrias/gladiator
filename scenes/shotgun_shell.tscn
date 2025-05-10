@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://jpk22ssaoqrr"]
+[gd_scene load_steps=4 format=3 uid="uid://s5gupwh4xgm4"]
 
 [ext_resource type="Script" path="res://scripts/shotgun_shell.gd" id="1_i111i"]
 [ext_resource type="PackedScene" uid="uid://1vfurpipajau" path="res://scenes/shotgun_projectile.tscn" id="2_yrqpx"]

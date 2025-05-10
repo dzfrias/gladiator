@@ -1,11 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://b8sfq85fv1ul4"]
+[gd_scene load_steps=25 format=3 uid="uid://b8sfq85fv1ul4"]
 
 [ext_resource type="Script" path="res://scripts/enemies/shooter.gd" id="1_a5ml5"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_stats.gd" id="2_jigxv"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_arjap"]
+[ext_resource type="Resource" uid="uid://i5hbuwgpus4y" path="res://resources/burrower_shotgun.tres" id="3_u7dxa"]
+[ext_resource type="Resource" uid="uid://ca8278nv2fgcf" path="res://resources/raider_rifle.tres" id="4_k5tb6"]
 [ext_resource type="Script" path="res://scripts/enemies/shooter_animations.gd" id="5_cynpy"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_rapbo"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="5_x6nd1"]
-[ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/shooter.tres" id="6_cglso"]
+[ext_resource type="Resource" uid="uid://cm6ckunk22kfc" path="res://resources/raider_pistol.tres" id="6_cglso"]
 [ext_resource type="Script" path="res://scripts/ui/follow_health_bar_creator.gd" id="9_iylj5"]
 [ext_resource type="Script" path="res://scripts/platform_detection.gd" id="10_0f2bf"]
 [ext_resource type="SpriteFrames" uid="uid://dmm0dvb5sx8oo" path="res://resources/sprite_frames/shooter.tres" id="13_h6ii1"]
@@ -38,6 +41,7 @@ position = Vector2(0, -34)
 collision_layer = 130
 collision_mask = 33
 script = ExtResource("1_a5ml5")
+weapon_stats = Array[ExtResource("2_jigxv")]([ExtResource("3_u7dxa"), ExtResource("6_cglso"), ExtResource("4_k5tb6")])
 speed = 50.0
 jump_height = -400.0
 stop_dist = 400.0
