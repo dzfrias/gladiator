@@ -89,3 +89,13 @@ one_way_collision = true
 position = Vector2(603, 266.63)
 shape = SubResource("SegmentShape2D_036dd")
 one_way_collision = true
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="."]
+position = Vector2(472, 193.63)
+shape = SubResource("RectangleShape2D_6sy4c")
+one_way_collision = true
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="."]
+position = Vector2(663, 137.63)
+shape = SubResource("RectangleShape2D_6sy4c")
+one_way_collision = true
