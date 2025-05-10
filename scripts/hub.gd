@@ -12,7 +12,7 @@ func _ready() -> void:
 	mission_board = $MissionBoard
 	if reset_save:
 		PersistentData.reset()
-		PersistentData.done_tutorial = true
+		PersistentData.done_tutorial = false
 	_play_sound.call_deferred()
 	$Player.set_alt_weapon(PersistentData.alternate)
 	$Player.gadget().set_gadget(PersistentData.gadget)

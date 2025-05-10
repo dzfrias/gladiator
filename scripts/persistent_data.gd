@@ -92,5 +92,5 @@ func reset() -> void:
 	_gadget = null
 	_passives = []
 	_level = 0
-	_done_tutorial = false
+	_done_tutorial = true
 	save()

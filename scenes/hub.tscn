@@ -37,6 +37,7 @@ fill_from = Vector2(0.502294, 0.511468)
 [node name="Hub" type="Node2D"]
 position = Vector2(1, 0)
 script = ExtResource("1_y8sdt")
+reset_save = false
 
 [node name="HubBg" type="Sprite2D" parent="."]
 light_mask = 2
