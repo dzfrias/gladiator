@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dktl7ywhwt15s"]
+[gd_scene load_steps=20 format=3 uid="uid://dktl7ywhwt15s"]
 
 [ext_resource type="Script" path="res://scripts/ui/mission_ui.gd" id="1_bm8m2"]
 [ext_resource type="PackedScene" uid="uid://bhayxr4wyjijd" path="res://scenes/acid_rain_indicator.tscn" id="3_lbnag"]
@@ -14,6 +14,7 @@
 [ext_resource type="FontFile" uid="uid://db0ql4n1jkmaq" path="res://assets/Fonts/PixelatedEleganceRegular-ovyAA.ttf" id="10_132hn"]
 [ext_resource type="PackedScene" uid="uid://7rm76yft7pay" path="res://scenes/pause_screen.tscn" id="11_0dn3d"]
 [ext_resource type="Script" path="res://scripts/ui/passive_ui.gd" id="12_fd3pk"]
+[ext_resource type="Texture2D" uid="uid://y110ct827cc3" path="res://assets/Art/item_slot.png" id="13_lo4n5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0e2u"]
 bg_color = Color(0.215686, 0.215686, 0.215686, 1)
@@ -22,7 +23,7 @@ bg_color = Color(0.215686, 0.215686, 0.215686, 1)
 bg_color = Color(0.438421, 0.301203, 0.218421, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjwni"]
-bg_color = Color(0.847059, 0, 0, 1)
+bg_color = Color(1, 0.117647, 0, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_b502f"]
 base_font = ExtResource("10_132hn")
@@ -101,47 +102,46 @@ offset_right = 63.0
 offset_bottom = -107.0
 grow_vertical = 0
 script = ExtResource("5_74ny8")
-weapon_image = NodePath("ColorRect/WeaponImage")
-alt_weapon_image = NodePath("ColorRect2/WeaponImage2")
+weapon_image = NodePath("WeaponImage")
+alt_weapon_image = NodePath("WeaponImage2")
 infinite_ammo_image = NodePath("InfiniteAmmoSymbol")
 ammo_text = NodePath("AmmoText")
 
-[node name="ColorRect2" type="ColorRect" parent="WeaponUI"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = -39.0
-offset_right = 80.0
-offset_bottom = 30.0
-color = Color(0.129559, 0.129558, 0.129558, 0.615686)
-
-[node name="WeaponImage2" type="TextureRect" parent="WeaponUI/ColorRect2"]
-modulate = Color(1, 1, 1, 0.392157)
+[node name="WeaponImage2" type="TextureRect" parent="WeaponUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -69.0
-offset_right = 67.0
+offset_left = 13.0
+offset_top = -79.0
+offset_right = 78.0
+offset_bottom = -10.0
 grow_vertical = 0
+texture = ExtResource("13_lo4n5")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="WeaponUI"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = -39.0
-offset_right = 114.0
-offset_bottom = 30.0
-color = Color(0.129412, 0.129412, 0.129412, 1)
-
-[node name="WeaponImage" type="TextureRect" parent="WeaponUI/ColorRect"]
+[node name="WeaponImage3" type="TextureRect" parent="WeaponUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -69.0
-offset_right = 67.0
+offset_left = 44.0
+offset_top = -79.0
+offset_right = 109.0
+offset_bottom = -10.0
+grow_vertical = 0
+texture = ExtResource("13_lo4n5")
+stretch_mode = 5
+
+[node name="WeaponImage" type="TextureRect" parent="WeaponUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 47.0
+offset_top = -79.0
+offset_right = 112.0
+offset_bottom = -10.0
 grow_vertical = 0
 texture = ExtResource("7_cbvig")
 stretch_mode = 5
@@ -176,10 +176,11 @@ offset_right = 205.0
 offset_bottom = -139.0
 grow_vertical = 0
 script = ExtResource("9_d74rq")
-gadget_image = NodePath("ColorRect2/GadgetImage")
+gadget_image = NodePath("GadgetImage")
 uses_num = NodePath("AmmoText")
 
 [node name="ColorRect2" type="ColorRect" parent="GadgetUI"]
+visible = false
 layout_mode = 0
 offset_left = 11.0
 offset_top = -7.0
@@ -187,15 +188,17 @@ offset_right = 80.0
 offset_bottom = 62.0
 color = Color(0.129559, 0.129558, 0.129558, 0.615686)
 
-[node name="GadgetImage" type="TextureRect" parent="GadgetUI/ColorRect2"]
-modulate = Color(1, 1, 1, 0.392157)
+[node name="GadgetImage" type="TextureRect" parent="GadgetUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -69.0
-offset_right = 69.0
+offset_left = 11.0
+offset_top = -48.0
+offset_right = 80.0
+offset_bottom = 21.0
 grow_vertical = 0
+texture = ExtResource("13_lo4n5")
 expand_mode = 1
 stretch_mode = 5
 
