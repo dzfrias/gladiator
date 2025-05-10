@@ -2,6 +2,7 @@ class_name Mission extends Node
 
 var buckles: int
 var weather: Node
+var difficulty: Difficulty = Difficulty.MEDIUM
 var in_combat: bool:
 	get:
 		return _in_combat
@@ -14,6 +15,12 @@ var in_combat: bool:
 			exited_combat.emit()
 var scene: PackedScene = load("res://scenes/mission.tscn")
 
+enum Difficulty {
+	EASY,
+	MEDIUM,
+	HARD
+}
+
 var _in_combat: bool = false
 var _effects_scene = preload("res://scenes/load_effects.tscn")
 var _death_ui = preload("res://scenes/died.tscn")
@@ -25,6 +32,20 @@ signal exited_combat
 func _ready() -> void:
 	assert(buckles >= 0)
 	_setup.call_deferred()
+	
+	match difficulty:
+		Difficulty.EASY:
+			Player.Instance.get_health().max_health += 10
+		Difficulty.MEDIUM:
+			Player.Instance.get_health().max_health += 5
+	mission_finished.connect(_take_health)
+
+func _take_health(_success: bool) -> void:
+	match difficulty:
+		Difficulty.EASY:
+			Player.Instance.get_health().max_health -= 10
+		Difficulty.MEDIUM:
+			Player.Instance.get_health().max_health -= 5
 
 func _setup() -> void:
 	if weather:

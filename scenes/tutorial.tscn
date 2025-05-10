@@ -1,16 +1,16 @@
 [gd_scene load_steps=21 format=4 uid="uid://d1xnu3ygtm8qs"]
 
 [ext_resource type="PackedScene" uid="uid://dv7ihnextsw4v" path="res://scenes/player.tscn" id="1_i3pcd"]
-[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="1_od3kf"]
+[ext_resource type="PackedScene" uid="uid://cy0ehmv0nnrm8" path="res://scenes/background.tscn" id="1_od3kf"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="2_og5eq"]
-[ext_resource type="Material" path="res://resources/materials/dark.tres" id="3_bdu60"]
+[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="3_bdu60"]
 [ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="3_kuqna"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="5_5v347"]
 [ext_resource type="PackedScene" uid="uid://dpoytbmytn7c6" path="res://scenes/wall.tscn" id="6_j8hyw"]
 [ext_resource type="PackedScene" uid="uid://bhglqsap5vi4o" path="res://scenes/structures/silo.tscn" id="8_04us3"]
-[ext_resource type="PackedScene" path="res://scenes/vhs.tscn" id="8_5q5mq"]
+[ext_resource type="PackedScene" uid="uid://bag0ows8h4ibm" path="res://scenes/vhs.tscn" id="8_5q5mq"]
 [ext_resource type="PackedScene" uid="uid://bydm8vffd6nwt" path="res://scenes/wolf.tscn" id="8_c3jeb"]
-[ext_resource type="Theme" path="res://resources/main_theme.tres" id="8_eqom3"]
+[ext_resource type="Theme" uid="uid://bqlm22ts8dxfd" path="res://resources/main_theme.tres" id="8_eqom3"]
 [ext_resource type="Script" path="res://scripts/ui/floating.gd" id="9_50ia2"]
 [ext_resource type="PackedScene" uid="uid://csqqcnv8iucaq" path="res://scenes/suispider.tscn" id="12_xxaix"]
 [ext_resource type="Script" path="res://scripts/spider_valley.gd" id="13_ucrvn"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b8sfq85fv1ul4" path="res://scenes/shooter.tscn" id="18_q73k1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ey5c"]
-size = Vector2(698.125, 589)
+size = Vector2(234.25, 589)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n0wf1"]
 size = Vector2(1031.5, 386.5)
@@ -263,7 +263,7 @@ script = ExtResource("13_ucrvn")
 enemy_to_spawn = ExtResource("12_xxaix")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpiderValley"]
-position = Vector2(-3, -151)
+position = Vector2(0, -156.5)
 shape = SubResource("RectangleShape2D_4ey5c")
 
 [node name="Text" type="Label" parent="SpiderValley"]
@@ -312,6 +312,9 @@ speed = 3.0
 
 [node name="Spawn1" type="Node2D" parent="SpiderValley"]
 position = Vector2(-942, -376)
+
+[node name="Spawn2" type="Node2D" parent="SpiderValley"]
+position = Vector2(895, -349)
 
 [node name="EndArea" type="Area2D" parent="."]
 collision_layer = 0

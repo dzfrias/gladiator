@@ -38,7 +38,7 @@ offset_right = 101.0
 offset_bottom = 61.0
 text = "Acid Rain"
 
-[node name="DificultyLabel" type="Label" parent="."]
+[node name="DifficultyLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 62.0

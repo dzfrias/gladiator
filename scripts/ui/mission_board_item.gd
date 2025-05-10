@@ -29,8 +29,18 @@ func set_to_mission(mission: Mission):
 	else:
 		weather_name = "None"
 	
+	var difficulty_str: String
+	match mission.difficulty:
+		Mission.Difficulty.EASY:
+			difficulty_str = "Easy"
+		Mission.Difficulty.MEDIUM:
+			difficulty_str = "Medium"
+		Mission.Difficulty.HARD:
+			difficulty_str = "Hard"
+	
 	$Description/MissionLabel.text = mission_name
 	$Description/BucklesLabel.text = str(mission.buckles)
+	$DifficultyLabel.text = "Difficulty: " + difficulty_str
 	$WeatherLabel.text = weather_name
 
 func _on_entered():

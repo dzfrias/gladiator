@@ -11,21 +11,20 @@ func _ready() -> void:
 		missions.append(mission)
 		return
 	
-	var mission := ConquerMission.new()
-	var mission2 := ConquerMission.new()
-	var mission3 := ConquerMission.new()
+	for i in range(3):
+		var mission = ConquerMission.new()
+		
+		mission.difficulty = i as Mission.Difficulty
+		var weather_index := randi_range(0, 2)
+		match weather_index:
+			0: mission.weather = Lightning.new()
+			1: mission.weather = AcidRain.new()
+			2: mission.weather = Flood.new()
+		match mission.difficulty:
+			Mission.Difficulty.EASY: mission.buckles = 20
+			Mission.Difficulty.MEDIUM: mission.buckles = 40
+			Mission.Difficulty.HARD: mission.buckles = 60
+		missions.append(mission)
 	
-	mission.buckles = 20
-	mission.weather = Lightning.new()
-	missions.append(mission)
-	
-	mission2.buckles = 10
-	mission2.weather = AcidRain.new()
-	missions.append(mission2)
-
-	mission3.buckles = 10
-	mission3.weather = Flood.new()
-	missions.append(mission3)
-
 func _on_interact() -> void:
 	HubManager.open_mission_select_screen()

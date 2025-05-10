@@ -69,9 +69,6 @@ func _shoot() -> void:
 	$Direction.scalar = signf(Player.Instance.global_position.x - global_position.x)
 	$Weapon.activate_prefire_flash()
 	for _i in range(warning_flashes):
-		if _state != State.ATTACKING:
-			return
-		
 		var slope = player_pos - $Weapon.global_position
 		var draw_pos = player_pos + slope * 100
 		Debug.draw_line(
