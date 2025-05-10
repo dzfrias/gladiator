@@ -1,7 +1,7 @@
 class_name DeathSpawner extends Node2D
 
 @export var health: Health
-@export var spawn_chance: float = 0.2
+@export var spawn_chance: float = 0.4
 @export var drops: Array[PackedScene]
 
 func _ready() -> void:
