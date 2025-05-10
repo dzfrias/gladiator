@@ -26,4 +26,4 @@ func _win() -> void:
 	get_tree().change_scene_to_packed(_win_screen)
 
 func _play_sound():
-	AudioManager.play_music(preload("res://assets/Music/hub_music.wav"), -20)
+	AudioManager.play_music(preload("res://assets/Music/hub_music.wav"), 5)

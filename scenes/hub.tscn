@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="2_poabe"]
 [ext_resource type="TileSet" uid="uid://bjui5u2g4ioq7" path="res://assets/desert_final.tres" id="3_o4r3g"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="3_veakm"]
-[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="4_cakyi"]
+[ext_resource type="Material" path="res://resources/materials/dark.tres" id="4_cakyi"]
 [ext_resource type="Script" path="res://scripts/tilemap_hit.gd" id="4_djpkc"]
 [ext_resource type="Script" path="res://scripts/mission_board.gd" id="5_ur55b"]
 [ext_resource type="PackedScene" uid="uid://dktl7ywhwt15s" path="res://scenes/player_ui.tscn" id="7_5xbek"]

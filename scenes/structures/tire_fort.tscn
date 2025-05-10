@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://t8m6qnvpbiym"]
 
-[ext_resource type="Material" uid="uid://ce7037eaiyihc" path="res://resources/materials/dark.tres" id="1_lqrdg"]
+[ext_resource type="Material" path="res://resources/materials/dark.tres" id="1_lqrdg"]
 [ext_resource type="Texture2D" uid="uid://bo5xfrd5ibhn0" path="res://assets/Art/Tire fort platform.png" id="2_j4ypb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ff4jc"]
