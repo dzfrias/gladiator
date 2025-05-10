@@ -20,6 +20,7 @@ class EnemyScene:
 		self.scene = load(scene)
 		self.weight = weight
 
+var did_spawn_boss: bool = false
 var _started := false
 var _spawn_during_wave: int
 var _initial_spawn_amt: int
@@ -29,6 +30,7 @@ var _enemies := [
 	EnemyScene.new("res://scenes/wolf.tscn", 2),
 	EnemyScene.new("res://scenes/shooter.tscn", 3),
 ]
+var _boss_scene = preload("res://scenes/boss.tscn")
 var _last_spawned: PackedScene
 var _done := false
 var _idle_shooter: PackedScene = preload("res://scenes/idle_shooter.tscn")
@@ -85,6 +87,9 @@ func _process(_delta: float) -> void:
 		if will_spawn_chest:
 			_spawn_chest()
 		_done = true
+	
+	if _spawn_during_wave == 0 and did_spawn_boss:
+		_spawn_during_wave = 4
 
 static func _create_boundary(x: float) -> StaticBody2D:
 	var boundary := StaticBody2D.new()
@@ -188,3 +193,12 @@ func _choose_enemy() -> PackedScene:
 		scene = WorldMap.weighted_choice(normalized).scene
 	_last_spawned = scene
 	return scene
+
+func spawn_boss() -> void:
+	var boss = _boss_scene.instantiate()
+	var spawn_points := $SpawnPoints.get_children()
+	var spawn_point = spawn_points[randi_range(0, spawn_points.size() - 1)]
+	boss.position = to_global(spawn_point.position)
+	boss.add_to_group(_group_name)
+	boss.add_to_group("enemy")
+	get_tree().current_scene.add_child(boss)
