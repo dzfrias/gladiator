@@ -46,6 +46,7 @@ func _cycle():
 		var effects := rain_effects.instantiate() as RainEffects
 		var final_count = effects.rain_count
 		effects.rain_count = 10
+		AudioManager.play_ui_sound(self, load("res://assets/SoundEffects/acid_rain.wav"), -10)
 		get_tree().current_scene.add_child(effects)
 		effects.set_bounds(Player.Instance.global_position.x - 1000.0, Player.Instance.global_position.x + 1000.0)
 		await get_tree().create_timer(warning_time).timeout
