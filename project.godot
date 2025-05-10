@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gladiator"
-run/main_scene="res://scenes/test_scene.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
@@ -129,3 +129,4 @@ toggle_pause={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true

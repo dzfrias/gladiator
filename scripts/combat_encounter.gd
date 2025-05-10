@@ -65,6 +65,13 @@ func _ready() -> void:
 	_right_body.position.x = right_boundary + boundary_tolerance
 	
 	_spawn_during_wave = randi_range(spawn_during_wave_min, spawn_during_wave_max)
+	
+	match MissionManager.mission.difficulty:
+		Mission.Difficulty.EASY:
+			_spawn_during_wave -= 2
+		Mission.Difficulty.MEDIUM:
+			_spawn_during_wave -= 1
+	
 	_spawn_enemies.call_deferred()
 
 func _process(_delta: float) -> void:

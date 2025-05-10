@@ -2,13 +2,14 @@ class_name Health extends Node
 
 signal damage_taken(amount: float, direction: Vector2)
 signal health_gained(amount: float)
+signal max_health_changed
 signal died
 
 @export var max_health: float = 20:
 	set(new_max):
-		if health > new_max:
-			health = new_max
+		_health = new_max
 		max_health = new_max
+		max_health_changed.emit()
 var health: float:
 	get: return _health
 var has_died: bool:

@@ -56,6 +56,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Engine.time_scale == 0: return
+	print($Health.health)
 	
 	if _is_jumping:
 		velocity.y -= movement_settings.jump_accel * delta
