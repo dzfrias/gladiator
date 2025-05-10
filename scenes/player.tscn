@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://sd8ia7h1hphh" path="res://resources/player_movement_settings.tres" id="2_an6wh"]
 [ext_resource type="Script" path="res://scripts/direction.gd" id="3_70gf3"]
 [ext_resource type="Script" path="res://scripts/health.gd" id="3_s7yvn"]
-[ext_resource type="PackedScene" path="res://scenes/backlight.tscn" id="3_x3oej"]
+[ext_resource type="PackedScene" uid="uid://crrscutvdwg36" path="res://scenes/backlight.tscn" id="3_x3oej"]
 [ext_resource type="Script" path="res://scripts/player_camera.gd" id="4_trosa"]
 [ext_resource type="Script" path="res://scripts/player/weapon.gd" id="5_crqak"]
 [ext_resource type="Resource" uid="uid://cbyts5spi0ken" path="res://resources/pistol.tres" id="6_0weg3"]
@@ -15,7 +15,7 @@
 [ext_resource type="Shader" path="res://resources/shaders/solid_color.gdshader" id="14_ojru7"]
 [ext_resource type="Texture2D" uid="uid://b3yl3oymh43ks" path="res://assets/Art/PlayerJump1.png" id="15_3rly8"]
 [ext_resource type="Texture2D" uid="uid://dwowtfaylsxnu" path="res://assets/Art/PlayerWalk1.png" id="15_5unjr"]
-[ext_resource type="PackedScene" path="res://scenes/particles/underground_particles.tscn" id="16_rc816"]
+[ext_resource type="PackedScene" uid="uid://d37g531von16b" path="res://scenes/particles/underground_particles.tscn" id="16_rc816"]
 [ext_resource type="Script" path="res://scripts/gadgets/gadget.gd" id="16_rlhru"]
 [ext_resource type="Script" path="res://scripts/player/player_gun.gd" id="16_ud12g"]
 [ext_resource type="AudioStream" uid="uid://dlq8esunh5ld3" path="res://assets/SoundEffects/sand_walk_1.wav" id="17_l3x6c"]
@@ -284,6 +284,7 @@ script = ExtResource("3_70gf3")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_s7yvn")
+max_health = 30.0
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("11_40if5")
