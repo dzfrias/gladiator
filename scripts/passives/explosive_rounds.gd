@@ -16,7 +16,8 @@ func _on_weapon_fired(projectile: Node2D) -> void:
 		return
 	
 	_current = count
-	projectile.hit.connect(_create_explosion.bind(projectile))
+	if projectile.has_signal("hit"):
+		projectile.hit.connect(_create_explosion.bind(projectile))
 
 func _create_explosion(projectile: Node2D) -> void:
 	var explosion := explosion_scene.instantiate() as Explosion

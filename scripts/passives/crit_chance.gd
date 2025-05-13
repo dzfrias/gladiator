@@ -12,7 +12,8 @@ func _on_weapon_fired(projectile: Node2D) -> void:
 	if randf() > chance:
 		return
 	
-	projectile.hit.connect(_crit.bind(projectile))
+	if projectile.has_signal("hit"):
+		projectile.hit.connect(_crit.bind(projectile))
 
 func _crit(projectile) -> void:
 	projectile.damage *= multiplier
