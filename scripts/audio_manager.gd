@@ -32,3 +32,7 @@ func play_music(stream: AudioStreamWAV, volume_db = 0) -> void:
 	music.stream = stream
 	music.play()
 	music.volume_db = volume_db
+	music.finished.connect(on_music_finished)
+	
+func on_music_finished():
+	music.play()

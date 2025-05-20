@@ -22,15 +22,6 @@ func _goto_mission() -> void:
 	new_scene.add_child(mission)
 	var player := new_scene.find_child("Player") as Player
 	player.gadget().set_gadget(PersistentData.gadget)
-	var random_num = randi_range(0, 3)
-	if random_num == 0:
-		AudioManager.play_music(load("res://assets/Music/sea pickle.wav"))
-	elif random_num == 1:
-		AudioManager.play_music(load("res://assets/Music/March_yawn.wav"))
-	elif random_num == 2:
-		AudioManager.play_music(load("res://assets/Music/level_music.wav"))
-	elif random_num == 3:
-		AudioManager.play_music(load("res://assets/Music/shine_remix.wav"))
 	player.set_alt_weapon(PersistentData.alternate)
 	for passive in PersistentData.get_passives():
 		player.add_passive(passive)
